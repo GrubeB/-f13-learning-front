@@ -1,0 +1,22 @@
+.login-container {
+    border-radius: 30px;
+    overflow: hidden;
+    height: 800px;
+}
+
+.login-left-column {
+    background: rgb(199,180,0);
+    background: linear-gradient(43deg, rgba(199,180,0,1) 0%, rgba(255,231,0,1) 23%, rgba(255,231,0,1) 100%);
+}
+.login-left-column img {
+    width: 100px;
+    height: 100px;
+}
+
+.login-right-column {
+    background-color: rgb(245, 248, 251);
+}
+.login-right-column img {
+    width: 80px;
+    height: 80px;
+}

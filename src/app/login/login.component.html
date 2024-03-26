@@ -1,0 +1,40 @@
+<div class="position-absolute top-50 start-50 translate-middle container-xl">
+
+    <div class="row login-container w-100 position-relative">
+        <div 
+            (click)="close()"  
+            class="position-absolute top-0 end-0 m-3 justify-content-center align-items-center" 
+            style="height: 35px; width: 35px;" 
+        >
+            <i class="bi bi-x-lg"></i>
+        </div>
+        <div class="col login-left-column d-flex flex-column justify-content-center align-items-center">
+            <img [src]="'/assets/logo.png'" alt="logo">
+            <p class="fs-2 fw-bolder">Solo learning</p>
+        </div>
+        <div class="col login-right-column d-flex flex-column justify-content-center align-items-center">
+            <img [src]="'/assets/logo.png'" alt="logo">
+            <p class="fs-3">Login/Register</p>
+            <p class="fs-6">By registering You agree to our: <span class="fw-bold">Terms & Privacy Policy</span></p>
+            
+            <email-login-form *ngIf="activeProvider === 'email'"/>
+
+            <div class="col-6 mt-2 mb-2">
+                <divider *ngIf="activeProvider !== null" [text]="'or'"/>
+            </div>
+
+            <div class="d-grid gap-1 col-6 mx-auto" >
+                <div *ngFor="let provider of providers">
+                    <login-button 
+                        *ngIf="activeProvider !== provider.name"
+                        [disabled]="!provider.enable" 
+                        [name]="provider.name"
+                        [text]="provider.displayName" 
+                        [icon]="provider.icon"
+                        (action)="setActiveProvider($event)"
+                    />
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>

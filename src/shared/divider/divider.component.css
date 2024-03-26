@@ -1,0 +1,21 @@
+.divider{
+    font-size: 1.25rem;
+    color: rgb(77, 76, 76);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content:center;
+}
+.divider-text {
+    flex-basis:5%;
+    flex-shrink:2;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.divider-line {
+    border-top: .2rem solid rgb(77, 76, 76);
+    transform: translateY(50%);
+    flex-basis:40%;
+    flex-shrink:2;
+    flex-grow:2
+}
