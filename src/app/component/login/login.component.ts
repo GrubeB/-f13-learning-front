@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { LoginButtonComponent } from './login-button/login-button.component';
 import { CommonModule } from '@angular/common';
 import { EmailLoginFormComponent } from './email-login-form/email-login-form.component';
-import { DividerComponent } from '../../shared/divider/divider.component';
+import { DividerComponent } from '../../../shared/divider/divider.component';
 
 @Component({
   selector: 'login',
@@ -59,7 +59,7 @@ export class LoginComponent {
     console.log("setActiveProvider");
     this.activeProvider = providerName;
   }
-  close(){
+  close() {
     this.hide.emit();
   }
 }

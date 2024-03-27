@@ -17,7 +17,10 @@
             <p class="fs-3">Login/Register</p>
             <p class="fs-6">By registering You agree to our: <span class="fw-bold">Terms & Privacy Policy</span></p>
             
-            <email-login-form *ngIf="activeProvider === 'email'"/>
+            <email-login-form 
+                *ngIf="activeProvider === 'email'"
+                (onSuccessLogin) = "close()"
+            />
 
             <div class="col-6 mt-2 mb-2">
                 <divider *ngIf="activeProvider !== null" [text]="'or'"/>

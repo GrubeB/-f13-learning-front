@@ -1,0 +1,55 @@
+<form 
+    [formGroup]="loginFormGroup" 
+    (ngSubmit)="login()"
+    class="container justify-content-center"
+>
+
+<div class="row justify-content-center">
+        <div class="col-7">
+            <div class="row mb-3" *ngIf="message">
+                <small class="text-danger">{{message}}</small>
+            </div>
+            <div class="row mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" class="form-control" type="text" formControlName="email">
+                <div id="emailHelp" class="form-text">We will never share your email with anyone else.</div>
+                <div *ngIf="loginFormGroup.get('email')?.invalid 
+                && (loginFormGroup.get('email')?.dirty 
+                || loginFormGroup.get('email')?.touched)">
+                    <small
+                        class="text-danger"
+                        *ngIf="loginFormGroup.get('email')?.hasError('required')"
+                    >This field is requied.</small>
+                    <small
+                        class="text-danger"
+                        *ngIf="loginFormGroup.get('email')?.hasError('email')"
+                    >Email is incorect.</small>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input id="password" class="form-control" type="password" formControlName="password">
+                <div *ngIf="loginFormGroup.get('password')?.invalid 
+                && (loginFormGroup.get('password')?.dirty 
+                || loginFormGroup.get('password')?.touched)">
+                    <small
+                        class="text-danger"
+                        *ngIf="loginFormGroup.get('password')?.hasError('required')"
+                    >This field is requied.</small>
+                    <small
+                        class="text-danger"
+                        *ngIf="loginFormGroup.get('password')?.hasError('minlength')"
+                    >Password has to be at last 8 characters.</small>
+                </div>
+            </div>
+            <div class="row d-grid">
+                <button 
+                    type="submit" 
+                    class="btn btn-secondary"
+                    [disabled]="loginFormGroup.invalid"
+                >Login</button>
+            </div>
+        </div>
+    </div>
+        
+</form>
