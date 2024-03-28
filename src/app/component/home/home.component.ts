@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { CategoryVievComponent } from '../category/category-viev/category-viev.component';
+import { CategoryVievComponent } from '../category/category-viev.component';
 
 @Component({
   selector: 'app-home',
