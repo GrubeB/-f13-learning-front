@@ -11,7 +11,7 @@ import { CategoriesListItemComponent } from '../categories-list-item/categories-
     CategoriesListItemComponent
   ],
   templateUrl: './categories-list.component.html',
-  styleUrl: './categories-list.component.css'
+  styleUrl: './categories-list.component.scss'
 })
 export class CategoriesListComponent {
   @Input() categories!: Category[];

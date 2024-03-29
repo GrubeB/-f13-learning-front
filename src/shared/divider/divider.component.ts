@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
     CommonModule
   ],
   templateUrl: './divider.component.html',
-  styleUrl: './divider.component.css'
+  styleUrl: './divider.component.scss'
 })
 export class DividerComponent {
   @Input("text") dividerText !: string;

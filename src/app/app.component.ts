@@ -14,7 +14,7 @@ import { LoginComponent } from './component/login/login.component';
     LoginComponent
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   loginViewViable: boolean = false;

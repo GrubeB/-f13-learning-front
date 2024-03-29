@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     CommonModule
   ],
   templateUrl: './login-button.component.html',
-  styleUrl: './login-button.component.css'
+  styleUrl: './login-button.component.scss'
 })
 export class LoginButtonComponent {
   @Input() name!: string;

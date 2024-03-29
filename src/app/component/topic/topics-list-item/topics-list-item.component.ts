@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
     RouterLink
   ],
   templateUrl: './topics-list-item.component.html',
-  styleUrl: './topics-list-item.component.css'
+  styleUrl: './topics-list-item.component.scss'
 })
 export class TopicsListItemComponent {
   @Input() topic!: Topic;

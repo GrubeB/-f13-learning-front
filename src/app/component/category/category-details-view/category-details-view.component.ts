@@ -12,7 +12,7 @@ import { take } from 'rxjs';
     CommonModule
   ],
   templateUrl: './category-details-view.component.html',
-  styleUrl: './category-details-view.component.css'
+  styleUrl: './category-details-view.component.scss'
 })
 export class CategoryDetailsViewComponent {
   category?: Category;

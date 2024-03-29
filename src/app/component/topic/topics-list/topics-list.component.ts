@@ -11,7 +11,7 @@ import { TopicsListItemComponent } from '../topics-list-item/topics-list-item.co
     TopicsListItemComponent
   ],
   templateUrl: './topics-list.component.html',
-  styleUrl: './topics-list.component.css'
+  styleUrl: './topics-list.component.scss'
 })
 export class TopicsListComponent {
   @Input() topics!: Topic[];

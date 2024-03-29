@@ -13,7 +13,7 @@ import { CategoriesListComponent } from './categories-list/categories-list.compo
     CategoriesListComponent
   ],
   templateUrl: './category-viev.component.html',
-  styleUrl: './category-viev.component.css'
+  styleUrl: './category-viev.component.scss'
 })
 export class CategoryVievComponent implements OnInit {
   categories: Category[] =[];

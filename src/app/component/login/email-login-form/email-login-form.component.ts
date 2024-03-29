@@ -14,7 +14,7 @@ import { NGXLogger } from 'ngx-logger';
     ReactiveFormsModule
   ],
   templateUrl: './email-login-form.component.html',
-  styleUrl: './email-login-form.component.css'
+  styleUrl: './email-login-form.component.scss'
 })
 export class EmailLoginFormComponent {
   logger: NGXLogger = inject(NGXLogger);

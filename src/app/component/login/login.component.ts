@@ -14,7 +14,7 @@ import { DividerComponent } from '../../../shared/divider/divider.component';
     DividerComponent
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   @Output() hide = new EventEmitter<any>();

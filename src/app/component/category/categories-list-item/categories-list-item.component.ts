@@ -11,7 +11,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     RouterLink,
   ],
   templateUrl: './categories-list-item.component.html',
-  styleUrl: './categories-list-item.component.css'
+  styleUrl: './categories-list-item.component.scss'
 })
 export class CategoriesListItemComponent {
   @Input() category!: Category;

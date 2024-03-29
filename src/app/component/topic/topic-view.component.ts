@@ -14,7 +14,7 @@ import { TopicsListComponent } from './topics-list/topics-list.component';
     TopicsListComponent
   ],
   templateUrl: './topic-view.component.html',
-  styleUrl: './topic-view.component.css'
+  styleUrl: './topic-view.component.scss'
 })
 export class TopicViewComponent {
   topics: Topic[] = [];
