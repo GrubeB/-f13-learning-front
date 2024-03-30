@@ -1,0 +1,45 @@
+// https://fonts.google.com/specimen/Roboto
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body{
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    color: $primary-text;
+}
+h1{
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+}
+h2{
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
+h3{
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+h4{
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    line-height: 10px;
+    font-weight: 400;
+}
+h5{
+    font-family: "Roboto", sans-serif;
+    font-size: 10px;
+    line-height: 8px;
+    font-weight: 400;
+}
+p{
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+}
+a{
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+}

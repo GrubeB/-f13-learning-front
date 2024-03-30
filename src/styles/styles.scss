@@ -1,3 +1,7 @@
 @import "./variables";
 // BOOTSTRAP
 @import "../../node_modules/bootstrap/scss/bootstrap";
+@import "./base";
+@import "./typography";
+
+@import "./module/category";

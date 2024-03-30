@@ -1,0 +1,19 @@
+button.btn-category{
+    height: 2em;
+    padding: .25em .3em;
+    background: none;
+    opacity: 0.5;
+    border: none;
+    border-radius: 1em;
+    color: $secondary-text;
+    &:before {
+        content: "#";
+    }
+    &:hover{
+        opacity: 0.7;
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+    &:focus{
+        opacity: 1;
+    }
+}

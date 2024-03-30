@@ -1,0 +1,11 @@
+<button
+    [disabled]="disabled"
+    (click)="$event.preventDefault(); this.action.emit();"
+>
+    <div>
+        <i [ngClass]="iconClass"></i>
+    </div>
+    <div *ngIf="text">
+       {{text}}
+    </div>
+</button>

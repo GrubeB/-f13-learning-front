@@ -7,6 +7,11 @@ export class Topic {
     status?: TopicStatus;
     categories?: Category[];
     references?: Reference[];
+    
+    createdBy?: String;
+    createdDate?: Date;
+    lastModifiedBy?: String;
+    lastModifiedDate?: Date;
 }
 
 export enum TopicStatus {

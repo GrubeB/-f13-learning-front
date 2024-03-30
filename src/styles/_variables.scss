@@ -2,16 +2,14 @@ $primary-light: #FFD65C;
 $primary: #FFC107;
 $primary-dark:#E0A800;
 
-$secondary-light: #383C3F;
+$primary-light-text: #FFF;
+$primary-text: #FFF;
+$primary-dark-text:#FFF;
+
+$secondary-light: #262d35;
 $secondary: #0E1217;
 $secondary-dark: #080A0D;
 
-//color: map-get($app-colors, primary);
-$app-colors: (
-    primary-light: $primary-light,
-    primary: $primary,
-    primary-dark: $primary-dark,
-    secondar-light: $secondary,
-    secondar: $secondary,
-    secondar-dark: $secondary-dark,
-);
+$secondary-light-text: #FFF;
+$secondary-text: #FFF;
+$secondary-dark-text: #FFF;

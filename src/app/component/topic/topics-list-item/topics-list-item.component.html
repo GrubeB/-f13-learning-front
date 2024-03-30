@@ -1,13 +1,23 @@
-<div class="card m-2 bg-light" style="width: 18rem;">
-    <div class="card-header bg-gray">
-    </div>
-    <div class="card-body">
-        <h5 class="card-title">{{topic.name}}</h5>
-    </div>
-    <div class="card-body">
-        <div class="d-flex flex-row justify-content-between">
-            <a href="#" class="btn btn-sm  btn-primary">Topics</a>
-            <a class="btn btn-sm btn-primary" routerLink="/topics/{{topic.id}}">Details</a>
+<div class="card m-2 w-100">
+    <div class="card-header p-2 m-2 d-flex flex-row justify-content-between">
+        <div class="d-flex flex-row">
+            <btn-image/>
+            <div class="d-flex ms-2 flex-column">
+                <h4>Ala Kot{{topic.createdBy}}</h4>
+                <h5>{{topic.createdDate | date }}</h5>
+            </div>
         </div>
+        <btn-icon [icon] = "'bi-three-dots-vertical'"/>
+    </div>
+    <div class="card-body">
+        <h2 class="card-title">{{topic.name}}</h2>
+        <div class="d-flex flex-row flex-wrap justify-content-start">
+            <button *ngFor="let category of topic.categories" class="btn-category">{{category.name}}</button>
+        </div>
+    </div>
+    <div class="card-footer d-flex flex-row justify-content-around">
+        <btn-icon [icon] = "'bi-box-arrow-up-right'"/>
+        <btn-icon [icon] = "'bi-chat-left-text-fill'"/>
+        <btn-icon [icon] = "'bi-star'" text="132"/>
     </div>
 </div>
