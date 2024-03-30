@@ -27,8 +27,8 @@ export class Reference {
     description? : string;
     link? : string;
     status?: ReferenceStatus;
-    likesNumber?: number;
-    dislikesNumber?: number;
+    likesNumber!: number;
+    dislikesNumber!: number;
 }
 export enum ReferenceStatus {
     UNVERIFIED,

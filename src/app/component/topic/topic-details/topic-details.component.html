@@ -3,18 +3,41 @@
         <button class="app-btn-image s48">
             <img [src]="'https://i.pinimg.com/originals/40/00/b7/4000b7b7caf046215794ccdef4a78630.png'"/>
         </button>
-        <div class="d-flex ms-2 flex-column">
-            <h2>Ala Kot{{topic.createdBy}}</h2>
+        <div class="d-flex ms-3 flex-column">
+            <h1>Ala Kot{{topic.createdBy}}</h1>
             <h4>{{topic.createdDate | date }}</h4>
         </div>
     </div>
+
     <div class="mt-3">
-        <h1>{{topic.name }}</h1>
+        <h1>{{topic.name}}</h1>
         <h3>{{topic.content}}</h3>
     </div>
-    <div>
+
+    <div class="mt-3">
         <div class="d-flex flex-row flex-wrap justify-content-start">
             <button *ngFor="let category of topic.categories" class="btn-category">{{category.name}}</button>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div class="d-flex flex-row justify-content-between align-items-center">
+            <div style="width: 20em;">    
+                <h1>{{topic.references?.length}} References</h1>
+            </div>
+            <div style="width: 16em;">
+                <form class="d-flex">
+                    <select class="form-select"  >
+                        <option value="0" selected>Sorted by</option>
+                        <option value="1">Highest score(default)</option>
+                        <option value="2">Date modified(newest first)</option>
+                        <option value="3">Date created(oldest first)</option>
+                      </select>
+                </form>
+            </div>
+        </div>
+        <div class="d-flex flex-column gap-1 mt-4">
+            <reference-item *ngFor="let reference of topic.references" [reference]="reference"/>
         </div>
     </div>
 </div>

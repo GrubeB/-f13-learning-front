@@ -4,13 +4,15 @@ import { Topic } from '../../../model/topic.model';
 import { ActivatedRoute } from '@angular/router';
 import { TopicService } from '../../../service/topic.service';
 import { take } from 'rxjs';
+import { ReferenceItemComponent } from '../../reference/reference-item/reference-item.component';
 
 @Component({
   selector: 'topic-details',
   standalone: true,
   imports: [
     CommonModule,
-    DatePipe
+    DatePipe,
+    ReferenceItemComponent
   ],
   templateUrl: './topic-details.component.html',
   styleUrl: './topic-details.component.scss'
