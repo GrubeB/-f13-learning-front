@@ -1,4 +1,4 @@
-<div class="card m-2 w-100">
+<div class="card m-2 w-100" >
     <div class="card-header p-2 m-2 d-flex flex-row justify-content-between">
         <div class="d-flex flex-row">
             <button class="app-btn-image s32">
@@ -9,7 +9,9 @@
                 <h5>{{topic.createdDate | date }}</h5>
             </div>
         </div>
-        <btn-icon [icon] = "'bi-three-dots-vertical'"/>
+        <button  class="app-btn-icon">
+            <i class="bi bi-three-dots-vertical"></i>
+        </button>
     </div>
     <div class="card-body">
         <h2 class="card-title">{{topic.name}}</h2>
@@ -18,8 +20,17 @@
         </div>
     </div>
     <div class="card-footer d-flex flex-row justify-content-around">
-        <btn-icon [icon] = "'bi-box-arrow-up-right'" (action)="openTopicDetailsModal(topic.id)"/>
-        <btn-icon [icon] = "'bi-chat-left-text-fill'"/>
-        <btn-icon [icon] = "'bi-star'" text="132"/>
+        <button
+            class="app-btn-icon"
+            (click)="openTopicDetailsModal(topic.id);"
+        >
+            <i class="bi bi-box-arrow-up-right"></i>
+        </button>
+        <button  class="app-btn-icon">
+            <i class="bi bi-chat-left-text-fill"></i>
+        </button>
+        <button  class="app-btn-icon">
+            <i class="bi bi-star"></i>
+        </button>
     </div>
 </div>
