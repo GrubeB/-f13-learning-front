@@ -2,8 +2,9 @@ import { Component, Input } from '@angular/core';
 import { Topic } from '../../../model/topic.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { BtnImageComponent } from '../../../../shared/btn-image/btn-image.component';
 import { BtnIconComponent } from '../../../../shared/btn-icon/btn-icon.component';
+import { EventBusService } from '../../../service/event-bus.service';
+import { ShowTopicDetailsModalEvent } from '../topic-module.event';
 
 @Component({
   selector: 'topics-list-item',
@@ -11,7 +12,6 @@ import { BtnIconComponent } from '../../../../shared/btn-icon/btn-icon.component
   imports: [
     CommonModule,
     RouterLink,
-    BtnImageComponent,
     BtnIconComponent,
     DatePipe,
   ],
@@ -20,4 +20,12 @@ import { BtnIconComponent } from '../../../../shared/btn-icon/btn-icon.component
 })
 export class TopicsListItemComponent {
   @Input() topic!: Topic;
+
+  constructor(
+    private eventBus: EventBusService
+  ) { }
+
+  openTopicDetailsModal(topicId: string) {
+    this.eventBus.emit(ShowTopicDetailsModalEvent.name, new ShowTopicDetailsModalEvent(topicId));
+  }
 }
