@@ -6,3 +6,12 @@ export class ShowTopicDetailsModalEvent {
 }
 export class HideTopicDetailsModalEvent {
 }
+
+export class TopicDetailsFilterChangedEvent {
+    sorterIndex!: number;
+    filterIndex!: number;
+    constructor(sorterIndex: number, filterIndex:number){
+        this.sorterIndex = sorterIndex;
+        this.filterIndex = filterIndex;
+    }
+}

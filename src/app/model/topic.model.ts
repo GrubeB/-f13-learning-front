@@ -8,10 +8,10 @@ export class Topic {
     categories?: Category[];
     references?: Reference[];
     
-    createdBy?: String;
-    createdDate?: Date;
-    lastModifiedBy?: String;
-    lastModifiedDate?: Date;
+    createdBy!: String;
+    createdDate!: Date;
+    lastModifiedBy!: String;
+    lastModifiedDate!: Date;
 }
 
 export enum TopicStatus {
@@ -29,6 +29,11 @@ export class Reference {
     status?: ReferenceStatus;
     likesNumber!: number;
     dislikesNumber!: number;
+
+    createdBy!: String;
+    createdDate!: Date;
+    lastModifiedBy!: String;
+    lastModifiedDate!: Date;
 }
 export enum ReferenceStatus {
     UNVERIFIED,
