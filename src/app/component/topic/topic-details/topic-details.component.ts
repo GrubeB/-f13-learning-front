@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe, Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { Reference, Topic } from '../../../model/topic.model';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { Topic } from '../../../model/topic.model';
 import { ActivatedRoute } from '@angular/router';
 import { TopicService } from '../../../service/topic.service';
 import { take } from 'rxjs';
@@ -9,6 +9,8 @@ import { TopicDetailsReferencesFilterComponent } from '../topic-details-referenc
 import { filters, sorters } from '../topic-details-references-filter/topic-details-references-filter.component';
 import { EventBusService } from '../../../service/event-bus.service';
 import { TopicDetailsFilterChangedEvent } from '../topic-module.event';
+import { ReferenceCreateFormComponent } from '../../reference/reference-create-form/reference-create-form.component';
+import { TopicQueryService } from '../../../service/topic-query.service';
 
 @Component({
   selector: 'topic-details',
@@ -17,21 +19,22 @@ import { TopicDetailsFilterChangedEvent } from '../topic-module.event';
     CommonModule,
     DatePipe,
     ReferenceItemComponent,
-    TopicDetailsReferencesFilterComponent
+    TopicDetailsReferencesFilterComponent,
+    ReferenceCreateFormComponent
   ],
   templateUrl: './topic-details.component.html',
   styleUrl: './topic-details.component.scss'
 })
 export class TopicDetailsComponent implements OnInit {
+  topicService = inject(TopicService);
+  topicQueryService = inject(TopicQueryService);
+  eventBus = inject(EventBusService);
+
   @Input() topicId!: string;
+
   topic?: Topic;
   activeFilter: any = filters[0];
   activeSorter: any = sorters[0];
-
-  constructor(
-    private topicService: TopicService,
-    private eventBus: EventBusService
-  ) { }
 
   ngOnInit(): void {
     this.getTopic(this.topicId);
@@ -42,7 +45,7 @@ export class TopicDetailsComponent implements OnInit {
   }
 
   getTopic(id: string): void {
-    this.topicService.get(id).pipe(take(1)).subscribe({
+    this.topicQueryService.get(id).pipe(take(1)).subscribe({
       next: data => {
         this.topic = data;
       },

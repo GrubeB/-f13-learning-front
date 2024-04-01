@@ -1,4 +1,5 @@
 import { Category } from "./category.model";
+import { Reference } from "./reference.model";
 
 export class Topic {
     id!: string;
@@ -15,27 +16,6 @@ export class Topic {
 }
 
 export enum TopicStatus {
-    UNVERIFIED,
-    VERIFIED
-}
-
-export class Reference {
-    id!: string;
-    title?: string;
-    author? : string;
-    publicationDate? : Date;
-    description? : string;
-    link? : string;
-    status?: ReferenceStatus;
-    likesNumber!: number;
-    dislikesNumber!: number;
-
-    createdBy!: String;
-    createdDate!: Date;
-    lastModifiedBy!: String;
-    lastModifiedDate!: Date;
-}
-export enum ReferenceStatus {
     UNVERIFIED,
     VERIFIED
 }

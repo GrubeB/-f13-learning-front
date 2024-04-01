@@ -2,50 +2,42 @@ import { Inject, Injectable, inject } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Category } from '../model/category.model';
-import { Page } from '../model/response.model';
-import { Topic } from '../model/topic.model';
 import { errorHandle } from './service-support';
+import { Reference } from '../model/reference.model';
 
 @Injectable()
-export class TopicService {
+export class ReferenceVotingService {
   http: HttpClient = inject(HttpClient);
 
-  resourceName: string = "topics";
+  resourceName: string = "references";
   resourcePath: string = "/api/v1/" + this.resourceName;
   url: string = "http://localhost:9006" + this.resourcePath;
 
-  create(data: Topic): Observable<Topic> {
-    return this.http.request<Topic>("POST",
-      this.url,
+  createLike(referenceId: string, userId: string): Observable<HttpEvent<any>> {
+    return this.http.request<any>("POST",
+      this.url + "/" + referenceId + "/likes",
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         }),
-        body: JSON.stringify(data),
-        observe: 'body',
-        responseType: "json",
-      }
-    ).pipe(catchError(errorHandle));
-  }
-
-  update(data: Topic): Observable<HttpEvent<any>> {
-    return this.http.request<any>("PUT",
-      this.url + '/' + data.id,
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        }),
-        body: JSON.stringify(data),
+        body: JSON.stringify({ referenceId: referenceId, userId: userId }),
         observe: 'body',
         responseType: "json",
       }
     ).pipe(retry(1), catchError(errorHandle));
   }
 
-  delete(id: number): Observable<HttpEvent<any>> {
+  deleteLike(referenceId: string, userId: string): Observable<HttpEvent<any>> {
     return this.http.request<any>("DELETE",
-      this.url + '/' + id,
+      this.url + "/" + referenceId + "/likes",
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify({ referenceId: referenceId, userId: userId }),
+        observe: 'body',
+        responseType: "json",
+      }
     ).pipe(retry(1), catchError(errorHandle));
   }
 }

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CategoryService } from '../../../service/category.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
 import { Category } from '../../../model/category.model';
 import { take } from 'rxjs';
+import { CategoryQueryService } from '../../../service/category-query.service';
 
 @Component({
   selector: 'category-details-view',
@@ -15,13 +16,11 @@ import { take } from 'rxjs';
   styleUrl: './category-details-view.component.scss'
 })
 export class CategoryDetailsViewComponent {
-  category?: Category;
+  route = inject(ActivatedRoute);
+  categoryQueryService = inject(CategoryQueryService);
+  location = inject(Location);
 
-  constructor(
-    private route: ActivatedRoute,
-    private categoryService: CategoryService,
-    private location: Location
-  ) { }
+  category?: Category;
 
   ngOnInit(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
@@ -29,7 +28,7 @@ export class CategoryDetailsViewComponent {
   }
 
   getCategory(id: string): void {
-    this.categoryService.get(id).pipe(take(1)).subscribe({
+    this.categoryQueryService.get(id).pipe(take(1)).subscribe({
       next: data => {
         this.category = data;
       },

@@ -1,4 +1,5 @@
 
+import { HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 
 // Error handling

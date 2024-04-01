@@ -1,0 +1,67 @@
+<form 
+    [formGroup]="formGroup" 
+    (ngSubmit)="submit()"
+    class="container-xl"
+>
+<div class="d-flex flex-column">
+    <div  *ngIf="message">
+        <small class="text-danger">{{message}}</small>
+    </div>
+
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input id="title" class="form-control" type="text" formControlName="title">
+        <div *ngIf="formGroup.get('title')?.invalid && (formGroup.get('title')?.dirty || formGroup.get('title')?.touched)">
+            <small class="text-danger" *ngIf="formGroup.get('title')?.hasError('required')"
+            >This field is requied.</small>
+            <small class="text-danger" *ngIf="formGroup.get('title')?.hasError('minlength')"
+            >This field has to be at last 8 characters.</small>
+        </div>
+        
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" class="form-control" rows="3" formControlName="description"></textarea>
+        <div *ngIf="formGroup.get('description')?.invalid && (formGroup.get('description')?.dirty || formGroup.get('description')?.touched)">
+            <small class="text-danger" *ngIf="formGroup.get('description')?.hasError('required')"
+            >This field is requied.</small>
+            <small class="text-danger" *ngIf="formGroup.get('description')?.hasError('minlength')"
+            >This field has to be at last 8 characters.</small>
+        </div>
+    </div>
+
+    <div class="d-flex flex-row gap-3">
+        <div class="mb-3 flex-grow-1">
+            <label for="author" class="form-label">Author</label>
+            <input id="author" class="form-control" type="text" formControlName="author">
+            <div *ngIf="formGroup.get('author')?.invalid && (formGroup.get('author')?.dirty || formGroup.get('author')?.touched)">
+                <small class="text-danger" *ngIf="formGroup.get('author')?.hasError('required')"
+                >This field is requied.</small>
+            </div>
+        </div>
+        <div class="mb-3 flex-grow-1">
+            <label for="publicationDate" class="form-label">Publication Date</label>
+            <input id="publicationDate" class="form-control" type="date" formControlName="publicationDate">
+            <div *ngIf="formGroup.get('publicationDate')?.invalid && (formGroup.get('publicationDate')?.dirty || formGroup.get('publicationDate')?.touched)">
+                <small class="text-danger" *ngIf="formGroup.get('publicationDate')?.hasError('required')"
+                >This field is requied.</small>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="link" class="form-label">Link</label>
+        <input id="link" class="form-control" type="text" formControlName="link">
+        <div *ngIf="formGroup.get('link')?.invalid && (formGroup.get('link')?.dirty || formGroup.get('link')?.touched)">
+            <small class="text-danger" *ngIf="formGroup.get('link')?.hasError('required')"
+            >This field is requied.</small>
+        </div>
+    </div>
+    <div class="d-flex flex-row justify-content-end">
+        <button 
+            type="submit" 
+            class="app-btn"
+            [disabled]="formGroup.invalid"
+        >Submit</button>
+    </div>
+</div>
+</form>

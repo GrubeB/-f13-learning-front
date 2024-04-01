@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Reference } from '../../../model/topic.model';
+import { Reference } from '../../../model/reference.model';
 import { EventBusService } from '../../../service/event-bus.service';
 import { TopicDetailsFilterChangedEvent } from '../topic-module.event';
 

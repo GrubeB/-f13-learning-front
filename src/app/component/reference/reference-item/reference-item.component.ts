@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Reference } from '../../../model/topic.model';
+import { Reference } from '../../../model/reference.model';
 
 @Component({
   selector: 'reference-item',

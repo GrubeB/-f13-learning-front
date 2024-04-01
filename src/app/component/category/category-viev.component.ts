@@ -4,6 +4,7 @@ import { Category } from '../../model/category.model';
 import { CommonModule } from '@angular/common';
 import { take } from 'rxjs';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
+import { CategoryQueryService } from '../../service/category-query.service';
 
 @Component({
   selector: 'category-viev',
@@ -16,12 +17,13 @@ import { CategoriesListComponent } from './categories-list/categories-list.compo
   styleUrl: './category-viev.component.scss'
 })
 export class CategoryVievComponent implements OnInit {
+  categoryQueryService = inject(CategoryQueryService)
+
   categories: Category[] =[];
 
-  constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.categoryService.getAll().pipe(take(1)).subscribe({
+    this.categoryQueryService.getAll().pipe(take(1)).subscribe({
       next: data => {
         this.categories = data.content;
       },

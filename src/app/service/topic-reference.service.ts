@@ -1,23 +1,21 @@
-import { Inject, Injectable, inject } from '@angular/core';
-import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpEvent, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Category } from '../model/category.model';
-import { Page } from '../model/response.model';
-import { Topic } from '../model/topic.model';
 import { errorHandle } from './service-support';
+import { Reference } from '../model/reference.model';
 
 @Injectable()
-export class TopicService {
+export class TopicReferenceService {
   http: HttpClient = inject(HttpClient);
 
-  resourceName: string = "topics";
-  resourcePath: string = "/api/v1/" + this.resourceName;
+  resourceName: string = "references";
+  resourcePath: string = "/api/v1/topics/:topicId/" + this.resourceName;
   url: string = "http://localhost:9006" + this.resourcePath;
 
-  create(data: Topic): Observable<Topic> {
-    return this.http.request<Topic>("POST",
-      this.url,
+  create(topicId: string, data: Reference): Observable<Reference> {
+    return this.http.request<Reference>("POST",
+      this.url.replace(":topicId", topicId),
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -29,7 +27,7 @@ export class TopicService {
     ).pipe(catchError(errorHandle));
   }
 
-  update(data: Topic): Observable<HttpEvent<any>> {
+  update(data: Reference): Observable<HttpEvent<any>> {
     return this.http.request<any>("PUT",
       this.url + '/' + data.id,
       {
@@ -48,4 +46,5 @@ export class TopicService {
       this.url + '/' + id,
     ).pipe(retry(1), catchError(errorHandle));
   }
+
 }
