@@ -3,13 +3,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Topic } from '../../../model/topic.model';
 import { TopicService } from '../../../service/topic.service';
 import { first, take } from 'rxjs';
-import { TopicsListComponent } from '../topics-list/topics-list.component';
+import { TopicListComponent } from './topics-list/topic-list.component';
 import { TopicDetailsModalComponent } from '../topic-details-modal/topic-details-modal.component';
 import { EventBusService } from '../../../service/event-bus.service';
 import { DeleteTopicEvent, HideTopicDetailsModalEvent, ShowTopicDetailsModalEvent, TopicCreatedEvent } from '../topic-module.event';
 import { TopicQueryService } from '../../../service/topic-query.service';
 import { NGXLogger } from 'ngx-logger';
-import { TopicFormComponent } from '../topic-form/topic-form.component';
+import { TopicFormComponent } from './topic-form/topic-form.component';
 
 
 @Component({
@@ -17,7 +17,7 @@ import { TopicFormComponent } from '../topic-form/topic-form.component';
   standalone: true,
   imports: [
     CommonModule,
-    TopicsListComponent,
+    TopicListComponent,
     TopicDetailsModalComponent,
     TopicFormComponent
   ],

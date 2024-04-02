@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../../../service/event-bus.service';
-import { DeleteTopicEvent, ShowTopicItemContextMenuEvent } from '../../topic-module.event';
+import { EventBusService } from '../../../../../../service/event-bus.service';
+import { DeleteTopicEvent, ShowTopicItemContextMenuEvent } from '../../../../topic-module.event';
 import { CommonModule } from '@angular/common';
-import { OutsideClickDirective } from '../../../../../shared/directive/outside-click.directive';
+import { OutsideClickDirective } from '../../../../../../../shared/directive/outside-click.directive';
 import { RouterLink } from '@angular/router';
 
 @Component({
