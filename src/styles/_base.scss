@@ -60,8 +60,60 @@ body {
             scrollbar-width: none;
         }
     }
+} 
+.context-menu-container {
+    position: absolute;
+    background-color: $secondary;
+    border-radius: .5em;
+    padding: 0em;
+    min-height: 3em;
+    min-width: 10em;
+    width: auto; 
+    left: 0;
+    top: 0; 
+    .context-menu{
+        padding: .25em 0em;
+        display: flex;
+        flex-direction:column;
+        gap:.25em;
+        button {
+            height: 1em;
+            display: flex;
+            flex-direction: row;
+            background: none;
+            border: none;
+            border-radius: .25em;
+            color: $secondary-text;
+            align-items: center;
+            i{
+                margin-left: .75em;
+                display: inline-block;
+            }
+            p{
+                display: inline-block;
+                line-height: 1em;
+                margin: auto 0px auto 1em;
+            }
+            &:hover{
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+            &:active {
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+            &.s32{
+                height: 2em;
+                border-radius: .5em;
+                i{
+                    font-size: 1.25em;
+                }
+                p{
+                    font-size: 1em;
+                    line-height: 2em;
+                }
+            }
+        }
+    }
 }
-
 // BUTTONS
 button.app-btn-close {
     width: 1em;

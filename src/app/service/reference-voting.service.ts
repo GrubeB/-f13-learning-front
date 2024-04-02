@@ -40,4 +40,28 @@ export class ReferenceVotingService {
       }
     ).pipe(retry(1), catchError(errorHandle));
   }
+  createDislike(referenceId: string, userId: string): Observable<HttpEvent<any>> {
+    return this.http.request<any>("POST",
+      this.url + "/" + referenceId + "/dislikes",
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify({ referenceId: referenceId, userId: userId }),
+      }
+    ).pipe(retry(1), catchError(errorHandle));
+  }
+  deleteDislike(referenceId: string, userId: string): Observable<HttpEvent<any>> {
+    return this.http.request<any>("DELETE",
+      this.url + "/" + referenceId + "/dislikes",
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify({ referenceId: referenceId, userId: userId }),
+        observe: 'body',
+        responseType: "json",
+      }
+    ).pipe(retry(1), catchError(errorHandle));
+  }
 }

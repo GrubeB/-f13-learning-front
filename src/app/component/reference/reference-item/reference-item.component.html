@@ -1,12 +1,12 @@
 <div class="d-flex flex-row justify-content-between">
     <div class="d-flex flex-column">
-        <button class="app-btn-icon">
+        <button class="app-btn-icon" (click)="addLike(reference.id)">
             <i class="bi bi-chevron-double-up"></i>
         </button>
-        <button class="app-btn-icon" [disabled]="true">
+        <button class="app-btn-icon" (click)="removeLikeAndDislike(reference.id)">
             {{ reference.likesNumber - reference.dislikesNumber }}
         </button>
-        <button class="app-btn-icon">
+        <button class="app-btn-icon" (click)="addDislike(reference.id)">
             <i class="bi bi-chevron-double-down"></i>
         </button>
     </div>

@@ -1,26 +1,28 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject, Subject, filter, map, shareReplay, tap } from 'rxjs';
+import { Injectable, OnInit, inject } from '@angular/core';
+import { Observable, ReplaySubject, Subject, filter, first, map, shareReplay, tap } from 'rxjs';
 import { AuthResponse, AuthenticationContext } from './authentication.model';
-import { jwtDecode } from 'jwt-decode';
+import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { NGXLogger } from 'ngx-logger';
 
 @Injectable()
 export class AuthenticationService {
+    http = inject(HttpClient);
+    logger = inject(NGXLogger);
 
     resourceName: string = "auth";
     resourcePath: string = "/api/v1/" + this.resourceName;
     url: string = "http://localhost:9007" + this.resourcePath;
 
-    constructor(
-        private http: HttpClient,
-        private logger: NGXLogger
-    ) {
+    private authenticationContext = new ReplaySubject<AuthenticationContext | null>(1);
+
+    constructor() {
         this.authenticationContext.next(null);
     }
 
-    private authenticationContext = new ReplaySubject<AuthenticationContext | null>(1);
-    
+    authenticationContext$(): Observable<AuthenticationContext | null> {
+        return this.authenticationContext;
+    }
     isAuthenticated$(): Observable<boolean> {
         return this.authenticationContext.pipe(
             map(context => !!context)
@@ -34,30 +36,33 @@ export class AuthenticationService {
     }
 
     login(email: string, password: string) {
+        this.logger.debug(AuthenticationService.name, " login()");
         return this.http.post<AuthResponse>(this.url + '/authenticate', { email, password })
             .pipe(map(response => {
-                let decodedToken = jwtDecode(response.accessToken);
+                this.logger.debug(AuthenticationService.name, " accessToken: ", response.accessToken);
+                let decodedToken: any = jwtDecode<JwtPayload>(response.accessToken);
+
                 // TODO get decoded values
                 let context: AuthenticationContext = {
                     user: {
-                        id: "displayname",
-                        email: "email",
-                        name: "name"
+                        id: decodedToken.user_id,
+                        email: decodedToken.sub,
+                        name: decodedToken.sub,
                     },
                     authorities: {
                         roles: [],
-                        privilages: []
+                        privilages: decodedToken.auth.split(','),
                     },
                     tokens: {
                         accessToken: response.accessToken
                     }
                 };
-                this.logger.debug("new authenticationContext ", context);
+                this.logger.debug(AuthenticationService.name, " new authenticationContext ", context);
                 this.authenticationContext.next(context);
             }))
     }
 
     logout(): void {
-
+        this.logger.debug(AuthenticationService.name, " logout()");
     }
 }

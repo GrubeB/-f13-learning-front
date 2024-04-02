@@ -5,6 +5,8 @@ import { NGXLogger } from 'ngx-logger';
 import { Reference } from '../../../model/reference.model';
 import { first } from 'rxjs';
 import { TopicReferenceService } from '../../../service/topic-reference.service';
+import { EventBusService } from '../../../service/event-bus.service';
+import { ReferenceCreatedEvent } from '../reference-module.event';
 
 @Component({
   selector: 'reference-create-form',
@@ -17,23 +19,35 @@ import { TopicReferenceService } from '../../../service/topic-reference.service'
   styleUrl: './reference-create-form.component.scss'
 })
 export class ReferenceCreateFormComponent {
-  @Output() onSuccessSubmit = new EventEmitter<any>();
-  @Input() topicId!: string;
-  
-  logger: NGXLogger = inject(NGXLogger);
-  referenceService: TopicReferenceService = inject(TopicReferenceService);
+  logger= inject(NGXLogger);
+  eventBus= inject(EventBusService);
+  referenceService = inject(TopicReferenceService);
 
-  message?:string;
-  
+  @Input() topicId!: string;
+
+  message?: string;
+
   formGroup = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    description: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    author: new FormControl('', [Validators.required]),
-    publicationDate: new FormControl('', [Validators.required]),
-    link: new FormControl('', [Validators.required]),
+    title: new FormControl('', [
+      Validators.required,
+      // Validators.minLength(8)
+    ]),
+    description: new FormControl('', [
+      // Validators.required,
+      // Validators.minLength(8)
+    ]),
+    author: new FormControl('', [
+      // Validators.required
+    ]),
+    publicationDate: new FormControl('', [
+      // Validators.required
+    ]),
+    link: new FormControl('', [
+      // Validators.required
+    ]),
   });
 
-  private createReferenceFromFormValues(formValues: any): Reference{
+  private createReferenceFromFormValues(formValues: any): Reference {
     let reference = new Reference();
     reference.title = formValues.title ? formValues.title as string : '';
     reference.description = formValues.description ? formValues.description as string : '';
@@ -45,15 +59,15 @@ export class ReferenceCreateFormComponent {
 
   submit() {
     this.logger.debug(ReferenceCreateFormComponent.name, "submit");
-    if(this.formGroup.valid){
+    if (this.formGroup.valid) {
       let newReference = this.createReferenceFromFormValues(this.formGroup.value);
-      
+
       this.referenceService.create(this.topicId, newReference)
         .pipe(first())
         .subscribe({
           next: response => {
             this.logger.debug(ReferenceCreateFormComponent.name, " referemce created ", response.id);
-            this.onSuccessSubmit.emit();
+            this.eventBus.emit(ReferenceCreatedEvent.name, new ReferenceCreatedEvent(response.id));
           },
           error: e => {
             this.logger.debug(ReferenceCreateFormComponent.name, "error occurred while creating reference ", e);
