@@ -1,5 +1,8 @@
 <div class="card m-2 w-100 bg-secondary-light" >
-    <div class="card-header p-2 d-flex flex-row justify-content-end">
+    <div class="card-header p-2 d-flex flex-row justify-content-between">
+        <div class="d-flex justify-content-center align-items-center p-2 ">
+            <h2 class="m-0">{{category.name}}</h2>
+        </div>
         <button 
             class="app-btn-icon s24" 
             (click)="openContextMenu($event)"
@@ -8,7 +11,6 @@
         </button>
     </div>
     <div class="card-body">
-        <h2 class="card-title">{{category.name}}</h2>
         <p class="card-text">{{category.description}}</p>
     </div>
 </div>

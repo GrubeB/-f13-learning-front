@@ -1,0 +1,27 @@
+<div *ngIf="category" class="container-xl d-flex flex-column">
+    <div class="mt-3">
+        <h1>{{category.name}}</h1>
+        <h3>{{category.description}}</h3>
+    </div>
+
+    <div class="mt-4">
+        <div class="d-flex flex-row justify-content-between align-items-center">
+            <div class="d-flex flex-row gap-3">
+                <h1>{{category.parents?.length}} Parents</h1>
+            </div>
+        </div>
+        <div>
+            <category-list [categories]="category.parents ?? []" />
+        </div>
+
+        <div class="d-flex flex-row justify-content-between align-items-center">
+            <div class="d-flex flex-row gap-3">
+                <h1>{{category.children?.length}} Children</h1>
+            </div>
+        </div>
+        <div>
+            <category-list [categories]="category.children ?? []" />
+        </div>
+    </div>
+    
+</div>

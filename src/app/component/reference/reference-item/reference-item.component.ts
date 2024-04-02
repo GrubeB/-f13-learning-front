@@ -77,12 +77,12 @@ export class ReferenceItemComponent {
               this.eventBus.emit(ReferenceLikeRemovedEvent.name, new ReferenceLikeRemovedEvent(referenceId, userId));
             }
           });
-          // this.referenceVotingService.deleteDislike(referenceId, userId).subscribe({
-          //   next: res =>{
-          //     this.logger.debug(ReferenceItemComponent.name, " User removed dislike ");
-          //     this.eventBus.emit(ReferenceDislikeRemovedEvent.name, new ReferenceDislikeRemovedEvent(referenceId, userId));
-          //   }
-          // });
+          this.referenceVotingService.deleteDislike(referenceId, userId).subscribe({
+            next: res =>{
+              this.logger.debug(ReferenceItemComponent.name, " User removed dislike ");
+              this.eventBus.emit(ReferenceDislikeRemovedEvent.name, new ReferenceDislikeRemovedEvent(referenceId, userId));
+            }
+          });
         }
       }
     });

@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { NGXLogger } from "ngx-logger";
-import { Observable, Subject } from "rxjs";
+import { Subject } from "rxjs";
 
 @Injectable()
 export class EventBusService {
@@ -13,10 +13,17 @@ export class EventBusService {
         this.subject.next({ eventName, payload });
     }
 
-    listen(eventName: string, callback: (event: any) => void) {
+    listen(eventName: string  | string[], callback: (event: any) => void) {
+        
         this.subject.asObservable().subscribe((nextObj: any) => {
-            if (eventName === nextObj.eventName) {
-                callback(nextObj.payload);
+            if (typeof eventName === 'string') {
+                if (eventName === nextObj.eventName) {
+                    callback(nextObj.payload);
+                }
+            } else if (Array.isArray(eventName)) {
+                if (eventName.includes(nextObj.eventName)) {
+                    callback(nextObj.payload);
+                }
             }
         })
     }

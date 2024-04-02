@@ -5,37 +5,28 @@ import { CommonModule, Location } from '@angular/common';
 import { Category } from '../../../model/category.model';
 import { take } from 'rxjs';
 import { CategoryQueryService } from '../../../service/category-query.service';
+import { CategoryDetailsComponent } from '../category-details/category-details.component';
 
 @Component({
   selector: 'category-details-view',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    CategoryDetailsComponent
   ],
   templateUrl: './category-details-view.component.html',
   styleUrl: './category-details-view.component.scss'
 })
 export class CategoryDetailsViewComponent {
   route = inject(ActivatedRoute);
-  categoryQueryService = inject(CategoryQueryService);
   location = inject(Location);
-
-  category?: Category;
+  
+  categoryId?: string;
 
   ngOnInit(): void {
-    const id = String(this.route.snapshot.paramMap.get('id'));
-    this.getCategory(id);
+    this.categoryId = String(this.route.snapshot.paramMap.get('id'));
   }
 
-  getCategory(id: string): void {
-    this.categoryQueryService.get(id).pipe(take(1)).subscribe({
-      next: data => {
-        this.category = data;
-      },
-      error: e => {
-      }
-    });
-  }
   goBack(): void {
     this.location.back();
   }

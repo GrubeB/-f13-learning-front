@@ -34,8 +34,8 @@ export class TopicDetailsComponent implements OnInit {
   logger = inject(NGXLogger);
 
   @Input() topicId!: string;
-
   topic?: Topic;
+  
   activeFilter: any = filters[0];
   activeSorter: any = sorters[0];
 
@@ -49,18 +49,13 @@ export class TopicDetailsComponent implements OnInit {
       this.refreshTopic(); 
       this.toggleReferenceForm();
     });
-    this.eventBus.listen(ReferenceLikedEvent.name, (e: ReferenceLikedEvent) => {
-      this.refreshTopic(); 
-    });
-    this.eventBus.listen(ReferenceDislikedEvent.name, (e: ReferenceDislikedEvent) => {
-      this.refreshTopic(); 
-    });
-    
-    this.eventBus.listen(ReferenceLikeRemovedEvent.name, (e: ReferenceLikeRemovedEvent) => {
-      this.refreshTopic(); 
-    });
-    
-    this.eventBus.listen(ReferenceDislikeRemovedEvent.name, (e: ReferenceDislikeRemovedEvent) => {
+
+    this.eventBus.listen([
+      ReferenceLikedEvent.name,
+      ReferenceDislikedEvent.name,
+      ReferenceLikeRemovedEvent.name,
+      ReferenceDislikeRemovedEvent.name,
+    ], (e: any) => {
       this.refreshTopic(); 
     });
   }
