@@ -42,7 +42,7 @@ export class CategoryService {
     ).pipe(retry(1), catchError(errorHandle));
   }
 
-  delete(id: number): Observable<HttpEvent<any>> {
+  delete(id: string): Observable<HttpEvent<any>> {
     return this.http.request<any>("DELETE",
       this.url + '/' + id,
       {

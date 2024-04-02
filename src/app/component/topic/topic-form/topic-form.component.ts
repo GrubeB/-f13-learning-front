@@ -15,7 +15,7 @@ import { TopicCreatedEvent } from '../topic-module.event';
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './topic-form.component.html',
   styleUrl: './topic-form.component.scss'

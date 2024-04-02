@@ -1,18 +1,35 @@
+// EVENTS
 export class CategoryCreatedEvent {
-    topicId!: string;
-    constructor(topicId: string) {
-        this.topicId = topicId;
+    categoryId!: string;
+    constructor(categoryId: string) {
+        this.categoryId = categoryId;
     }
 }
 export class CategoryDeletedEvent {
-    topicId!: string;
-    constructor(topicId: string) {
-        this.topicId = topicId;
+    categoryId!: string;
+    constructor(categoryId: string) {
+        this.categoryId = categoryId;
     }
 }
+// COMMANDS
 export class DeleteCategoryEvent {
-    topicId!: string;
-    constructor(topicId: string) {
-        this.topicId = topicId;
+    categoryId!: string;
+    constructor(categoryId: string) {
+        this.categoryId = categoryId;
+    }
+}
+// COMPONENTS
+export class ShowCategoryItemContextMenuEvent {
+    categoryId!: string;
+    posX!: number;
+    posY!: number;
+    constructor(
+        categoryId: string,
+        posX: number,
+        posY: number
+    ) {
+        this.categoryId = categoryId;
+        this.posX = posX;
+        this.posY = posY;
     }
 }

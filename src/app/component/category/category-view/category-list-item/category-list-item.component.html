@@ -1,0 +1,14 @@
+<div class="card m-2 w-100 bg-secondary-light" >
+    <div class="card-header p-2 d-flex flex-row justify-content-end">
+        <button 
+            class="app-btn-icon s24" 
+            (click)="openContextMenu($event)"
+        >
+            <i class="bi bi-three-dots-vertical"></i>
+        </button>
+    </div>
+    <div class="card-body">
+        <h2 class="card-title">{{category.name}}</h2>
+        <p class="card-text">{{category.description}}</p>
+    </div>
+</div>

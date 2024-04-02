@@ -37,6 +37,7 @@ export class TopicViewComponent implements OnInit {
       this.getTopics(); 
       this.toggleTopicForm();
     });
+
     this.eventBus.listen(DeleteTopicEvent.name, (event: DeleteTopicEvent) => {
       this.topicService.delete(event.topicId).pipe(first()).subscribe({
         next: data => {
@@ -64,6 +65,7 @@ export class TopicViewComponent implements OnInit {
       }
     });
   }
+  
   // TOPIC FORM
   topicFormViable: boolean = false;
   toggleTopicForm() {
