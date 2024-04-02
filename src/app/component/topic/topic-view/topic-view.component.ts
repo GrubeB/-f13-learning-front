@@ -6,9 +6,10 @@ import { first, take } from 'rxjs';
 import { TopicsListComponent } from '../topics-list/topics-list.component';
 import { TopicDetailsModalComponent } from '../topic-details-modal/topic-details-modal.component';
 import { EventBusService } from '../../../service/event-bus.service';
-import { DeleteTopicEvent, HideTopicDetailsModalEvent, ShowTopicDetailsModalEvent } from '../topic-module.event';
+import { DeleteTopicEvent, HideTopicDetailsModalEvent, ShowTopicDetailsModalEvent, TopicCreatedEvent } from '../topic-module.event';
 import { TopicQueryService } from '../../../service/topic-query.service';
 import { NGXLogger } from 'ngx-logger';
+import { TopicFormComponent } from '../topic-form/topic-form.component';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { NGXLogger } from 'ngx-logger';
   imports: [
     CommonModule,
     TopicsListComponent,
-    TopicDetailsModalComponent
+    TopicDetailsModalComponent,
+    TopicFormComponent
   ],
   templateUrl: './topic-view.component.html',
   styleUrl: './topic-view.component.scss'
@@ -31,6 +33,10 @@ export class TopicViewComponent implements OnInit {
   topics: Topic[] = [];
 
   constructor() {
+    this.eventBus.listen(TopicCreatedEvent.name, (e: TopicCreatedEvent) => {
+      this.getTopics(); 
+      this.toggleTopicForm();
+    });
     this.eventBus.listen(DeleteTopicEvent.name, (event: DeleteTopicEvent) => {
       this.topicService.delete(event.topicId).pipe(first()).subscribe({
         next: data => {
@@ -57,5 +63,11 @@ export class TopicViewComponent implements OnInit {
         this.topics = [];
       }
     });
+  }
+  // TOPIC FORM
+  topicFormViable: boolean = false;
+  toggleTopicForm() {
+    this.logger.debug(TopicViewComponent.name, "toggleTopicForm()");
+    this.topicFormViable = !this.topicFormViable;
   }
 }

@@ -70,7 +70,7 @@ export class ReferenceCreateFormComponent {
             this.eventBus.emit(ReferenceCreatedEvent.name, new ReferenceCreatedEvent(response.id));
           },
           error: e => {
-            this.logger.debug(ReferenceCreateFormComponent.name, "error occurred while creating reference ", e);
+            this.logger.debug(ReferenceCreateFormComponent.name, " error occurred while creating reference ", e);
             this.message = e.message;
           }
         })

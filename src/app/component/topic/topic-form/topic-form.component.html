@@ -1,0 +1,38 @@
+<form 
+    [formGroup]="formGroup" 
+    (ngSubmit)="submit()"
+    class="container-xl"
+>
+<div class="d-flex flex-column">
+    <div  *ngIf="message">
+        <small class="text-danger">{{message}}</small>
+    </div>
+
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input id="name" class="form-control" type="text" formControlName="name">
+        <div *ngIf="formGroup.get('name')?.invalid && (formGroup.get('name')?.dirty || formGroup.get('name')?.touched)">
+            <small class="text-danger" *ngIf="formGroup.get('name')?.hasError('required')"
+            >This field is requied.</small>
+        </div>
+        
+    </div>
+
+    <div class="mb-3">
+        <label for="content" class="form-label">Description</label>
+        <textarea id="content" class="form-control" rows="3" formControlName="content"></textarea>
+        <div *ngIf="formGroup.get('content')?.invalid && (formGroup.get('content')?.dirty || formGroup.get('content')?.touched)">
+            <small class="text-danger" *ngIf="formGroup.get('content')?.hasError('required')"
+            >This field is requied.</small>
+        </div>
+    </div>
+
+    <div class="d-flex flex-row justify-content-end">
+        <button 
+            type="submit" 
+            class="app-btn s32"
+            [disabled]="formGroup.invalid"
+        >Submit</button>
+    </div>
+</div>
+</form>

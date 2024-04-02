@@ -29,7 +29,12 @@ export class ShowTopicItemContextMenuEvent {
         this.posY = posY;
     }
 }
-
+export class TopicCreatedEvent {
+    topicId!: string;
+    constructor(topicId: string) {
+        this.topicId = topicId;
+    }
+}
 export class DeleteTopicEvent {
     topicId!: string;
     constructor(topicId: string) {
