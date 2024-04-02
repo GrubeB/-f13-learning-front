@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CategoryService } from '../../service/category.service';
-import { Category } from '../../model/category.model';
+import { CategoryService } from '../../../service/category.service';
+import { Category } from '../../../model/category.model';
 import { CommonModule } from '@angular/common';
 import { take } from 'rxjs';
-import { CategoriesListComponent } from './categories-list/categories-list.component';
-import { CategoryQueryService } from '../../service/category-query.service';
+import { CategoriesListComponent } from '../categories-list/categories-list.component';
+import { CategoryQueryService } from '../../../service/category-query.service';
 
 @Component({
   selector: 'category-viev',
