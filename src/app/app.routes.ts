@@ -3,7 +3,7 @@ import { HomeComponent } from './component/home/home.component';
 import { PageNotFoundComponent } from '../shared/page-not-found/page-not-found.component';
 import { CategoryVievComponent } from './component/category/category-viev.component';
 import { CategoryDetailsViewComponent } from './component/category/category-details-view/category-details-view.component';
-import { TopicViewComponent } from './component/topic/topic-view.component';
+import { TopicViewComponent } from './component/topic/topic-view/topic-view.component';
 import { TopicDetailsViewComponent } from './component/topic/topic-details-view/topic-details-view.component';
 
 export const routes: Routes = [

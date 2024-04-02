@@ -5,13 +5,13 @@
     class="context-menu-container" 
 >
     <div class="context-menu">
-        <button class="s32">
-            <i class="bi bi-three-dots-vertical"></i>
-            <p>Kot</p>
+        <button class="s32" routerLink="/topics/{{topicId}}" >
+            <i class="bi bi-box-arrow-up-right"></i>
+            <p>Open</p>
         </button>
-        <button class="s32">
-            <i class="bi bi-three-dots-vertical"></i>
-            <p>Kot</p>
+        <button class="s32" (click)="emitDeleteTopicEvent()">
+            <i class="bi bi-trash3"></i>
+            <p>Delete</p>
         </button>
     </div>
 </div>
