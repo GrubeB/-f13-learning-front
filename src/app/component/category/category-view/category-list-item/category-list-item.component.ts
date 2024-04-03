@@ -4,7 +4,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { NGXLogger } from 'ngx-logger';
 import { CategoryListItemContextMenuComponent } from './category-list-item-context-menu/category-list-item-context-menu.component';
 import { EventBusService } from '../../../../service/event-bus.service';
-import { Category } from '../../../../model/category.model';
+import { Category } from '../../category.model';
 import { ShowCategoryItemContextMenuEvent } from '../../category-module.event';
 
 @Component({

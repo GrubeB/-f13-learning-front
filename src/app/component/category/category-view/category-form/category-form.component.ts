@@ -4,10 +4,10 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } fr
 import { NGXLogger } from 'ngx-logger';
 import { first, take } from 'rxjs';
 import { EventBusService } from '../../../../service/event-bus.service';
-import { CategoryService } from '../../../../service/category.service';
+import { CategoryService } from '../../category.service';
 import { CategoryCreatedEvent, CategoryUpdatedEvent, EditCategoryEvent } from '../../category-module.event';
-import { Category, CreateCategoryCommand, UpdateCategoryCommand } from '../../../../model/category.model';
-import { CategoryQueryService } from '../../../../service/category-query.service';
+import { Category, CreateCategoryCommand, UpdateCategoryCommand } from '../../category.model';
+import { CategoryQueryService } from '../../category-query.service';
 import { MultiSelectComponent } from '../../../../../shared/multi-select/multi-select.component';
 
 @Component({

@@ -2,14 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NGXLogger } from 'ngx-logger';
-import { Reference } from '../../../../model/reference.model';
+import { Reference } from '../../../reference/reference.model';
 import { first, take } from 'rxjs';
-import { TopicReferenceService } from '../../../../service/topic-reference.service';
+import { TopicReferenceService } from '../../topic-reference.service';
 import { EventBusService } from '../../../../service/event-bus.service';
-import { TopicService } from '../../../../service/topic.service';
-import { Topic } from '../../../../model/topic.model';
+import { TopicService } from '../../topic.service';
+import { CreateTopicCommand, Topic } from '../../topic.model';
 import { CreateTopicEvent, EditTopicEvent, TopicCreatedEvent, TopicUpdateddEvent } from '../../topic-module.event';
-import { TopicQueryService } from '../../../../service/topic-query.service';
+import { TopicQueryService } from '../../topic-query.service';
 
 @Component({
   selector: 'topic-form',
@@ -70,11 +70,11 @@ export class TopicFormComponent {
     }
   }
   createCategory() {
-    let topic = new Topic();
-    topic.name = this.formGroup.value.name ? this.formGroup.value.name as string : '';
-    topic.content = this.formGroup.value.content ? this.formGroup.value.content as string : '';
-    topic.categories = [];
-    this.topicService.create(topic)
+    let command = new CreateTopicCommand();
+    command.name = this.formGroup.value.name ? this.formGroup.value.name as string : '';
+    command.content = this.formGroup.value.content ? this.formGroup.value.content as string : '';
+    command.categoryIds = [];
+    this.topicService.create(command)
       .pipe(first())
       .subscribe({
         next: response => {

@@ -6,15 +6,15 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LocalStorageService } from './service/local-storage.service';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { AuthenticationService } from './auth/authentication.service';
-import { CategoryService } from './service/category.service';
+import { CategoryService } from './component/category/category.service';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { EventBusService } from './service/event-bus.service';
-import { TopicService } from './service/topic.service';
-import { TopicReferenceService } from './service/topic-reference.service';
-import { ReferenceQueryService } from './service/reference-query.service';
-import { ReferenceVotingService } from './service/reference-voting.service';
-import { TopicQueryService } from './service/topic-query.service';
-import { CategoryQueryService } from './service/category-query.service';
+import { TopicService } from './component/topic/topic.service';
+import { TopicReferenceService } from './component/topic/topic-reference.service';
+import { ReferenceQueryService } from './component/reference/reference-query.service';
+import { ReferenceVotingService } from './component/reference/reference-voting.service';
+import { TopicQueryService } from './component/topic/topic-query.service';
+import { CategoryQueryService } from './component/category/category-query.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [

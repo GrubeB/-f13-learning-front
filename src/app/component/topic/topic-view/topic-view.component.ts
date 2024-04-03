@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { Topic } from '../../../model/topic.model';
-import { TopicService } from '../../../service/topic.service';
+import { Topic } from '../topic.model';
+import { TopicService } from '../topic.service';
 import { first, take } from 'rxjs';
 import { TopicListComponent } from './topics-list/topic-list.component';
 import { TopicDetailsModalComponent } from '../topic-details-modal/topic-details-modal.component';
 import { EventBusService } from '../../../service/event-bus.service';
 import { CreateTopicEvent, DeleteTopicEvent, HideTopicDetailsModalEvent, ShowTopicDetailsModalEvent, TopicCreatedEvent, TopicDeletedEvent, TopicUpdateddEvent } from '../topic-module.event';
-import { TopicQueryService } from '../../../service/topic-query.service';
+import { TopicQueryService } from '../topic-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { TopicFormComponent } from './topic-form/topic-form.component';
 

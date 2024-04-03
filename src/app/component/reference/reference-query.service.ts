@@ -2,9 +2,9 @@ import { Inject, Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Page } from '../model/response.model';
-import { errorHandle } from './service-support';
-import { Reference } from '../model/reference.model';
+import { Page } from '../../model/response.model';
+import { errorHandle } from '../../service/service-support';
+import { Reference } from './reference.model';
 @Injectable()
 export class ReferenceQueryService {
   http: HttpClient = inject(HttpClient);

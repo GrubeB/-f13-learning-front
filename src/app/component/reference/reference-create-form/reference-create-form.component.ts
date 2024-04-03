@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NGXLogger } from 'ngx-logger';
-import { Reference } from '../../../model/reference.model';
+import { Reference } from '../reference.model';
 import { first } from 'rxjs';
-import { TopicReferenceService } from '../../../service/topic-reference.service';
+import { TopicReferenceService } from '../../topic/topic-reference.service';
 import { EventBusService } from '../../../service/event-bus.service';
 import { ReferenceCreatedEvent } from '../reference-module.event';
 

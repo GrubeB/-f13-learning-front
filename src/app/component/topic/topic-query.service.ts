@@ -2,10 +2,10 @@ import { Inject, Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
-import { Category } from '../model/category.model';
-import { Page } from '../model/response.model';
-import { Topic } from '../model/topic.model';
-import { errorHandle } from './service-support';
+import { Category } from '../category/category.model';
+import { Page } from '../../model/response.model';
+import { Topic } from './topic.model';
+import { errorHandle } from '../../service/service-support';
 
 @Injectable()
 export class TopicQueryService {

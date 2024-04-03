@@ -1,8 +1,8 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Inject, Input, inject } from '@angular/core';
-import { Reference } from '../../../model/reference.model';
+import { Reference } from '../reference.model';
 import { AuthenticationService } from '../../../auth/authentication.service';
-import { ReferenceVotingService } from '../../../service/reference-voting.service';
+import { ReferenceVotingService } from '../reference-voting.service';
 import { take } from 'rxjs';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../service/event-bus.service';

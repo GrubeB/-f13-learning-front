@@ -2,8 +2,8 @@ import { Inject, Injectable, inject } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { errorHandle } from './service-support';
-import { Reference } from '../model/reference.model';
+import { errorHandle } from '../../service/service-support';
+import { Reference } from './reference.model';
 
 @Injectable()
 export class ReferenceVotingService {

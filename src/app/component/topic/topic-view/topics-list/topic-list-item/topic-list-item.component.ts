@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
-import { Topic } from '../../../../../model/topic.model';
+import { Topic } from '../../../topic.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { EventBusService } from '../../../../../service/event-bus.service';

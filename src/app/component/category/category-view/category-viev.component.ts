@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CategoryService } from '../../../service/category.service';
-import { Category, CreateCategoryCommand } from '../../../model/category.model';
+import { CategoryService } from '../category.service';
+import { Category, CreateCategoryCommand } from '../category.model';
 import { CommonModule } from '@angular/common';
 import { first, take } from 'rxjs';
 import { CategoriesListComponent } from './category-list/category-list.component';
-import { CategoryQueryService } from '../../../service/category-query.service';
+import { CategoryQueryService } from '../category-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../service/event-bus.service';
 import { CategoryCreatedEvent, CategoryDeletedEvent, CategoryUpdatedEvent, DeleteCategoryEvent, EditCategoryEvent } from '../category-module.event';

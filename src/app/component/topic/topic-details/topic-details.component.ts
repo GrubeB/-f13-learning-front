@@ -1,8 +1,8 @@
 import { CommonModule, DatePipe, Location } from '@angular/common';
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { Topic } from '../../../model/topic.model';
+import { Topic } from '../topic.model';
 import { ActivatedRoute } from '@angular/router';
-import { TopicService } from '../../../service/topic.service';
+import { TopicService } from '../topic.service';
 import { take } from 'rxjs';
 import { ReferenceItemComponent } from '../../reference/reference-item/reference-item.component';
 import { TopicDetailsReferencesFilterComponent } from './topic-details-references-filter/topic-details-references-filter.component';
@@ -10,7 +10,7 @@ import { filters, sorters } from './topic-details-references-filter/topic-detail
 import { EventBusService } from '../../../service/event-bus.service';
 import { TopicDetailsFilterChangedEvent } from '../topic-module.event';
 import { ReferenceCreateFormComponent } from '../../reference/reference-create-form/reference-create-form.component';
-import { TopicQueryService } from '../../../service/topic-query.service';
+import { TopicQueryService } from '../topic-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { ReferenceCreatedEvent, ReferenceDislikeRemovedEvent, ReferenceDislikedEvent, ReferenceLikeRemovedEvent, ReferenceLikedEvent } from '../../reference/reference-module.event';
 

@@ -1,5 +1,5 @@
-import { Category } from "./category.model";
-import { Reference } from "./reference.model";
+import { Category } from "../category/category.model";
+import { Reference } from "../reference/reference.model";
 
 export class Topic {
     id!: string;
@@ -18,4 +18,10 @@ export class Topic {
 export enum TopicStatus {
     UNVERIFIED,
     VERIFIED
+}
+
+export class CreateTopicCommand {
+    name!: string;
+    content! : string;
+    categoryIds!: string[];
 }

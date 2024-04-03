@@ -1,10 +1,10 @@
 import { Component, Input, inject } from '@angular/core';
-import { CategoryService } from '../../../service/category.service';
+import { CategoryService } from '../category.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
-import { Category } from '../../../model/category.model';
+import { Category } from '../category.model';
 import { take } from 'rxjs';
-import { CategoryQueryService } from '../../../service/category-query.service';
+import { CategoryQueryService } from '../category-query.service';
 import { CategoriesListComponent } from '../category-view/category-list/category-list.component';
 
 @Component({

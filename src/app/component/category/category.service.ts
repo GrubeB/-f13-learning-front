@@ -2,9 +2,9 @@ import { Inject, Injectable, inject } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Category, CreateCategoryCommand, UpdateCategoryCommand } from '../model/category.model';
-import { Page } from '../model/response.model';
-import { errorHandle } from './service-support';
+import { Category, CreateCategoryCommand, UpdateCategoryCommand } from './category.model';
+import { Page } from '../../model/response.model';
+import { errorHandle } from '../../service/service-support';
 
 @Injectable()
 export class CategoryService {

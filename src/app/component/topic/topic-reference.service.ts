@@ -2,8 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { errorHandle } from './service-support';
-import { Reference } from '../model/reference.model';
+import { errorHandle } from '../../service/service-support';
+import { Reference } from '../reference/reference.model';
 
 @Injectable()
 export class TopicReferenceService {
@@ -46,5 +46,4 @@ export class TopicReferenceService {
       this.url + '/' + id,
     ).pipe(retry(1), catchError(errorHandle));
   }
-
 }

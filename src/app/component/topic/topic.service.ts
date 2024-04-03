@@ -2,10 +2,10 @@ import { Inject, Injectable, inject } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Category } from '../model/category.model';
-import { Page } from '../model/response.model';
-import { Topic } from '../model/topic.model';
-import { errorHandle } from './service-support';
+import { Category } from '../category/category.model';
+import { Page } from '../../model/response.model';
+import { CreateTopicCommand, Topic } from './topic.model';
+import { errorHandle } from '../../service/service-support';
 
 @Injectable()
 export class TopicService {
@@ -15,7 +15,7 @@ export class TopicService {
   resourcePath: string = "/api/v1/" + this.resourceName;
   url: string = "http://localhost:9006" + this.resourcePath;
 
-  create(data: Topic): Observable<Topic> {
+  create(data: CreateTopicCommand): Observable<Topic> {
     return this.http.request<Topic>("POST",
       this.url,
       {
