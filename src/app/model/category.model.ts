@@ -18,3 +18,10 @@ export class CreateCategoryCommand {
     parents!: string[];
     children!: string[];
 }
+export class UpdateCategoryCommand {
+    id!: string;
+    name!: string;
+    description! : string;
+    parents!: string[];
+    children!: string[];
+}

@@ -2,7 +2,7 @@ import { Inject, Injectable, inject } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Category, CreateCategoryCommand } from '../model/category.model';
+import { Category, CreateCategoryCommand, UpdateCategoryCommand } from '../model/category.model';
 import { Page } from '../model/response.model';
 import { errorHandle } from './service-support';
 
@@ -28,7 +28,7 @@ export class CategoryService {
     ).pipe(catchError(errorHandle));
   }
 
-  update(data: Category): Observable<HttpEvent<any>> {
+  update(data: UpdateCategoryCommand): Observable<HttpEvent<any>> {
     return this.http.request<any>("PUT",
       this.url + '/' + data.id,
       {
@@ -52,6 +52,6 @@ export class CategoryService {
         observe: 'body',
         responseType: "json",
       }
-    ).pipe(retry(1), catchError(errorHandle));
+    ).pipe(catchError(errorHandle));
   }
 }

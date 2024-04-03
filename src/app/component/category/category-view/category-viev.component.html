@@ -2,16 +2,13 @@
     <div class="d-flex flex-row gap-3">
         <h1>Categories List</h1>
         <button 
-          (click)="toggleCategoryForm();" 
+          (click)="showCategoryForm();" 
             class="app-btn-icon s32"
         >
             <i class="bi bi-plus"></i>
         </button>
     </div>
-    <div *ngIf="categoryFormViable" class="d-flex flex-column mt-4">
-        <div>    
-            <h1>Add Category</h1>
-        </div>
+    <div class="mt-4">
         <category-form />
     </div>
     <category-list [categories]="categories" />
