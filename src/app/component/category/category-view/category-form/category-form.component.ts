@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, inject, input } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, inject, input } from '@angular/core';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NGXLogger } from 'ngx-logger';
-import { first } from 'rxjs';
+import { first, take } from 'rxjs';
 import { EventBusService } from '../../../../service/event-bus.service';
 import { CategoryService } from '../../../../service/category.service';
 import { CategoryCreatedEvent } from '../../category-module.event';
 import { Category } from '../../../../model/category.model';
+import { CategoryQueryService } from '../../../../service/category-query.service';
+import { MultiSelectComponent } from '../../../../../shared/multi-select/multi-select.component';
 
 @Component({
   selector: 'category-form',
@@ -14,25 +16,37 @@ import { Category } from '../../../../model/category.model';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MultiSelectComponent,
   ],
   templateUrl: './category-form.component.html',
   styleUrl: './category-form.component.scss'
 })
-export class CategoryFormComponent {
+export class CategoryFormComponent implements OnInit{
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
   categoryService = inject(CategoryService);
+  categoryQueryService = inject(CategoryQueryService);
 
+  categories: Category[] = [];
   message?: string;
-
   formGroup = new FormGroup({
     name: new FormControl('', [
       Validators.required,
     ]),
     description: new FormControl('', [
     ]),
+    parentCategories: new FormControl([], [
+    ]),
   });
-
+  
+  ngOnInit(): void {
+    this.categoryQueryService.getAll().pipe(take(1)).subscribe({
+      next: data => {
+        this.categories = data.content;
+      }
+    })
+  }
+  
   submit() {
     this.logger.debug(CategoryFormComponent.name, "submit");
     if (this.formGroup.valid) {
@@ -54,4 +68,5 @@ export class CategoryFormComponent {
         })
     }
   }
+
 }

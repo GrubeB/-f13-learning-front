@@ -1,0 +1,21 @@
+<div class="multi-select-container">
+    <div class="multi-select-selected-items" (click)="openMenu()">
+        <div *ngFor="let selectedValue of selectedValues"  class="multi-select-selected-item">
+            <div class="btn-category" (click)="removeOption(selectedValue)">
+                {{optionLabel ? selectedValue[optionLabel] : selectedValue}}
+            </div>
+        </div>
+    </div>
+    <div class="multi-select-options-container">
+        <div 
+            class="multi-select-options" 
+            [hidden]="!menuVisable"
+            [appOutsideClickActive]="menuVisable"
+            (appOutsideClick)="hideMenu()"
+        >
+            <div *ngFor="let option of options" (click)="addOption(option)" class="multi-select-option">
+                {{optionLabel ? option[optionLabel] : option}}
+            </div>
+        </div>
+    </div>
+</div>

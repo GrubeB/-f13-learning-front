@@ -64,7 +64,7 @@ export class CategoryVievComponent implements OnInit {
   }
 
   // CATEGORY FORM
-  categoryFormViable: boolean = false;
+  categoryFormViable: boolean = true;
   toggleCategoryForm() {
     this.logger.debug(CategoryVievComponent.name, "toggleCategoryForm()");
     this.categoryFormViable = !this.categoryFormViable;

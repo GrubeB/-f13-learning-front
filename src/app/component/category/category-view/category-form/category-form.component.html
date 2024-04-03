@@ -27,6 +27,14 @@
         </div>
     </div>
 
+
+    <div class="mb-3">
+        <label for="parentCategories">Select parent categories</label>
+        <app-multi-select [options]="categories" [optionLabel]="'name'" formControlName="parentCategories"/>
+        
+    </div>
+
+
     <div class="d-flex flex-row justify-content-end">
         <button 
             type="submit" 
@@ -35,4 +43,5 @@
         >Submit</button>
     </div>
 </div>
+{{formGroup.value | json }}
 </form>
