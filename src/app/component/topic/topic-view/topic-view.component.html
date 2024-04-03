@@ -1,16 +1,11 @@
 <div class="container-fluid p-2">
     <div class="d-flex flex-row gap-3">
         <h1>Topic List</h1>
-        <button (click)="toggleTopicForm();" class="app-btn-icon s32">
+        <button (click)="showTopicForm();" class="app-btn-icon s32">
             <i class="bi bi-plus"></i>
         </button>
     </div>
-    <div *ngIf="topicFormViable" class="d-flex flex-column mt-4">
-        <div>    
-            <h1>Add topic</h1>
-        </div>
-        <topic-form />
-    </div>
+    <topic-form />
     <topic-list [topics]="topics"/>
 </div>
 <topic-details-modal />

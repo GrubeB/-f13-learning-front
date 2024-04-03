@@ -6,7 +6,7 @@ import { first, take } from 'rxjs';
 import { TopicListComponent } from './topics-list/topic-list.component';
 import { TopicDetailsModalComponent } from '../topic-details-modal/topic-details-modal.component';
 import { EventBusService } from '../../../service/event-bus.service';
-import { DeleteTopicEvent, HideTopicDetailsModalEvent, ShowTopicDetailsModalEvent, TopicCreatedEvent } from '../topic-module.event';
+import { CreateTopicEvent, DeleteTopicEvent, HideTopicDetailsModalEvent, ShowTopicDetailsModalEvent, TopicCreatedEvent, TopicDeletedEvent, TopicUpdateddEvent } from '../topic-module.event';
 import { TopicQueryService } from '../../../service/topic-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { TopicFormComponent } from './topic-form/topic-form.component';
@@ -33,16 +33,19 @@ export class TopicViewComponent implements OnInit {
   topics: Topic[] = [];
 
   constructor() {
-    this.eventBus.listen(TopicCreatedEvent.name, (e: TopicCreatedEvent) => {
-      this.getTopics(); 
-      this.toggleTopicForm();
+    this.eventBus.listen([
+      TopicCreatedEvent.name,
+      TopicUpdateddEvent.name,
+      TopicDeletedEvent.name
+    ], (e: any) => {
+      this.getTopics();
     });
 
     this.eventBus.listen(DeleteTopicEvent.name, (event: DeleteTopicEvent) => {
       this.topicService.delete(event.topicId).pipe(first()).subscribe({
         next: data => {
           this.logger.debug(TopicViewComponent.name, "Deleted Topic ", event.topicId);
-          this. getTopics();
+          this.eventBus.emit(TopicDeletedEvent.name, new TopicDeletedEvent(event.topicId));
         },
         error: e => {
           this.logger.debug(TopicViewComponent.name, "Error occured while deleting topic ", e);
@@ -66,10 +69,8 @@ export class TopicViewComponent implements OnInit {
     });
   }
   
-  // TOPIC FORM
-  topicFormViable: boolean = false;
-  toggleTopicForm() {
+  showTopicForm() {
     this.logger.debug(TopicViewComponent.name, "toggleTopicForm()");
-    this.topicFormViable = !this.topicFormViable;
+    this.eventBus.emit(CreateTopicEvent.name, new CreateTopicEvent());
   }
 }

@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.logger.info("intercepting request");
+        this.logger.trace("intercepting request");
         return this.authService.accessToken$().pipe(
             switchMap(token => {
                 if (token != null) {
@@ -26,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
                             Authorization: `Bearer ${token}`
                         }
                     });
-                    this.logger.info("added token to request");
+                    this.logger.trace("added token to request");
                 }
                 return next.handle(req);
             })

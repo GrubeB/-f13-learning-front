@@ -1,3 +1,40 @@
+// EVENTS
+export class TopicCreatedEvent {
+    topicId!: string;
+    constructor(topicId: string) {
+        this.topicId = topicId;
+    }
+}
+export class TopicUpdateddEvent {
+    topicId!: string;
+    constructor(topicId: string) {
+        this.topicId = topicId;
+    }
+}
+export class TopicDeletedEvent {
+    topicId!: string;
+    constructor(topicId: string) {
+        this.topicId = topicId;
+    }
+}
+
+// COMMANDS
+export class CreateTopicEvent{
+}
+export class EditTopicEvent {
+    topicId!: string;
+    constructor(topicId: string) {
+        this.topicId = topicId;
+    }
+}
+export class DeleteTopicEvent {
+    topicId!: string;
+    constructor(topicId: string) {
+        this.topicId = topicId;
+    }
+}
+
+// COMPONENTS
 export class ShowTopicDetailsModalEvent {
     topicId!: string;
     constructor(topicId: string) {
@@ -27,17 +64,5 @@ export class ShowTopicItemContextMenuEvent {
         this.topicId = topicId;
         this.posX = posX;
         this.posY = posY;
-    }
-}
-export class TopicCreatedEvent {
-    topicId!: string;
-    constructor(topicId: string) {
-        this.topicId = topicId;
-    }
-}
-export class DeleteTopicEvent {
-    topicId!: string;
-    constructor(topicId: string) {
-        this.topicId = topicId;
     }
 }

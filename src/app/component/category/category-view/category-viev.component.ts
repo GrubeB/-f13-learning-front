@@ -34,7 +34,7 @@ export class CategoryVievComponent implements OnInit {
       CategoryCreatedEvent.name,
       CategoryUpdatedEvent.name,
       CategoryDeletedEvent.name
-    ], (e: CategoryCreatedEvent) => {
+    ], (e: any) => {
       this.getCategories();
     });
 
