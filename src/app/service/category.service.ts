@@ -2,7 +2,7 @@ import { Inject, Injectable, inject } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Category } from '../model/category.model';
+import { Category, CreateCategoryCommand } from '../model/category.model';
 import { Page } from '../model/response.model';
 import { errorHandle } from './service-support';
 
@@ -14,7 +14,7 @@ export class CategoryService {
   resourcePath: string = "/api/v1/" + this.resourceName;
   url: string = "http://localhost:9006" + this.resourcePath;
 
-  create(data: Category): Observable<Category> {
+  create(data: CreateCategoryCommand): Observable<Category> {
     return this.http.request<Category>("POST",
       this.url,
       {

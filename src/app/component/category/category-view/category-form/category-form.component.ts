@@ -6,7 +6,7 @@ import { first, take } from 'rxjs';
 import { EventBusService } from '../../../../service/event-bus.service';
 import { CategoryService } from '../../../../service/category.service';
 import { CategoryCreatedEvent } from '../../category-module.event';
-import { Category } from '../../../../model/category.model';
+import { Category, CreateCategoryCommand } from '../../../../model/category.model';
 import { CategoryQueryService } from '../../../../service/category-query.service';
 import { MultiSelectComponent } from '../../../../../shared/multi-select/multi-select.component';
 
@@ -35,8 +35,8 @@ export class CategoryFormComponent implements OnInit{
     ]),
     description: new FormControl('', [
     ]),
-    parentCategories: new FormControl([], [
-    ]),
+    parentCategories: new FormControl([]),
+    childCategories: new FormControl([]),
   });
   
   ngOnInit(): void {
@@ -50,11 +50,12 @@ export class CategoryFormComponent implements OnInit{
   submit() {
     this.logger.debug(CategoryFormComponent.name, "submit");
     if (this.formGroup.valid) {
-      let newCategory = new Category();
-      newCategory.name = this.formGroup.value.name ? this.formGroup.value.name as string : '';
-      newCategory.description = this.formGroup.value.description ? this.formGroup.value.description as string : '';
-
-      this.categoryService.create(newCategory)
+      let newCategoryCommand = new CreateCategoryCommand();
+      newCategoryCommand.name = this.formGroup.value.name ? this.formGroup.value.name as string : '';
+      newCategoryCommand.description = this.formGroup.value.description ? this.formGroup.value.description as string : '';
+      newCategoryCommand.parents = this.formGroup.value.parentCategories?.map(cat => cat['id']) as string[] ?? [];
+      newCategoryCommand.children = this.formGroup.value.childCategories?.map(cat => cat['id']) as string[] ?? [];
+      this.categoryService.create(newCategoryCommand)
         .pipe(first())
         .subscribe({
           next: response => {

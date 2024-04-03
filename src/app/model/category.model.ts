@@ -11,3 +11,10 @@ export enum CategoryStatus {
     UNVERIFIED,
     VERIFIED
 }
+
+export class CreateCategoryCommand {
+    name!: string;
+    description! : string;
+    parents!: string[];
+    children!: string[];
+}
