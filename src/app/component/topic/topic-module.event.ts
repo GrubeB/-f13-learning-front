@@ -21,7 +21,7 @@ export class TopicDeletedEvent {
 // COMMANDS
 export class CreateTopicEvent{
 }
-export class EditTopicEvent {
+export class UpdateTopicEvent {
     topicId!: string;
     constructor(topicId: string) {
         this.topicId = topicId;

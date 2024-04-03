@@ -25,3 +25,9 @@ export class CreateTopicCommand {
     content! : string;
     categoryIds!: string[];
 }
+export class UpdateTopicCommand {
+    id!: string;
+    name!: string;
+    content! : string;
+    categoryIds!: string[];
+}

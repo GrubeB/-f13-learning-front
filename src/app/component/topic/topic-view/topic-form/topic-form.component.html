@@ -30,6 +30,11 @@
                     >This field is requied.</small>
                 </div>
             </div>
+            
+            <div class="mb-3">
+                <label for="categories">Selec categories</label>
+                <app-multi-select [options]="allCategories" [optionLabel]="'name'" formControlName="categories"/>
+            </div>
 
             <div class="d-flex flex-row justify-content-end">
                 <button 

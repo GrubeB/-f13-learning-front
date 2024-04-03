@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../../../../service/event-bus.service';
-import { DeleteTopicEvent, ShowTopicItemContextMenuEvent } from '../../../../topic-module.event';
+import { DeleteTopicEvent, ShowTopicItemContextMenuEvent, UpdateTopicEvent } from '../../../../topic-module.event';
 import { CommonModule } from '@angular/common';
 import { OutsideClickDirective } from '../../../../../../../shared/directive/outside-click.directive';
 import { RouterLink } from '@angular/router';
+import { UpdateTopicCommand } from '../../../../topic.model';
 
 @Component({
   selector: 'topic-list-item-context-menu',
@@ -54,6 +55,14 @@ export class TopicListItemContextMenuComponent implements AfterViewInit {
     if (this.topicId) {
       this.logger.debug(TopicListItemContextMenuComponent.name, " emitDeleteTopicEvent()");
       this.eventBus.emit(DeleteTopicEvent.name, new DeleteTopicEvent(this.topicId));
+      this.hideMenu();
+    }
+  }
+  
+  emitUpdateTopicEvent() {
+    if (this.topicId) {
+      this.logger.debug(TopicListItemContextMenuComponent.name, " emitUpdateTopicEvent()");
+      this.eventBus.emit(UpdateTopicEvent.name, new UpdateTopicEvent(this.topicId));
       this.hideMenu();
     }
   }

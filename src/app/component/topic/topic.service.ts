@@ -2,9 +2,9 @@ import { Inject, Injectable, inject } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Category } from '../category/category.model';
+import { Category, UpdateCategoryCommand } from '../category/category.model';
 import { Page } from '../../model/response.model';
-import { CreateTopicCommand, Topic } from './topic.model';
+import { CreateTopicCommand, Topic, UpdateTopicCommand } from './topic.model';
 import { errorHandle } from '../../service/service-support';
 
 @Injectable()
@@ -29,7 +29,7 @@ export class TopicService {
     ).pipe(catchError(errorHandle));
   }
 
-  update(data: Topic): Observable<HttpEvent<any>> {
+  update(data: UpdateTopicCommand): Observable<HttpEvent<any>> {
     return this.http.request<any>("PUT",
       this.url + '/' + data.id,
       {
