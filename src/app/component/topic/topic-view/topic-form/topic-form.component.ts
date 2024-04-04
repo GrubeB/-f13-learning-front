@@ -68,6 +68,7 @@ export class TopicFormComponent implements OnInit {
       })
     });
   }
+  
   ngOnInit(): void {
     this.categoryQueryService.getAll().pipe(first()).subscribe({
       next: data => {
@@ -80,9 +81,6 @@ export class TopicFormComponent implements OnInit {
     this.logger.debug(TopicFormComponent.name, "submit");
     if (this.formGroup.valid) {
       this.isEditForm ? this.updateCategory() : this.createCategory();
-    }
-    if (this.formGroup.valid) {
-
     }
   }
   createCategory() {

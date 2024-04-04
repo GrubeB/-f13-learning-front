@@ -5,7 +5,18 @@ export class ReferenceCreatedEvent {
         this.referenceId = referenceId;
     }
 }
-
+export class ReferenceUpdatedEvent {
+    referenceId!: string;
+    constructor(referenceId: string) {
+        this.referenceId = referenceId;
+    }
+}
+export class ReferenceDeletedEvent {
+    referenceId!: string;
+    constructor(referenceId: string) {
+        this.referenceId = referenceId;
+    }
+}
 export class ReferenceLikedEvent {
     referenceId!: string;
     userId!: string;
@@ -39,7 +50,7 @@ export class DeleteReferenceEvent {
         this.referenceId = referenceId;
     }
 }
-export class EditReferenceEvent {
+export class UpdateReferenceEvent {
     referenceId!: string;
     constructor(referenceId: string) {
         this.referenceId = referenceId;

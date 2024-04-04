@@ -24,6 +24,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(LoggerModule.forRoot({
       serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.DEBUG,
+      colorScheme: ['purple', 'teal', 'orange', 'gray', 'red', 'red', 'red']
       // serverLogLevel: NgxLoggerLevel.ERROR
     })),
 

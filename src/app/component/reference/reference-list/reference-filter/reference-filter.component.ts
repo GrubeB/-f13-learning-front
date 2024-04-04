@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Reference } from '../../../reference/reference.model';
+import { Reference } from '../../reference.model';
 import { EventBusService } from '../../../../service/event-bus.service';
-import { TopicDetailsFilterChangedEvent } from '../../topic-module.event';
+import { TopicDetailsFilterChangedEvent } from '../../../topic/topic-module.event';
 
 export const filters = [
   (item: Reference) => true
@@ -14,13 +14,13 @@ export const sorters = [
 ];
 
 @Component({
-  selector: 'topic-details-references-filter',
+  selector: 'reference-filter',
   standalone: true,
   imports: [],
-  templateUrl: './topic-details-references-filter.component.html',
-  styleUrl: './topic-details-references-filter.component.scss'
+  templateUrl: './reference-filter.component.html',
+  styleUrl: './reference-filter.component.scss'
 })
-export class TopicDetailsReferencesFilterComponent {
+export class ReferenceFilterComponent {
   filter: string = "0";
   sorter: string = "0";
 

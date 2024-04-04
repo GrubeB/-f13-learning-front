@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { OutsideClickDirective } from '../../../../../shared/directive/outside-click.directive';
 import { EventBusService } from '../../../../service/event-bus.service';
-import { DeleteReferenceEvent, EditReferenceEvent, ShowReferenceItemContextMenuEvent } from '../../reference-module.event';
+import { DeleteReferenceEvent, ShowReferenceItemContextMenuEvent, UpdateReferenceEvent } from '../../reference-module.event';
 
 @Component({
   selector: 'reference-item-context-menu',
@@ -57,10 +57,10 @@ export class ReferenceItemContextMenuComponent implements AfterViewInit{
       this.hideMenu();
     }
   }
-  emitEditReferenceEvent() {
+  emitUpdateReferenceEvent() {
     if (this.referenceId) {
       this.logger.debug(ReferenceItemContextMenuComponent.name, " emitEditCategoryEvent()");
-      this.eventBus.emit(EditReferenceEvent.name, new EditReferenceEvent(this.referenceId));
+      this.eventBus.emit(UpdateReferenceEvent.name, new UpdateReferenceEvent(this.referenceId));
       this.hideMenu();
     }
   }

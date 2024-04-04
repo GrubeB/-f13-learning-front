@@ -5,14 +5,15 @@ import { ActivatedRoute } from '@angular/router';
 import { TopicService } from '../topic.service';
 import { take } from 'rxjs';
 import { ReferenceItemComponent } from '../../reference/reference-item/reference-item.component';
-import { TopicDetailsReferencesFilterComponent } from './topic-details-references-filter/topic-details-references-filter.component';
-import { filters, sorters } from './topic-details-references-filter/topic-details-references-filter.component';
+import { ReferenceFilterComponent } from '../../reference/reference-list/reference-filter/reference-filter.component';
+import { filters, sorters } from '../../reference/reference-list/reference-filter/reference-filter.component';
 import { EventBusService } from '../../../service/event-bus.service';
 import { TopicDetailsFilterChangedEvent } from '../topic-module.event';
-import { ReferenceCreateFormComponent } from '../../reference/reference-create-form/reference-create-form.component';
+import { ReferenceCreateFormComponent } from '../../reference/reference-form/reference-form.component';
 import { TopicQueryService } from '../topic-query.service';
 import { NGXLogger } from 'ngx-logger';
-import { ReferenceCreatedEvent, ReferenceLikeDislikRemovedEvent, ReferenceDislikedEvent, ReferenceLikedEvent } from '../../reference/reference-module.event';
+import { ReferenceCreatedEvent, ReferenceLikeDislikRemovedEvent, ReferenceDislikedEvent, ReferenceLikedEvent, CreateReferenceEvent, ReferenceUpdatedEvent, ReferenceDeletedEvent } from '../../reference/reference-module.event';
+import { ReferenceListComponent } from '../../reference/reference-list/reference-list.component';
 
 @Component({
   selector: 'topic-details',
@@ -21,8 +22,9 @@ import { ReferenceCreatedEvent, ReferenceLikeDislikRemovedEvent, ReferenceDislik
     CommonModule,
     DatePipe,
     ReferenceItemComponent,
-    TopicDetailsReferencesFilterComponent,
-    ReferenceCreateFormComponent
+    ReferenceFilterComponent,
+    ReferenceCreateFormComponent,
+    ReferenceListComponent
   ],
   templateUrl: './topic-details.component.html',
   styleUrl: './topic-details.component.scss'
@@ -41,19 +43,14 @@ export class TopicDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTopic(this.topicId);
-    this.eventBus.listen(TopicDetailsFilterChangedEvent.name, (e: TopicDetailsFilterChangedEvent) => {
-      this.activeFilter = filters[e.filterIndex];
-      this.activeSorter = sorters[e.sorterIndex];
-    });
-    this.eventBus.listen(ReferenceCreatedEvent.name, (e: ReferenceCreatedEvent) => {
-      this.refreshTopic(); 
-      this.toggleReferenceForm();
-    });
-
     this.eventBus.listen([
       ReferenceLikedEvent.name,
       ReferenceDislikedEvent.name,
       ReferenceLikeDislikRemovedEvent.name,
+      
+      ReferenceCreatedEvent.name,
+      ReferenceUpdatedEvent.name,
+      ReferenceDeletedEvent.name
     ], (e: any) => {
       this.refreshTopic(); 
     });
@@ -73,13 +70,7 @@ export class TopicDetailsComponent implements OnInit {
   refreshTopic() {
     this.logger.debug(TopicDetailsComponent.name, "refreshTopic()");
     if(this.topic?.id) {
-      this.getTopic(this.topic?.id);
+      this.getTopic(this.topic.id);
     }
-  }
-  // REFERENCE FORM
-  referenceFormViable: boolean = false;
-  toggleReferenceForm() {
-    this.logger.debug(TopicDetailsComponent.name, "toggleReferenceForm()");
-    this.referenceFormViable = !this.referenceFormViable;
   }
 }
