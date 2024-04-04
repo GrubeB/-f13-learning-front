@@ -16,7 +16,7 @@ import { DeleteCategoryEvent, EditCategoryEvent, ShowCategoryItemContextMenuEven
   ],
   templateUrl: './category-list-item-context-menu.component.html',
 })
-export class CategoryListItemContextMenuComponent {
+export class CategoryListItemContextMenuComponent implements AfterViewInit{
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
 

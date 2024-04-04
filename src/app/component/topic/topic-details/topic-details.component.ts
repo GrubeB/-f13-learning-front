@@ -12,7 +12,7 @@ import { TopicDetailsFilterChangedEvent } from '../topic-module.event';
 import { ReferenceCreateFormComponent } from '../../reference/reference-create-form/reference-create-form.component';
 import { TopicQueryService } from '../topic-query.service';
 import { NGXLogger } from 'ngx-logger';
-import { ReferenceCreatedEvent, ReferenceDislikeRemovedEvent, ReferenceDislikedEvent, ReferenceLikeRemovedEvent, ReferenceLikedEvent } from '../../reference/reference-module.event';
+import { ReferenceCreatedEvent, ReferenceLikeDislikRemovedEvent, ReferenceDislikedEvent, ReferenceLikedEvent } from '../../reference/reference-module.event';
 
 @Component({
   selector: 'topic-details',
@@ -53,8 +53,7 @@ export class TopicDetailsComponent implements OnInit {
     this.eventBus.listen([
       ReferenceLikedEvent.name,
       ReferenceDislikedEvent.name,
-      ReferenceLikeRemovedEvent.name,
-      ReferenceDislikeRemovedEvent.name,
+      ReferenceLikeDislikRemovedEvent.name,
     ], (e: any) => {
       this.refreshTopic(); 
     });

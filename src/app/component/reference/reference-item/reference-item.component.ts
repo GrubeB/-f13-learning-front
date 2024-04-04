@@ -6,7 +6,8 @@ import { ReferenceVotingService } from '../reference-voting.service';
 import { take } from 'rxjs';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../service/event-bus.service';
-import { ReferenceDislikeRemovedEvent, ReferenceDislikedEvent, ReferenceLikeRemovedEvent, ReferenceLikedEvent } from '../reference-module.event';
+import { ReferenceLikeDislikRemovedEvent, ReferenceDislikedEvent, ReferenceLikedEvent, ShowReferenceItemContextMenuEvent } from '../reference-module.event';
+import { ReferenceItemContextMenuComponent } from './reference-item-context-menu/reference-item-context-menu.component';
 
 @Component({
   selector: 'reference-item',
@@ -26,13 +27,20 @@ export class ReferenceItemComponent {
 
   @Input() reference!: Reference;
 
+  emitShowReferenceItemContextMenuEvent(event: any) {
+    this.logger.debug(ReferenceItemComponent.name, " emitShowReferenceItemContextMenuEvent()");
+    this.eventBus.emit(ShowReferenceItemContextMenuEvent.name, new ShowReferenceItemContextMenuEvent(
+      this.reference.id, event.clientX, event.clientY
+    ))
+  }
+
   openReference(): void {
     this.logger.debug(ReferenceItemComponent.name, " openReference()");
     window.open(this.reference.link, '_blank');
   }
 
-  addLike(referenceId: string){
-    this.logger.debug(ReferenceItemComponent.name, " addLike()");
+  emitReferenceLikedEvent(referenceId: string){
+    this.logger.debug(ReferenceItemComponent.name, " emitReferenceLikedEvent()");
     this.authenticationService.authenticationContext$().pipe(take(1)).subscribe({
       next: context => {
         if(context!=null && context.user.id != null) {
@@ -48,8 +56,8 @@ export class ReferenceItemComponent {
     });
   }
 
-  addDislike(referenceId: string){
-    this.logger.debug(ReferenceItemComponent.name, " addDislike()");
+  emitReferenceDislikedEvent(referenceId: string){
+    this.logger.debug(ReferenceItemComponent.name, " emitReferenceDislikedEvent()");
     this.authenticationService.authenticationContext$().pipe(take(1)).subscribe({
       next: context => {
         if(context!=null && context.user.id != null) {
@@ -64,23 +72,17 @@ export class ReferenceItemComponent {
       }
     });
   }
-  removeLikeAndDislike(referenceId: string){
-    this.logger.debug(ReferenceItemComponent.name, " removeLikeAndDislike()");
+  emitReferenceLikeDislikRemovedEvent(referenceId: string){
+    this.logger.debug(ReferenceItemComponent.name, " emitReferenceLikeDislikRemovedEvent()");
     this.authenticationService.authenticationContext$().pipe(take(1)).subscribe({
       next: context => {
         if(context!=null && context.user.id != null) {
           const userId = context.user.id;
 
-          this.referenceVotingService.deleteLike(referenceId, userId).subscribe({
+          this.referenceVotingService.deleteLikeAndDislike(referenceId, userId).subscribe({
             next: res =>{
-              this.logger.debug(ReferenceItemComponent.name, " User removed like ");
-              this.eventBus.emit(ReferenceLikeRemovedEvent.name, new ReferenceLikeRemovedEvent(referenceId, userId));
-            }
-          });
-          this.referenceVotingService.deleteDislike(referenceId, userId).subscribe({
-            next: res =>{
-              this.logger.debug(ReferenceItemComponent.name, " User removed dislike ");
-              this.eventBus.emit(ReferenceDislikeRemovedEvent.name, new ReferenceDislikeRemovedEvent(referenceId, userId));
+              this.logger.debug(ReferenceItemComponent.name, " User removed like/dislike ");
+              this.eventBus.emit(ReferenceLikeDislikRemovedEvent.name, new ReferenceLikeDislikRemovedEvent(referenceId, userId));
             }
           });
         }
