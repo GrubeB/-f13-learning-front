@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, inject, input } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { OutsideClickDirective } from '../../../../../shared/directive/outside-click.directive';
 import { EventBusService } from '../../../../service/event-bus.service';
-import { DeleteReferenceEvent, ShowReferenceItemContextMenuEvent, UpdateReferenceEvent } from '../../reference-module.event';
+import { DeleteReferenceEvent, UpdateReferenceEvent } from '../../reference-module.event';
 
 @Component({
   selector: 'reference-item-context-menu',
@@ -16,51 +16,31 @@ import { DeleteReferenceEvent, ShowReferenceItemContextMenuEvent, UpdateReferenc
   ],
   templateUrl: './reference-item-context-menu.component.html',
 })
-export class ReferenceItemContextMenuComponent implements AfterViewInit{
+export class ReferenceItemContextMenuComponent {
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
 
-  referenceId?: string;
-  menuVisable: boolean = false;
-  @ViewChild('container') container!: ElementRef;
-
-  constructor(private elementRef: ElementRef) {
-    this.eventBus.listen(ShowReferenceItemContextMenuEvent.name, (event: ShowReferenceItemContextMenuEvent) => {
-      this.referenceId = event.referenceId;
-      let width = this.container.nativeElement.offsetWidth;
-      this.showMenu(event.posX - width, event.posY);
-    })
-  }
-  
-  ngAfterViewInit(): void {
-    this.hideMenu();
-  }
-  
-  showMenu(x: number, y: number) {
-    this.logger.debug(ReferenceItemContextMenuComponent.name, " showMenu()");
-    this.container.nativeElement.style.left = `${x + 10}px`;
-    this.container.nativeElement.style.top = `${y - 10}px`;
-    this.menuVisable = true;
-  }
+  @Input() modelId!: string;
+  @Input() visable: boolean = false;
+  @Output() visableChange = new EventEmitter<boolean>();
 
   hideMenu() {
     this.logger.debug(ReferenceItemContextMenuComponent.name, " hideMenu()");
-    this.container.nativeElement.style.left = `-10000px`;
-    this.container.nativeElement.style.top = `-10000px`;
-    this.menuVisable = false;
+    this.visable = false;
+    this.visableChange.emit(this.visable);
   }
   
   emitDeleteReferenceEvent() {
-    if (this.referenceId) {
+    if (this.modelId) {
       this.logger.debug(ReferenceItemContextMenuComponent.name, " emitDeleteCategoryEvent()");
-      this.eventBus.emit(DeleteReferenceEvent.name, new DeleteReferenceEvent(this.referenceId));
+      this.eventBus.emit(DeleteReferenceEvent.name, new DeleteReferenceEvent(this.modelId));
       this.hideMenu();
     }
   }
   emitUpdateReferenceEvent() {
-    if (this.referenceId) {
+    if (this.modelId) {
       this.logger.debug(ReferenceItemContextMenuComponent.name, " emitEditCategoryEvent()");
-      this.eventBus.emit(UpdateReferenceEvent.name, new UpdateReferenceEvent(this.referenceId));
+      this.eventBus.emit(UpdateReferenceEvent.name, new UpdateReferenceEvent(this.modelId));
       this.hideMenu();
     }
   }

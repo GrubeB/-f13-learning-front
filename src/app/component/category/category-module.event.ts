@@ -34,17 +34,3 @@ export class EditCategoryEvent {
 }
 
 // COMPONENTS
-export class ShowCategoryItemContextMenuEvent {
-    categoryId!: string;
-    posX!: number;
-    posY!: number;
-    constructor(
-        categoryId: string,
-        posX: number,
-        posY: number
-    ) {
-        this.categoryId = categoryId;
-        this.posX = posX;
-        this.posY = posY;
-    }
-}

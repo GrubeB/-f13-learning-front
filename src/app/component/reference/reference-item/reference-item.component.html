@@ -22,9 +22,10 @@
     <div class="d-flex flex-column gap-2 mt-1">
         <button 
             class="app-btn-icon" 
-            (click)="emitShowReferenceItemContextMenuEvent($event)"
+            (click)="toggleContextMenu()"
         >
             <i class="bi bi-three-dots-vertical"></i>
+            <reference-item-context-menu [modelId]="reference.id" [(visable)]="contextMenuVisable"/>
         </button>
         <button
             class="app-btn-icon"

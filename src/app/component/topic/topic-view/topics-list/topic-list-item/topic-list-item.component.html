@@ -9,8 +9,9 @@
                 <h5>{{topic.createdDate | date }}</h5>
             </div>
         </div>
-        <button class="app-btn-icon s24" (click)="openContextMenu($event)">
+        <button class="app-btn-icon s24" (click)="toggleContextMenu()">
             <i class="bi bi-three-dots-vertical"></i>
+            <topic-list-item-context-menu [modelId]="topic.id" [(visable)]="contextMenuVisable"/>
         </button>
     </div>
     <div class="card-body">

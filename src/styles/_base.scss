@@ -78,8 +78,7 @@ body {
     min-height: 1em;
     min-width: 10em;
     width: auto; 
-    left: 0;
-    top: 0; 
+    z-index: 200;
     .context-menu{
         padding: .25em 0em;
         display: flex;

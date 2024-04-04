@@ -58,17 +58,3 @@ export class UpdateReferenceEvent {
 }
 
 // COMPONENTS
-export class ShowReferenceItemContextMenuEvent {
-    referenceId!: string;
-    posX!: number;
-    posY!: number;
-    constructor(
-        referenceId: string,
-        posX: number,
-        posY: number
-    ) {
-        this.referenceId = referenceId;
-        this.posX = posX;
-        this.posY = posY;
-    }
-}

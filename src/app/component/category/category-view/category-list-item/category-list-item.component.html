@@ -5,9 +5,10 @@
         </div>
         <button 
             class="app-btn-icon s24" 
-            (click)="openContextMenu($event)"
+            (click)="toggleContextMenu()"
         >
             <i class="bi bi-three-dots-vertical"></i>
+            <category-list-item-context-menu [modelId]="category.id" [(visable)]="contextMenuVisable"/>
         </button>
     </div>
     <div class="card-body">

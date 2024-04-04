@@ -9,8 +9,7 @@ import { TopicListItemContextMenuComponent } from './topic-list-item/topic-list-
   standalone: true,
   imports: [
     CommonModule,
-    TopicListItemComponent,
-    TopicListItemContextMenuComponent
+    TopicListItemComponent
   ],
   templateUrl: './topic-list.component.html',
   styleUrl: './topic-list.component.scss'

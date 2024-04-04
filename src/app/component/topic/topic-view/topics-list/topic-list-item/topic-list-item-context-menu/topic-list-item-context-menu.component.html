@@ -1,11 +1,12 @@
 <div
-    #container
-    [appOutsideClickActive]="menuVisable"
+    [hidden]="!visable"
+    [appOutsideClickActive]="visable"
     (appOutsideClick)="hideMenu()"
-    class="context-menu-container" 
+    class="context-menu-container"
+    (click)="$event.stopPropagation()"
 >
     <div class="context-menu">
-        <button class="s32" routerLink="/topics/{{topicId}}" >
+        <button class="s32" routerLink="/topics/{{modelId}}" >
             <i class="bi bi-box-arrow-up-right"></i>
             <p>Open</p>
         </button>

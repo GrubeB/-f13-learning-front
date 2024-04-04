@@ -1,8 +1,9 @@
 <div
-    #container
-    [appOutsideClickActive]="menuVisable"
+    [hidden]="!visable"
+    [appOutsideClickActive]="visable"
     (appOutsideClick)="hideMenu()"
-    class="context-menu-container" 
+    class="context-menu-container"
+    (click)="$event.stopPropagation()"
 >
     <div class="context-menu">
         <button class="s32" (click)="emitDeleteReferenceEvent()">
