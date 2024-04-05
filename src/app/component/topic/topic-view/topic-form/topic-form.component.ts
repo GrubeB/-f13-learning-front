@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NGXLogger } from 'ngx-logger';
 import { Reference } from '../../../reference/reference.model';
 import { first, take } from 'rxjs';
-import { TopicReferenceService } from '../../topic-reference.service';
+import { TopicReferenceService } from '../../../reference/topic-reference.service';
 import { EventBusService } from '../../../../service/event-bus.service';
 import { TopicService } from '../../topic.service';
 import { CreateTopicCommand, Topic, UpdateTopicCommand } from '../../topic.model';

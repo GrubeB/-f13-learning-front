@@ -10,7 +10,7 @@ import { CategoryService } from './component/category/category.service';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { EventBusService } from './service/event-bus.service';
 import { TopicService } from './component/topic/topic.service';
-import { TopicReferenceService } from './component/topic/topic-reference.service';
+import { TopicReferenceService } from './component/reference/topic-reference.service';
 import { ReferenceQueryService } from './component/reference/reference-query.service';
 import { ReferenceVotingService } from './component/reference/reference-voting.service';
 import { TopicQueryService } from './component/topic/topic-query.service';

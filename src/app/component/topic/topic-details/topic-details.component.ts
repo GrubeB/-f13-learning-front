@@ -17,6 +17,7 @@ import { ReferenceListComponent } from '../../reference/reference-list/reference
 import { CommentListComponent } from '../../comment/comment-list/comment-list.component';
 import { TopicCommentService } from '../../comment/topic-comment.service';
 import { CommentFormComponent } from '../../comment/comment-form/comment-form.component';
+import { TopicReferenceService } from '../../reference/topic-reference.service';
 
 @Component({
   selector: 'topic-details',
@@ -40,6 +41,7 @@ export class TopicDetailsComponent implements OnInit {
   eventBus = inject(EventBusService);
   logger = inject(NGXLogger);
   topicCommentService = inject(TopicCommentService);
+  topicReferenceService = inject(TopicReferenceService);
   
   @Input() topicId!: string;
   topic?: Topic;

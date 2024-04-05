@@ -3,10 +3,11 @@ import { HttpClient, HttpEvent, HttpHeaders, HttpResponse } from '@angular/commo
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { errorHandle } from '../../service/service-support';
-import { Reference } from '../reference/reference.model';
+import { Reference } from './reference.model';
+import { ReferenceService } from './reference.service';
 
 @Injectable()
-export class TopicReferenceService {
+export class TopicReferenceService extends ReferenceService {
   http: HttpClient = inject(HttpClient);
 
   resourceName: string = "references";

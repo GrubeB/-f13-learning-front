@@ -4,11 +4,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NGXLogger } from 'ngx-logger';
 import { Reference } from '../reference.model';
 import { first, take } from 'rxjs';
-import { TopicReferenceService } from '../../topic/topic-reference.service';
+import { TopicReferenceService } from '../topic-reference.service';
 import { EventBusService } from '../../../service/event-bus.service';
 import { CreateReferenceEvent, ReferenceCreatedEvent, ReferenceUpdatedEvent, UpdateReferenceEvent } from '../reference-module.event';
 import { MultiSelectComponent } from '../../../../shared/multi-select/multi-select.component';
 import { ReferenceQueryService } from '../reference-query.service';
+import { ReferenceService } from '../reference.service';
 
 @Component({
   selector: 'reference-form',
@@ -24,8 +25,8 @@ import { ReferenceQueryService } from '../reference-query.service';
 export class ReferenceCreateFormComponent {
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
-  referenceService = inject(TopicReferenceService);
   referenceQueryService = inject(ReferenceQueryService);
+  @Input() referenceService!: ReferenceService;
 
   @Input() topicId!: string;
 
