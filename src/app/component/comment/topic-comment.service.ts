@@ -31,7 +31,7 @@ export class TopicCommentService extends CommentService {
   }
   createRepley(topicId: string, parentCommentId: string, data: CreateCommentCommand): Observable<Reference> {
     return this.http.request<Reference>("POST",
-      this.url.replace(":topicId", topicId) + parentCommentId + "/commands/",
+      this.url.replace(":topicId", topicId) + "/" + parentCommentId + "/comments",
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

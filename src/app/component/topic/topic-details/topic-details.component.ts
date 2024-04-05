@@ -18,6 +18,8 @@ import { CommentListComponent } from '../../comment/comment-list/comment-list.co
 import { TopicCommentService } from '../../comment/topic-comment.service';
 import { CommentFormComponent } from '../../comment/comment-form/comment-form.component';
 import { TopicReferenceService } from '../../reference/topic-reference.service';
+import { CategoryCreatedEvent, CategoryDeletedEvent, CategoryUpdatedEvent } from '../../category/category-module.event';
+import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent } from '../../comment/comment-module.event';
 
 @Component({
   selector: 'topic-details',
@@ -58,7 +60,11 @@ export class TopicDetailsComponent implements OnInit {
       
       ReferenceCreatedEvent.name,
       ReferenceUpdatedEvent.name,
-      ReferenceDeletedEvent.name
+      ReferenceDeletedEvent.name,
+
+      CommentCreatedEvent.name,
+      CommentUpdatedEvent.name,
+      CommentDeletedEvent.name
     ], (e: any) => {
       this.refreshTopic(); 
     });
