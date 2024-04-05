@@ -1,4 +1,5 @@
 import { Category } from "../category/category.model";
+import { CommentContainer } from "../comment/category.model";
 import { Reference } from "../reference/reference.model";
 
 export class Topic {
@@ -8,6 +9,7 @@ export class Topic {
     status?: TopicStatus;
     categories?: Category[];
     references?: Reference[];
+    comment!: CommentContainer;
     
     createdBy!: String;
     createdDate!: Date;

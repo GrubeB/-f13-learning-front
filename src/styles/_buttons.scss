@@ -196,25 +196,41 @@ button.app-btn-image {
         opacity: 0.9;
     }
     img {  
-        width: 100%;
-        height: 100%;
+        width: 16px;
+        height: 16px;
         border-radius: 50%;
     }
     &.s24 {
         width: 1.5em;
         height: 1.5em;
+        img {  
+            width: 24px;
+            height: 24px;
+        }
     }
     &.s32 {
         width: 2em;
         height: 2em;
+        img {  
+            width: 32px;
+            height: 32px;
+        }
     }
     &.s48 {
         width: 3em;
         height: 3em;
+        img {  
+            width: 48px;
+            height: 48px;
+        }
     }
     &.s64 {
         width: 4em;
         height: 4em;
+        img {  
+            width: 64px;
+            height: 64px;
+        }
     }
 }
 

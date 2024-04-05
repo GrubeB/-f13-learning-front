@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit, inject } from '@angular/core';
-import { Observable, ReplaySubject, Subject, filter, first, map, shareReplay, tap } from 'rxjs';
+import { Observable, ReplaySubject, Subject, filter, first, map, shareReplay, take, tap } from 'rxjs';
 import { AuthResponse, AuthenticationContext } from './authentication.model';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { NGXLogger } from 'ngx-logger';
@@ -23,6 +23,7 @@ export class AuthenticationService {
     authenticationContext$(): Observable<AuthenticationContext | null> {
         return this.authenticationContext;
     }
+
     isAuthenticated$(): Observable<boolean> {
         return this.authenticationContext.pipe(
             map(context => !!context)
@@ -34,7 +35,12 @@ export class AuthenticationService {
             map(context => context?.tokens?.accessToken ?? null)
         );
     }
-
+    userId$(): Observable<string | null> {
+        return this.authenticationContext.pipe(
+            map(context => context?.user?.id ?? null),
+            take(1)
+        );
+    }
     login(email: string, password: string) {
         this.logger.debug(AuthenticationService.name, " login()");
         return this.http.post<AuthResponse>(this.url + '/authenticate', { email, password })

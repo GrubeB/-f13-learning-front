@@ -41,10 +41,9 @@ export class ReferenceItemComponent {
 
   emitReferenceLikedEvent(referenceId: string) {
     this.logger.debug(ReferenceItemComponent.name, " emitReferenceLikedEvent()");
-    this.authenticationService.authenticationContext$().pipe(take(1)).subscribe({
-      next: context => {
-        if (context != null && context.user.id != null) {
-          const userId = context.user.id;
+    this.authenticationService.userId$().subscribe({
+      next: userId => {
+        if (userId != null) {
           this.referenceVotingService.createLike(referenceId, userId).subscribe({
             next: res => {
               this.logger.debug(ReferenceItemComponent.name, " User give like ");
@@ -58,10 +57,9 @@ export class ReferenceItemComponent {
 
   emitReferenceDislikedEvent(referenceId: string) {
     this.logger.debug(ReferenceItemComponent.name, " emitReferenceDislikedEvent()");
-    this.authenticationService.authenticationContext$().pipe(take(1)).subscribe({
-      next: context => {
-        if (context != null && context.user.id != null) {
-          const userId = context.user.id;
+    this.authenticationService.userId$().subscribe({
+      next: userId => {
+        if (userId != null) {
           this.referenceVotingService.createDislike(referenceId, userId).subscribe({
             next: res => {
               this.logger.debug(ReferenceItemComponent.name, " User give dislike ");
@@ -74,11 +72,9 @@ export class ReferenceItemComponent {
   }
   emitReferenceLikeDislikRemovedEvent(referenceId: string) {
     this.logger.debug(ReferenceItemComponent.name, " emitReferenceLikeDislikRemovedEvent()");
-    this.authenticationService.authenticationContext$().pipe(take(1)).subscribe({
-      next: context => {
-        if (context != null && context.user.id != null) {
-          const userId = context.user.id;
-
+    this.authenticationService.userId$().subscribe({
+      next: userId => {
+        if (userId != null) {
           this.referenceVotingService.deleteLikeAndDislike(referenceId, userId).subscribe({
             next: res => {
               this.logger.debug(ReferenceItemComponent.name, " User removed like/dislike ");

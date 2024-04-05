@@ -14,6 +14,9 @@ import { TopicQueryService } from '../topic-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { ReferenceCreatedEvent, ReferenceLikeDislikRemovedEvent, ReferenceDislikedEvent, ReferenceLikedEvent, CreateReferenceEvent, ReferenceUpdatedEvent, ReferenceDeletedEvent } from '../../reference/reference-module.event';
 import { ReferenceListComponent } from '../../reference/reference-list/reference-list.component';
+import { CommentListComponent } from '../../comment/comment-list/comment-list.component';
+import { TopicCommentService } from '../../comment/topic-comment.service';
+import { CommentFormComponent } from '../../comment/comment-form/comment-form.component';
 
 @Component({
   selector: 'topic-details',
@@ -24,7 +27,9 @@ import { ReferenceListComponent } from '../../reference/reference-list/reference
     ReferenceItemComponent,
     ReferenceFilterComponent,
     ReferenceCreateFormComponent,
-    ReferenceListComponent
+    ReferenceListComponent,
+    CommentListComponent,
+    CommentFormComponent
   ],
   templateUrl: './topic-details.component.html',
   styleUrl: './topic-details.component.scss'
@@ -34,7 +39,8 @@ export class TopicDetailsComponent implements OnInit {
   topicQueryService = inject(TopicQueryService);
   eventBus = inject(EventBusService);
   logger = inject(NGXLogger);
-
+  topicCommentService = inject(TopicCommentService);
+  
   @Input() topicId!: string;
   topic?: Topic;
   

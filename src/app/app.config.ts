@@ -15,6 +15,8 @@ import { ReferenceQueryService } from './component/reference/reference-query.ser
 import { ReferenceVotingService } from './component/reference/reference-voting.service';
 import { TopicQueryService } from './component/topic/topic-query.service';
 import { CategoryQueryService } from './component/category/category-query.service';
+import { CommentQueryService } from './component/comment/comment-query.service';
+import { TopicCommentService } from './component/comment/topic-comment.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,7 +27,6 @@ export const appConfig: ApplicationConfig = {
       serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.DEBUG,
       colorScheme: ['purple', 'teal', 'orange', 'gray', 'red', 'red', 'red']
-      // serverLogLevel: NgxLoggerLevel.ERROR
     })),
 
     { provide: AuthenticationService },
@@ -42,7 +43,10 @@ export const appConfig: ApplicationConfig = {
     { provide: TopicReferenceService},
     { provide: ReferenceQueryService},
     { provide: ReferenceVotingService},
-
+    
+    { provide: CommentQueryService},
+    { provide: TopicCommentService},
+    
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ]
 };

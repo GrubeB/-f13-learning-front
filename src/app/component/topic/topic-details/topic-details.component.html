@@ -27,4 +27,13 @@
     <div class="mt-4">
         <reference-list [references]="topic.references ?? []"/>
     </div>
+
+
+    <div class="mt-4">
+        <comment-form [commentService]="topicCommentService" [topicId] = "topic.id"/>
+    </div>
+    <div class="mt-4">
+        <comment-list [comments]="topic.comment.comments"/>
+    </div>
+   
 </div>

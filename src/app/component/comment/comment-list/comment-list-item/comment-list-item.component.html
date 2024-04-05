@@ -1,0 +1,42 @@
+<div class="comment-item container-xl d-flex flex-column">
+    <div class="comment-item-content">
+        <div class="d-flex flex-row justify-content-between">
+            <div class="d-flex flex-row p-3">
+                <button class="app-btn-image s32">
+                    <img [src]="'https://i.pinimg.com/originals/40/00/b7/4000b7b7caf046215794ccdef4a78630.png'"/>
+                </button>
+                <div class="d-flex ms-3 flex-column">
+                    <h3>Ala Kot{{comment.createdBy}}</h3>
+                    <h5>{{comment.createdDate | date }}</h5>
+                </div>
+            </div>
+            <button class="app-btn-icon m-3">
+                <i class="bi bi-three-dots-vertical"></i>
+            </button>
+        </div>
+        <div class="p-3">
+            <h1>{{comment.content}}</h1>
+        </div>
+    </div>
+    <div class="comment-item-buttons d-flex flex-row justify-content-around p-3">
+        <button  class="app-btn-icon"
+            (click)="emitCreateCommentReplayEvent()"
+        >
+            <i class="bi bi-chat-left-text-fill"></i>
+        </button>
+        <div class="d-flex flex-row gap-1">
+            <button class="app-btn-icon">
+                <i class="bi bi-chevron-double-up"></i>
+            </button>
+            <button class="app-btn-icon">
+                {{ comment.voting.likesNumber - comment.voting.dislikesNumber }}
+            </button>
+            <button class="app-btn-icon">
+                <i class="bi bi-chevron-double-down"></i>
+            </button>
+        </div>
+    </div>
+    <div class="ms-4 me-1">
+        <comment-list-item *ngFor="let comment of comment.comments" [comment]="comment"/>
+    </div>
+</div>
