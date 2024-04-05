@@ -4,10 +4,9 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { errorHandle } from '../../service/service-support';
 import { Reference } from './reference.model';
-import { ReferenceService } from './reference.service';
 
 @Injectable()
-export class TopicReferenceService extends ReferenceService {
+export class TopicReferenceService {
   http: HttpClient = inject(HttpClient);
 
   resourceName: string = "references";

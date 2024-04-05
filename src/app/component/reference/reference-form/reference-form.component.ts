@@ -9,7 +9,6 @@ import { EventBusService } from '../../../service/event-bus.service';
 import { CreateReferenceEvent, ReferenceCreatedEvent, ReferenceUpdatedEvent, UpdateReferenceEvent } from '../reference-module.event';
 import { MultiSelectComponent } from '../../../../shared/multi-select/multi-select.component';
 import { ReferenceQueryService } from '../reference-query.service';
-import { ReferenceService } from '../reference.service';
 
 @Component({
   selector: 'reference-form',
@@ -26,7 +25,7 @@ export class ReferenceCreateFormComponent {
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
   referenceQueryService = inject(ReferenceQueryService);
-  @Input() referenceService!: ReferenceService;
+  referenceService = inject(TopicReferenceService);
 
   @Input() topicId!: string;
 

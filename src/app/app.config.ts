@@ -12,7 +12,7 @@ import { EventBusService } from './service/event-bus.service';
 import { TopicService } from './component/topic/topic.service';
 import { TopicReferenceService } from './component/reference/topic-reference.service';
 import { ReferenceQueryService } from './component/reference/reference-query.service';
-import { ReferenceVotingService } from './component/reference/reference-voting.service';
+import { ReferenceVotingService } from './component/voting/reference-voting.service';
 import { TopicQueryService } from './component/topic/topic-query.service';
 import { CategoryQueryService } from './component/category/category-query.service';
 import { CommentQueryService } from './component/comment/comment-query.service';
@@ -40,12 +40,13 @@ export const appConfig: ApplicationConfig = {
     { provide: TopicService},
     { provide: TopicQueryService},
 
-    { provide: TopicReferenceService},
     { provide: ReferenceQueryService},
-    { provide: ReferenceVotingService},
+    { provide: TopicReferenceService},
     
     { provide: CommentQueryService},
     { provide: TopicCommentService},
+
+    { provide: ReferenceVotingService},
     
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ]

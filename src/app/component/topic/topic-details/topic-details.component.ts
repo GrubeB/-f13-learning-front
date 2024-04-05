@@ -43,7 +43,6 @@ export class TopicDetailsComponent implements OnInit {
   eventBus = inject(EventBusService);
   logger = inject(NGXLogger);
   topicCommentService = inject(TopicCommentService);
-  topicReferenceService = inject(TopicReferenceService);
   
   @Input() topicId!: string;
   topic?: Topic;
