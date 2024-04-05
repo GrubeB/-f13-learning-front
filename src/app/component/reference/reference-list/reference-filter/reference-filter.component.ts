@@ -8,7 +8,7 @@ export const filters = [
 ];
 
 export const sorters = [
-  (e1: Reference, e2: Reference) => (e2.likesNumber - e2.dislikesNumber) - (e1.likesNumber - e1.dislikesNumber),
+  (e1: Reference, e2: Reference) => (e2.voting.likesNumber - e2.voting.dislikesNumber) - (e1.voting.likesNumber - e1.voting.dislikesNumber),
   (e1: Reference, e2: Reference) => (e1.publicationDate ?? new Date()) <= (e2.publicationDate ?? new Date()) ,
   (e1: Reference, e2: Reference) => e1.createdDate < e2.createdDate,
 ];

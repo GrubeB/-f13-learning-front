@@ -78,7 +78,8 @@ body {
     min-height: 1em;
     min-width: 10em;
     width: auto; 
-    z-index: 200;
+    z-index: 999;
+    transform: translate(-100%, 0);
     .context-menu{
         padding: .25em 0em;
         display: flex;

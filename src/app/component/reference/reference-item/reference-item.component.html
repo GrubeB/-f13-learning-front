@@ -4,7 +4,7 @@
             <i class="bi bi-chevron-double-up"></i>
         </button>
         <button class="app-btn-icon" (click)="emitReferenceLikeDislikRemovedEvent(reference.id)">
-            {{ reference.likesNumber - reference.dislikesNumber }}
+            {{ reference.voting.likesNumber - reference.voting.dislikesNumber }}
         </button>
         <button class="app-btn-icon" (click)="emitReferenceDislikedEvent(reference.id)">
             <i class="bi bi-chevron-double-down"></i>
