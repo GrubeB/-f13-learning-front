@@ -4,7 +4,7 @@ import { Topic } from '../topic.model';
 import { ActivatedRoute } from '@angular/router';
 import { TopicService } from '../topic.service';
 import { take } from 'rxjs';
-import { ReferenceItemComponent } from '../../reference/reference-item/reference-item.component';
+import { ReferenceItemComponent } from '../../reference/reference-list/reference-item/reference-item.component';
 import { ReferenceFilterComponent } from '../../reference/reference-list/reference-filter/reference-filter.component';
 import { filters, sorters } from '../../reference/reference-list/reference-filter/reference-filter.component';
 import { EventBusService } from '../../../service/event-bus.service';

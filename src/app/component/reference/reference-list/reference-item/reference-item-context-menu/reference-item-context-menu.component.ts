@@ -2,9 +2,9 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 import { NGXLogger } from 'ngx-logger';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { OutsideClickDirective } from '../../../../../shared/directive/outside-click.directive';
-import { EventBusService } from '../../../../service/event-bus.service';
-import { DeleteReferenceEvent, UpdateReferenceEvent } from '../../reference-module.event';
+import { OutsideClickDirective } from '../../../../../../shared/directive/outside-click.directive';
+import { EventBusService } from '../../../../../service/event-bus.service';
+import { DeleteReferenceEvent, UpdateReferenceEvent } from '../../../reference-module.event';
 
 @Component({
   selector: 'reference-item-context-menu',

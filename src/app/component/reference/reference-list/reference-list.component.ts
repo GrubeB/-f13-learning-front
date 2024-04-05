@@ -2,7 +2,7 @@ import { CommonModule, DatePipe, Location } from '@angular/common';
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
-import { ReferenceItemComponent } from '../../reference/reference-item/reference-item.component';
+import { ReferenceItemComponent } from './reference-item/reference-item.component';
 import { EventBusService } from '../../../service/event-bus.service';
 import { ReferenceCreateFormComponent } from '../reference-form/reference-form.component';
 import { NGXLogger } from 'ngx-logger';
@@ -10,7 +10,7 @@ import { ReferenceCreatedEvent, ReferenceLikeDislikRemovedEvent, ReferenceDislik
 import { Reference } from '../reference.model';
 import { ReferenceFilterComponent, filters, sorters } from './reference-filter/reference-filter.component';
 import { TopicDetailsFilterChangedEvent } from '../../topic/topic-module.event';
-import { ReferenceItemContextMenuComponent } from '../reference-item/reference-item-context-menu/reference-item-context-menu.component';
+import { ReferenceItemContextMenuComponent } from './reference-item/reference-item-context-menu/reference-item-context-menu.component';
 
 @Component({
   selector: 'reference-list',

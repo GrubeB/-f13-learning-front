@@ -1,12 +1,12 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Inject, Input, inject } from '@angular/core';
-import { Reference } from '../reference.model';
-import { AuthenticationService } from '../../../auth/authentication.service';
-import { ReferenceVotingService } from '../reference-voting.service';
+import { Reference } from '../../reference.model';
+import { AuthenticationService } from '../../../../auth/authentication.service';
+import { ReferenceVotingService } from '../../reference-voting.service';
 import { take } from 'rxjs';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../../service/event-bus.service';
-import { ReferenceLikeDislikRemovedEvent, ReferenceDislikedEvent, ReferenceLikedEvent } from '../reference-module.event';
+import { EventBusService } from '../../../../service/event-bus.service';
+import { ReferenceLikeDislikRemovedEvent, ReferenceDislikedEvent, ReferenceLikedEvent } from '../../reference-module.event';
 import { ReferenceItemContextMenuComponent } from './reference-item-context-menu/reference-item-context-menu.component';
 
 @Component({
