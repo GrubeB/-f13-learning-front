@@ -17,30 +17,6 @@ export class CommentDeletedEvent {
         this.commentId = commentId;
     }
 }
-export class CommentLikedEvent {
-    commentId!: string;
-    userId!: string;
-    constructor(commentId: string, userId: string) {
-        this.commentId = commentId;
-        this.userId = userId;
-    }
-}
-export class CommentDislikedEvent {
-    commentId!: string;
-    userId!: string;
-    constructor(commentId: string, userId: string) {
-        this.commentId = commentId;
-        this.userId = userId;
-    }
-}
-export class CommentLikeDislikRemovedEvent {
-    commentId!: string;
-    userId!: string;
-    constructor(commentId: string, userId: string) {
-        this.commentId = commentId;
-        this.userId = userId;
-    }
-}
 //COMMANDS 
 export class CreateCommentEvent {
 }

@@ -13,9 +13,9 @@ export class ReferenceVotingService extends VotingService {
   resourcePath: string = "/api/v1/" + this.resourceName;
   url: string = "http://localhost:9006" + this.resourcePath;
 
-  createLike(referenceId: string, userId: string): Observable<HttpEvent<any>> {
+  createLike(id: string, userId: string): Observable<HttpEvent<any>> {
     return this.http.request<any>("POST",
-      this.url + "/" + referenceId + "/likes/" + userId,
+      this.url + "/" + id + "/likes/" + userId,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -26,9 +26,9 @@ export class ReferenceVotingService extends VotingService {
     ).pipe(retry(1), catchError(errorHandle));
   }
 
-  deleteLike(referenceId: string, userId: string): Observable<HttpEvent<any>> {
+  deleteLike(id: string, userId: string): Observable<HttpEvent<any>> {
     return this.http.request<any>("DELETE",
-      this.url + "/" + referenceId + "/likes/" + userId,
+      this.url + "/" + id + "/likes/" + userId,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -39,9 +39,9 @@ export class ReferenceVotingService extends VotingService {
     ).pipe(retry(1), catchError(errorHandle));
   }
 
-  createDislike(referenceId: string, userId: string): Observable<HttpEvent<any>> {
+  createDislike(id: string, userId: string): Observable<HttpEvent<any>> {
     return this.http.request<any>("POST",
-      this.url + "/" + referenceId + "/dislikes/" + userId,
+      this.url + "/" + id + "/dislikes/" + userId,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -50,9 +50,9 @@ export class ReferenceVotingService extends VotingService {
     ).pipe(retry(1), catchError(errorHandle));
   }
 
-  deleteDislike(referenceId: string, userId: string): Observable<HttpEvent<any>> {
+  deleteDislike(id: string, userId: string): Observable<HttpEvent<any>> {
     return this.http.request<any>("DELETE",
-      this.url + "/" + referenceId + "/dislikes/" + userId,
+      this.url + "/" + id + "/dislikes/" + userId,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -62,9 +62,9 @@ export class ReferenceVotingService extends VotingService {
       }
     ).pipe(retry(1), catchError(errorHandle));
   }
-  deleteLikeAndDislike(referenceId: string, userId: string): Observable<HttpEvent<any>> {
+  deleteLikeAndDislike(id: string, userId: string): Observable<HttpEvent<any>> {
     return this.http.request<any>("DELETE",
-      this.url + "/" + referenceId + "/likes-dislikes/" + userId,
+      this.url + "/" + id + "/likes-dislikes/" + userId,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

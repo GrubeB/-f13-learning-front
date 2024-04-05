@@ -6,8 +6,8 @@ import { ReferenceVotingService } from '../../../voting/reference-voting.service
 import { take } from 'rxjs';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../../service/event-bus.service';
-import { ReferenceLikeDislikRemovedEvent, ReferenceDislikedEvent, ReferenceLikedEvent } from '../../reference-module.event';
 import { ReferenceItemContextMenuComponent } from './reference-item-context-menu/reference-item-context-menu.component';
+import { ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../../voting/voting-module.event';
 
 @Component({
   selector: 'reference-item',
@@ -22,7 +22,7 @@ import { ReferenceItemContextMenuComponent } from './reference-item-context-menu
 })
 export class ReferenceItemComponent {
   authenticationService = inject(AuthenticationService);
-  referenceVotingService = inject(ReferenceVotingService);
+  votingService = inject(ReferenceVotingService);
   eventBus = inject(EventBusService);
   logger = inject(NGXLogger);
 
@@ -39,12 +39,12 @@ export class ReferenceItemComponent {
     window.open(this.reference.link, '_blank');
   }
 
-  emitReferenceLikedEvent(referenceId: string) {
-    this.logger.debug(ReferenceItemComponent.name, " emitReferenceLikedEvent()");
+  like(referenceId: string) {
+    this.logger.debug(ReferenceItemComponent.name, " like()");
     this.authenticationService.userId$().subscribe({
       next: userId => {
         if (userId != null) {
-          this.referenceVotingService.createLike(referenceId, userId).subscribe({
+          this.votingService.createLike(referenceId, userId).subscribe({
             next: res => {
               this.logger.debug(ReferenceItemComponent.name, " User give like ");
               this.eventBus.emit(ReferenceLikedEvent.name, new ReferenceLikedEvent(referenceId, userId));
@@ -55,12 +55,12 @@ export class ReferenceItemComponent {
     });
   }
 
-  emitReferenceDislikedEvent(referenceId: string) {
-    this.logger.debug(ReferenceItemComponent.name, " emitReferenceDislikedEvent()");
+  dislike(referenceId: string) {
+    this.logger.debug(ReferenceItemComponent.name, " dislike()");
     this.authenticationService.userId$().subscribe({
       next: userId => {
         if (userId != null) {
-          this.referenceVotingService.createDislike(referenceId, userId).subscribe({
+          this.votingService.createDislike(referenceId, userId).subscribe({
             next: res => {
               this.logger.debug(ReferenceItemComponent.name, " User give dislike ");
               this.eventBus.emit(ReferenceDislikedEvent.name, new ReferenceDislikedEvent(referenceId, userId));
@@ -70,12 +70,12 @@ export class ReferenceItemComponent {
       }
     });
   }
-  emitReferenceLikeDislikRemovedEvent(referenceId: string) {
-    this.logger.debug(ReferenceItemComponent.name, " emitReferenceLikeDislikRemovedEvent()");
+  removeLikeDislike(referenceId: string) {
+    this.logger.debug(ReferenceItemComponent.name, " removeLikeDislike()");
     this.authenticationService.userId$().subscribe({
       next: userId => {
         if (userId != null) {
-          this.referenceVotingService.deleteLikeAndDislike(referenceId, userId).subscribe({
+          this.votingService.deleteLikeAndDislike(referenceId, userId).subscribe({
             next: res => {
               this.logger.debug(ReferenceItemComponent.name, " User removed like/dislike ");
               this.eventBus.emit(ReferenceLikeDislikRemovedEvent.name, new ReferenceLikeDislikRemovedEvent(referenceId, userId));

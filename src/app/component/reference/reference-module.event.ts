@@ -17,30 +17,6 @@ export class ReferenceDeletedEvent {
         this.referenceId = referenceId;
     }
 }
-export class ReferenceLikedEvent {
-    referenceId!: string;
-    userId!: string;
-    constructor(referenceId: string, userId: string) {
-        this.referenceId = referenceId;
-        this.userId = userId;
-    }
-}
-export class ReferenceDislikedEvent {
-    referenceId!: string;
-    userId!: string;
-    constructor(referenceId: string, userId: string) {
-        this.referenceId = referenceId;
-        this.userId = userId;
-    }
-}
-export class ReferenceLikeDislikRemovedEvent {
-    referenceId!: string;
-    userId!: string;
-    constructor(referenceId: string, userId: string) {
-        this.referenceId = referenceId;
-        this.userId = userId;
-    }
-}
 //COMMANDS 
 export class CreateReferenceEvent {
 }

@@ -24,17 +24,25 @@
         >
             <i class="bi bi-chat-left-text-fill"></i>
         </button>
+
         <div class="d-flex flex-row gap-1">
-            <button class="app-btn-icon">
+            <button class="app-btn-icon"
+                (click)="like(comment.id)"
+            >
                 <i class="bi bi-chevron-double-up"></i>
             </button>
-            <button class="app-btn-icon">
+            <button class="app-btn-icon"
+                (click)="removeLikeDislike(comment.id)"
+            >
                 {{ comment.voting.likesNumber - comment.voting.dislikesNumber }}
             </button>
-            <button class="app-btn-icon">
+            <button class="app-btn-icon"
+                (click)="dislike(comment.id)"
+            >
                 <i class="bi bi-chevron-double-down"></i>
             </button>
         </div>
+
     </div>
     <div class="ms-4 me-1">
         <comment-list-item *ngFor="let comment of comment.comments" [comment]="comment"/>

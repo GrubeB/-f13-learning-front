@@ -12,7 +12,7 @@ import { TopicDetailsFilterChangedEvent } from '../topic-module.event';
 import { ReferenceCreateFormComponent } from '../../reference/reference-form/reference-form.component';
 import { TopicQueryService } from '../topic-query.service';
 import { NGXLogger } from 'ngx-logger';
-import { ReferenceCreatedEvent, ReferenceLikeDislikRemovedEvent, ReferenceDislikedEvent, ReferenceLikedEvent, CreateReferenceEvent, ReferenceUpdatedEvent, ReferenceDeletedEvent } from '../../reference/reference-module.event';
+import { ReferenceCreatedEvent, ReferenceUpdatedEvent, ReferenceDeletedEvent } from '../../reference/reference-module.event';
 import { ReferenceListComponent } from '../../reference/reference-list/reference-list.component';
 import { CommentListComponent } from '../../comment/comment-list/comment-list.component';
 import { TopicCommentService } from '../../comment/topic-comment.service';
@@ -20,6 +20,7 @@ import { CommentFormComponent } from '../../comment/comment-form/comment-form.co
 import { TopicReferenceService } from '../../reference/topic-reference.service';
 import { CategoryCreatedEvent, CategoryDeletedEvent, CategoryUpdatedEvent } from '../../category/category-module.event';
 import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent } from '../../comment/comment-module.event';
+import { CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../voting/voting-module.event';
 
 @Component({
   selector: 'topic-details',
@@ -56,14 +57,18 @@ export class TopicDetailsComponent implements OnInit {
       ReferenceLikedEvent.name,
       ReferenceDislikedEvent.name,
       ReferenceLikeDislikRemovedEvent.name,
-      
       ReferenceCreatedEvent.name,
       ReferenceUpdatedEvent.name,
       ReferenceDeletedEvent.name,
 
       CommentCreatedEvent.name,
       CommentUpdatedEvent.name,
-      CommentDeletedEvent.name
+      CommentDeletedEvent.name,
+
+      CommentLikedEvent.name,
+      CommentDislikedEvent.name,
+      CommentLikeDislikRemovedEvent.name,
+
     ], (e: any) => {
       this.refreshTopic(); 
     });

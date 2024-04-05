@@ -17,6 +17,7 @@ import { TopicQueryService } from './component/topic/topic-query.service';
 import { CategoryQueryService } from './component/category/category-query.service';
 import { CommentQueryService } from './component/comment/comment-query.service';
 import { TopicCommentService } from './component/comment/topic-comment.service';
+import { CommentVotingService } from './component/voting/comment-voting.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -47,6 +48,7 @@ export const appConfig: ApplicationConfig = {
     { provide: TopicCommentService},
 
     { provide: ReferenceVotingService},
+    { provide: CommentVotingService},
     
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ]

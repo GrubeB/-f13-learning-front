@@ -6,7 +6,7 @@ import { ReferenceItemComponent } from './reference-item/reference-item.componen
 import { EventBusService } from '../../../service/event-bus.service';
 import { ReferenceCreateFormComponent } from '../reference-form/reference-form.component';
 import { NGXLogger } from 'ngx-logger';
-import { ReferenceCreatedEvent, ReferenceLikeDislikRemovedEvent, ReferenceDislikedEvent, ReferenceLikedEvent, CreateReferenceEvent } from '../../reference/reference-module.event';
+import { CreateReferenceEvent } from '../../reference/reference-module.event';
 import { Reference } from '../reference.model';
 import { ReferenceFilterComponent, filters, sorters } from './reference-filter/reference-filter.component';
 import { TopicDetailsFilterChangedEvent } from '../../topic/topic-module.event';
