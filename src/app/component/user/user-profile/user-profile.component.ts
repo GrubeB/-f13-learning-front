@@ -24,6 +24,7 @@ export class UserProfileComponent implements OnInit {
 
   user?: User;
   url: string = "http://localhost:9007/api/v1/files/";
+  defalutImage: string = 'https://cdn.pixabay.com/photo/2022/12/19/13/31/panda-7665674_1280.jpg';
 
   ngOnInit(): void {
     this.getUser();
@@ -38,6 +39,9 @@ export class UserProfileComponent implements OnInit {
     });
   }
   getAvatarUrl() {
-    return this.url + this.user?.avatarFileId;
+    if(this.user?.avatarFileId){
+      return this.url + this.user?.avatarFileId;
+    }
+    return this.defalutImage;
   }
 }
