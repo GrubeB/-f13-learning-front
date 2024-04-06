@@ -1,6 +1,9 @@
-<div *ngIf="formViable" class="d-flex flex-column">
-    <div>    
-        <h1>Add references</h1>
+<div *ngIf="formViable" class="d-flex flex-column bg-secondary-light p-3 mb-3 rounded">
+    <div class="d-flex flex-row gap-3">
+        <h1>Add reference</h1>
+        <button (click)="hideForm()" class="app-btn-icon s32">
+            <i class="bi bi-dash"></i>
+        </button>
     </div>
     <form 
         [formGroup]="formGroup" 

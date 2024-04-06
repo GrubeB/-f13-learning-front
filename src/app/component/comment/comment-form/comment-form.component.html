@@ -1,6 +1,9 @@
-<div *ngIf="formViable" class="d-flex flex-column">
-    <div>    
+<div *ngIf="formViable" class="d-flex flex-column bg-secondary-light p-3 mb-3 rounded">
+    <div class="d-flex flex-row gap-3">
         <h1>Add <span *ngIf="!parentCommentId">comment</span><span *ngIf="parentCommentId">replay</span></h1>
+        <button (click)="hideForm()" class="app-btn-icon s32">
+            <i class="bi bi-dash"></i>
+        </button>
     </div>
     <form 
         [formGroup]="formGroup" 
@@ -26,3 +29,5 @@
         </div>
     </form>
 </div>
+
+
