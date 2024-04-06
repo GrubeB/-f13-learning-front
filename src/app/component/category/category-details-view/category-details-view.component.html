@@ -1,4 +1,11 @@
-<div *ngIf="categoryId" class="container-xl bg-secondary-dark p-4" style="border-radius: 2em;">
-    <button class="btn app-btn s32" type="button" (click)="goBack()">go back</button>
-    <category-details [categoryId]="categoryId" />
+<div class="view-container container-xl">
+    <div class="view-button-back">
+        <button class="app-btn-icon s32" (click)="goBack()">
+            <i class="bi bi-arrow-bar-left"></i>
+        </button>
+    </div>
+    
+    <div *ngIf="categoryId" class="view-content">
+        <category-details [categoryId]="categoryId" />
+    </div>
 </div>

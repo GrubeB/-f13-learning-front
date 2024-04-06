@@ -33,7 +33,24 @@ body {
     background-color: $secondary-dark;
     color: $secondary-dark-text;
 }
-
+// VIEW
+.view-container {
+    .view-button-back {
+        position: absolute;
+        padding: .25em;
+        margin: .25em;
+        button{
+            position: relative;
+            left: -50px;
+        }
+    }
+    .view-content {
+        background-color: $secondary-dark;
+        color: $secondary-dark-text;
+        border-radius: 2em;
+        padding: 1em 2em;
+    }
+}
 // MODAL
 .modal-background {
     position: fixed;
