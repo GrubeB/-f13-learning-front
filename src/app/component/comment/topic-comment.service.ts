@@ -57,9 +57,9 @@ export class TopicCommentService extends CommentService {
     ).pipe(retry(1), catchError(errorHandle));
   }
 
-  delete(id: number): Observable<HttpEvent<any>> {
+  delete(topicId: string, id: string): Observable<HttpEvent<any>> {
     return this.http.request<any>("DELETE",
-      this.url + '/' + id,
+    this.url.replace(":topicId", topicId) + '/' + id,
     ).pipe(retry(1), catchError(errorHandle));
   }
 }

@@ -11,5 +11,5 @@ export abstract class CommentService {
 
   abstract update(topicId: string, data: UpdateCommentCommand): Observable<HttpEvent<any>>;
 
-  abstract delete(id: number): Observable<HttpEvent<any>>;
+  abstract delete(topicId: string, id: string): Observable<HttpEvent<any>>;
 }

@@ -10,8 +10,9 @@
                     <h5>{{comment.createdDate | date }}</h5>
                 </div>
             </div>
-            <button class="app-btn-icon m-3">
+            <button class="app-btn-icon m-3" (click)="toggleContextMenu()">
                 <i class="bi bi-three-dots-vertical"></i>
+                <comment-list-item-context-menu [modelId]="comment.id" [(visable)]="contextMenuVisable"/>
             </button>
         </div>
         <div class="p-3">
