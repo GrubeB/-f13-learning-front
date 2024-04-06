@@ -6,6 +6,8 @@ import { EventBusService } from '../../../../../service/event-bus.service';
 import { ShowTopicDetailsModalEvent } from '../../../topic-module.event';
 import { TopicListItemContextMenuComponent } from './topic-list-item-context-menu/topic-list-item-context-menu.component';
 import { NGXLogger } from 'ngx-logger';
+import { UserProfileComponent } from '../../../../user/user-profile/user-profile.component';
+import { UserProfile2Component } from '../../../../user/user-profile-2/user-profile-2.component';
 
 @Component({
   selector: 'topic-list-item',
@@ -14,7 +16,8 @@ import { NGXLogger } from 'ngx-logger';
     CommonModule,
     RouterLink,
     DatePipe,
-    TopicListItemContextMenuComponent
+    TopicListItemContextMenuComponent,
+    UserProfile2Component
   ],
   templateUrl: './topic-list-item.component.html',
   styleUrl: './topic-list-item.component.scss'

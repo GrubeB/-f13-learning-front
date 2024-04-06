@@ -11,6 +11,7 @@ import { CommentVotingService } from '../../../voting/comment-voting.service';
 import { CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikedEvent } from '../../../voting/voting-module.event';
 import { CommentListItemContextMenuComponent } from './comment-list-item-context-menu/comment-list-item-context-menu.component';
 import { CommentService } from '../../comment.service';
+import { UserProfile2Component } from '../../../user/user-profile-2/user-profile-2.component';
 
 @Component({
   selector: 'comment-list-item',
@@ -19,7 +20,8 @@ import { CommentService } from '../../comment.service';
     CommonModule,
     DatePipe,
     CommentListComponent,
-    CommentListItemContextMenuComponent
+    CommentListItemContextMenuComponent,
+    UserProfile2Component,
   ],
   templateUrl: './comment-list-item.component.html',
   styleUrl: './comment-list-item.component.scss'

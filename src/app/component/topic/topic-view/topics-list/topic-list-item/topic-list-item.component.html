@@ -1,14 +1,6 @@
 <div class="card m-2 w-100 bg-secondary-light" >
     <div class="card-header p-2 m-2 d-flex flex-row justify-content-between">
-        <div class="d-flex flex-row">
-            <button class="app-btn-image s48">
-                <img [src]="'https://i.pinimg.com/originals/40/00/b7/4000b7b7caf046215794ccdef4a78630.png'"/>
-            </button>
-            <div class="d-flex ms-2 pt-2 flex-column">
-                <h4>Ala Kot{{topic.createdBy}}</h4>
-                <h5>{{topic.createdDate | date }}</h5>
-            </div>
-        </div>
+        <user-profile-2 [userId]="topic.createdBy" [date]="topic.createdDate"/>
         <button class="app-btn-icon s24" (click)="toggleContextMenu()">
             <i class="bi bi-three-dots-vertical"></i>
             <topic-list-item-context-menu [modelId]="topic.id" [(visable)]="contextMenuVisable"/>
@@ -28,10 +20,10 @@
             <i class="bi bi-arrows-angle-expand"></i>
         </button>
         <button  class="app-btn-icon s24">
-            <i class="bi bi-chat-left-text-fill"></i>
-        </button>
-        <button  class="app-btn-icon s24">
             <i class="bi bi-star"></i>
+        </button>
+        <button  class="app-btn-icon s24" routerLink="/topics/{{topic.id}}">
+            <i class="bi bi-box-arrow-up-right"></i>
         </button>
     </div>
 </div>

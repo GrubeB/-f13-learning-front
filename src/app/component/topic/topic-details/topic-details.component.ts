@@ -21,6 +21,7 @@ import { TopicReferenceService } from '../../reference/topic-reference.service';
 import { CategoryCreatedEvent, CategoryDeletedEvent, CategoryUpdatedEvent, DeleteCategoryEvent } from '../../category/category-module.event';
 import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent, DeleteCommentEvent } from '../../comment/comment-module.event';
 import { CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../voting/voting-module.event';
+import { UserProfile2Component } from '../../user/user-profile-2/user-profile-2.component';
 
 @Component({
   selector: 'topic-details',
@@ -33,7 +34,8 @@ import { CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikedEvent,
     ReferenceCreateFormComponent,
     ReferenceListComponent,
     CommentListComponent,
-    CommentFormComponent
+    CommentFormComponent,
+    UserProfile2Component,
   ],
   templateUrl: './topic-details.component.html',
   styleUrl: './topic-details.component.scss'

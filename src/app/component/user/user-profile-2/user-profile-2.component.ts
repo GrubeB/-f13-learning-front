@@ -4,23 +4,25 @@ import { EventBusService } from '../../../service/event-bus.service';
 import { User } from '../user.model';
 import { UserQueryService } from '../user-query.service';
 import { first } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'user-profile',
+  selector: 'user-profile-2',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    DatePipe
   ],
-  templateUrl: './user-profile.component.html',
-  styleUrl: './user-profile.component.scss'
+  templateUrl: './user-profile-2.component.html',
+  styleUrl: './user-profile-2.component.scss'
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfile2Component {
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
   userQueryService = inject(UserQueryService);
 
   @Input() userId!: string;
+  @Input() date!: any;
 
   user?: User;
   url: string = "http://localhost:9007/api/v1/files/";
@@ -31,7 +33,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUser() {
-    this.logger.debug(UserProfileComponent.name, " getUser()");
+    this.logger.debug(UserProfile2Component.name, " getUser()");
     this.userQueryService.get(this.userId).pipe(first()).subscribe({
       next: data =>{
         this.user = data;

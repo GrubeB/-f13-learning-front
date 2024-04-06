@@ -11,9 +11,9 @@ export class Topic {
     references?: Reference[];
     comment!: CommentContainer;
     
-    createdBy!: String;
+    createdBy!: string;
     createdDate!: Date;
-    lastModifiedBy!: String;
+    lastModifiedBy!: string;
     lastModifiedDate!: Date;
 }
 

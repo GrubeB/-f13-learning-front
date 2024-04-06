@@ -1,13 +1,5 @@
 <div *ngIf="topic" class="container-xl d-flex flex-column">
-    <div class="d-flex flex-row">
-        <button class="app-btn-image s48">
-            <img [src]="'https://i.pinimg.com/originals/40/00/b7/4000b7b7caf046215794ccdef4a78630.png'"/>
-        </button>
-        <div class="d-flex ms-3 flex-column">
-            <h1>Ala Kot{{topic.createdBy}}</h1>
-            <h4>{{topic.createdDate | date }}</h4>
-        </div>
-    </div>
+    <user-profile-2 [userId]="topic.createdBy" [date]="topic.createdDate"/>
 
     <div class="mt-3">
         <h1>{{topic.name}}</h1>
