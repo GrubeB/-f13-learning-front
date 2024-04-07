@@ -6,7 +6,7 @@ import { first, take } from 'rxjs';
 import { TopicListComponent } from './topics-list/topic-list.component';
 import { TopicDetailsModalComponent } from '../topic-details-modal/topic-details-modal.component';
 import { EventBusService } from '../../../service/event-bus.service';
-import { CreateTopicEvent, DeleteTopicEvent, HideTopicDetailsModalEvent, ShowTopicDetailsModalEvent, TopicCreatedEvent, TopicDeletedEvent, TopicUpdateddEvent } from '../topic-module.event';
+import { CreateTopicEvent, DeleteTopicEvent, TopicCreatedEvent, TopicDeletedEvent, TopicUpdateddEvent } from '../topic-module.event';
 import { TopicQueryService } from '../topic-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { TopicFormComponent } from './topic-form/topic-form.component';

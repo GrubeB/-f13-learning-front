@@ -1,49 +1,90 @@
 export class ReferenceLikedEvent {
-    referenceId!: string;
+    id!: string;
     userId!: string;
-    constructor(referenceId: string, userId: string) {
-        this.referenceId = referenceId;
+    constructor(id: string, userId: string) {
+        this.id = id;
         this.userId = userId;
     }
 }
 export class ReferenceDislikedEvent {
-    referenceId!: string;
+    id!: string;
     userId!: string;
-    constructor(referenceId: string, userId: string) {
-        this.referenceId = referenceId;
+    constructor(id: string, userId: string) {
+        this.id = id;
         this.userId = userId;
     }
 }
 export class ReferenceLikeDislikRemovedEvent {
-    referenceId!: string;
+    id!: string;
     userId!: string;
-    constructor(referenceId: string, userId: string) {
-        this.referenceId = referenceId;
+    constructor(id: string, userId: string) {
+        this.id = id;
         this.userId = userId;
     }
 }
 // COMMENTS
 export class CommentLikedEvent {
-    commentId!: string;
+    id!: string;
     userId!: string;
-    constructor(commentId: string, userId: string) {
-        this.commentId = commentId;
+    constructor(id: string, userId: string) {
+        this.id = id;
         this.userId = userId;
     }
 }
 export class CommentDislikedEvent {
-    commentId!: string;
+    id!: string;
     userId!: string;
-    constructor(commentId: string, userId: string) {
-        this.commentId = commentId;
+    constructor(id: string, userId: string) {
+        this.id = id;
         this.userId = userId;
     }
 }
 export class CommentLikeDislikRemovedEvent {
-    commentId!: string;
+    id!: string;
     userId!: string;
-    constructor(commentId: string, userId: string) {
-        this.commentId = commentId;
+    constructor(id: string, userId: string) {
+        this.id = id;
+        this.userId = userId;
+    }
+}
+// TOPIC
+export class TopicLikedEvent {
+    id!: string;
+    userId!: string;
+    constructor(id: string, userId: string) {
+        this.id = id;
+        this.userId = userId;
+    }
+}
+export class TopicLikeRemvedEvent {
+    id!: string;
+    userId!: string;
+    constructor(id: string, userId: string) {
+        this.id = id;
+        this.userId = userId;
+    }
+}
+export class TopicDislikedEvent {
+    id!: string;
+    userId!: string;
+    constructor(id: string, userId: string) {
+        this.id = id;
+        this.userId = userId;
+    }
+}
+export class TopicDisLikeRemvedEvent {
+    id!: string;
+    userId!: string;
+    constructor(id: string, userId: string) {
+        this.id = id;
+        this.userId = userId;
+    }
+}
+export class TopicLikeDislikRemovedEvent {
+    id!: string;
+    userId!: string;
+    constructor(id: string, userId: string) {
+        this.id = id;
         this.userId = userId;
     }
 }
