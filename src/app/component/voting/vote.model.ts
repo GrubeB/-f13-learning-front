@@ -6,15 +6,16 @@ export class Vote {
     userId!: string;
     type!: VoteType;
     domainObject!: string;
-    domainObjectType!: string;
+    domainObjectType!: DomainObjectType;
 }
 export enum VoteType {
-    LIKE,
-    DISLIKE,
+    NULL = "NULL",
+    LIKE = "LIKE",
+    DISLIKE = "DISLIKE",
 }
 export enum DomainObjectType {
-    REFERENCE,
-    TOPIC,
-    CATEGORY,
-    COMMENT,
+    REFERENCE = "REFERENCE",
+    TOPIC = "TOPIC",
+    CATEGORY = "CATEGORY",
+    COMMENT = "COMMENT",
 }

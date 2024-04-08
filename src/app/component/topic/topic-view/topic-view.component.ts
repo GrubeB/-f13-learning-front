@@ -29,7 +29,6 @@ import { VotingQueryService } from '../../voting/voting-query.service';
 export class TopicViewComponent implements OnInit {
   topicQueryService = inject(TopicQueryService);
   topicService = inject(TopicService);
-  votingQueryService = inject(VotingQueryService);
   eventBus = inject(EventBusService);
   logger = inject(NGXLogger);
   
@@ -59,18 +58,6 @@ export class TopicViewComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getTopics();
-    this.getVotes();
-  }
-  getVotes() {
-    this.logger.debug(TopicViewComponent.name, " getVotes()");
-    this.votingQueryService.getAllByUser().pipe(take(1)).subscribe({
-      next: data => {
-        this.votes = data.content;
-      },
-      error: e => {
-        this.votes = [];
-      }
-    });
   }
   getTopics() {
     this.logger.debug(TopicViewComponent.name, " getTopics()");

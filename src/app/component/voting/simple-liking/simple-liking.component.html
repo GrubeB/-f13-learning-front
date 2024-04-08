@@ -1,0 +1,6 @@
+<button *ngIf="vote === null || vote?.type?.toString() !== 'LIKE'" class="app-btn-icon s24" (click)="like.emit()">
+    <i class="bi bi-star"></i>
+</button>
+<button *ngIf="vote !== null && vote?.type?.toString() === 'LIKE'" class="app-btn-icon s24" (click)="removeLike.emit()">
+    <i class="bi bi-star-fill"></i>
+</button>

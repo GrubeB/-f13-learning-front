@@ -16,9 +16,7 @@
         <button class="app-btn-icon s24" (click)="openTopicDetailsModal(topic.id)">
             <i class="bi bi-arrows-angle-expand"></i>
         </button>
-        <button  class="app-btn-icon s24" (click)="like(topic.id)">
-            <i class="bi bi-star"></i>
-        </button>
+        <simple-liking [vote]="vote" (like)="like(topic.id)" (removeLike)="removeLike(topic.id)" />
         <button  class="app-btn-icon s24" routerLink="/topics/{{topic.id}}">
             <i class="bi bi-box-arrow-up-right"></i>
         </button>

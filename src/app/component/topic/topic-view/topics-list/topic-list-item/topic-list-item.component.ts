@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { Topic } from '../../../topic.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -11,6 +11,9 @@ import { UserProfile2Component } from '../../../../user/user-profile-2/user-prof
 import { TopicVotingService } from '../../../../voting/topic-voting.service';
 import { AuthenticationService } from '../../../../../auth/authentication.service';
 import { TopicLikeRemvedEvent, TopicLikedEvent } from '../../../../voting/voting-module.event';
+import { VotingQueryService } from '../../../../voting/voting-query.service';
+import { DomainObjectType, Vote } from '../../../../voting/vote.model';
+import { SimpleLikingComponent } from '../../../../voting/simple-liking/simple-liking.component';
 
 @Component({
   selector: 'topic-list-item',
@@ -20,17 +23,34 @@ import { TopicLikeRemvedEvent, TopicLikedEvent } from '../../../../voting/voting
     RouterLink,
     DatePipe,
     TopicListItemContextMenuComponent,
-    UserProfile2Component
+    UserProfile2Component,
+    SimpleLikingComponent
   ],
   templateUrl: './topic-list-item.component.html',
   styleUrl: './topic-list-item.component.scss'
 })
-export class TopicListItemComponent {
+export class TopicListItemComponent implements OnInit{
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
   votingService = inject(TopicVotingService);
+  votingQueryService = inject(VotingQueryService);
 
   @Input() topic!: Topic;
+  vote?: Vote;
+
+  ngOnInit(): void {
+    this.getVote();
+  }
+
+  getVote() {
+    this.logger.debug(TopicListItemComponent.name, " getVote()");
+    this.votingQueryService.get(this.topic.id, DomainObjectType.TOPIC).subscribe({
+      next: vote => {
+        this.logger.debug(TopicListItemComponent.name, " getVote() - refresh ", vote);
+        this.vote = vote;
+      },
+    });
+  }
 
   contextMenuVisable: boolean = false;
   toggleContextMenu() {

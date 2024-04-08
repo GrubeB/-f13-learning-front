@@ -4,7 +4,7 @@ import { Vote } from './vote.model';
 import { Page } from '../../model/response.model';
 
 export abstract class AbstractVotingQueryService {
-  abstract getAllByUser(): Observable<Page<Vote[]>> ;
+  // abstract getAllByUser(): Observable<Page<Vote[]>> ;
 }
 
 export abstract class AbstractVotingService {
