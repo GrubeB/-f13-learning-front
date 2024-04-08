@@ -1,6 +1,7 @@
 import { Category } from "../category/category.model";
-import { CommentContainer } from "../comment/category.model";
+import { CommentContainer } from "../comment/comment.model";
 import { Reference } from "../reference/reference.model";
+import { Voting } from "../voting/vote.model";
 
 export class Topic {
     id!: string;
@@ -10,6 +11,7 @@ export class Topic {
     categories?: Category[];
     references?: Reference[];
     comment!: CommentContainer;
+    voting!: Voting;
     
     createdBy!: string;
     createdDate!: Date;

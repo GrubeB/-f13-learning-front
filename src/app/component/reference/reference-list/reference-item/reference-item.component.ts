@@ -41,47 +41,29 @@ export class ReferenceItemComponent {
 
   like(referenceId: string) {
     this.logger.debug(ReferenceItemComponent.name, " like()");
-    this.authenticationService.userId$().subscribe({
-      next: userId => {
-        if (userId != null) {
-          this.votingService.createLike(referenceId, userId).subscribe({
-            next: res => {
-              this.logger.debug(ReferenceItemComponent.name, " User give like ");
-              this.eventBus.emit(ReferenceLikedEvent.name, new ReferenceLikedEvent(referenceId, userId));
-            }
-          });
-        }
+    this.votingService.createLike(referenceId).subscribe({
+      next: res => {
+        this.logger.debug(ReferenceItemComponent.name, " User give like ");
+        this.eventBus.emit(ReferenceLikedEvent.name, new ReferenceLikedEvent(referenceId));
       }
     });
   }
 
   dislike(referenceId: string) {
     this.logger.debug(ReferenceItemComponent.name, " dislike()");
-    this.authenticationService.userId$().subscribe({
-      next: userId => {
-        if (userId != null) {
-          this.votingService.createDislike(referenceId, userId).subscribe({
-            next: res => {
-              this.logger.debug(ReferenceItemComponent.name, " User give dislike ");
-              this.eventBus.emit(ReferenceDislikedEvent.name, new ReferenceDislikedEvent(referenceId, userId));
-            }
-          });
-        }
+    this.votingService.createDislike(referenceId).subscribe({
+      next: res => {
+        this.logger.debug(ReferenceItemComponent.name, " User give dislike ");
+        this.eventBus.emit(ReferenceDislikedEvent.name, new ReferenceDislikedEvent(referenceId));
       }
     });
   }
   removeLikeDislike(referenceId: string) {
     this.logger.debug(ReferenceItemComponent.name, " removeLikeDislike()");
-    this.authenticationService.userId$().subscribe({
-      next: userId => {
-        if (userId != null) {
-          this.votingService.deleteLikeAndDislike(referenceId, userId).subscribe({
-            next: res => {
-              this.logger.debug(ReferenceItemComponent.name, " User removed like/dislike ");
-              this.eventBus.emit(ReferenceLikeDislikRemovedEvent.name, new ReferenceLikeDislikRemovedEvent(referenceId, userId));
-            }
-          });
-        }
+    this.votingService.deleteLikeAndDislike(referenceId).subscribe({
+      next: res => {
+        this.logger.debug(ReferenceItemComponent.name, " User removed like/dislike ");
+        this.eventBus.emit(ReferenceLikeDislikRemovedEvent.name, new ReferenceLikeDislikRemovedEvent(referenceId));
       }
     });
   }

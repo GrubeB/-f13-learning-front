@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Page } from '../../model/response.model';
 import { errorHandle } from '../../service/service-support';
-import { Comment } from './category.model';
+import { Comment } from './comment.model';
 
 @Injectable()
 export class CommentQueryService {

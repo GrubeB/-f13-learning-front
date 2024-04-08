@@ -1,3 +1,5 @@
+import { Voting } from "../voting/vote.model";
+
 export class Reference {
     id!: string;
     title!: string;
@@ -12,11 +14,6 @@ export class Reference {
     createdDate!: Date;
     lastModifiedBy!: String;
     lastModifiedDate!: Date;
-}
-
-export class Voting{
-    likesNumber!: number;
-    dislikesNumber!: number;
 }
 export enum ReferenceStatus {
     UNVERIFIED,

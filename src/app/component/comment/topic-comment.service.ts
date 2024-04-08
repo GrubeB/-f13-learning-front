@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError, take } from 'rxjs/operators';
 import { errorHandle } from '../../service/service-support';
 import { Reference } from '../reference/reference.model';
-import { CreateCommentCommand, UpdateCommentCommand } from './category.model';
+import { CreateCommentCommand, UpdateCommentCommand } from './comment.model';
 import { CommentService } from './comment.service';
 import { AuthenticationService } from '../../auth/authentication.service';
 

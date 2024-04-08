@@ -20,6 +20,7 @@ import { TopicCommentService } from './component/comment/topic-comment.service';
 import { CommentVotingService } from './component/voting/comment-voting.service';
 import { UserQueryService } from './component/user/user-query.service';
 import { TopicVotingService } from './component/voting/topic-voting.service';
+import { VotingQueryService } from './component/voting/voting-query.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -52,6 +53,7 @@ export const appConfig: ApplicationConfig = {
     { provide: ReferenceVotingService},
     { provide: CommentVotingService},
     { provide: TopicVotingService},
+    { provide: VotingQueryService},
     
     { provide: UserQueryService},
 

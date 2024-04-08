@@ -10,6 +10,8 @@ import { CreateTopicEvent, DeleteTopicEvent, TopicCreatedEvent, TopicDeletedEven
 import { TopicQueryService } from '../topic-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { TopicFormComponent } from './topic-form/topic-form.component';
+import { Vote } from '../../voting/vote.model';
+import { VotingQueryService } from '../../voting/voting-query.service';
 
 
 @Component({
@@ -27,10 +29,12 @@ import { TopicFormComponent } from './topic-form/topic-form.component';
 export class TopicViewComponent implements OnInit {
   topicQueryService = inject(TopicQueryService);
   topicService = inject(TopicService);
+  votingQueryService = inject(VotingQueryService);
   eventBus = inject(EventBusService);
   logger = inject(NGXLogger);
-
+  
   topics: Topic[] = [];
+  votes: Vote[] = [];
 
   constructor() {
     this.eventBus.listen([
@@ -55,8 +59,19 @@ export class TopicViewComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getTopics();
+    this.getVotes();
   }
-
+  getVotes() {
+    this.logger.debug(TopicViewComponent.name, " getVotes()");
+    this.votingQueryService.getAllByUser().pipe(take(1)).subscribe({
+      next: data => {
+        this.votes = data.content;
+      },
+      error: e => {
+        this.votes = [];
+      }
+    });
+  }
   getTopics() {
     this.logger.debug(TopicViewComponent.name, " getTopics()");
     this.topicQueryService.getAll().pipe(take(1)).subscribe({

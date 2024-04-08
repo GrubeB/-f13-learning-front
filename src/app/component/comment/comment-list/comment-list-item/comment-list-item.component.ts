@@ -1,5 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
-import { Comment } from '../../category.model';
+import { Comment } from '../../comment.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { CommentListComponent } from '../comment-list.component';
 import { CreateCommentReplayEvent } from '../../comment-module.event';
@@ -41,47 +41,29 @@ export class CommentListItemComponent {
 
   like(id: string) {
     this.logger.debug(CommentListItemComponent.name, " like()");
-    this.authenticationService.userId$().subscribe({
-      next: userId => {
-        if (userId != null) {
-          this.votingService.createLike(id, userId).subscribe({
-            next: res => {
-              this.logger.debug(CommentListItemComponent.name, " User give like ");
-              this.eventBus.emit(CommentLikedEvent.name, new CommentLikedEvent(id, userId));
-            }
-          });
-        }
+    this.votingService.createLike(id).subscribe({
+      next: res => {
+        this.logger.debug(CommentListItemComponent.name, " User give like ");
+        this.eventBus.emit(CommentLikedEvent.name, new CommentLikedEvent(id));
       }
     });
   }
 
   dislike(id: string) {
     this.logger.debug(CommentListItemComponent.name, " dislike()");
-    this.authenticationService.userId$().subscribe({
-      next: userId => {
-        if (userId != null) {
-          this.votingService.createDislike(id, userId).subscribe({
-            next: res => {
-              this.logger.debug(CommentListItemComponent.name, " User give dislike ");
-              this.eventBus.emit(CommentDislikedEvent.name, new CommentDislikedEvent(id, userId));
-            }
-          });
-        }
+    this.votingService.createDislike(id).subscribe({
+      next: res => {
+        this.logger.debug(CommentListItemComponent.name, " User give dislike ");
+        this.eventBus.emit(CommentDislikedEvent.name, new CommentDislikedEvent(id));
       }
     });
   }
   removeLikeDislike(id: string) {
     this.logger.debug(CommentListItemComponent.name, " removeLikeDislike()");
-    this.authenticationService.userId$().subscribe({
-      next: userId => {
-        if (userId != null) {
-          this.votingService.deleteLikeAndDislike(id, userId).subscribe({
-            next: res => {
-              this.logger.debug(CommentListItemComponent.name, " User removed like/dislike ");
-              this.eventBus.emit(CommentLikeDislikRemovedEvent.name, new CommentLikeDislikRemovedEvent(id, userId));
-            }
-          });
-        }
+    this.votingService.deleteLikeAndDislike(id).subscribe({
+      next: res => {
+        this.logger.debug(CommentListItemComponent.name, " User removed like/dislike ");
+        this.eventBus.emit(CommentLikeDislikRemovedEvent.name, new CommentLikeDislikRemovedEvent(id));
       }
     });
   }

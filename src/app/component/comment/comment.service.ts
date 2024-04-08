@@ -1,7 +1,7 @@
 import { HttpEvent} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Reference } from '../reference/reference.model';
-import { CreateCommentCommand, UpdateCommentCommand } from './category.model';
+import { CreateCommentCommand, UpdateCommentCommand } from './comment.model';
 
 export abstract class CommentService {
 

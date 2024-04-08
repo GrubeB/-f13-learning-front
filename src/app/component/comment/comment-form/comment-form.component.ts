@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../service/event-bus.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Comment, CreateCommentCommand, UpdateCommentCommand } from '../category.model';
+import { Comment, CreateCommentCommand, UpdateCommentCommand } from '../comment.model';
 import { CommentCreatedEvent, CommentUpdatedEvent, CreateCommentEvent, CreateCommentReplayEvent, UpdateCommentEvent } from '../comment-module.event';
 import { CommentQueryService } from '../comment-query.service';
 import { first, take } from 'rxjs';

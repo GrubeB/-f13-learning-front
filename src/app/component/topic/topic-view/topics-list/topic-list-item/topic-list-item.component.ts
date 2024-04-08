@@ -29,7 +29,6 @@ export class TopicListItemComponent {
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
   votingService = inject(TopicVotingService);
-  authenticationService = inject(AuthenticationService);
 
   @Input() topic!: Topic;
 
@@ -46,31 +45,19 @@ export class TopicListItemComponent {
   // VOTING
   like(id: string) {
     this.logger.debug(TopicListItemComponent.name, " like()");
-    this.authenticationService.userId$().subscribe({
-      next: userId => {
-        if (userId != null) {
-          this.votingService.createLike(id, userId).subscribe({
-            next: res => {
-              this.logger.debug(TopicListItemComponent.name, " User give like ");
-              this.eventBus.emit(TopicLikedEvent.name, new TopicLikedEvent(id, userId));
-            }
-          });
-        }
+    this.votingService.createLike(id).subscribe({
+      next: res => {
+        this.logger.debug(TopicListItemComponent.name, " User give like ");
+        this.eventBus.emit(TopicLikedEvent.name, new TopicLikedEvent(id));
       }
     });
   }
   removeLike(id: string) {
     this.logger.debug(TopicListItemComponent.name, " removeLike()");
-    this.authenticationService.userId$().subscribe({
-      next: userId => {
-        if (userId != null) {
-          this.votingService.deleteLikeAndDislike(id, userId).subscribe({
-            next: res => {
-              this.logger.debug(TopicListItemComponent.name, " User removed like ");
-              this.eventBus.emit(TopicLikeRemvedEvent.name, new TopicLikeRemvedEvent(id, userId));
-            }
-          });
-        }
+    this.votingService.deleteLikeAndDislike(id).subscribe({
+      next: res => {
+        this.logger.debug(TopicListItemComponent.name, " User removed like ");
+        this.eventBus.emit(TopicLikeRemvedEvent.name, new TopicLikeRemvedEvent(id));
       }
     });
   }
