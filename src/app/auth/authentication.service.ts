@@ -40,7 +40,7 @@ export class AuthenticationService {
     userId$(): Observable<string | null> {
         return this._authenticationContext.pipe(
             map(context => context?.user?.id ?? null),
-            take(1)
+            shareReplay(1)
         );
     }
     login(email: string, password: string) {

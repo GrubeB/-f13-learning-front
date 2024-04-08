@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, DestroyRef, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { Topic } from '../../../topic.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -14,6 +14,8 @@ import { TopicLikeRemvedEvent, TopicLikedEvent } from '../../../../voting/voting
 import { VotingQueryService } from '../../../../voting/voting-query.service';
 import { DomainObjectType, Vote } from '../../../../voting/vote.model';
 import { SimpleLikingComponent } from '../../../../voting/simple-liking/simple-liking.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { first } from 'rxjs';
 
 @Component({
   selector: 'topic-list-item',
@@ -29,7 +31,8 @@ import { SimpleLikingComponent } from '../../../../voting/simple-liking/simple-l
   templateUrl: './topic-list-item.component.html',
   styleUrl: './topic-list-item.component.scss'
 })
-export class TopicListItemComponent implements OnInit{
+export class TopicListItemComponent implements OnInit {
+  private destroyRef = inject(DestroyRef);
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
   votingService = inject(TopicVotingService);
@@ -44,7 +47,7 @@ export class TopicListItemComponent implements OnInit{
 
   getVote() {
     this.logger.debug(TopicListItemComponent.name, " getVote()");
-    this.votingQueryService.get(this.topic.id, DomainObjectType.TOPIC).subscribe({
+    this.votingQueryService.get(this.topic.id, DomainObjectType.TOPIC).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: vote => {
         this.logger.debug(TopicListItemComponent.name, " getVote() - refresh ", vote);
         this.vote = vote;
@@ -57,7 +60,7 @@ export class TopicListItemComponent implements OnInit{
     this.logger.debug(TopicListItemComponent.name, " toggleContextMenu()");
     this.contextMenuVisable = !this.contextMenuVisable;
   }
-  
+
   openTopicDetailsModal(topicId: string) {
     this.logger.debug(TopicListItemComponent.name, " openTopicDetailsModal()");
     this.eventBus.emit(ShowTopicDetailsModalEvent.name, new ShowTopicDetailsModalEvent(topicId));
@@ -65,7 +68,7 @@ export class TopicListItemComponent implements OnInit{
   // VOTING
   like(id: string) {
     this.logger.debug(TopicListItemComponent.name, " like()");
-    this.votingService.createLike(id).subscribe({
+    this.votingService.createLike(id).pipe(first()).subscribe({
       next: res => {
         this.logger.debug(TopicListItemComponent.name, " User give like ");
         this.eventBus.emit(TopicLikedEvent.name, new TopicLikedEvent(id));
@@ -74,7 +77,7 @@ export class TopicListItemComponent implements OnInit{
   }
   removeLike(id: string) {
     this.logger.debug(TopicListItemComponent.name, " removeLike()");
-    this.votingService.deleteLikeAndDislike(id).subscribe({
+    this.votingService.deleteLikeAndDislike(id).pipe(first()).subscribe({
       next: res => {
         this.logger.debug(TopicListItemComponent.name, " User removed like ");
         this.eventBus.emit(TopicLikeRemvedEvent.name, new TopicLikeRemvedEvent(id));

@@ -10,6 +10,7 @@ import { AuthenticationService } from '../../auth/authentication.service';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../service/event-bus.service';
 import { CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent, TopicDisLikeRemvedEvent, TopicDislikedEvent, TopicLikeDislikRemovedEvent, TopicLikeRemvedEvent, TopicLikedEvent } from './voting-module.event';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 // TODO servis should make only one call when starting application,
 // and then should keep and update his state by yourself 
@@ -75,7 +76,7 @@ export class VotingQueryService implements AbstractVotingQueryService {
     this.eventBus.listen(TopicDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.TOPIC); });
     this.eventBus.listen(TopicLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.TOPIC); });
 
-    this.authenticationService.userId$().subscribe({
+    this.authenticationService.userId$().pipe(takeUntilDestroyed()).subscribe({
       next: data => {
         if (data != null) {
           this.currentUserId = data;
@@ -109,11 +110,11 @@ export class VotingQueryService implements AbstractVotingQueryService {
     return this.cache$;
   }
 
-  get(domainObject: string, domainObjectType: DomainObjectType): Observable<Vote | undefined> {
+  get(domainObjectId: string, domainObjectType: DomainObjectType): Observable<Vote | undefined> {
     this.logger.info(VotingQueryService.name, " get()");
     return this.getAllByUser().pipe(
       mergeMap(array => array),
-      filter(element => element.domainObject === domainObject && element.domainObjectType.toString() === DomainObjectType[domainObjectType]),
+      filter(element => element.domainObject === domainObjectId && element.domainObjectType.toString() === DomainObjectType[domainObjectType]),
     );
   }
 }

@@ -1,10 +1,10 @@
 import { HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Vote } from './vote.model';
-import { Page } from '../../model/response.model';
+import { DomainObjectType, Vote } from './vote.model';
 
 export abstract class AbstractVotingQueryService {
-  // abstract getAllByUser(): Observable<Page<Vote[]>> ;
+  abstract getAllByUser(): Observable<Vote[]>;
+  abstract get(domainObjectId: string, domainObjectType: DomainObjectType): Observable<Vote | undefined>;
 }
 
 export abstract class AbstractVotingService {

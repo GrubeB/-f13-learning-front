@@ -11,7 +11,6 @@ import { TopicQueryService } from '../topic-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { TopicFormComponent } from './topic-form/topic-form.component';
 import { Vote } from '../../voting/vote.model';
-import { VotingQueryService } from '../../voting/voting-query.service';
 
 
 @Component({
@@ -61,7 +60,7 @@ export class TopicViewComponent implements OnInit {
   }
   getTopics() {
     this.logger.debug(TopicViewComponent.name, " getTopics()");
-    this.topicQueryService.getAll().pipe(take(1)).subscribe({
+    this.topicQueryService.getAll().pipe(first()).subscribe({
       next: data => {
         this.topics = data.content;
       },
