@@ -66,3 +66,34 @@ export class TopicLikeDislikRemovedEvent {
         this.id = id;
     }
 }
+// CATEGORY
+export class CategoryLikedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class CategoryLikeRemvedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class CategoryDislikedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class CategoryDisLikeRemvedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class CategoryLikeDislikRemovedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}

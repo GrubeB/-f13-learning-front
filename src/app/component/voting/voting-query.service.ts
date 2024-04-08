@@ -9,7 +9,7 @@ import { DomainObjectType, Vote, VoteType } from './vote.model';
 import { AuthenticationService } from '../../auth/authentication.service';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../service/event-bus.service';
-import { CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent, TopicDisLikeRemvedEvent, TopicDislikedEvent, TopicLikeDislikRemovedEvent, TopicLikeRemvedEvent, TopicLikedEvent } from './voting-module.event';
+import { CategoryDisLikeRemvedEvent, CategoryDislikedEvent, CategoryLikeDislikRemovedEvent, CategoryLikeRemvedEvent, CategoryLikedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent, TopicDisLikeRemvedEvent, TopicDislikedEvent, TopicLikeDislikRemovedEvent, TopicLikeRemvedEvent, TopicLikedEvent } from './voting-module.event';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 // TODO servis should make only one call when starting application,
@@ -75,6 +75,13 @@ export class VotingQueryService implements AbstractVotingQueryService {
     this.eventBus.listen(TopicDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.TOPIC); });
     this.eventBus.listen(TopicDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.TOPIC); });
     this.eventBus.listen(TopicLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.TOPIC); });
+
+    
+    this.eventBus.listen(CategoryLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.CATEGORY); });
+    this.eventBus.listen(CategoryLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.CATEGORY); });
+    this.eventBus.listen(CategoryDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.CATEGORY); });
+    this.eventBus.listen(CategoryDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.CATEGORY); });
+    this.eventBus.listen(CategoryLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.CATEGORY); });
 
     this.authenticationService.userId$().pipe(takeUntilDestroyed()).subscribe({
       next: data => {

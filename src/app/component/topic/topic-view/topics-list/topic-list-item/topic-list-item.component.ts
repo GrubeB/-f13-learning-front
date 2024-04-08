@@ -45,27 +45,29 @@ export class TopicListItemComponent implements OnInit {
     this.getVote();
   }
 
-  getVote() {
-    this.logger.debug(TopicListItemComponent.name, " getVote()");
-    this.votingQueryService.get(this.topic.id, DomainObjectType.TOPIC).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: vote => {
-        this.logger.debug(TopicListItemComponent.name, " getVote() - refresh ", vote);
-        this.vote = vote;
-      },
-    });
+  // MODAL 
+  openTopicDetailsModal(topicId: string) {
+    this.logger.debug(TopicListItemComponent.name, " openTopicDetailsModal()");
+    this.eventBus.emit(ShowTopicDetailsModalEvent.name, new ShowTopicDetailsModalEvent(topicId));
   }
 
+  // CONTEXT MENU
   contextMenuVisable: boolean = false;
   toggleContextMenu() {
     this.logger.debug(TopicListItemComponent.name, " toggleContextMenu()");
     this.contextMenuVisable = !this.contextMenuVisable;
   }
 
-  openTopicDetailsModal(topicId: string) {
-    this.logger.debug(TopicListItemComponent.name, " openTopicDetailsModal()");
-    this.eventBus.emit(ShowTopicDetailsModalEvent.name, new ShowTopicDetailsModalEvent(topicId));
-  }
   // VOTING
+  getVote() {
+    this.logger.debug(TopicListItemComponent.name, " getVote()");
+    this.votingQueryService.get(this.topic.id, DomainObjectType.TOPIC).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: vote => {
+        this.vote = vote;
+      },
+    });
+  }
+
   like(id: string) {
     this.logger.debug(TopicListItemComponent.name, " like()");
     this.votingService.createLike(id).pipe(first()).subscribe({
