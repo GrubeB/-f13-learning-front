@@ -32,7 +32,7 @@ import { first } from 'rxjs';
   styleUrl: './topic-list-item.component.scss'
 })
 export class TopicListItemComponent implements OnInit {
-  private destroyRef = inject(DestroyRef);
+  destroyRef = inject(DestroyRef);
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
   votingService = inject(TopicVotingService);
@@ -70,20 +70,10 @@ export class TopicListItemComponent implements OnInit {
 
   like(id: string) {
     this.logger.debug(TopicListItemComponent.name, " like()");
-    this.votingService.createLike(id).pipe(first()).subscribe({
-      next: res => {
-        this.logger.debug(TopicListItemComponent.name, " User give like ");
-        this.eventBus.emit(TopicLikedEvent.name, new TopicLikedEvent(id));
-      }
-    });
+    this.votingService.createLike(id)
   }
   removeLike(id: string) {
     this.logger.debug(TopicListItemComponent.name, " removeLike()");
-    this.votingService.deleteLikeAndDislike(id).pipe(first()).subscribe({
-      next: res => {
-        this.logger.debug(TopicListItemComponent.name, " User removed like ");
-        this.eventBus.emit(TopicLikeRemvedEvent.name, new TopicLikeRemvedEvent(id));
-      }
-    });
+    this.votingService.deleteLikeAndDislike(id);
   }
 }

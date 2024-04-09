@@ -1,0 +1,9 @@
+<div class="container-fluid d-flex flex-column">
+    <!-- <div class="d-flex flex-row justify-content-end">
+        <topic-filter [items]="topics" (outputItmes)="filtredTopics = $event"/>
+    </div> -->
+    <div class="row row-cols-4">
+        <!-- <group-list-item *ngFor="let group of filtredGroups" [group]="group"/> -->
+        <group-list-item *ngFor="let group of groups" [group]="group"/>
+    </div>
+</div>

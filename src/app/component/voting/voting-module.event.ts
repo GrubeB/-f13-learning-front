@@ -4,7 +4,19 @@ export class ReferenceLikedEvent {
         this.id = id;
     }
 }
+export class ReferenceLikeRemvedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
 export class ReferenceDislikedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class ReferenceDisLikeRemvedEvent {
     id!: string;
     constructor(id: string) {
         this.id = id;
@@ -23,7 +35,19 @@ export class CommentLikedEvent {
         this.id = id;
     }
 }
+export class CommentLikeRemvedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
 export class CommentDislikedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class CommentDisLikeRemvedEvent {
     id!: string;
     constructor(id: string) {
         this.id = id;

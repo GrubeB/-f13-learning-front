@@ -56,23 +56,4 @@ export class CategoriesListItemComponent implements OnInit {
       },
     });
   }
-
-  like(id: string) {
-    this.logger.debug(CategoriesListItemComponent.name, " like()");
-    this.votingService.createLike(id).pipe(first()).subscribe({
-      next: res => {
-        this.logger.debug(CategoriesListItemComponent.name, " User give like ");
-        this.eventBus.emit(CategoryLikedEvent.name, new CategoryLikedEvent(id));
-      }
-    });
-  }
-  removeLike(id: string) {
-    this.logger.debug(CategoriesListItemComponent.name, " removeLike()");
-    this.votingService.deleteLikeAndDislike(id).pipe(first()).subscribe({
-      next: res => {
-        this.logger.debug(CategoriesListItemComponent.name, " User removed like ");
-        this.eventBus.emit(CategoryLikeRemvedEvent.name, new CategoryLikeRemvedEvent(id));
-      }
-    });
-  }
 }

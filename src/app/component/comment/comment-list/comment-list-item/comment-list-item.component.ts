@@ -38,35 +38,6 @@ export class CommentListItemComponent {
     this.logger.debug(CommentListItemComponent.name, "emitCreateCommentReplayEvent");
     this.eventBus.emit(CreateCommentReplayEvent.name, new CreateCommentReplayEvent(this.comment.id));
   }
-
-  like(id: string) {
-    this.logger.debug(CommentListItemComponent.name, " like()");
-    this.votingService.createLike(id).subscribe({
-      next: res => {
-        this.logger.debug(CommentListItemComponent.name, " User give like ");
-        this.eventBus.emit(CommentLikedEvent.name, new CommentLikedEvent(id));
-      }
-    });
-  }
-
-  dislike(id: string) {
-    this.logger.debug(CommentListItemComponent.name, " dislike()");
-    this.votingService.createDislike(id).subscribe({
-      next: res => {
-        this.logger.debug(CommentListItemComponent.name, " User give dislike ");
-        this.eventBus.emit(CommentDislikedEvent.name, new CommentDislikedEvent(id));
-      }
-    });
-  }
-  removeLikeDislike(id: string) {
-    this.logger.debug(CommentListItemComponent.name, " removeLikeDislike()");
-    this.votingService.deleteLikeAndDislike(id).subscribe({
-      next: res => {
-        this.logger.debug(CommentListItemComponent.name, " User removed like/dislike ");
-        this.eventBus.emit(CommentLikeDislikRemovedEvent.name, new CommentLikeDislikRemovedEvent(id));
-      }
-    });
-  }
   contextMenuVisable: boolean = false;
   toggleContextMenu() {
     this.logger.debug(CommentListItemComponent.name, " toggleContextMenu()");

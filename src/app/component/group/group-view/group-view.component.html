@@ -1,0 +1,14 @@
+<div class="view-container container-xl">
+    <div  class="view-content">
+        <div class="container-fluid p-2">
+            <div class="d-flex flex-row gap-3">
+                <h1>Group List</h1>
+                <button (click)="showTopicForm();" class="app-btn-icon s32">
+                    <i class="bi bi-plus"></i>
+                </button>
+            </div>
+            <!-- <topic-form /> -->
+            <group-list [groups]="groups"/>
+        </div>
+    </div>
+</div>

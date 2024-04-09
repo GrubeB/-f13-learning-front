@@ -15,7 +15,7 @@
         <p class="card-text">{{category.description}}</p>
     </div>
     <div class="card-footer d-flex flex-row justify-content-around pt-3">
-        <simple-liking [vote]="vote" (like)="like(category.id)" (removeLike)="removeLike(category.id)" />
+        <simple-liking [vote]="vote" (like)="votingService.createLike(category.id)" (removeLike)="votingService.deleteLikeAndDislike(category.id)" />
         <button  class="app-btn-icon s24" routerLink="/categories/{{category.id}}">
             <i class="bi bi-box-arrow-up-right"></i>
         </button>

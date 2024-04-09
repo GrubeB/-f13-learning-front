@@ -20,17 +20,17 @@
 
         <div class="d-flex flex-row gap-1">
             <button class="app-btn-icon"
-                (click)="like(comment.id)"
+                (click)="votingService.createLike(comment.id)"
             >
                 <i class="bi bi-chevron-double-up"></i>
             </button>
             <button class="app-btn-icon"
-                (click)="removeLikeDislike(comment.id)"
+                (click)="votingService.deleteLikeAndDislike(comment.id)"
             >
                 {{ comment.voting.likesNumber - comment.voting.dislikesNumber }}
             </button>
             <button class="app-btn-icon"
-                (click)="dislike(comment.id)"
+                (click)="votingService.createDislike(comment.id)"
             >
                 <i class="bi bi-chevron-double-down"></i>
             </button>

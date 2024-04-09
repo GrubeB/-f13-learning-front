@@ -1,116 +1,74 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError, switchMap } from 'rxjs/operators';
-import { errorHandle } from '../../service/service-support';
+import { HttpClient } from '@angular/common/http';
+import { first } from 'rxjs/operators';
 import { AbstractVotingService } from './abstract-voting.service';
 import { AuthenticationService } from '../../auth/authentication.service';
+import { NGXLogger } from 'ngx-logger';
+import { EventBusService } from '../../service/event-bus.service';
+import { ReferenceDisLikeRemvedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikeRemvedEvent, ReferenceLikedEvent } from './voting-module.event';
 
 @Injectable()
 export class ReferenceVotingService extends AbstractVotingService {
-  http: HttpClient = inject(HttpClient);
-  authenticationService = inject(AuthenticationService);
+  _http: HttpClient = inject(HttpClient);
+  _authenticationService = inject(AuthenticationService);
+  logger = inject(NGXLogger);
+  eventBus = inject(EventBusService);
 
   resourceName: string = "references";
   resourcePath: string = "/api/v1/" + this.resourceName;
-  url: string = "http://localhost:9006" + this.resourcePath;
-  
-  createLike(id: string): Observable<HttpEvent<any>> {
-    return this.authenticationService.userId$().pipe(switchMap(
-      userId => {
-        if (userId == null) {
-          return throwError(() => Error('userId jest null'));
-        }
-        return this.http.request<any>("POST",
-          this.url + "/" + id + "/likes/" + userId,
-          {
-            headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-            }),
-            observe: 'body',
-            responseType: "json",
-          }
-        ).pipe(retry(1), catchError(errorHandle))
+  _url: string = "http://localhost:9006" + this.resourcePath;
+
+  createLike(id: string): void {
+    this.makeCreateLike(id).pipe(first()).subscribe({
+      next: res => {
+        this.logger.info(ReferenceVotingService.name, "User give like");
+        this.eventBus.emit(ReferenceLikedEvent.name, new ReferenceLikedEvent(id));
       }
-    ));
+    });
   }
 
-  deleteLike(id: string): Observable<HttpEvent<any>> {
-    return this.authenticationService.userId$().pipe(switchMap(
-      userId => {
-        if (userId == null) {
-          return throwError(() => Error('userId jest null'));
-        }
-        return this.http.request<any>("DELETE",
-          this.url + "/" + id + "/likes/" + userId,
-          {
-            headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-            }),
-            observe: 'body',
-            responseType: "json",
-          }
-        ).pipe(retry(1), catchError(errorHandle));
+  deleteLike(id: string): void {
+    this.makeDeleteLike(id).pipe(first()).subscribe({
+      next: res => {
+        this.logger.info(ReferenceVotingService.name, " User removed like");
+        this.eventBus.emit(ReferenceLikeRemvedEvent.name, new ReferenceLikeRemvedEvent(id));
       }
-    ));
+    });
   }
 
-  createDislike(id: string): Observable<HttpEvent<any>> {
-    return this.authenticationService.userId$().pipe(switchMap(
-      userId => {
-        if (userId == null) {
-          return throwError(() => Error('userId jest null'));
-        }
-        return this.http.request<any>("POST",
-          this.url + "/" + id + "/dislikes/" + userId,
-          {
-            headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-            }),
-          }
-        ).pipe(retry(1), catchError(errorHandle));
+  createDislike(id: string): void {
+    this.makeCreateDislike(id).pipe(first()).subscribe({
+      next: res => {
+        this.logger.info(ReferenceVotingService.name, " User give dislike");
+        this.eventBus.emit(ReferenceDislikedEvent.name, new ReferenceDislikedEvent(id));
       }
-    ));
+    });
   }
 
-  deleteDislike(id: string): Observable<HttpEvent<any>> {
-    return this.authenticationService.userId$().pipe(switchMap(
-      userId => {
-        if (userId == null) {
-          return throwError(() => Error('userId jest null'));
-        }
-        return this.http.request<any>("DELETE",
-          this.url + "/" + id + "/dislikes/" + userId,
-          {
-            headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-            }),
-            observe: 'body',
-            responseType: "json",
-          }
-        ).pipe(retry(1), catchError(errorHandle));
+  deleteDislike(id: string): void {
+    this.makeDeleteDislike(id).pipe(first()).subscribe({
+      next: res => {
+        this.logger.info(ReferenceVotingService.name, " User removed like");
+        this.eventBus.emit(ReferenceDisLikeRemvedEvent.name, new ReferenceDisLikeRemvedEvent(id));
       }
-    ));
+    });
   }
-  
-  deleteLikeAndDislike(id: string): Observable<HttpEvent<any>> {
-    return this.authenticationService.userId$().pipe(switchMap(
-      userId => {
-        if (userId == null) {
-          return throwError(() => Error('userId jest null'));
-        }
-        return this.http.request<any>("DELETE",
-          this.url + "/" + id + "/likes-dislikes/" + userId,
-          {
-            headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-            }),
-            observe: 'body',
-            responseType: "json",
-          }
-        ).pipe(retry(1), catchError(errorHandle));
-      }
-    ));
 
+  deleteLikeAndDislike(id: string): void {
+    this.makeDeleteLikeAndDislike(id).pipe(first()).subscribe({
+      next: res => {
+        this.logger.info(ReferenceVotingService.name, " User removed like/dislike");
+        this.eventBus.emit(ReferenceLikeDislikRemovedEvent.name, new ReferenceLikeDislikRemovedEvent(id));
+      }
+    });
+  }
+  authenticationService(): AuthenticationService {
+    return this._authenticationService;
+  }
+  http(): HttpClient {
+    return this._http;
+  }
+  url(): string {
+    return this._url;
   }
 }

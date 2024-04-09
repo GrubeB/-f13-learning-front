@@ -38,33 +38,4 @@ export class ReferenceItemComponent {
     this.logger.debug(ReferenceItemComponent.name, " openReference()");
     window.open(this.reference.link, '_blank');
   }
-
-  like(referenceId: string) {
-    this.logger.debug(ReferenceItemComponent.name, " like()");
-    this.votingService.createLike(referenceId).subscribe({
-      next: res => {
-        this.logger.debug(ReferenceItemComponent.name, " User give like ");
-        this.eventBus.emit(ReferenceLikedEvent.name, new ReferenceLikedEvent(referenceId));
-      }
-    });
-  }
-
-  dislike(referenceId: string) {
-    this.logger.debug(ReferenceItemComponent.name, " dislike()");
-    this.votingService.createDislike(referenceId).subscribe({
-      next: res => {
-        this.logger.debug(ReferenceItemComponent.name, " User give dislike ");
-        this.eventBus.emit(ReferenceDislikedEvent.name, new ReferenceDislikedEvent(referenceId));
-      }
-    });
-  }
-  removeLikeDislike(referenceId: string) {
-    this.logger.debug(ReferenceItemComponent.name, " removeLikeDislike()");
-    this.votingService.deleteLikeAndDislike(referenceId).subscribe({
-      next: res => {
-        this.logger.debug(ReferenceItemComponent.name, " User removed like/dislike ");
-        this.eventBus.emit(ReferenceLikeDislikRemovedEvent.name, new ReferenceLikeDislikRemovedEvent(referenceId));
-      }
-    });
-  }
 }
