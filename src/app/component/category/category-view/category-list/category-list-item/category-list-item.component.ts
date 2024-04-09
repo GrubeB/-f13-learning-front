@@ -50,7 +50,7 @@ export class CategoriesListItemComponent implements OnInit {
   // VOTING
   getVote() {
     this.logger.debug(CategoriesListItemComponent.name, " getVote()");
-    this.votingQueryService.get(this.category.id, DomainObjectType.CATEGORY).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.votingQueryService.get(DomainObjectType.CATEGORY, this.category.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: vote => {
         this.vote = vote;
       },

@@ -32,7 +32,6 @@ export class TopicViewComponent implements OnInit {
   logger = inject(NGXLogger);
   
   topics: Topic[] = [];
-  votes: Vote[] = [];
 
   constructor() {
     this.eventBus.listen([
@@ -46,11 +45,11 @@ export class TopicViewComponent implements OnInit {
     this.eventBus.listen(DeleteTopicEvent.name, (event: DeleteTopicEvent) => {
       this.topicService.delete(event.topicId).pipe(first()).subscribe({
         next: data => {
-          this.logger.debug(TopicViewComponent.name, "Deleted Topic ", event.topicId);
+          this.logger.debug(TopicViewComponent.name, " Deleted Topic ", event.topicId);
           this.eventBus.emit(TopicDeletedEvent.name, new TopicDeletedEvent(event.topicId));
         },
         error: e => {
-          this.logger.debug(TopicViewComponent.name, "Error occured while deleting topic ", e);
+          this.logger.debug(TopicViewComponent.name, " Error occured while deleting topic ", e);
         }
       })
     })
@@ -71,7 +70,7 @@ export class TopicViewComponent implements OnInit {
   }
   
   showTopicForm() {
-    this.logger.debug(TopicViewComponent.name, "toggleTopicForm()");
+    this.logger.debug(TopicViewComponent.name, " toggleTopicForm()");
     this.eventBus.emit(CreateTopicEvent.name, new CreateTopicEvent());
   }
 }

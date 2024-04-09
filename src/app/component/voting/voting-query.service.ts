@@ -1,7 +1,7 @@
 import { Inject, Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, ReplaySubject, concat, filter, first, flatMap, map, mergeMap, of, throwError } from 'rxjs';
-import { retry, catchError, switchMap, take, defaultIfEmpty } from 'rxjs/operators';
+import { retry, catchError, switchMap, take, defaultIfEmpty, toArray, tap } from 'rxjs/operators';
 import { Page } from '../../model/response.model';
 import { errorHandle } from '../../service/service-support';
 import { AbstractVotingQueryService } from './abstract-voting.service';
@@ -76,7 +76,7 @@ export class VotingQueryService implements AbstractVotingQueryService {
     this.eventBus.listen(TopicDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.TOPIC); });
     this.eventBus.listen(TopicLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.TOPIC); });
 
-    
+
     this.eventBus.listen(CategoryLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.CATEGORY); });
     this.eventBus.listen(CategoryLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.CATEGORY); });
     this.eventBus.listen(CategoryDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.CATEGORY); });
@@ -116,12 +116,18 @@ export class VotingQueryService implements AbstractVotingQueryService {
   getAllByUser(): Observable<Vote[]> {
     return this.cache$;
   }
-
-  get(domainObjectId: string, domainObjectType: DomainObjectType): Observable<Vote | undefined> {
+  getByDomainType(domainObjectType: DomainObjectType): Observable<Vote[]> {
+    this.logger.info(VotingQueryService.name, " getByDomainType()");
+    return this.getAllByUser().pipe(
+      map(arr => arr.filter(e => e.domainObjectType.toString() == DomainObjectType[domainObjectType])),
+    );
+  }
+  get(domainObjectType: DomainObjectType, domainObjectId: string): Observable<Vote | undefined> {
     this.logger.info(VotingQueryService.name, " get()");
     return this.getAllByUser().pipe(
       mergeMap(array => array),
-      filter(element => element.domainObject === domainObjectId && element.domainObjectType.toString() === DomainObjectType[domainObjectType]),
+      filter(element => element.domainObjectType.toString() == DomainObjectType[domainObjectType]),
+      filter(element => element.domainObject === domainObjectId),
     );
   }
 }

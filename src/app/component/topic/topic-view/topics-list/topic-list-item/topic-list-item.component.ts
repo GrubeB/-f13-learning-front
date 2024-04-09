@@ -61,7 +61,7 @@ export class TopicListItemComponent implements OnInit {
   // VOTING
   getVote() {
     this.logger.debug(TopicListItemComponent.name, " getVote()");
-    this.votingQueryService.get(this.topic.id, DomainObjectType.TOPIC).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.votingQueryService.get(DomainObjectType.TOPIC, this.topic.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: vote => {
         this.vote = vote;
       },
