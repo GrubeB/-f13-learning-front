@@ -1,0 +1,16 @@
+<div class="d-flex flex-row gap-1">
+    <div clas="d-flex" style="width: 16em;">
+        <select class="form-select" (change)="changeFilter($event)">
+            <option value="0" selected>Filter by</option>
+            <option value="0">None(default)</option>
+            <option value="1">By liked categories</option>
+        </select>
+    </div>
+    <div clas="d-flex" style="width: 16em;">
+        <select class="form-select" (change)="changeSorter($event)">
+            <option value="0" selected>Sorted by</option>
+            <option value="0">Highest score(default)</option>
+            <option value="1">Created date(newest first)</option>
+        </select>
+    </div>
+</div>

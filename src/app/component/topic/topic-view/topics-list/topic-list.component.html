@@ -1,5 +1,8 @@
 <div class="container-fluid d-flex flex-column">
+    <div class="d-flex flex-row justify-content-end">
+        <topic-filter [items]="topics" (outputItmes)="filtredTopics = $event"/>
+    </div>
     <div class="row row-cols-4">
-        <topic-list-item *ngFor="let topic of topics" [topic]="topic"/>
+        <topic-list-item *ngFor="let topic of filtredTopics" [topic]="topic"/>
     </div>
 </div>

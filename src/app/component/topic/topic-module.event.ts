@@ -1,3 +1,6 @@
+import { Filter } from "../../../shared/filter/filter.model";
+import { Topic } from "./topic.model";
+
 // EVENTS
 export class TopicCreatedEvent {
     topicId!: string;
@@ -19,7 +22,7 @@ export class TopicDeletedEvent {
 }
 
 // COMMANDS
-export class CreateTopicEvent{
+export class CreateTopicEvent {
 }
 export class UpdateTopicEvent {
     topicId!: string;
@@ -50,5 +53,11 @@ export class TopicDetailsFilterChangedEvent {
     constructor(sorterIndex: number, filterIndex: number) {
         this.sorterIndex = sorterIndex;
         this.filterIndex = filterIndex;
+    }
+}
+export class TopicFilterChangedEvent {
+    filter!: Filter<Topic>;
+    constructor(filter: Filter<Topic>) {
+        this.filter = filter;
     }
 }

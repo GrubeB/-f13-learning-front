@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Reference } from '../../reference.model';
 import { EventBusService } from '../../../../service/event-bus.service';
 import { TopicDetailsFilterChangedEvent } from '../../../topic/topic-module.event';
@@ -21,12 +21,9 @@ export const sorters = [
   styleUrl: './reference-filter.component.scss'
 })
 export class ReferenceFilterComponent {
+  eventBus = inject(EventBusService);
   filter: string = "0";
   sorter: string = "0";
-
-  constructor(
-    private eventBus: EventBusService
-  ) { }
 
   changeSorter(event: any) {
     this.sorter = event.target.value;

@@ -1,10 +1,7 @@
 import { CommonModule, DatePipe, Location } from '@angular/common';
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs';
 import { ReferenceItemComponent } from './reference-item/reference-item.component';
 import { EventBusService } from '../../../service/event-bus.service';
-import { ReferenceCreateFormComponent } from '../reference-form/reference-form.component';
 import { NGXLogger } from 'ngx-logger';
 import { CreateReferenceEvent } from '../../reference/reference-module.event';
 import { Reference } from '../reference.model';
@@ -30,13 +27,6 @@ export class ReferenceListComponent {
 
   @Input() references!: Reference[];
 
-  filtredReferences() {
-    return this.references.filter(this.activeFilter)?.sort(this.activeSorter)
-  }
-
-  activeFilter: any = filters[0];
-  activeSorter: any = sorters[0];
-  
   constructor(){
     this.eventBus.listen(TopicDetailsFilterChangedEvent.name, (e: TopicDetailsFilterChangedEvent) => {
       this.activeFilter = filters[e.filterIndex];
@@ -47,5 +37,12 @@ export class ReferenceListComponent {
   emitCreateReferenceEvent() {
     this.logger.debug(ReferenceListComponent.name, "emitCreateReferenceEvent()");
     this.eventBus.emit(CreateReferenceEvent.name, new CreateReferenceEvent());
+  }
+
+  // FILTER
+  activeFilter: any = filters[0];
+  activeSorter: any = sorters[0];
+  filtredReferences() {
+    return this.references.filter(this.activeFilter)?.sort(this.activeSorter)
   }
 }
