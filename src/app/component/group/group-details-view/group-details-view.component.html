@@ -1,0 +1,11 @@
+<div class="view-container container-xl">
+    <div class="view-button-back">
+        <button class="app-btn-icon s32" (click)="goBack()">
+            <i class="bi bi-arrow-bar-left"></i>
+        </button>
+    </div>
+    
+    <div *ngIf="groupId" class="view-content">
+        <group-details [groupId]="groupId" />
+    </div>
+</div>

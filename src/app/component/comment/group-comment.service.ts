@@ -9,16 +9,16 @@ import { AbstractCommentService } from './abstract-comment.service';
 import { AuthenticationService } from '../../auth/authentication.service';
 
 @Injectable()
-export class TopicCommentService extends AbstractCommentService {
+export class GroupCommentService extends AbstractCommentService {
   http: HttpClient = inject(HttpClient);
 
-  resourceName: string = "comments";
-  resourcePath: string = "/api/v1/topics/:topicId/" + this.resourceName;
+  resourceName: string = "groups";
+  resourcePath: string = "/api/v1/groups/:groupId/" + this.resourceName;
   url: string = "http://localhost:9006" + this.resourcePath;
 
-  create(topicId: string, data: CreateCommentCommand): Observable<Reference> {
+  create(groupId: string, data: CreateCommentCommand): Observable<Reference> {
     return this.http.request<Reference>("POST",
-      this.url.replace(":topicId", topicId),
+      this.url.replace(":groupId", groupId),
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -29,9 +29,9 @@ export class TopicCommentService extends AbstractCommentService {
       }
     ).pipe(catchError(errorHandle));
   }
-  createRepley(topicId: string, parentCommentId: string, data: CreateCommentCommand): Observable<Reference> {
+  createRepley(groupId: string, parentCommentId: string, data: CreateCommentCommand): Observable<Reference> {
     return this.http.request<Reference>("POST",
-      this.url.replace(":topicId", topicId) + "/" + parentCommentId + "/comments",
+      this.url.replace(":groupId", groupId) + "/" + parentCommentId + "/comments",
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -43,9 +43,9 @@ export class TopicCommentService extends AbstractCommentService {
     ).pipe(catchError(errorHandle));
   }
 
-  update(topicId: string, data: UpdateCommentCommand): Observable<HttpEvent<any>> {
+  update(groupId: string, data: UpdateCommentCommand): Observable<HttpEvent<any>> {
     return this.http.request<any>("PUT",
-      this.url.replace(":topicId", topicId) + '/' + data.commentId,
+      this.url.replace(":groupId", groupId) + '/' + data.commentId,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -57,9 +57,9 @@ export class TopicCommentService extends AbstractCommentService {
     ).pipe(retry(1), catchError(errorHandle));
   }
 
-  delete(topicId: string, id: string): Observable<HttpEvent<any>> {
+  delete(groupId: string, id: string): Observable<HttpEvent<any>> {
     return this.http.request<any>("DELETE",
-    this.url.replace(":topicId", topicId) + '/' + id,
+    this.url.replace(":groupId", groupId) + '/' + id,
     ).pipe(retry(1), catchError(errorHandle));
   }
 }

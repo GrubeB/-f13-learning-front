@@ -32,17 +32,17 @@ export class TopicListItemContextMenuComponent {
   }
   
   
-  emitDeleteTopicEvent() {
+  emitDeleteEvent() {
     if (this.modelId) {
-      this.logger.debug(TopicListItemContextMenuComponent.name, " emitDeleteTopicEvent()");
+      this.logger.debug(TopicListItemContextMenuComponent.name, " emitDeleteEvent()");
       this.eventBus.emit(DeleteTopicEvent.name, new DeleteTopicEvent(this.modelId));
       this.hideMenu();
     }
   }
   
-  emitUpdateTopicEvent() {
+  emitUpdateEvent() {
     if (this.modelId) {
-      this.logger.debug(TopicListItemContextMenuComponent.name, " emitUpdateTopicEvent()");
+      this.logger.debug(TopicListItemContextMenuComponent.name, " emitUpdateEvent()");
       this.eventBus.emit(UpdateTopicEvent.name, new UpdateTopicEvent(this.modelId));
       this.hideMenu();
     }

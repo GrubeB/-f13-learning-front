@@ -22,7 +22,7 @@
 
 
     <div class="mt-4">
-        <comment-form [commentService]="topicCommentService" [topicId] = "topic.id"/>
+        <comment-form [commentService]="commentService" [topicId] = "topic.id"/>
     </div>
     <div class="mt-4">
         <comment-list [comments]="topic.comment.comments"/>

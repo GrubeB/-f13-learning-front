@@ -39,18 +39,18 @@ import { UserProfile2Component } from '../../user/user-profile-2/user-profile-2.
   styleUrl: './topic-details.component.scss'
 })
 export class TopicDetailsComponent implements OnInit {
-  topicService = inject(TopicService);
-  topicQueryService = inject(TopicQueryService);
   eventBus = inject(EventBusService);
   logger = inject(NGXLogger);
-  topicCommentService = inject(TopicCommentService);
+  service = inject(TopicService);
+  queryService = inject(TopicQueryService);
+  commentService = inject(TopicCommentService);
 
   @Input() topicId!: string;
   topic?: Topic;
 
   constructor() {
     this.eventBus.listen(DeleteCommentEvent.name, (event: DeleteCommentEvent) => {
-      this.topicCommentService.delete(this.topicId, event.commentId).pipe(first()).subscribe({
+      this.commentService.delete(this.topicId, event.commentId).pipe(first()).subscribe({
         next: data => {
           this.logger.debug(TopicDetailsComponent.name, "Deleted comment ", event.commentId);
           this.eventBus.emit(CommentDeletedEvent.name, new CommentDeletedEvent(event.commentId));
@@ -88,7 +88,7 @@ export class TopicDetailsComponent implements OnInit {
 
   getTopic(id: string): void {
     this.logger.debug(TopicDetailsComponent.name, "getTopic()");
-    this.topicQueryService.get(id).pipe(take(1)).subscribe({
+    this.queryService.get(id).pipe(take(1)).subscribe({
       next: data => {
         this.topic = data;
         this.logger.debug(TopicDetailsComponent.name, "topic: ", this.topic);
@@ -99,8 +99,6 @@ export class TopicDetailsComponent implements OnInit {
   }
   refreshTopic() {
     this.logger.debug(TopicDetailsComponent.name, "refreshTopic()");
-    if (this.topic?.id) {
-      this.getTopic(this.topic.id);
-    }
+    this.getTopic(this.topicId);
   }
 }

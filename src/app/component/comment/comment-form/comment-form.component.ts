@@ -7,7 +7,7 @@ import { Comment, CreateCommentCommand, UpdateCommentCommand } from '../comment.
 import { CommentCreatedEvent, CommentUpdatedEvent, CreateCommentEvent, CreateCommentReplayEvent, UpdateCommentEvent } from '../comment-module.event';
 import { CommentQueryService } from '../comment-query.service';
 import { first, take } from 'rxjs';
-import { CommentService } from '../comment.service';
+import { AbstractCommentService } from '../abstract-comment.service';
 import { AuthenticationService } from '../../../auth/authentication.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class CommentFormComponent {
   commentQueryService = inject(CommentQueryService);
   authenticationService = inject(AuthenticationService);
 
-  @Input() commentService!: CommentService;
+  @Input() commentService!: AbstractCommentService;
   @Input() topicId!: string;
   parentCommentId?: string;
 

@@ -9,7 +9,7 @@ import { DomainObjectType, Vote, VoteType } from './vote.model';
 import { AuthenticationService } from '../../auth/authentication.service';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../service/event-bus.service';
-import { CategoryDisLikeRemvedEvent, CategoryDislikedEvent, CategoryLikeDislikRemovedEvent, CategoryLikeRemvedEvent, CategoryLikedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent, TopicDisLikeRemvedEvent, TopicDislikedEvent, TopicLikeDislikRemovedEvent, TopicLikeRemvedEvent, TopicLikedEvent } from './voting-module.event';
+import { CategoryDisLikeRemvedEvent, CategoryDislikedEvent, CategoryLikeDislikRemovedEvent, CategoryLikeRemvedEvent, CategoryLikedEvent, CommentDisLikeRemvedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikeRemvedEvent, CommentLikedEvent, GroupDisLikeRemvedEvent, GroupDislikedEvent, GroupLikeDislikRemovedEvent, GroupLikeRemvedEvent, GroupLikedEvent, ReferenceDisLikeRemvedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikeRemvedEvent, ReferenceLikedEvent, TopicDisLikeRemvedEvent, TopicDislikedEvent, TopicLikeDislikRemovedEvent, TopicLikeRemvedEvent, TopicLikedEvent } from './voting-module.event';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 // TODO servis should make only one call when starting application,
@@ -63,11 +63,15 @@ export class VotingQueryService implements AbstractVotingQueryService {
 
   constructor() {
     this.eventBus.listen(ReferenceLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.REFERENCE); });
+    this.eventBus.listen(ReferenceLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.REFERENCE); });
     this.eventBus.listen(ReferenceDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.REFERENCE); });
+    this.eventBus.listen(ReferenceDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.REFERENCE); });
     this.eventBus.listen(ReferenceLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.REFERENCE); });
 
     this.eventBus.listen(CommentLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.COMMENT); });
+    this.eventBus.listen(CommentLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.COMMENT); });
     this.eventBus.listen(CommentDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.COMMENT); });
+    this.eventBus.listen(CommentDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.COMMENT); });
     this.eventBus.listen(CommentLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.COMMENT); });
 
     this.eventBus.listen(TopicLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.TOPIC); });
@@ -76,13 +80,18 @@ export class VotingQueryService implements AbstractVotingQueryService {
     this.eventBus.listen(TopicDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.TOPIC); });
     this.eventBus.listen(TopicLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.TOPIC); });
 
-
     this.eventBus.listen(CategoryLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.CATEGORY); });
     this.eventBus.listen(CategoryLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.CATEGORY); });
     this.eventBus.listen(CategoryDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.CATEGORY); });
     this.eventBus.listen(CategoryDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.CATEGORY); });
     this.eventBus.listen(CategoryLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.CATEGORY); });
 
+    this.eventBus.listen(GroupLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.GROUP); });
+    this.eventBus.listen(GroupLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.GROUP); });
+    this.eventBus.listen(GroupDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.GROUP); });
+    this.eventBus.listen(GroupDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.GROUP); });
+    this.eventBus.listen(GroupLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.GROUP); });
+    
     this.authenticationService.userId$().pipe(takeUntilDestroyed()).subscribe({
       next: data => {
         if (data != null) {

@@ -1,6 +1,8 @@
 import { Category } from "../category/category.model";
+import { CommentContainer } from "../comment/comment.model";
 import { Reference } from "../reference/reference.model";
 import { Topic } from "../topic/topic.model";
+import { Voting } from "../voting/vote.model";
 
 export class Group {
     id!: string;
@@ -12,8 +14,8 @@ export class Group {
     
     topics!: Topic[];
     groups!: Group[];
-    // comment!: CommentContainer;
-    // voting!: Voting;
+    comment!: CommentContainer;
+    voting!: Voting;
     
     createdBy!: string;
     createdDate!: Date;

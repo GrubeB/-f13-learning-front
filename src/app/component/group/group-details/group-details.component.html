@@ -1,0 +1,32 @@
+<div *ngIf="group" class="container-xl d-flex flex-column">
+    <user-profile-2 [userId]="group.createdBy" [date]="group.createdDate"/>
+
+    <div class="mt-3">
+        <h1>{{group.name}}</h1>
+        <h3>{{group.content}}</h3>
+    </div>
+
+    <div class="mt-3">
+        <div class="d-flex flex-row flex-wrap justify-content-start">
+            <button *ngFor="let category of group.categories" class="btn-category">{{category.name}}</button>
+        </div>
+    </div>
+
+    <!-- <div class="mt-4">
+        <reference-form [topicId] = "topic.id"/>
+    </div> -->
+
+    <div class="mt-4">
+        <reference-list [references]="group.references"/>
+    </div>
+
+
+    <!-- <div class="mt-4">
+        <comment-form [commentService]="commentService" [topicId] = "group.id"/>
+    </div> -->
+
+    <!-- <div class="mt-4">
+        <comment-list [comments]="group.comment.comments"/>
+    </div> -->
+   
+</div>

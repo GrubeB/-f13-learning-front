@@ -121,3 +121,34 @@ export class CategoryLikeDislikRemovedEvent {
         this.id = id;
     }
 }
+// CATEGORY
+export class GroupLikedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class GroupLikeRemvedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class GroupDislikedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class GroupDisLikeRemvedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class GroupLikeDislikRemovedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}

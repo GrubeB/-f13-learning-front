@@ -5,6 +5,12 @@ import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../../service/event-bus.service';
 import { VotingQueryService } from '../../../voting/voting-query.service';
 import { Group } from '../../group.model';
+import { DomainObjectType, Vote } from '../../../voting/vote.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { GroupVotingService } from '../../../voting/group-voting.service';
+import { SimpleLikingComponent } from '../../../voting/simple-liking/simple-liking.component';
+import { GroupListItemContextMenuComponent } from './group-list-item-context-menu/group-list-item-context-menu.component';
+import { UserProfile2Component } from '../../../user/user-profile-2/user-profile-2.component';
 
 @Component({
   selector: 'group-list-item',
@@ -13,6 +19,9 @@ import { Group } from '../../group.model';
     CommonModule,
     RouterLink,
     DatePipe,
+    SimpleLikingComponent,
+    GroupListItemContextMenuComponent,
+    UserProfile2Component,
   ],
   templateUrl: './group-list-item.component.html',
   styleUrl: './group-list-item.component.scss'
@@ -21,14 +30,14 @@ export class GroupListItemComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
-  // votingService = inject(GroupVotingService);
+  votingService = inject(GroupVotingService);
   votingQueryService = inject(VotingQueryService);
 
   @Input() group!: Group;
-  // vote?: Vote;
+  vote?: Vote;
 
   ngOnInit(): void {
-    // this.getVote();
+    this.getVote();
   }
 
   // // MODAL 
@@ -44,33 +53,13 @@ export class GroupListItemComponent implements OnInit {
     this.contextMenuVisable = !this.contextMenuVisable;
   }
 
-  // // VOTING
-  // getVote() {
-  //   this.logger.debug(GroupListItemComponent.name, " getVote()");
-  //   this.votingQueryService.get(DomainObjectType.TOPIC, this.topic.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-  //     next: vote => {
-  //       this.vote = vote;
-  //     },
-  //   });
-  // }
-
-  // like(id: string) {
-  //   this.logger.debug(GroupListItemComponent.name, " like()");
-  //   this.votingService.createLike(id).pipe(first()).subscribe({
-  //     next: res => {
-  //       this.logger.debug(TopicListItemComponent.name, " User give like ");
-  //       this.eventBus.emit(TopicLikedEvent.name, new TopicLikedEvent(id));
-  //     }
-  //   });
-  // }
-  // removeLike(id: string) {
-  //   this.logger.debug(GroupListItemComponent.name, " removeLike()");
-  //   this.votingService.deleteLikeAndDislike(id).pipe(first()).subscribe({
-  //     next: res => {
-  //       this.logger.debug(GroupListItemComponent.name, " User removed like ");
-  //       this.eventBus.emit(TopicLikeRemvedEvent.name, new TopicLikeRemvedEvent(id));
-  //     }
-  //   });
-  // }
-
+  // VOTING
+  getVote() {
+    this.logger.debug(GroupListItemComponent.name, " getVote()");
+    this.votingQueryService.get(DomainObjectType.GROUP, this.group.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: vote => {
+        this.vote = vote;
+      },
+    });
+  }
 }

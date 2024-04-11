@@ -22,6 +22,10 @@ import { UserQueryService } from './component/user/user-query.service';
 import { TopicVotingService } from './component/voting/topic-voting.service';
 import { VotingQueryService } from './component/voting/voting-query.service';
 import { CategoryVotingService } from './component/voting/category-voting.service';
+import { GroupVotingService } from './component/voting/group-voting.service';
+import { GroupQueryService } from './component/group/group-query.service';
+import { GroupService } from './component/group/group.service';
+import { GroupCommentService } from './component/comment/group-comment.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -50,11 +54,17 @@ export const appConfig: ApplicationConfig = {
     
     { provide: CommentQueryService},
     { provide: TopicCommentService},
+    { provide: GroupCommentService},
 
+    { provide: GroupQueryService},
+    { provide: GroupService},
+
+    
     { provide: ReferenceVotingService},
     { provide: CommentVotingService},
     { provide: TopicVotingService},
     { provide: CategoryVotingService},
+    { provide: GroupVotingService},
     { provide: VotingQueryService},
     
     { provide: UserQueryService},

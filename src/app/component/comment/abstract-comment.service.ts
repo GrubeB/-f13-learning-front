@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Reference } from '../reference/reference.model';
 import { CreateCommentCommand, UpdateCommentCommand } from './comment.model';
 
-export abstract class CommentService {
+export abstract class AbstractCommentService {
 
   abstract create(topicId: string, data: CreateCommentCommand): Observable<Reference>;
 
