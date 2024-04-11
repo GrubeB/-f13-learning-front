@@ -1,14 +1,14 @@
 @import '/styles';
 
 .main-container {
-    background-color: $secondary;
-    color: $secondary-text;
+    background-color: $gray-10;
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
     .navbar {
         background-color: $secondary;
+        color: $secondary-text;
         border-bottom: 1px solid $secondary-light;
         .container-fluid{
             .navbar-brand{

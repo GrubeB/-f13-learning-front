@@ -45,9 +45,8 @@ body {
         }
     }
     .view-content {
-        background-color: $secondary-dark;
-        color: $secondary-dark-text;
-        border-radius: 2em;
+        background-color: $gray-00;
+        border-radius: 2px;
         padding: 1em 2em;
     }
 }
@@ -67,7 +66,7 @@ body {
         position: relative;
         background-color: $secondary;
         color: $secondary-text;
-        border-radius: 2em;
+        border-radius: 2px;
         min-height: 3em;
         padding: 1em 4em;
         .modal-button-close {

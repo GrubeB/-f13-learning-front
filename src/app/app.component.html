@@ -1,5 +1,5 @@
 <div class="main-container">
-  <nav class="navbar navbar-expand-lg p-2 m-2">
+  <nav class="navbar navbar-expand-lg p-2">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img [src]="'/assets/logo.png'" alt="logo" width="30" height="30" class="d-inline-block align-text-top">
@@ -23,14 +23,6 @@
         </ul>
   
         <div class="d-flex gap-3 ">
-          <div>
-            <form class="d-flex">
-              <input class="form-control me-2" style="height: 2em;" type="search" placeholder="Search" aria-label="Search">
-              <button 
-                class="btn app-btn-outline s32" type="submit"
-              >Search</button>
-            </form>
-          </div>
           <div class="d-flex justify-content-center">
             <div *ngIf="curentUser">
               <user-profile [userId]="curentUser.id"/>

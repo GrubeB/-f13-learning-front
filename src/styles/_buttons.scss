@@ -1,18 +1,22 @@
-// <button class="app-btn s32">
-//     Login
-// </button>
 button.app-btn {
     color: $primary-text;
     background:  $primary;
-    height: 2em;
+
+    height: 36px;
     width: auto;
-    padding: 0 .5em;
+
+    padding: 6px 12px;
     margin: auto 0;
+
     border: none;
-    border-radius: .25em;
-    opacity: 1;
-    line-height: 2em;
-    font-size: .5em;
+    border-radius: 2px;
+
+    font-size: 14px;
+    i {
+        display: inline-block;
+        font-size: 14px;
+        padding-right: 6px;
+    }
     &:hover {
         background:  $primary-dark;
         color:  $primary-dark-text;
@@ -21,152 +25,260 @@ button.app-btn {
         background:  $primary-dark;
         color:  $primary-dark-text;
     }
-    &.s24{
-        padding: 0 1em;
-        font-size: .75em;
-    }
-    &.s32 {
-        padding: 0 1em;
-        font-size: 1em;
-    }
 }
-
-// <button class="app-btn-outline s32">
-//     Login   
-// </button>
 button.app-btn-outline {
     color: $primary;
     background: none;
-    height: 2em;
+    
+    height: 36px;
     width: auto;
-    padding: 0 .5em;
+    
+    padding: 6px 12px;
     margin: auto 0;
-    border: 1px solid $primary;
-    border-radius: .25em;
-    opacity: 1;
-    line-height: 2em;
-    font-size: .5em;
-    &:hover {
-        background:  $primary-dark;
-        color:  $primary-dark-text;
-    }
-    &:focus {
-        background:  $primary-dark;
-        color:  $primary-dark-text;
-    }
-    &.s24{
-        padding: 0 1em;
-        font-size: .75em;
-    }
-    &.s32 {
-        padding: 0 1em;
-        font-size: 1em;
-    }
-}
 
-// <button class="app-btn-icon-text s32">
-//     <i class="bi bi-three-dots-vertical"></i>
-//     <p>Login</p>
-// </button>
-button.app-btn-icon-text {
-    color: $primary;
-    background: none;
-    height: 1em;
-    width: auto;
-    padding: .25em .5em;
-    margin: auto 0;
-    border-radius: .25em;
-    border: 1px solid $primary;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    opacity: .9;
+    border: 2px solid $primary;
+    border-radius: 2px;
+
+    font-size: 14px;
     i {
         display: inline-block;
-        font-size: .5em;
-        line-height: .5em;    
-    }
-    p {
-        display: inline-block;
-        line-height: .5em;
-        font-size: .5em;
-        margin: auto 0px auto .125em;
+        font-size: 14px;
+        padding-right: 6px;
     }
     &:hover {
         background:  $primary-dark;
         color:  $primary-dark-text;
-        opacity: 1;
+        border-color: $primary-dark;
     }
     &:focus {
         background:  $primary-dark;
         color:  $primary-dark-text;
-        opacity: 1;
-    }
-    &.s24{
-        height: 1.5em;
-        i {
-            font-size: .75em;
-            line-height: .75em;   
-        }
-        p {
-            line-height: .75em;
-            font-size: .75em;
-            margin: auto 0px auto .125em;
-        }
-    }
-    &.s32{
-        height: 2em;
-        i {
-            font-size: 1em;
-            line-height: 1em;     
-        }
-        p {
-            line-height: 1em;
-            font-size: 1em;
-            margin: auto 0px auto .125em;
-        }
+        border-color: $primary-dark;
     }
 }
-
-// <button class="app-btn-close s32"></button>
-button.app-btn-close {
+button.app-btn-secondary {
     color: $secondary-text;
-    background: none;
-    height: 1em;
-    width:  1em;
-    padding: 0 0 .125em .25em;
-    margin: auto 0;
-    border-radius: 50%;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    opacity: 0.5;
+    background:  $secondary;
 
-    font-size: 1em;
-    line-height: .75em;
+    height: 36px;
+    width: auto;
+
+    padding: 6px 12px;
+    margin: auto 0;
+
+    border: none;
+    border-radius: 2px;
+
+    font-size: 14px;
+    i {
+        display: inline-block;
+        font-size: 14px;
+        padding-right: 6px;
+    }
+    &:hover {
+        background:  $secondary-dark;
+        color:  $secondary-dark-text;
+    }
+    &:focus {
+        background:  $secondary-dark;
+        color:  $secondary-dark-text;
+    }
+}
+button.app-btn-secondary-outline {
+    color: $secondary;
+    background: none;
     
-    &:before {
-        content: "x";
+    height: 36px;
+    width: auto;
+    
+    padding: 6px 12px;
+    margin: auto 0;
+
+    border: 2px solid $secondary;
+    border-radius: 2px;
+
+    font-size: 14px;
+    i {
+        display: inline-block;
+        font-size: 14px;
+        padding-right: 6px;
     }
-    &:hover{
-        opacity: 0.7;
-        background-color: rgba(255, 255, 255, 0.1);
+    &:hover {
+        background:  $secondary-dark;
+        color:  $secondary-dark-text;
+        border-color: $secondary-dark;
     }
-    &:focus{
-        opacity: 1;
+    &:focus {
+        background:  $secondary-dark;
+        color:  $secondary-dark-text;
     }
-    &.s24 {
-        font-size: 1.5em;
+}
+button.app-btn-tertiary {
+    color: $primary-text;
+    background: none;
+    
+    height: 36px;
+    width: auto;
+    
+    padding: 6px 12px;
+    margin: auto 0;
+
+    border: none;
+    border-radius: 2px;
+
+    font-size: 14px;
+    i {
+        display: inline-block;
+        font-size: 14px;
+        padding-right: 6px;
     }
-    &.s32 {
-        font-size: 2em;
+    &:hover {
+        background:  $gray-200;
+    }
+    &:focus {
+        background:  $gray-200;
     }
 }
 
-// <button class="app-btn-image s32">
-//     <img [src]="'https://i.pinimg.com/originals/40/00/b7/4000b7b7caf046215794ccdef4a78630.png'"/>
-// </button>
+
+button.app-btn-icon {
+    color: $primary-text;
+    background:  $primary;
+
+    height: 36px;
+    width: auto;
+
+    padding: 6px 12px;
+    margin: auto 0;
+
+    border: none;
+    border-radius: 2px;
+
+    font-size: 14px;
+    i {
+        display: inline-block;
+        font-size: 14px;
+    }
+    &:hover {
+        background:  $primary-dark;
+        color:  $primary-dark-text;
+    }
+    &:focus {
+        background:  $primary-dark;
+        color:  $primary-dark-text;
+    }
+}
+button.app-btn-icon-outline{
+    color: $primary;
+    background: none;
+
+    height: 36px;
+    width: auto;
+
+    padding: 6px 12px;
+    margin: auto 0;
+
+    border: 2px solid $primary;
+    border-radius: 2px;
+
+    font-size: 14px;
+    i {
+        display: inline-block;
+        font-size: 14px;
+    }
+    &:hover {
+        background:  $primary-dark;
+        color:  $primary-dark-text;
+        border-color: $primary-dark;
+    }
+    &:focus {
+        background:  $primary-dark;
+        color:  $primary-dark-text;
+        border-color: $primary-dark;
+    }
+}
+button.app-btn-icon-secondary {
+    color: $secondary-text;
+    background:  $secondary;
+
+    height: 36px;
+    width: auto;
+
+    padding: 6px 12px;
+    margin: auto 0;
+
+    border: none;
+    border-radius: 2px;
+
+    font-size: 14px;
+    i {
+        display: inline-block;
+        font-size: 14px;
+    }
+    &:hover {
+        background:  $secondary-dark;
+        color:  $secondary-dark-text;
+    }
+    &:focus {
+        background:  $secondary-dark;
+        color:  $secondary-dark-text;
+    }
+}
+button.app-btn-icon-secondary-outline{
+    color: $secondary;
+    background: none;
+
+    height: 36px;
+    width: auto;
+
+    padding: 6px 12px;
+    margin: auto 0;
+
+    border: 2px solid $secondary;
+    border-radius: 2px;
+
+    font-size: 14px;
+    i {
+        display: inline-block;
+        font-size: 14px;
+    }
+    &:hover {
+        background:  $secondary-dark;
+        color:  $secondary-dark-text;
+        border-color: $secondary-dark;
+    }
+    &:focus {
+        background:  $secondary-dark;
+        color:  $secondary-dark-text;
+        border-color: $secondary-dark;
+    }
+}
+button.app-btn-icon-tertiary {
+    color: $primary-text;
+    background: none;
+
+    height: 36px;
+    width: auto;
+
+    padding: 6px 12px;
+    margin: auto 0;
+
+    border: none;
+    border-radius: 2px;
+
+    font-size: 14px;
+    i {
+        display: inline-block;
+        font-size: 14px;
+    }
+    &:hover {
+        background:  $gray-200;
+    }
+    &:focus {
+        background:  $gray-200;
+    }
+}
+
 button.app-btn-image {
     color: $secondary-text;
     background: none;
@@ -230,56 +342,6 @@ button.app-btn-image {
         img {  
             width: 64px;
             height: 64px;
-        }
-    }
-}
-
-// <button class="app-btn-icon s32">
-//     <i class="bi bi-plus"></i>
-// </button>
-button.app-btn-icon {
-    color: $secondary-text;
-    background: none;
-
-    height: 1em;
-    width:  1em;
-
-    padding: 0 0 .125em .25em;
-    margin: auto 0;
-
-    border-radius: 50%;
-    border: none;
-
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-
-    opacity: 0.5;
-
-    font-size: 1em;
-    line-height: 1em;
-
-    &:hover {
-        opacity: 0.7;
-    }
-    &:focus {
-        opacity: 1;
-    }
-    &.s24 {
-        width: 1.5em;
-        height: 1.5em;
-        i {
-            font-size: 1.5em;
-            line-height: 1.5em;
-        }
-    }
-    &.s32{
-        width: 2em;
-        height: 2em;
-        i {
-            font-size: 2em;
-            line-height: 2em;
         }
     }
 }
