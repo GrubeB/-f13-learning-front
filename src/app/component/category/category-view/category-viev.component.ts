@@ -9,6 +9,7 @@ import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../service/event-bus.service';
 import { CategoryCreatedEvent, CategoryDeletedEvent, CategoryUpdatedEvent, CreateCategoryEvent, DeleteCategoryEvent, EditCategoryEvent } from '../category-module.event';
 import { CategoryFormComponent } from '../category-form/category-form.component';
+import { BreadcrumbItem } from '../../../../shared/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'category-viev',
@@ -85,5 +86,5 @@ export class CategoryVievComponent implements OnInit {
       let index = this.tabs.indexOf(tabName);
       this.activeTab = this.tabs[index];
     }
-  }
+  };
 }

@@ -345,3 +345,32 @@ button.app-btn-image {
         }
     }
 }
+button.app-tab {
+    color: $primary-text;
+    background: none;
+    
+    height: 36px;
+    width: auto;
+    
+    padding: 6px 12px;
+    margin: auto 0;
+
+    border: none;
+    border-radius: 2px;
+
+    font-size: 14px;
+    i {
+        display: inline-block;
+        font-size: 14px;
+        padding-right: 6px;
+    }
+    &.active{
+        color: $primary;
+    }
+    &:hover {
+        background:  $gray-200;
+    }
+    &:focus {
+        background:  $gray-200;
+    }
+}
