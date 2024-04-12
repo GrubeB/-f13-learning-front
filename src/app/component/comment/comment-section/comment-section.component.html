@@ -23,6 +23,6 @@
 
     <div [hidden]="contentHidden" class="mt-2">
         <comment-form [hidden] = "activeTab != 'FORM'" [commentService]="commentService" [modelId]="modelId"/>
-        <comment-list [hidden] = "activeTab != 'LIST'" [comments]="comments"/>
+        <comment-list [hidden] = "activeTab != 'LIST'" [comments]="items"/>
     </div>
 </div>

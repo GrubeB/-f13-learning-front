@@ -81,13 +81,18 @@ export class TopicViewComponent implements OnInit {
   }
 
   // TABS
-  tabs = ['list', 'form'];
+  tabs = [Tabs.LIST, Tabs.FORM];
   activeTab = this.tabs[0];
   changeTab(tabName: string) {
     this.logger.debug(TopicViewComponent.name, "changeTab()");
-    if (this.tabs.includes(tabName)) {
-      let index = this.tabs.indexOf(tabName);
+    var tab : Tabs = Tabs[tabName as keyof typeof Tabs];
+    if (tab && this.tabs.includes(tab)) {
+      let index = this.tabs.indexOf(tab);
       this.activeTab = this.tabs[index];
     }
   };
+}
+enum Tabs {
+  LIST = "LIST",
+  FORM = "FORM",
 }

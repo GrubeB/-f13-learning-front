@@ -26,7 +26,7 @@ export class ReferenceSectionComponent {
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
   @Input() modelId!: string;
-  @Input() references!: Reference[];
+  @Input() items!: Reference[];
   @Input() referenceService!: AbstractReferenceService;
 
   constructor() {

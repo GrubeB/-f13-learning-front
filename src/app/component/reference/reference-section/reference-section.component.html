@@ -23,6 +23,6 @@
 
     <div [hidden]="contentHidden" class="mt-2">
         <reference-form [hidden] = "activeTab != 'FORM'" [referenceService]="referenceService" [modelId]="modelId"/>
-        <reference-list [hidden] = "activeTab != 'LIST'" [references]="references"/>
+        <reference-list [hidden] = "activeTab != 'LIST'" [references]="items"/>
     </div>
 </div>

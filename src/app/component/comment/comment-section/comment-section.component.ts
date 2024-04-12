@@ -25,7 +25,7 @@ export class CommentSectionComponent {
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
   @Input() modelId!: string;
-  @Input() comments!: Comment[];
+  @Input() items!: Comment[];
   @Input() commentService!: AbstractCommentService;
 
   constructor() {
