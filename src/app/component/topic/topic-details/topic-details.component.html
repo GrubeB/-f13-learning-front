@@ -1,31 +1,23 @@
-<div *ngIf="topic" class="container-xl d-flex flex-column">
-    <user-profile-2 [userId]="topic.createdBy" [date]="topic.createdDate"/>
+<div *ngIf="topic" class="container-xl d-flex flex-column ">
+    <div class="d-flex flex-column bg-gray-00 shadow-3 rounded-1 p-3">
+        <user-profile-2 [userId]="topic.createdBy" [date]="topic.createdDate"/>
 
-    <div class="mt-3">
-        <h1>{{topic.name}}</h1>
-        <h3>{{topic.content}}</h3>
-    </div>
-
-    <div class="mt-3">
-        <div class="d-flex flex-row flex-wrap justify-content-start">
-            <button *ngFor="let category of topic.categories" class="btn-category">{{category.name}}</button>
+        <div class="mt-3">
+            <h1>{{topic.name}}</h1>
+            <h3>{{topic.content}}</h3>
+        </div>
+    
+        <div class="mt-3">
+            <div class="d-flex flex-row flex-wrap justify-content-start">
+                <button *ngFor="let category of topic.categories" class="btn-category">{{category.name}}</button>
+            </div>
         </div>
     </div>
-
-    <div class="mt-4">
-        <reference-form [topicId] = "topic.id"/>
+    <div class="d-flex flex-column bg-gray-00 shadow-3 rounded-1 mt-2 p-2">
+        <reference-section [modelId]="topic.id" [referenceService]="referenceService" [references]="topic.reference.references"/>
     </div>
 
-    <div class="mt-4">
-        <reference-list [references]="topic.references ?? []"/>
+    <div class="d-flex flex-column bg-gray-00 shadow-3 rounded-1 mt-2 p-2">
+        <comment-section [modelId]="topic.id" [commentService]="commentService" [comments]="topic.comment.comments"/>
     </div>
-
-
-    <div class="mt-4">
-        <comment-form [commentService]="commentService" [topicId] = "topic.id"/>
-    </div>
-    <div class="mt-4">
-        <comment-list [comments]="topic.comment.comments"/>
-    </div>
-   
 </div>

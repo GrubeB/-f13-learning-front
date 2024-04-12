@@ -11,7 +11,7 @@ export class TopicReferenceService extends AbstractReferenceService {
   http: HttpClient = inject(HttpClient);
 
   resourceName: string = "references";
-  resourcePath: string = "/api/v1/topics/:modelId/" + this.resourceName;
+  resourcePath: string = "/api/v1/groups/:modelId/" + this.resourceName;
   url: string = "http://localhost:9006" + this.resourcePath;
 
   create(modelId: string, data: CreateReferenceCommand): Observable<Reference> {

@@ -12,7 +12,7 @@ import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent, DeleteCo
 import { CommonModule, DatePipe } from '@angular/common';
 import { ReferenceItemComponent } from '../../reference/reference-list/reference-item/reference-item.component';
 import { ReferenceFilterComponent } from '../../reference/reference-list/reference-filter/reference-filter.component';
-import { ReferenceCreateFormComponent } from '../../reference/reference-form/reference-form.component';
+import { ReferenceFormComponent } from '../../reference/reference-form/reference-form.component';
 import { ReferenceListComponent } from '../../reference/reference-list/reference-list.component';
 import { CommentListComponent } from '../../comment/comment-list/comment-list.component';
 import { CommentFormComponent } from '../../comment/comment-form/comment-form.component';
@@ -26,7 +26,7 @@ import { UserProfile2Component } from '../../user/user-profile-2/user-profile-2.
     DatePipe,
     ReferenceItemComponent,
     ReferenceFilterComponent,
-    ReferenceCreateFormComponent,
+    ReferenceFormComponent,
     ReferenceListComponent,
     CommentListComponent,
     CommentFormComponent,

@@ -3,13 +3,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Topic } from '../topic.model';
 import { TopicService } from '../topic.service';
 import { first, take } from 'rxjs';
-import { TopicListComponent } from './topics-list/topic-list.component';
+import { TopicListComponent } from '../topic-list/topic-list.component';
 import { TopicDetailsModalComponent } from '../topic-details-modal/topic-details-modal.component';
 import { EventBusService } from '../../../service/event-bus.service';
-import { CreateTopicEvent, DeleteTopicEvent, TopicCreatedEvent, TopicDeletedEvent, TopicUpdateddEvent } from '../topic-module.event';
+import { CreateTopicEvent, DeleteTopicEvent, TopicCreatedEvent, TopicDeletedEvent, TopicUpdateddEvent, UpdateTopicEvent } from '../topic-module.event';
 import { TopicQueryService } from '../topic-query.service';
 import { NGXLogger } from 'ngx-logger';
-import { TopicFormComponent } from './topic-form/topic-form.component';
+import { TopicFormComponent } from '../topic-form/topic-form.component';
 import { Vote } from '../../voting/vote.model';
 
 
@@ -40,8 +40,14 @@ export class TopicViewComponent implements OnInit {
       TopicDeletedEvent.name
     ], (e: any) => {
       this.getTopics();
+      this.changeTab('list');
     });
-
+    this.eventBus.listen([
+      UpdateTopicEvent.name,
+      CreateTopicEvent.name
+    ], (event: any) => {
+      this.changeTab('form');
+    });
     this.eventBus.listen(DeleteTopicEvent.name, (event: DeleteTopicEvent) => {
       this.topicService.delete(event.topicId).pipe(first()).subscribe({
         next: data => {
@@ -73,4 +79,15 @@ export class TopicViewComponent implements OnInit {
     this.logger.debug(TopicViewComponent.name, " toggleTopicForm()");
     this.eventBus.emit(CreateTopicEvent.name, new CreateTopicEvent());
   }
+
+  // TABS
+  tabs = ['list', 'form'];
+  activeTab = this.tabs[0];
+  changeTab(tabName: string) {
+    this.logger.debug(TopicViewComponent.name, "changeTab()");
+    if (this.tabs.includes(tabName)) {
+      let index = this.tabs.indexOf(tabName);
+      this.activeTab = this.tabs[index];
+    }
+  };
 }

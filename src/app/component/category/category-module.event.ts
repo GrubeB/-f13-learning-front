@@ -26,7 +26,7 @@ export class DeleteCategoryEvent {
         this.categoryId = categoryId;
     }
 }
-export class EditCategoryEvent {
+export class UpdateCategoryEvent {
     categoryId!: string;
     constructor(categoryId: string) {
         this.categoryId = categoryId;

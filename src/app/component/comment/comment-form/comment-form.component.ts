@@ -27,7 +27,8 @@ export class CommentFormComponent {
   authenticationService = inject(AuthenticationService);
 
   @Input() commentService!: AbstractCommentService;
-  @Input() topicId!: string;
+
+  @Input() modelId!: string;
   parentCommentId?: string;
 
   message?: string;
@@ -47,7 +48,6 @@ export class CommentFormComponent {
       this.formGroup.setValue({
         content: ''
       });
-      this.formViable ? this.hideForm() : this.showForm();
     });
 
     this.eventBus.listen(CreateCommentReplayEvent.name, (event: CreateCommentReplayEvent) => {
@@ -56,7 +56,6 @@ export class CommentFormComponent {
       this.formGroup.setValue({
         content: ''
       });
-      this.formViable ? this.hideForm() : this.showForm();
     });
 
     this.eventBus.listen(UpdateCommentEvent.name, (event: UpdateCommentEvent) => {
@@ -67,7 +66,6 @@ export class CommentFormComponent {
           this.formGroup.setValue({
             content: this.editComment?.content ?? ""
           });
-          this.showForm();
         }
       })
     });
@@ -92,13 +90,12 @@ export class CommentFormComponent {
         }
         command.userId = userId;
         if (this.parentCommentId == null) {
-          this.commentService.create(this.topicId, command)
+          this.commentService.create(this.modelId, command)
             .pipe(first())
             .subscribe({
               next: response => {
                 this.logger.debug(CommentFormComponent.name, " comment created ", response.id);
                 this.eventBus.emit(CommentCreatedEvent.name, new CommentCreatedEvent(response.id));
-                this.hideForm();
               },
               error: e => {
                 this.logger.debug(CommentFormComponent.name, " error occurred while creating command ", e);
@@ -106,13 +103,12 @@ export class CommentFormComponent {
               }
             });
         } else {
-          this.commentService.createRepley(this.topicId, this.parentCommentId, command)
+          this.commentService.createRepley(this.modelId, this.parentCommentId, command)
             .pipe(first())
             .subscribe({
               next: response => {
                 this.logger.debug(CommentFormComponent.name, " comment created ", response.id);
                 this.eventBus.emit(CommentCreatedEvent.name, new CommentCreatedEvent(response.id));
-                this.hideForm();
               },
               error: e => {
                 this.logger.debug(CommentFormComponent.name, " error occurred while creating command ", e);
@@ -129,13 +125,12 @@ export class CommentFormComponent {
     command.commentId = this.editComment?.id ?? '';
     command.content = this.formGroup.value.content ? this.formGroup.value.content as string : '';
 
-    this.commentService.update(this.topicId, command)
+    this.commentService.update(this.modelId, command)
       .pipe(first())
       .subscribe({
         next: response => {
           this.logger.debug(CommentFormComponent.name, " command updated ", command.commentId);
           this.eventBus.emit(CommentUpdatedEvent.name, new CommentUpdatedEvent(command.commentId));
-          this.hideForm();
         },
         error: e => {
           this.logger.debug(CommentFormComponent.name, " error occurred while updating command ", e);
@@ -143,16 +138,5 @@ export class CommentFormComponent {
         }
       });
 
-  }
-
-
-  formViable: boolean = false;
-  showForm() {
-    this.logger.debug(CommentFormComponent.name, "showForm");
-    this.formViable = true
-  }
-  hideForm() {
-    this.logger.debug(CommentFormComponent.name, "hideForm");
-    this.formViable = false;
   }
 }

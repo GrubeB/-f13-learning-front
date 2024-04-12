@@ -2,17 +2,17 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, inject, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NGXLogger } from 'ngx-logger';
-import { Reference } from '../../../reference/reference.model';
+import { Reference } from '../../reference/reference.model';
 import { first, take } from 'rxjs';
-import { TopicReferenceService } from '../../../reference/topic-reference.service';
-import { EventBusService } from '../../../../service/event-bus.service';
-import { TopicService } from '../../topic.service';
-import { CreateTopicCommand, Topic, UpdateTopicCommand } from '../../topic.model';
-import { CreateTopicEvent, UpdateTopicEvent, TopicCreatedEvent, TopicUpdateddEvent } from '../../topic-module.event';
-import { TopicQueryService } from '../../topic-query.service';
-import { Category } from '../../../category/category.model';
-import { CategoryQueryService } from '../../../category/category-query.service';
-import { MultiSelectComponent } from '../../../../../shared/multi-select/multi-select.component';
+import { TopicReferenceService } from '../../reference/topic-reference.service';
+import { EventBusService } from '../../../service/event-bus.service';
+import { TopicService } from '../topic.service';
+import { CreateTopicCommand, Topic, UpdateTopicCommand } from '../topic.model';
+import { CreateTopicEvent, UpdateTopicEvent, TopicCreatedEvent, TopicUpdateddEvent } from '../topic-module.event';
+import { TopicQueryService } from '../topic-query.service';
+import { Category } from '../../category/category.model';
+import { CategoryQueryService } from '../../category/category-query.service';
+import { MultiSelectComponent } from '../../../../shared/multi-select/multi-select.component';
 
 @Component({
   selector: 'topic-form',
@@ -50,7 +50,12 @@ export class TopicFormComponent implements OnInit {
 
   constructor() {
     this.eventBus.listen(CreateTopicEvent.name, (event: CreateTopicEvent) => {
-      this.formViable ? this.hideForm() : this.showForm();
+      this.isEditForm = false;
+      this.formGroup.setValue({
+        name: "",
+        content: "",
+        categories: []
+      });
     });
 
     this.eventBus.listen(UpdateTopicEvent.name, (event: UpdateTopicEvent) => {
@@ -63,7 +68,6 @@ export class TopicFormComponent implements OnInit {
             content: this.editTopic?.content ?? "",
             categories: this.editTopic?.categories ?? []
           });
-          this.showForm();
         }
       })
     });
@@ -95,7 +99,6 @@ export class TopicFormComponent implements OnInit {
         next: response => {
           this.logger.debug(TopicFormComponent.name, " topic created ", response.id);
           this.eventBus.emit(TopicCreatedEvent.name, new TopicCreatedEvent(response.id));
-          this.hideForm();
         },
         error: e => {
           this.logger.debug(TopicFormComponent.name, " error occurred while creating topic ", e);
@@ -116,20 +119,11 @@ export class TopicFormComponent implements OnInit {
         next: response => {
           this.logger.debug(TopicFormComponent.name, " topic updated ", command.id);
           this.eventBus.emit(TopicUpdateddEvent.name, new TopicUpdateddEvent(command.id));
-          this.hideForm();
         },
         error: e => {
           this.logger.debug(TopicFormComponent.name, " error occurred while updateing topic ", e);
           this.message = e.message;
         }
       })
-  }
-
-  formViable: boolean = false;
-  showForm() {
-    this.formViable = true
-  }
-  hideForm() {
-    this.formViable = false;
   }
 }

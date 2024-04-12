@@ -1,9 +1,9 @@
-<div *ngIf="user" class="d-flex flex-row">
+<div *ngIf="user" class="d-flex flex-row p-2">
     <button class="app-btn-image s48">
         <img [src]="getAvatarUrl()"/>
     </button>
-    <div class="d-flex ms-2 pt-2 flex-column">
-        <h3 class="fw-bold">{{user.username}}</h3>
-        <h5>{{date | date }}</h5>
+    <div class="d-flex ms-2 flex-column">
+        <h3 class="fw-bold m-0">{{user.username}}</h3>
+        <p class="m-0">{{date | date }}</p>
     </div>
 </div>

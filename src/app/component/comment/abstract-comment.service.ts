@@ -5,11 +5,11 @@ import { CreateCommentCommand, UpdateCommentCommand } from './comment.model';
 
 export abstract class AbstractCommentService {
 
-  abstract create(topicId: string, data: CreateCommentCommand): Observable<Reference>;
+  abstract create(modelId: string, data: CreateCommentCommand): Observable<Reference>;
 
-  abstract createRepley(topicId: string, parentCommentId: string, data: CreateCommentCommand): Observable<Reference>;
+  abstract createRepley(modelId: string, parentCommentId: string, data: CreateCommentCommand): Observable<Reference>;
 
-  abstract update(topicId: string, data: UpdateCommentCommand): Observable<HttpEvent<any>>;
+  abstract update(modelId: string, data: UpdateCommentCommand): Observable<HttpEvent<any>>;
 
-  abstract delete(topicId: string, id: string): Observable<HttpEvent<any>>;
+  abstract delete(modelId: string, id: string): Observable<HttpEvent<any>>;
 }

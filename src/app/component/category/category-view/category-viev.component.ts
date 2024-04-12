@@ -7,7 +7,7 @@ import { CategoriesListComponent } from './category-list/category-list.component
 import { CategoryQueryService } from '../category-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../service/event-bus.service';
-import { CategoryCreatedEvent, CategoryDeletedEvent, CategoryUpdatedEvent, CreateCategoryEvent, DeleteCategoryEvent, EditCategoryEvent } from '../category-module.event';
+import { CategoryCreatedEvent, CategoryDeletedEvent, CategoryUpdatedEvent, CreateCategoryEvent, DeleteCategoryEvent, UpdateCategoryEvent } from '../category-module.event';
 import { CategoryFormComponent } from '../category-form/category-form.component';
 import { BreadcrumbItem } from '../../../../shared/breadcrumb/breadcrumb.component';
 
@@ -40,7 +40,7 @@ export class CategoryVievComponent implements OnInit {
     });
 
     this.eventBus.listen([
-      EditCategoryEvent.name,
+      UpdateCategoryEvent.name,
       CreateCategoryEvent.name
     ], (event: any) => {
       this.changeTab('form');
@@ -78,6 +78,7 @@ export class CategoryVievComponent implements OnInit {
     this.eventBus.emit(CreateCategoryCommand.name, new CreateCategoryCommand());
   }
 
+  // TABS
   tabs = ['list', 'form'];
   activeTab = this.tabs[0];
   changeTab(tabName: string) {

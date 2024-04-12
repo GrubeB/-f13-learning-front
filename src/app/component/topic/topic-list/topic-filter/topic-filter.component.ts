@@ -1,13 +1,13 @@
 import { Component, DestroyRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, inject } from '@angular/core';
-import { Topic } from '../../../topic.model';
-import { EventBusService } from '../../../../../service/event-bus.service';
+import { Topic } from '../../topic.model';
+import { EventBusService } from '../../../../service/event-bus.service';
 import { NGXLogger } from 'ngx-logger';
-import { Direction, Sort } from '../../../../../../shared/filter/sort.model';
-import { Filter, Operator } from '../../../../../../shared/filter/filter.model';
-import { TopicFilterChangedEvent } from '../../../topic-module.event';
-import { VotingQueryService } from '../../../../voting/voting-query.service';
+import { Direction, Sort } from '../../../../../shared/filter/sort.model';
+import { Filter, Operator } from '../../../../../shared/filter/filter.model';
+import { TopicFilterChangedEvent } from '../../topic-module.event';
+import { VotingQueryService } from '../../../voting/voting-query.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DomainObjectType, Vote, VoteType } from '../../../../voting/vote.model';
+import { DomainObjectType, Vote, VoteType } from '../../../voting/vote.model';
 
 @Component({
   selector: 'topic-filter',

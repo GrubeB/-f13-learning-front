@@ -1,12 +1,8 @@
-<div class="d-flex flex-row justify-content-between align-items-center">
-    <div class="d-flex flex-row gap-3">
-        <h1>{{references.length}} References</h1>
-        <button (click)="emitCreateReferenceEvent()" class="app-btn-icon s32">
-            <i class="bi bi-plus"></i>
-        </button>
+<div class="d-flex flex-column">
+    <div class="d-flex flex-row justify-content-end">
+        <reference-filter [items]="references" (outputItmes)="filtredReference = $event"/>
     </div>
-    <reference-filter [items]="references" (outputItmes)="filtredReference = $event"/>
-</div>
-<div class="d-flex flex-column gap-1 mt-4">
-    <reference-item *ngFor="let reference of filtredReference" [reference]="reference"/>
+    <div class="d-flex flex-column gap-1 mt-4">
+        <reference-item *ngFor="let reference of filtredReference" [reference]="reference"/>
+    </div>
 </div>

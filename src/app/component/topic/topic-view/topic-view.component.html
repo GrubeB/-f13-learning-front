@@ -1,14 +1,26 @@
 <div class="view-container container-xl">
     <div  class="view-content">
-        <div class="container-fluid p-2">
-            <div class="d-flex flex-row gap-3">
-                <h1>Topic List</h1>
-                <button (click)="showTopicForm();" class="app-btn-icon s32">
-                    <i class="bi bi-plus"></i>
-                </button>
+        <div class="container-fluid">
+            <div id="header" class="bg-gray-00 p-3 ps-4 pe-4 shadow-2 rounded-1">
+                <div class="d-flex flex-row justify-content-between">
+                    <h1 class="fw-bold">Topics</h1>
+                    <button class="app-btn" (click)="showTopicForm()">
+                        <i class="bi bi-plus"></i> Add
+                    </button>
+                </div>
+                <div class="tab">
+                    <button  [ngClass]="activeTab == 'list'? 'active' : ''"
+                        (click)="changeTab('list')"> List
+                    </button>
+                    <button  [ngClass]="activeTab == 'form'? 'active' : ''"
+                        (click)="changeTab('form')"> Form
+                    </button>
+                </div>
             </div>
-            <topic-form />
-            <topic-list [topics]="topics"/>
+            <div class="bg-gray-00 mt-4 p-3 shadow-3 rounded-1">
+                <topic-form [hidden] = "activeTab != 'form'" />
+                <topic-list [hidden] = "activeTab != 'list'"  [topics]="topics"/>
+            </div>
         </div>
     </div>
 </div>

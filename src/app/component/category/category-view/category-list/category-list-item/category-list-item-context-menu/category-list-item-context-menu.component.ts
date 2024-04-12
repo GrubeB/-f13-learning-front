@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { OutsideClickDirective } from '../../../../../../../shared/directive/outside-click.directive';
 import { EventBusService } from '../../../../../../service/event-bus.service';
-import { DeleteCategoryEvent, EditCategoryEvent } from '../../../../category-module.event';
+import { DeleteCategoryEvent, UpdateCategoryEvent } from '../../../../category-module.event';
 import { CategoryLikeRemvedEvent, CategoryLikedEvent } from '../../../../../voting/voting-module.event';
 
 @Component({
@@ -42,7 +42,7 @@ export class CategoryListItemContextMenuComponent {
   emitEditCategoryEvent() {
     if (this.modelId) {
       this.logger.debug(CategoryListItemContextMenuComponent.name, " emitEditCategoryEvent()");
-      this.eventBus.emit(EditCategoryEvent.name, new EditCategoryEvent(this.modelId));
+      this.eventBus.emit(UpdateCategoryEvent.name, new UpdateCategoryEvent(this.modelId));
       this.hideMenu();
     }
   }

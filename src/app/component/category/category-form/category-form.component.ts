@@ -5,7 +5,7 @@ import { NGXLogger } from 'ngx-logger';
 import { first, take } from 'rxjs';
 import { EventBusService } from '../../../service/event-bus.service';
 import { CategoryService } from '../category.service';
-import { CategoryCreatedEvent, CategoryUpdatedEvent, EditCategoryEvent } from '../category-module.event';
+import { CategoryCreatedEvent, CategoryUpdatedEvent, UpdateCategoryEvent } from '../category-module.event';
 import { Category, CreateCategoryCommand, UpdateCategoryCommand } from '../category.model';
 import { CategoryQueryService } from '../category-query.service';
 import { MultiSelectComponent } from '../../../../shared/multi-select/multi-select.component';
@@ -53,7 +53,7 @@ export class CategoryFormComponent implements OnInit {
       });
     });
 
-    this.eventBus.listen(EditCategoryEvent.name, (event: EditCategoryEvent) => {
+    this.eventBus.listen(UpdateCategoryEvent.name, (event: UpdateCategoryEvent) => {
       this.isEditForm = true;
       this.categoryQueryService.get(event.categoryId).pipe(take(1)).subscribe({
         next: data => {

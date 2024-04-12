@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NGXLogger } from 'ngx-logger';
-import { Reference } from '../reference.model';
+import { CreateReferenceCommand, Reference, UpdateReferenceCommand } from '../reference.model';
 import { first, take } from 'rxjs';
 import { TopicReferenceService } from '../topic-reference.service';
 import { EventBusService } from '../../../service/event-bus.service';
 import { CreateReferenceEvent, ReferenceCreatedEvent, ReferenceUpdatedEvent, UpdateReferenceEvent } from '../reference-module.event';
 import { MultiSelectComponent } from '../../../../shared/multi-select/multi-select.component';
 import { ReferenceQueryService } from '../reference-query.service';
+import { AbstractReferenceService } from '../abstract-reference.service';
 
 @Component({
   selector: 'reference-form',
@@ -16,21 +17,19 @@ import { ReferenceQueryService } from '../reference-query.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MultiSelectComponent
+    MultiSelectComponent,
   ],
   templateUrl: './reference-form.component.html',
   styleUrl: './reference-form.component.scss'
 })
-export class ReferenceCreateFormComponent {
+export class ReferenceFormComponent {
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
   referenceQueryService = inject(ReferenceQueryService);
-  referenceService = inject(TopicReferenceService);
-
-  @Input() topicId!: string;
+  @Input() referenceService!: AbstractReferenceService;
+  @Input() modelId!: string;
 
   message?: string;
-
   isEditForm: boolean = false;
   editReference?: Reference;
 
@@ -54,17 +53,16 @@ export class ReferenceCreateFormComponent {
     ]),
   });
 
-  constructor(){
+  constructor() {
     this.eventBus.listen(CreateReferenceEvent.name, (event: CreateReferenceEvent) => {
       this.isEditForm = false;
       this.formGroup.setValue({
         title: '',
-        description:  '',
-        author:  '',
+        description: '',
+        author: '',
         publicationDate: '',
         link: '',
       });
-      this.formViable ? this.hideForm() : this.showForm();
     });
 
     this.eventBus.listen(UpdateReferenceEvent.name, (event: UpdateReferenceEvent) => {
@@ -79,70 +77,58 @@ export class ReferenceCreateFormComponent {
             publicationDate: '', //TODO
             link: this.editReference?.link ?? "",
           });
-          this.showForm();
         }
       })
     });
   }
   submit() {
-    this.logger.debug(ReferenceCreateFormComponent.name, "submit");
+    this.logger.debug(ReferenceFormComponent.name, "submit");
     if (this.formGroup.valid) {
       this.isEditForm ? this.update() : this.create();
     }
   }
 
   create() {
-    let reference = new Reference();
-    reference.title = this.formGroup.value.title ? this.formGroup.value.title as string : '';
-    reference.description = this.formGroup.value.description ? this.formGroup.value.description as string : '';
-    reference.author = this.formGroup.value.author ? this.formGroup.value.author as string : '';
-    reference.publicationDate = this.formGroup.value.publicationDate ? new Date(this.formGroup.value.publicationDate) : new Date();
-    reference.link = this.formGroup.value.link ? this.formGroup.value.link as string : '';
+    let command = new CreateReferenceCommand();
+    command.title = this.formGroup.value.title ? this.formGroup.value.title as string : '';
+    command.description = this.formGroup.value.description ? this.formGroup.value.description as string : '';
+    command.author = this.formGroup.value.author ? this.formGroup.value.author as string : '';
+    command.publicationDate = this.formGroup.value.publicationDate ? new Date(this.formGroup.value.publicationDate) : new Date();
+    command.link = this.formGroup.value.link ? this.formGroup.value.link as string : '';
 
-    this.referenceService.create(this.topicId, reference)
+    this.referenceService.create(this.modelId, command)
       .pipe(first())
       .subscribe({
         next: response => {
-          this.logger.debug(ReferenceCreateFormComponent.name, " referemce created ", response.id);
+          this.logger.debug(ReferenceFormComponent.name, " referemce created ", response.id);
           this.eventBus.emit(ReferenceCreatedEvent.name, new ReferenceCreatedEvent(response.id));
-          this.hideForm();
         },
         error: e => {
-          this.logger.debug(ReferenceCreateFormComponent.name, " error occurred while creating reference ", e);
+          this.logger.debug(ReferenceFormComponent.name, " error occurred while creating reference ", e);
           this.message = e.message;
         }
       })
   }
   update() {
-    let reference = this.editReference ?? new Reference();
-    reference.title = this.formGroup.value.title ? this.formGroup.value.title as string : '';
-    reference.description = this.formGroup.value.description ? this.formGroup.value.description as string : '';
-    reference.author = this.formGroup.value.author ? this.formGroup.value.author as string : '';
-    reference.publicationDate = this.formGroup.value.publicationDate ? new Date(this.formGroup.value.publicationDate) : new Date();
-    reference.link = this.formGroup.value.link ? this.formGroup.value.link as string : '';
+    let command = new UpdateReferenceCommand();
+    command.id = this.editReference?.id ?? '';
+    command.title = this.formGroup.value.title ? this.formGroup.value.title as string : '';
+    command.description = this.formGroup.value.description ? this.formGroup.value.description as string : '';
+    command.author = this.formGroup.value.author ? this.formGroup.value.author as string : '';
+    command.publicationDate = this.formGroup.value.publicationDate ? new Date(this.formGroup.value.publicationDate) : new Date();
+    command.link = this.formGroup.value.link ? this.formGroup.value.link as string : '';
 
-    this.referenceService.update(reference)
+    this.referenceService.update(this.modelId, command.id, command)
       .pipe(first())
       .subscribe({
         next: response => {
-          this.logger.debug(ReferenceCreateFormComponent.name, " referemce updated ", reference.id);
-          this.eventBus.emit(ReferenceUpdatedEvent.name, new ReferenceUpdatedEvent(reference.id));
-          this.hideForm();
+          this.logger.debug(ReferenceFormComponent.name, " referemce updated ", command.id);
+          this.eventBus.emit(ReferenceUpdatedEvent.name, new ReferenceUpdatedEvent(command.id));
         },
         error: e => {
-          this.logger.debug(ReferenceCreateFormComponent.name, " error occurred while updating reference ", e);
+          this.logger.debug(ReferenceFormComponent.name, " error occurred while updating reference ", e);
           this.message = e.message;
         }
-      })
-  }
-
-  formViable: boolean = false;
-  showForm() {
-    this.logger.debug(ReferenceCreateFormComponent.name, "showForm");
-    this.formViable = true
-  }
-  hideForm() {
-    this.logger.debug(ReferenceCreateFormComponent.name, "hideForm");
-    this.formViable = false;
+      });
   }
 }

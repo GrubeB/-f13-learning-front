@@ -1,19 +1,19 @@
 import { Component, DestroyRef, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
-import { Topic } from '../../../topic.model';
+import { Topic } from '../../topic.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { EventBusService } from '../../../../../service/event-bus.service';
-import { ShowTopicDetailsModalEvent } from '../../../topic-module.event';
+import { EventBusService } from '../../../../service/event-bus.service';
+import { ShowTopicDetailsModalEvent } from '../../topic-module.event';
 import { TopicListItemContextMenuComponent } from './topic-list-item-context-menu/topic-list-item-context-menu.component';
 import { NGXLogger } from 'ngx-logger';
-import { UserProfileComponent } from '../../../../user/user-profile/user-profile.component';
-import { UserProfile2Component } from '../../../../user/user-profile-2/user-profile-2.component';
-import { TopicVotingService } from '../../../../voting/topic-voting.service';
-import { AuthenticationService } from '../../../../../auth/authentication.service';
-import { TopicLikeRemvedEvent, TopicLikedEvent } from '../../../../voting/voting-module.event';
-import { VotingQueryService } from '../../../../voting/voting-query.service';
-import { DomainObjectType, Vote } from '../../../../voting/vote.model';
-import { SimpleLikingComponent } from '../../../../voting/simple-liking/simple-liking.component';
+import { UserProfileComponent } from '../../../user/user-profile/user-profile.component';
+import { UserProfile2Component } from '../../../user/user-profile-2/user-profile-2.component';
+import { TopicVotingService } from '../../../voting/topic-voting.service';
+import { AuthenticationService } from '../../../../auth/authentication.service';
+import { TopicLikeRemvedEvent, TopicLikedEvent } from '../../../voting/voting-module.event';
+import { VotingQueryService } from '../../../voting/voting-query.service';
+import { DomainObjectType, Vote } from '../../../voting/vote.model';
+import { SimpleLikingComponent } from '../../../voting/simple-liking/simple-liking.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { first } from 'rxjs';
 

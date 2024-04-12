@@ -2,34 +2,34 @@
     <div class="comment-item-content">
         <div class="d-flex flex-row justify-content-between">
             <user-profile-2 [userId]="comment.createdBy" [date]="comment.createdDate" class="m-3"/>
-            <button class="app-btn-icon mt-3 me-2" (click)="toggleContextMenu()">
+            <button class="app-btn-icon-tertiary mt-3 me-2" (click)="toggleContextMenu()">
                 <i class="bi bi-three-dots-vertical"></i>
                 <comment-list-item-context-menu [modelId]="comment.id" [(visable)]="contextMenuVisable"/>
             </button>
         </div>
-        <div class="p-3">
-            <h1>{{comment.content}}</h1>
+        <div class="ps-4 pe-4">
+            <p>{{comment.content}}</p>
         </div>
     </div>
-    <div class="comment-item-buttons d-flex flex-row justify-content-around p-3">
-        <button  class="app-btn-icon"
+    <div class="comment-item-buttons d-flex flex-row justify-content-around p-1">
+        <button  class="app-btn-icon-tertiary"
             (click)="emitCreateCommentReplayEvent()"
         >
             <i class="bi bi-chat-left-text-fill"></i>
         </button>
 
         <div class="d-flex flex-row gap-1">
-            <button class="app-btn-icon"
+            <button class="app-btn-icon-tertiary"
                 (click)="votingService.createLike(comment.id)"
             >
                 <i class="bi bi-chevron-double-up"></i>
             </button>
-            <button class="app-btn-icon"
+            <button class="app-btn-icon-tertiary"
                 (click)="votingService.deleteLikeAndDislike(comment.id)"
             >
                 {{ comment.voting.likesNumber - comment.voting.dislikesNumber }}
             </button>
-            <button class="app-btn-icon"
+            <button class="app-btn-icon-tertiary"
                 (click)="votingService.createDislike(comment.id)"
             >
                 <i class="bi bi-chevron-double-down"></i>
