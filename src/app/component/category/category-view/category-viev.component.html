@@ -1,19 +1,20 @@
 <div class="view-container container-xl">
     <div  class="view-content">
-        <div class="container-fluid p-2">
-            <div class="d-flex flex-row gap-3">
-                <h1>Categories List</h1>
-                <button 
-                  (click)="showCategoryForm();" 
-                    class="app-btn-icon s32"
-                >
-                    <i class="bi bi-plus"></i>
-                </button>
+        <div class="container-fluid">
+            <div class="bg-gray-00 p-3 shadow2">
+                <div class="d-flex flex-row gap-3 justify-content-between">
+                    <h1 class="fw-bold">Categories</h1>
+                    <button class="app-btn" (click)="showCategoryForm();" >
+                        <i class="bi bi-plus"></i> Add
+                    </button>
+                </div>
             </div>
-            <div class="mt-4">
-                <category-form />
+            
+            <category-form />
+
+            <div class="bg-gray-00 mt-4 p-3 shadow3">
+                <category-list [categories]="categories" />
             </div>
-            <category-list [categories]="categories" />
         </div>
     </div>
 </div>
