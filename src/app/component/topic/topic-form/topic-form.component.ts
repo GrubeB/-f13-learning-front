@@ -5,14 +5,14 @@ import { NGXLogger } from 'ngx-logger';
 import { Reference } from '../../reference/reference.model';
 import { first, take } from 'rxjs';
 import { TopicReferenceService } from '../../reference/topic-reference.service';
-import { EventBusService } from '../../../service/event-bus.service';
+import { EventBusService } from '../../../shared/service/event-bus.service';
 import { TopicService } from '../topic.service';
 import { CreateTopicCommand, Topic, UpdateTopicCommand } from '../topic.model';
 import { CreateTopicEvent, UpdateTopicEvent, TopicCreatedEvent, TopicUpdateddEvent } from '../topic-module.event';
 import { TopicQueryService } from '../topic-query.service';
 import { Category } from '../../category/category.model';
 import { CategoryQueryService } from '../../category/category-query.service';
-import { MultiSelectComponent } from '../../../../shared/multi-select/multi-select.component';
+import { MultiSelectComponent } from '../../../shared/component/multi-select/multi-select.component';
 
 @Component({
   selector: 'topic-form',

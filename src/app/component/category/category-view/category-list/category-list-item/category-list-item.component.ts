@@ -3,7 +3,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { NGXLogger } from 'ngx-logger';
 import { CategoryListItemContextMenuComponent } from './category-list-item-context-menu/category-list-item-context-menu.component';
-import { EventBusService } from '../../../../../service/event-bus.service';
+import { EventBusService } from '../../../../../shared/service/event-bus.service';
 import { Category } from '../../../category.model';
 import { CategoryVotingService } from '../../../../voting/category-voting.service';
 import { DomainObjectType, Vote } from '../../../../voting/vote.model';

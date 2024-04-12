@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
 import { Category } from '../category/category.model';
-import { Page } from '../../model/response.model';
+import { Page } from '../../shared/model/response.model';
 import { Topic } from './topic.model';
-import { errorHandle } from '../../service/service-support';
+import { errorHandle } from '../../shared/service/service-support';
 
 @Injectable()
 export class TopicQueryService {

@@ -4,7 +4,7 @@ import { first } from 'rxjs/operators';
 import { AbstractVotingService } from './abstract-voting.service';
 import { AuthenticationService } from '../../auth/authentication.service';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../service/event-bus.service';
+import { EventBusService } from '../../shared/service/event-bus.service';
 import { GroupDisLikeRemvedEvent, GroupDislikedEvent, GroupLikeDislikRemovedEvent, GroupLikeRemvedEvent, GroupLikedEvent } from './voting-module.event';
 
 @Injectable()

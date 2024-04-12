@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { EventBusService } from '../../../service/event-bus.service';
+import { EventBusService } from '../../../shared/service/event-bus.service';
 import { NGXLogger } from 'ngx-logger';
 import { GroupQueryService } from '../group-query.service';
 import { GroupService } from '../group.service';

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../../service/event-bus.service';
+import { EventBusService } from '../../../shared/service/event-bus.service';
 import { User } from '../user.model';
 import { UserQueryService } from '../user-query.service';
 import { first } from 'rxjs';

@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../../service/event-bus.service';
+import { EventBusService } from '../../../shared/service/event-bus.service';
 import { CreateReferenceCommand, Reference } from '../reference.model';
 import { AbstractReferenceService } from '../abstract-reference.service';
 import { CreateReferenceEvent, DeleteReferenceEvent, ReferenceCreatedEvent, ReferenceDeletedEvent, ReferenceUpdatedEvent, UpdateReferenceEvent } from '../reference-module.event';
@@ -8,7 +8,7 @@ import { first } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ReferenceFormComponent } from '../reference-form/reference-form.component';
 import { ReferenceListComponent } from '../reference-list/reference-list.component';
-import { SwitchButtonComponent } from '../../../../shared/switch-button/switch-button.component';
+import { SwitchButtonComponent } from '../../../shared/component/switch-button/switch-button.component';
 
 @Component({
   selector: 'reference-section',

@@ -3,12 +3,12 @@ import { Component, EventEmitter, Input, OnInit, Output, inject, input } from '@
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NGXLogger } from 'ngx-logger';
 import { first, take } from 'rxjs';
-import { EventBusService } from '../../../service/event-bus.service';
+import { EventBusService } from '../../../shared/service/event-bus.service';
 import { CategoryService } from '../category.service';
 import { CategoryCreatedEvent, CategoryUpdatedEvent, UpdateCategoryEvent } from '../category-module.event';
 import { Category, CreateCategoryCommand, UpdateCategoryCommand } from '../category.model';
 import { CategoryQueryService } from '../category-query.service';
-import { MultiSelectComponent } from '../../../../shared/multi-select/multi-select.component';
+import { MultiSelectComponent } from '../../../shared/component/multi-select/multi-select.component';
 
 @Component({
   selector: 'category-form',

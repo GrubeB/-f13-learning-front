@@ -1,7 +1,7 @@
 import { CommonModule, DatePipe, Location } from '@angular/common';
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { ReferenceItemComponent } from './reference-item/reference-item.component';
-import { EventBusService } from '../../../service/event-bus.service';
+import { EventBusService } from '../../../shared/service/event-bus.service';
 import { NGXLogger } from 'ngx-logger';
 import { CreateReferenceEvent } from '../../reference/reference-module.event';
 import { Reference } from '../reference.model';

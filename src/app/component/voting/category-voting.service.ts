@@ -2,12 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, switchMap, first } from 'rxjs/operators';
-import { errorHandle } from '../../service/service-support';
+import { errorHandle } from '../../shared/service/service-support';
 import { AbstractVotingService } from './abstract-voting.service';
 import { AuthenticationService } from '../../auth/authentication.service';
 import { NGXLogger } from 'ngx-logger';
 import { CategoryDisLikeRemvedEvent, CategoryDislikedEvent, CategoryLikeDislikRemovedEvent, CategoryLikeRemvedEvent, CategoryLikedEvent } from './voting-module.event';
-import { EventBusService } from '../../service/event-bus.service';
+import { EventBusService } from '../../shared/service/event-bus.service';
 
 @Injectable()
 export class CategoryVotingService extends AbstractVotingService {

@@ -2,7 +2,7 @@ import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, retry, switchMap, throwError } from 'rxjs';
 import { DomainObjectType, Vote } from './vote.model';
 import { AuthenticationService } from '../../auth/authentication.service';
-import { errorHandle } from '../../service/service-support';
+import { errorHandle } from '../../shared/service/service-support';
 
 export abstract class AbstractVotingQueryService {
   abstract getAllByUser(): Observable<Vote[]>;

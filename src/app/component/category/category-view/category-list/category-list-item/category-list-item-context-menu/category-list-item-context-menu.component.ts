@@ -2,8 +2,8 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 import { NGXLogger } from 'ngx-logger';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { OutsideClickDirective } from '../../../../../../../shared/directive/outside-click.directive';
-import { EventBusService } from '../../../../../../service/event-bus.service';
+import { OutsideClickDirective } from '../../../../../../shared/directive/outside-click.directive';
+import { EventBusService } from '../../../../../../shared/service/event-bus.service';
 import { DeleteCategoryEvent, UpdateCategoryEvent } from '../../../../category-module.event';
 import { CategoryLikeRemvedEvent, CategoryLikedEvent } from '../../../../../voting/voting-module.event';
 

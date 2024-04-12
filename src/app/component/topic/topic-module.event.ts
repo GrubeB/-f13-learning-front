@@ -1,4 +1,4 @@
-import { Filter } from "../../../shared/filter/filter.model";
+import { Filter } from "../../shared/filter/filter.model";
 import { Topic } from "./topic.model";
 
 // EVENTS

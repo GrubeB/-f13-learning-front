@@ -3,9 +3,9 @@ import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Category, UpdateCategoryCommand } from '../category/category.model';
-import { Page } from '../../model/response.model';
+import { Page } from '../../shared/model/response.model';
 import { CreateTopicCommand, Topic, UpdateTopicCommand } from './topic.model';
-import { errorHandle } from '../../service/service-support';
+import { errorHandle } from '../../shared/service/service-support';
 
 @Injectable()
 export class TopicService {

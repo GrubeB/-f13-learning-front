@@ -3,7 +3,7 @@ import { Comment } from '../comment.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { CommentListItemComponent } from './comment-list-item/comment-list-item.component';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../../service/event-bus.service';
+import { EventBusService } from '../../../shared/service/event-bus.service';
 import { CreateCommentEvent, CreateCommentReplayEvent } from '../comment-module.event';
 
 @Component({

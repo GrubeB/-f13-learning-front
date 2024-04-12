@@ -5,7 +5,7 @@ import { AuthenticationService } from '../../../../auth/authentication.service';
 import { ReferenceVotingService } from '../../../voting/reference-voting.service';
 import { take } from 'rxjs';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../../../service/event-bus.service';
+import { EventBusService } from '../../../../shared/service/event-bus.service';
 import { ReferenceItemContextMenuComponent } from './reference-item-context-menu/reference-item-context-menu.component';
 import { ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../../voting/voting-module.event';
 

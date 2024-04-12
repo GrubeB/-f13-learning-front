@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, take } from 'rxjs/operators';
-import { errorHandle } from '../../service/service-support';
+import { errorHandle } from '../../shared/service/service-support';
 import { Reference } from '../reference/reference.model';
 import { CreateCommentCommand, UpdateCommentCommand } from './comment.model';
 import { AbstractCommentService } from './abstract-comment.service';

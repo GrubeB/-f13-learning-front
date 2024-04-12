@@ -6,10 +6,10 @@ import { first, take } from 'rxjs';
 import { CategoriesListComponent } from './category-list/category-list.component';
 import { CategoryQueryService } from '../category-query.service';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../../service/event-bus.service';
+import { EventBusService } from '../../../shared/service/event-bus.service';
 import { CategoryCreatedEvent, CategoryDeletedEvent, CategoryUpdatedEvent, CreateCategoryEvent, DeleteCategoryEvent, UpdateCategoryEvent } from '../category-module.event';
 import { CategoryFormComponent } from '../category-form/category-form.component';
-import { BreadcrumbItem } from '../../../../shared/breadcrumb/breadcrumb.component';
+import { BreadcrumbItem } from '../../../shared/component/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'category-viev',

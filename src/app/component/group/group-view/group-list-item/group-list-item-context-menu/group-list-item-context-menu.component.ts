@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { OutsideClickDirective } from '../../../../../../shared/directive/outside-click.directive';
+import { OutsideClickDirective } from '../../../../../shared/directive/outside-click.directive';
 import { RouterLink } from '@angular/router';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../../../../service/event-bus.service';
+import { EventBusService } from '../../../../../shared/service/event-bus.service';
 import { DeleteGroupEvent, UpdateGroupEvent } from '../../../group-module.event';
 
 @Component({

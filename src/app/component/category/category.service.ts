@@ -3,8 +3,8 @@ import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Category, CreateCategoryCommand, UpdateCategoryCommand } from './category.model';
-import { Page } from '../../model/response.model';
-import { errorHandle } from '../../service/service-support';
+import { Page } from '../../shared/model/response.model';
+import { errorHandle } from '../../shared/service/service-support';
 
 @Injectable()
 export class CategoryService {

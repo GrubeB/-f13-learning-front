@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TopicDetailsComponent } from '../topic-details/topic-details.component';
-import { EventBusService } from '../../../service/event-bus.service';
+import { EventBusService } from '../../../shared/service/event-bus.service';
 import { HideTopicDetailsModalEvent, ShowTopicDetailsModalEvent } from '../topic-module.event';
 
 @Component({

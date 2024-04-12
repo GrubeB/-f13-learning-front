@@ -3,7 +3,7 @@ import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { CreateGroupCommand, Group, UpdateGroupCommand } from './group.model';
-import { errorHandle } from '../../service/service-support';
+import { errorHandle } from '../../shared/service/service-support';
 
 @Injectable()
 export class GroupService {

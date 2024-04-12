@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../../service/event-bus.service';
+import { EventBusService } from '../../../shared/service/event-bus.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Comment, CreateCommentCommand, UpdateCommentCommand } from '../comment.model';
 import { CommentCreatedEvent, CommentUpdatedEvent, CreateCommentEvent, CreateCommentReplayEvent, UpdateCommentEvent } from '../comment-module.event';

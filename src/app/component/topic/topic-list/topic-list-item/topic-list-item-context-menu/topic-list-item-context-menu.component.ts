@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../../../../service/event-bus.service';
+import { EventBusService } from '../../../../../shared/service/event-bus.service';
 import { DeleteTopicEvent, UpdateTopicEvent } from '../../../topic-module.event';
 import { CommonModule } from '@angular/common';
-import { OutsideClickDirective } from '../../../../../../shared/directive/outside-click.directive';
+import { OutsideClickDirective } from '../../../../../shared/directive/outside-click.directive';
 import { RouterLink } from '@angular/router';
 import { UpdateTopicCommand } from '../../../topic.model';
 

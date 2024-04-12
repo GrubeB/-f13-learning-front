@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../../service/event-bus.service';
+import { EventBusService } from '../../../shared/service/event-bus.service';
 import { Comment } from '../comment.model';
 import { AbstractCommentService } from '../abstract-comment.service';
 import { CommonModule } from '@angular/common';
@@ -8,7 +8,7 @@ import { CommentFormComponent } from '../comment-form/comment-form.component';
 import { CommentListComponent } from '../comment-list/comment-list.component';
 import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent, CreateCommentEvent, CreateCommentReplayEvent, DeleteCommentEvent, UpdateCommentEvent } from '../comment-module.event';
 import { first } from 'rxjs';
-import { SwitchButtonComponent } from '../../../../shared/switch-button/switch-button.component';
+import { SwitchButtonComponent } from '../../../shared/component/switch-button/switch-button.component';
 @Component({
   selector: 'comment-section',
   standalone: true,

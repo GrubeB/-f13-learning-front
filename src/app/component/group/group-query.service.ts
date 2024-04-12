@@ -3,8 +3,8 @@ import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
 import { Group } from './group.model';
-import { errorHandle } from '../../service/service-support';
-import { Page } from '../../model/response.model';
+import { errorHandle } from '../../shared/service/service-support';
+import { Page } from '../../shared/model/response.model';
 
 @Injectable()
 export class GroupQueryService {

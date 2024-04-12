@@ -3,7 +3,7 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import { Topic } from '../topic.model';
 import { TopicService } from '../topic.service';
 import { first } from 'rxjs';
-import { EventBusService } from '../../../service/event-bus.service';
+import { EventBusService } from '../../../shared/service/event-bus.service';
 import { TopicQueryService } from '../topic-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { ReferenceCreatedEvent, ReferenceUpdatedEvent, ReferenceDeletedEvent } from '../../reference/reference-module.event';

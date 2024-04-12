@@ -4,7 +4,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { CommentListComponent } from '../comment-list.component';
 import { CreateCommentReplayEvent } from '../../comment-module.event';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../../../service/event-bus.service';
+import { EventBusService } from '../../../../shared/service/event-bus.service';
 import { AuthenticationService } from '../../../../auth/authentication.service';
 import { ReferenceVotingService } from '../../../voting/reference-voting.service';
 import { CommentVotingService } from '../../../voting/comment-voting.service';

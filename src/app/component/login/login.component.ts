@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { LoginButtonComponent } from './login-button/login-button.component';
 import { CommonModule } from '@angular/common';
 import { EmailLoginFormComponent } from './email-login-form/email-login-form.component';
-import { DividerComponent } from '../../../shared/divider/divider.component';
+import { DividerComponent } from '../../shared/component/divider/divider.component';
 
 @Component({
   selector: 'login',

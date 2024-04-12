@@ -3,12 +3,12 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { LocalStorageService } from './service/local-storage.service';
+import { LocalStorageService } from './shared/service/local-storage.service';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { AuthenticationService } from './auth/authentication.service';
 import { CategoryService } from './component/category/category.service';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
-import { EventBusService } from './service/event-bus.service';
+import { EventBusService } from './shared/service/event-bus.service';
 import { TopicService } from './component/topic/topic.service';
 import { TopicReferenceService } from './component/reference/topic-reference.service';
 import { ReferenceQueryService } from './component/reference/reference-query.service';

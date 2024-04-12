@@ -2,13 +2,13 @@ import { Inject, Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, ReplaySubject, concat, filter, first, flatMap, map, mergeMap, of, throwError } from 'rxjs';
 import { retry, catchError, switchMap, take, defaultIfEmpty, toArray, tap } from 'rxjs/operators';
-import { Page } from '../../model/response.model';
-import { errorHandle } from '../../service/service-support';
+import { Page } from '../../shared/model/response.model';
+import { errorHandle } from '../../shared/service/service-support';
 import { AbstractVotingQueryService } from './abstract-voting.service';
 import { DomainObjectType, Vote, VoteType } from './vote.model';
 import { AuthenticationService } from '../../auth/authentication.service';
 import { NGXLogger } from 'ngx-logger';
-import { EventBusService } from '../../service/event-bus.service';
+import { EventBusService } from '../../shared/service/event-bus.service';
 import { CategoryDisLikeRemvedEvent, CategoryDislikedEvent, CategoryLikeDislikRemovedEvent, CategoryLikeRemvedEvent, CategoryLikedEvent, CommentDisLikeRemvedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikeRemvedEvent, CommentLikedEvent, GroupDisLikeRemvedEvent, GroupDislikedEvent, GroupLikeDislikRemovedEvent, GroupLikeRemvedEvent, GroupLikedEvent, ReferenceDisLikeRemvedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikeRemvedEvent, ReferenceLikedEvent, TopicDisLikeRemvedEvent, TopicDislikedEvent, TopicLikeDislikRemovedEvent, TopicLikeRemvedEvent, TopicLikedEvent } from './voting-module.event';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 

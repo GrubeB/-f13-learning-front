@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, inject } from '@angular/core';
 import { Reference } from '../../reference.model';
-import { EventBusService } from '../../../../service/event-bus.service';
+import { EventBusService } from '../../../../shared/service/event-bus.service';
 import { NGXLogger } from 'ngx-logger';
-import { Filter } from '../../../../../shared/filter/filter.model';
-import { Direction, Sort } from '../../../../../shared/filter/sort.model';
+import { Filter } from '../../../../shared/filter/filter.model';
+import { Direction, Sort } from '../../../../shared/filter/sort.model';
 
 @Component({
   selector: 'reference-filter',
