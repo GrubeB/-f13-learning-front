@@ -3,12 +3,12 @@ import { Component, EventEmitter, Input, OnInit, Output, inject, input } from '@
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NGXLogger } from 'ngx-logger';
 import { first, take } from 'rxjs';
-import { EventBusService } from '../../../../service/event-bus.service';
-import { CategoryService } from '../../category.service';
-import { CategoryCreatedEvent, CategoryUpdatedEvent, EditCategoryEvent } from '../../category-module.event';
-import { Category, CreateCategoryCommand, UpdateCategoryCommand } from '../../category.model';
-import { CategoryQueryService } from '../../category-query.service';
-import { MultiSelectComponent } from '../../../../../shared/multi-select/multi-select.component';
+import { EventBusService } from '../../../service/event-bus.service';
+import { CategoryService } from '../category.service';
+import { CategoryCreatedEvent, CategoryUpdatedEvent, EditCategoryEvent } from '../category-module.event';
+import { Category, CreateCategoryCommand, UpdateCategoryCommand } from '../category.model';
+import { CategoryQueryService } from '../category-query.service';
+import { MultiSelectComponent } from '../../../../shared/multi-select/multi-select.component';
 
 @Component({
   selector: 'category-form',
@@ -44,7 +44,13 @@ export class CategoryFormComponent implements OnInit {
 
   constructor() {
     this.eventBus.listen(CreateCategoryCommand.name, (event: CreateCategoryCommand) => {
-      this.formViable ? this.hideForm() : this.showForm();
+      this.isEditForm = false;
+      this.formGroup.setValue({
+        name: "",
+        description: "",
+        parentCategories: [],
+        childCategories: [],
+      });
     });
 
     this.eventBus.listen(EditCategoryEvent.name, (event: EditCategoryEvent) => {
@@ -58,7 +64,6 @@ export class CategoryFormComponent implements OnInit {
             parentCategories: this.editCategory?.parents ?? [],
             childCategories: this.editCategory?.children ?? [],
           });
-          this.showForm();
         }
       })
     });
@@ -93,7 +98,6 @@ export class CategoryFormComponent implements OnInit {
         next: response => {
           this.logger.debug(CategoryFormComponent.name, " updated created ", command.id);
           this.eventBus.emit(CategoryUpdatedEvent.name, new CategoryUpdatedEvent(command.id));
-          this.hideForm();
         },
         error: e => {
           this.logger.debug(CategoryFormComponent.name, " error occurred while updating category ", e);
@@ -115,20 +119,11 @@ export class CategoryFormComponent implements OnInit {
         next: response => {
           this.logger.debug(CategoryFormComponent.name, " category created ", response.id);
           this.eventBus.emit(CategoryCreatedEvent.name, new CategoryCreatedEvent(response.id));
-          this.hideForm();
         },
         error: e => {
           this.logger.debug(CategoryFormComponent.name, " error occurred while creating category ", e);
           this.message = e.message;
         }
       })
-  }
-
-  formViable: boolean = false;
-  showForm() {
-    this.formViable = true
-  }
-  hideForm() {
-    this.formViable = false;
   }
 }

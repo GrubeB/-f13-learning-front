@@ -1,14 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CategoryService } from '../category.service';
-import { Category, CreateCategoryCommand } from '../category.model';
+import { Category, CreateCategoryCommand, UpdateCategoryCommand } from '../category.model';
 import { CommonModule } from '@angular/common';
 import { first, take } from 'rxjs';
 import { CategoriesListComponent } from './category-list/category-list.component';
 import { CategoryQueryService } from '../category-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../service/event-bus.service';
-import { CategoryCreatedEvent, CategoryDeletedEvent, CategoryUpdatedEvent, DeleteCategoryEvent, EditCategoryEvent } from '../category-module.event';
-import { CategoryFormComponent } from './category-form/category-form.component';
+import { CategoryCreatedEvent, CategoryDeletedEvent, CategoryUpdatedEvent, CreateCategoryEvent, DeleteCategoryEvent, EditCategoryEvent } from '../category-module.event';
+import { CategoryFormComponent } from '../category-form/category-form.component';
 
 @Component({
   selector: 'category-viev',
@@ -38,6 +38,12 @@ export class CategoryVievComponent implements OnInit {
       this.getCategories();
     });
 
+    this.eventBus.listen([
+      EditCategoryEvent.name,
+      CreateCategoryEvent.name
+    ], (event: any) => {
+      this.changeTab('form');
+    });
     this.eventBus.listen(DeleteCategoryEvent.name, (event: DeleteCategoryEvent) => {
       this.categoryService.delete(event.categoryId).pipe(first()).subscribe({
         next: data => {
@@ -69,5 +75,15 @@ export class CategoryVievComponent implements OnInit {
   showCategoryForm() {
     this.logger.debug(CategoryVievComponent.name, "showCategoryForm()");
     this.eventBus.emit(CreateCategoryCommand.name, new CreateCategoryCommand());
+  }
+
+  tabs = ['list', 'form'];
+  activeTab = this.tabs[0];
+  changeTab(tabName: string) {
+    this.logger.debug(CategoryVievComponent.name, "changeTab()");
+    if (this.tabs.includes(tabName)) {
+      let index = this.tabs.indexOf(tabName);
+      this.activeTab = this.tabs[index];
+    }
   }
 }
