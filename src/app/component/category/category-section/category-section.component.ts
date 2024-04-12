@@ -4,7 +4,7 @@ import { EventBusService } from '../../../shared/service/event-bus.service';
 import { CommonModule } from '@angular/common';
 import { SwitchButtonComponent } from '../../../shared/component/switch-button/switch-button.component';
 import { Category } from '../category.model';
-import { CategoriesListComponent } from '../category-view/category-list/category-list.component';
+import { CategoriesListComponent } from '../category-list/category-list.component';
 
 @Component({
   selector: 'category-section',

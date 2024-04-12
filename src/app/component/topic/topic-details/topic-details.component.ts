@@ -14,6 +14,7 @@ import { UserProfile2Component } from '../../user/user-profile-2/user-profile-2.
 import { CommentSectionComponent } from '../../comment/comment-section/comment-section.component';
 import { ReferenceSectionComponent } from '../../reference/reference-section/reference-section.component';
 import { TopicReferenceService } from '../../reference/topic-reference.service';
+import { CategorySectionComponent } from '../../category/category-section/category-section.component';
 
 @Component({
   selector: 'topic-details',
@@ -24,6 +25,7 @@ import { TopicReferenceService } from '../../reference/topic-reference.service';
     UserProfile2Component,
     CommentSectionComponent,
     ReferenceSectionComponent,
+    CategorySectionComponent,
   ],
   templateUrl: './topic-details.component.html',
   styleUrl: './topic-details.component.scss'

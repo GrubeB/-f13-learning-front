@@ -16,7 +16,9 @@
     <div class="d-flex flex-column bg-gray-00 shadow-3 rounded-1 mt-2 p-2">
         <reference-section [modelId]="topic.id" [referenceService]="referenceService" [items]="topic.reference.references"/>
     </div>
-
+    <div class="d-flex flex-column bg-gray-00 shadow-3 rounded-1 mt-2 p-2">
+        <category-section [items]="topic.categories ?? []"  />
+    </div>
     <div class="d-flex flex-column bg-gray-00 shadow-3 rounded-1 mt-2 p-2">
         <comment-section [modelId]="topic.id" [commentService]="commentService" [items]="topic.comment.comments"/>
     </div>

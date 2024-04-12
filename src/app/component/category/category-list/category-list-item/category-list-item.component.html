@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-center align-items-center ps-2 ">
             <h2 class="m-0">{{category.name}}</h2>
         </div>
-        <button class="app-btn-icon-tertiary" (click)="toggleContextMenu()" >
+        <button *ngIf="_config.contextMenu.enable" class="app-btn-icon-tertiary" (click)="toggleContextMenu()" >
             <i class="bi bi-three-dots-vertical"></i>
             <category-list-item-context-menu [modelId]="category.id" [(visable)]="contextMenuVisable"/>
         </button>
@@ -12,8 +12,8 @@
         <p class="card-text">{{category.description}}</p>
     </div>
     <div class="d-flex flex-row justify-content-around pt-3">
-        <simple-liking [vote]="vote" (like)="votingService.createLike(category.id)" (removeLike)="votingService.deleteLikeAndDislike(category.id)" />
-        <button  class="app-btn-icon-tertiary" routerLink="/categories/{{category.id}}">
+        <simple-liking *ngIf="_config.voting" [vote]="vote" (like)="votingService.createLike(category.id)" (removeLike)="votingService.deleteLikeAndDislike(category.id)" />
+        <button *ngIf="_config.open" class="app-btn-icon-tertiary" routerLink="/categories/{{category.id}}">
             <i class="bi bi-box-arrow-up-right"></i>
         </button>
     </div>

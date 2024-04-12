@@ -9,17 +9,17 @@
                     </button>
                 </div>
                 <div class="tab">
-                    <button  [ngClass]="activeTab == 'list'? 'active' : ''"
-                        (click)="changeTab('list')"> List
+                    <button  [ngClass]="activeTab == 'LIST'? 'active' : ''"
+                        (click)="changeTab('LIST')"> List
                     </button>
-                    <button  [ngClass]="activeTab == 'form'? 'active' : ''"
-                        (click)="changeTab('form')"> Form
+                    <button  [ngClass]="activeTab == 'FORM'? 'active' : ''"
+                        (click)="changeTab('FORM')"> Form
                     </button>
                 </div>
             </div>
             <div class="bg-gray-00 mt-4 p-3 shadow-3 rounded-1">
-                <category-list [hidden] = "activeTab != 'list'" [categories]="categories" />
-                <category-form [hidden] = "activeTab != 'form'"/>
+                <category-list [hidden] = "activeTab != 'LIST'" [categories]="categories" />
+                <category-form [hidden] = "activeTab != 'FORM'"/>
             </div>
         </div>
     </div>

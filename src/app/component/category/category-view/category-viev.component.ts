@@ -3,7 +3,7 @@ import { CategoryService } from '../category.service';
 import { Category, CreateCategoryCommand, UpdateCategoryCommand } from '../category.model';
 import { CommonModule } from '@angular/common';
 import { first, take } from 'rxjs';
-import { CategoriesListComponent } from './category-list/category-list.component';
+import { CategoriesListComponent } from '../category-list/category-list.component';
 import { CategoryQueryService } from '../category-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../shared/service/event-bus.service';
@@ -37,13 +37,14 @@ export class CategoryVievComponent implements OnInit {
       CategoryDeletedEvent.name
     ], (e: any) => {
       this.getCategories();
+      this.changeTab(Tabs.LIST);
     });
 
     this.eventBus.listen([
       UpdateCategoryEvent.name,
       CreateCategoryEvent.name
     ], (event: any) => {
-      this.changeTab('form');
+      this.changeTab(Tabs.FORM);
     });
     this.eventBus.listen(DeleteCategoryEvent.name, (event: DeleteCategoryEvent) => {
       this.categoryService.delete(event.categoryId).pipe(first()).subscribe({
@@ -79,13 +80,18 @@ export class CategoryVievComponent implements OnInit {
   }
 
   // TABS
-  tabs = ['list', 'form'];
+  tabs = [Tabs.LIST, Tabs.FORM];
   activeTab = this.tabs[0];
   changeTab(tabName: string) {
     this.logger.debug(CategoryVievComponent.name, "changeTab()");
-    if (this.tabs.includes(tabName)) {
-      let index = this.tabs.indexOf(tabName);
+    var tab: Tabs = Tabs[tabName as keyof typeof Tabs];
+    if (tab && this.tabs.includes(tab)) {
+      let index = this.tabs.indexOf(tab);
       this.activeTab = this.tabs[index];
     }
   };
+}
+enum Tabs {
+  LIST = "LIST",
+  FORM = "FORM",
 }

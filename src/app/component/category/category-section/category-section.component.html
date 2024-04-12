@@ -11,6 +11,6 @@
     </div>
 
     <div [hidden]="contentHidden" class="mt-2">
-        <category-list [categories]="items"/>
+        <category-list [categories]="items" [config]="{items: { contextMenu: {enable: false}}}" />
     </div>
 </div>
