@@ -1,0 +1,7 @@
+<button *ngIf="!value" class="app-btn-icon-tertiary" (click)="toTrue()">
+    <i class="bi bi-caret-up-fill"></i>
+</button>
+
+<button *ngIf="value" class="app-btn-icon-tertiary" (click)="toFalse()">
+    <i class="bi bi-caret-down-fill"></i>
+</button>

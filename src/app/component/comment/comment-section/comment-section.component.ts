@@ -8,6 +8,7 @@ import { CommentFormComponent } from '../comment-form/comment-form.component';
 import { CommentListComponent } from '../comment-list/comment-list.component';
 import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent, CreateCommentEvent, CreateCommentReplayEvent, DeleteCommentEvent, UpdateCommentEvent } from '../comment-module.event';
 import { first } from 'rxjs';
+import { SwitchButtonComponent } from '../../../../shared/switch-button/switch-button.component';
 @Component({
   selector: 'comment-section',
   standalone: true,
@@ -15,6 +16,7 @@ import { first } from 'rxjs';
     CommonModule,
     CommentFormComponent,
     CommentListComponent,
+    SwitchButtonComponent,
   ],
   templateUrl: './comment-section.component.html',
   styleUrl: './comment-section.component.scss'
@@ -58,6 +60,9 @@ export class CommentSectionComponent {
     this.eventBus.emit(CreateCommentEvent.name, new CreateCommentEvent());
   }
   
+  // HIDDE CONTENT
+  contentHidden: boolean = false;
+
   // TABS
   tabs = [Tabs.LIST, Tabs.FORM];
   activeTab = this.tabs[0];

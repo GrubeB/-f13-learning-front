@@ -8,6 +8,7 @@ import { first } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ReferenceFormComponent } from '../reference-form/reference-form.component';
 import { ReferenceListComponent } from '../reference-list/reference-list.component';
+import { SwitchButtonComponent } from '../../../../shared/switch-button/switch-button.component';
 
 @Component({
   selector: 'reference-section',
@@ -16,6 +17,7 @@ import { ReferenceListComponent } from '../reference-list/reference-list.compone
     CommonModule,
     ReferenceFormComponent,
     ReferenceListComponent,
+    SwitchButtonComponent,
   ],
   templateUrl: './reference-section.component.html',
   styleUrl: './reference-section.component.scss'
@@ -58,6 +60,9 @@ export class ReferenceSectionComponent {
   emitCreateReferenceEvent() {
     this.eventBus.emit(CreateReferenceEvent.name, new CreateReferenceEvent());
   }
+
+  // HIDDE CONTENT
+  contentHidden: boolean = false;
 
   // TABS
   tabs = [Tabs.LIST, Tabs.FORM];
