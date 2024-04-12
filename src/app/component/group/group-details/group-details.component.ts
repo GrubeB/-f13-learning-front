@@ -6,7 +6,7 @@ import { NGXLogger } from 'ngx-logger';
 import { GroupCommentService } from '../../comment/group-comment.service';
 import { Group } from '../group.model';
 import { first } from 'rxjs';
-import { CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../voting/voting-module.event';
+import { CommentDisLikeRemvedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikeRemvedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../voting/voting-module.event';
 import { ReferenceCreatedEvent, ReferenceDeletedEvent, ReferenceUpdatedEvent } from '../../reference/reference-module.event';
 import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent, DeleteCommentEvent } from '../../comment/comment-module.event';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -17,6 +17,9 @@ import { ReferenceListComponent } from '../../reference/reference-list/reference
 import { CommentListComponent } from '../../comment/comment-list/comment-list.component';
 import { CommentFormComponent } from '../../comment/comment-form/comment-form.component';
 import { UserProfile2Component } from '../../user/user-profile-2/user-profile-2.component';
+import { CommentSectionComponent } from '../../comment/comment-section/comment-section.component';
+import { ReferenceSectionComponent } from '../../reference/reference-section/reference-section.component';
+import { GroupReferenceService } from '../../reference/group-reference.service';
 
 @Component({
   selector: 'group-details',
@@ -24,13 +27,9 @@ import { UserProfile2Component } from '../../user/user-profile-2/user-profile-2.
   imports: [
     CommonModule,
     DatePipe,
-    ReferenceItemComponent,
-    ReferenceFilterComponent,
-    ReferenceFormComponent,
-    ReferenceListComponent,
-    CommentListComponent,
-    CommentFormComponent,
     UserProfile2Component,
+    CommentSectionComponent,
+    ReferenceSectionComponent,
   ],
   templateUrl: './group-details.component.html',
   styleUrl: './group-details.component.scss'
@@ -41,23 +40,12 @@ export class GroupDetailsComponent {
   service = inject(GroupService);
   queryService = inject(GroupQueryService);
   commentService = inject(GroupCommentService);
+  referenceService = inject(GroupReferenceService);
 
-  @Input() groupId!: string;
-  group?: Group;
+  @Input() modelId!: string;
+  model?: Group;
 
   constructor() {
-    this.eventBus.listen(DeleteCommentEvent.name, (event: DeleteCommentEvent) => {
-      this.commentService.delete(this.groupId, event.commentId).pipe(first()).subscribe({
-        next: data => {
-          this.logger.debug(GroupDetailsComponent.name, "Deleted comment ", event.commentId);
-          this.eventBus.emit(CommentDeletedEvent.name, new CommentDeletedEvent(event.commentId));
-        },
-        error: e => {
-          this.logger.debug(GroupDetailsComponent.name, "Error occured while deleting comment ", e);
-        }
-      })
-    });
-
     this.eventBus.listen([
       ReferenceLikedEvent.name,
       ReferenceDislikedEvent.name,
@@ -71,31 +59,28 @@ export class GroupDetailsComponent {
       CommentDeletedEvent.name,
 
       CommentLikedEvent.name,
+      CommentLikeRemvedEvent.name,
       CommentDislikedEvent.name,
+      CommentDisLikeRemvedEvent.name,
       CommentLikeDislikRemovedEvent.name,
-
     ], (event: any) => {
-      this.refreshGroup();
+      this.getModel(this.modelId);
     });
   }
 
   ngOnInit(): void {
-    this.getGroup(this.groupId);
+    this.getModel(this.modelId);
   }
 
-  getGroup(id: string): void {
-    this.logger.debug(GroupDetailsComponent.name, "getGroup()");
+  getModel(id: string): void {
+    this.logger.debug(GroupDetailsComponent.name, "getModel()");
     this.queryService.get(id).pipe(first()).subscribe({
       next: data => {
-        this.group = data;
-        this.logger.debug(GroupDetailsComponent.name, "group: ", this.group);
+        this.model = data;
+        this.logger.debug(GroupDetailsComponent.name, "model: ", this.model);
       },
       error: e => {
       }
     });
-  }
-  refreshGroup() {
-    this.logger.debug(GroupDetailsComponent.name, "refreshGroup()");
-    this.getGroup(this.groupId);
   }
 }

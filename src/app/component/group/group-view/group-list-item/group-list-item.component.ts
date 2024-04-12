@@ -11,6 +11,7 @@ import { GroupVotingService } from '../../../voting/group-voting.service';
 import { SimpleLikingComponent } from '../../../voting/simple-liking/simple-liking.component';
 import { GroupListItemContextMenuComponent } from './group-list-item-context-menu/group-list-item-context-menu.component';
 import { UserProfile2Component } from '../../../user/user-profile-2/user-profile-2.component';
+import { ShowGroupDetailsModalEvent } from '../../group-module.event';
 
 @Component({
   selector: 'group-list-item',
@@ -40,11 +41,11 @@ export class GroupListItemComponent implements OnInit {
     this.getVote();
   }
 
-  // // MODAL 
-  // openTopicDetailsModal(topicId: string) {
-  //   this.logger.debug(TopicListItemComponent.name, " openTopicDetailsModal()");
-  //   this.eventBus.emit(ShowTopicDetailsModalEvent.name, new ShowTopicDetailsModalEvent(topicId));
-  // }
+  // MODAL 
+  openDetailsModal(modelId: string) {
+    this.logger.debug(GroupListItemComponent.name, " openDetailsModal()");
+    this.eventBus.emit(ShowGroupDetailsModalEvent.name, new ShowGroupDetailsModalEvent(modelId));
+  }
 
   // CONTEXT MENU
   contextMenuVisable: boolean = false;
@@ -61,5 +62,14 @@ export class GroupListItemComponent implements OnInit {
         this.vote = vote;
       },
     });
+  }
+
+  like(id: string) {
+    this.logger.debug(GroupListItemComponent.name, " like()");
+    this.votingService.createLike(id)
+  }
+  removeLike(id: string) {
+    this.logger.debug(GroupListItemComponent.name, " removeLike()");
+    this.votingService.deleteLikeAndDislike(id);
   }
 }

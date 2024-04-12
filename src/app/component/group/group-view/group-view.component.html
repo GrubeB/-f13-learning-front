@@ -1,14 +1,27 @@
 <div class="view-container container-xl">
     <div  class="view-content">
-        <div class="container-fluid p-2">
-            <div class="d-flex flex-row gap-3">
-                <h1>Group List</h1>
-                <button (click)="showTopicForm();" class="app-btn-icon s32">
-                    <i class="bi bi-plus"></i>
-                </button>
+        <div class="container-fluid">
+            <div id="header" class="bg-gray-00 p-3 ps-4 pe-4 shadow-2 rounded-1">
+                <div class="d-flex flex-row justify-content-between">
+                    <h1 class="fw-bold">Groups</h1>
+                    <button class="app-btn" (click)="showForm()">
+                        <i class="bi bi-plus"></i> Add
+                    </button>
+                </div>
+                <div class="tab">
+                    <button  [ngClass]="activeTab == 'LIST'? 'active' : ''"
+                        (click)="changeTab('LIST')"> List
+                    </button>
+                    <button  [ngClass]="activeTab == 'FORM'? 'active' : ''"
+                        (click)="changeTab('FORM')"> Form
+                    </button>
+                </div>
             </div>
-            <!-- <topic-form /> -->
-            <group-list [groups]="groups"/>
+            <div class="bg-gray-00 mt-4 p-3 shadow-3 rounded-1">
+                <group-form [hidden] = "activeTab != 'FORM'" />
+                <group-list [hidden] = "activeTab != 'LIST'"  [groups]="items"/>
+            </div>
         </div>
     </div>
 </div>
+<!-- <topic-details-modal /> -->

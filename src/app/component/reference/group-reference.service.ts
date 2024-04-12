@@ -7,7 +7,7 @@ import { CreateReferenceCommand, Reference, UpdateReferenceCommand } from './ref
 import { AbstractReferenceService } from './abstract-reference.service';
 
 @Injectable()
-export class TopicReferenceService extends AbstractReferenceService {
+export class GroupReferenceService extends AbstractReferenceService {
   http: HttpClient = inject(HttpClient);
 
   resourceName: string = "references";

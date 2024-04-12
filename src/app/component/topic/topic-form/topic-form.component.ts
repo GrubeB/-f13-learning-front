@@ -35,7 +35,7 @@ export class TopicFormComponent implements OnInit {
   message?: string;
 
   isEditForm: boolean = false;
-  editTopic?: Topic;
+  editModel?: Topic;
 
   allCategories: Category[] = [];
 
@@ -62,11 +62,11 @@ export class TopicFormComponent implements OnInit {
       this.isEditForm = true;
       this.topicQueryService.get(event.topicId).pipe(take(1)).subscribe({
         next: data => {
-          this.editTopic = data;
+          this.editModel = data;
           this.formGroup.setValue({
-            name: this.editTopic?.name ?? "",
-            content: this.editTopic?.content ?? "",
-            categories: this.editTopic?.categories ?? []
+            name: this.editModel?.name ?? "",
+            content: this.editModel?.content ?? "",
+            categories: this.editModel?.categories ?? []
           });
         }
       })
@@ -108,7 +108,7 @@ export class TopicFormComponent implements OnInit {
   }
   updateCategory() {
     let command = new UpdateTopicCommand();
-    command.id = this.editTopic?.id ?? '';
+    command.id = this.editModel?.id ?? '';
     command.name = this.formGroup.value.name ? this.formGroup.value.name as string : '';
     command.content = this.formGroup.value.content ? this.formGroup.value.content as string : '';
     command.categoryIds = this.formGroup.value.categories?.map(cat => cat['id']) as string[] ?? [];

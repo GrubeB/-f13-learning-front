@@ -1,20 +1,28 @@
-<div class="card m-2 w-100 bg-secondary-light" >
-    <div class="card-header p-2 m-2 d-flex flex-row justify-content-between">
+<div class="m-2 p-2 border shadow-1">
+    <div class="d-flex flex-row justify-content-between ">
         <user-profile-2 [userId]="group.createdBy" [date]="group.createdDate"/>
-        <button class="app-btn-icon s24" (click)="toggleContextMenu()">
+        <button class="app-btn-icon-tertiary mt-0" (click)="toggleContextMenu()">
             <i class="bi bi-three-dots-vertical"></i>
             <group-list-item-context-menu [modelId]="group.id" [(visable)]="contextMenuVisable"/>
         </button>
     </div>
-    <div class="card-body">
+    <div class="pt-2">
         <h2 class="card-title">{{group.name}}</h2>
-        <div class="d-flex flex-row flex-wrap justify-content-start">
-            <button *ngFor="let category of group.categories" class="btn-category">{{category.name}}</button>
-        </div>
+        <p>{{group.content}}</p>
     </div>
-    <div class="card-footer d-flex flex-row justify-content-around pt-3">
-        <simple-liking [vote]="vote" (like)="votingService.createLike(group.id)" (removeLike)="votingService.deleteLike(group.id)" />
-        <button  class="app-btn-icon s24" routerLink="/groups/{{group.id}}">
+    <div 
+        *ngIf="group.categories && group.categories.length > 0"
+        class="d-flex flex-row flex-wrap justify-content-start"
+    >
+        <button *ngFor="let category of group.categories" class="btn-category">{{category.name}}</button>
+    </div>
+
+    <div class="card-footer d-flex flex-row justify-content-around pt-2">
+        <button class="app-btn-icon-tertiary" >
+            <i class="bi bi-arrows-angle-expand"></i>
+        </button>
+        <simple-liking [vote]="vote" (like)="like(group.id)" (removeLike)="removeLike(group.id)" />
+        <button  class="app-btn-icon-tertiary" routerLink="/groups/{{group.id}}">
             <i class="bi bi-box-arrow-up-right"></i>
         </button>
     </div>

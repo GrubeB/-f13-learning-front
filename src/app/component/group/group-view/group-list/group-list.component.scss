@@ -1,0 +1,17 @@
+@import 'styles';
+
+.container-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(10em, 1fr));
+}
+@media (max-width: $layout-breakpoint-x-large) {
+  .container-list {
+    grid-template-columns: repeat(3, minmax(10em, 1fr));
+  }
+}
+
+@media (max-width: $layout-breakpoint-large) {
+  .container-list {
+    grid-template-columns: repeat(2, minmax(10em, 1fr));
+  }
+}

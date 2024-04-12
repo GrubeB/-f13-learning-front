@@ -17,10 +17,10 @@ export class GroupDetailsViewComponent {
   route = inject(ActivatedRoute);
   location = inject(Location);
 
-  groupId?: string;
+  modelId?: string;
 
   ngOnInit(): void {
-    this.groupId = String(this.route.snapshot.paramMap.get('id'));
+    this.modelId = String(this.route.snapshot.paramMap.get('id'));
   }
 
   goBack(): void {

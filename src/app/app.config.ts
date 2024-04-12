@@ -26,6 +26,7 @@ import { GroupVotingService } from './component/voting/group-voting.service';
 import { GroupQueryService } from './component/group/group-query.service';
 import { GroupService } from './component/group/group.service';
 import { GroupCommentService } from './component/comment/group-comment.service';
+import { GroupReferenceService } from './component/reference/group-reference.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -51,6 +52,7 @@ export const appConfig: ApplicationConfig = {
 
     { provide: ReferenceQueryService},
     { provide: TopicReferenceService},
+    { provide: GroupReferenceService},
     
     { provide: CommentQueryService},
     { provide: TopicCommentService},

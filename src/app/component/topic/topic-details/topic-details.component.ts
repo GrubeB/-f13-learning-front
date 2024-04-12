@@ -9,7 +9,7 @@ import { NGXLogger } from 'ngx-logger';
 import { ReferenceCreatedEvent, ReferenceUpdatedEvent, ReferenceDeletedEvent } from '../../reference/reference-module.event';
 import { TopicCommentService } from '../../comment/topic-comment.service';
 import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent } from '../../comment/comment-module.event';
-import { CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../voting/voting-module.event';
+import { CommentDisLikeRemvedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikeRemvedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../voting/voting-module.event';
 import { UserProfile2Component } from '../../user/user-profile-2/user-profile-2.component';
 import { CommentSectionComponent } from '../../comment/comment-section/comment-section.component';
 import { ReferenceSectionComponent } from '../../reference/reference-section/reference-section.component';
@@ -53,7 +53,9 @@ export class TopicDetailsComponent implements OnInit {
       CommentDeletedEvent.name,
 
       CommentLikedEvent.name,
+      CommentLikeRemvedEvent.name,
       CommentDislikedEvent.name,
+      CommentDisLikeRemvedEvent.name,
       CommentLikeDislikRemovedEvent.name,
     ], (event: any) => {
       this.getTopic(this.topicId);

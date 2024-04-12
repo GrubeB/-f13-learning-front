@@ -26,10 +26,10 @@ import { Vote } from '../../voting/vote.model';
   styleUrl: './topic-view.component.scss'
 })
 export class TopicViewComponent implements OnInit {
-  topicQueryService = inject(TopicQueryService);
-  topicService = inject(TopicService);
   eventBus = inject(EventBusService);
   logger = inject(NGXLogger);
+  topicQueryService = inject(TopicQueryService);
+  topicService = inject(TopicService);
   
   topics: Topic[] = [];
 
@@ -57,8 +57,8 @@ export class TopicViewComponent implements OnInit {
         error: e => {
           this.logger.debug(TopicViewComponent.name, " Error occured while deleting topic ", e);
         }
-      })
-    })
+      });
+    });
   }
   ngOnInit(): void {
     this.getTopics();

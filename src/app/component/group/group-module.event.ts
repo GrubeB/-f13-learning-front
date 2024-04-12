@@ -1,20 +1,20 @@
 // EVENTS
 export class GroupCreatedEvent {
-    groupId!: string;
-    constructor(groupId: string) {
-        this.groupId = groupId;
+    modelId!: string;
+    constructor(modelId: string) {
+        this.modelId = modelId;
     }
 }
 export class GroupUpdateddEvent {
-    groupId!: string;
-    constructor(groupId: string) {
-        this.groupId = groupId;
+    modelId!: string;
+    constructor(modelId: string) {
+        this.modelId = modelId;
     }
 }
 export class GroupDeletedEvent {
-    groupId!: string;
-    constructor(groupId: string) {
-        this.groupId = groupId;
+    modelId!: string;
+    constructor(modelId: string) {
+        this.modelId = modelId;
     }
 }
 
@@ -22,14 +22,21 @@ export class GroupDeletedEvent {
 export class CreateGroupEvent {
 }
 export class UpdateGroupEvent {
-    groupId!: string;
-    constructor(groupId: string) {
-        this.groupId = groupId;
+    modelId!: string;
+    constructor(modelId: string) {
+        this.modelId = modelId;
     }
 }
 export class DeleteGroupEvent {
-    groupId!: string;
-    constructor(groupId: string) {
-        this.groupId = groupId;
+    modelId!: string;
+    constructor(modelId: string) {
+        this.modelId = modelId;
+    }
+}
+// COMPONENTS
+export class ShowGroupDetailsModalEvent {
+    modelId!: string;
+    constructor(modelId: string) {
+        this.modelId = modelId;
     }
 }
