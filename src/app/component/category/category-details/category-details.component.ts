@@ -1,11 +1,11 @@
 import { Component, Input, inject } from '@angular/core';
-import { CategoryService } from '../category.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
 import { Category } from '../category.model';
 import { take } from 'rxjs';
 import { CategoryQueryService } from '../category-query.service';
 import { CategoriesListComponent } from '../category-view/category-list/category-list.component';
+import { CategorySectionComponent } from '../category-section/category-section.component';
 
 @Component({
   selector: 'category-details',
@@ -13,26 +13,27 @@ import { CategoriesListComponent } from '../category-view/category-list/category
   imports: [
     CommonModule,
     CategoriesListComponent,
+    CategorySectionComponent,
   ],
   templateUrl: './category-details.component.html',
   styleUrl: './category-details.component.scss'
 })
 export class CategoryDetailsComponent {
   route = inject(ActivatedRoute);
-  categoryQueryService = inject(CategoryQueryService);
+  queryService = inject(CategoryQueryService);
   location = inject(Location);
 
-  @Input() categoryId!: string;
-  category?: Category;
+  @Input() modelId!: string;
+  model?: Category;
 
   ngOnInit(): void {
-    this.getCategory(this.categoryId);
+    this.getModel(this.modelId);
   }
 
-  getCategory(id: string): void {
-    this.categoryQueryService.get(id).pipe(take(1)).subscribe({
+  getModel(id: string): void {
+    this.queryService.get(id).pipe(take(1)).subscribe({
       next: data => {
-        this.category = data;
+        this.model = data;
       },
       error: e => {
       }

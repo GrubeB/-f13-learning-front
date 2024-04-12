@@ -1,0 +1,16 @@
+<div class="d-flex flex-column ">
+    <div id="header" class="p-3 ps-4 pe-4 ">
+        <div class="d-flex flex-row justify-content-between">
+            <div class="d-flex flex-row gap-1">
+                <h1 *ngIf="label"  class="fw-bold">{{label}}</h1>
+                <h1 *ngIf="!label" class="fw-bold">Categories</h1>
+                
+                <switch-button [(value)]="contentHidden" />
+            </div>
+        </div>
+    </div>
+
+    <div [hidden]="contentHidden" class="mt-2">
+        <category-list [categories]="items"/>
+    </div>
+</div>
