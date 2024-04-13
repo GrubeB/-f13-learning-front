@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { EventBusService } from '../../../shared/service/event-bus.service';
 import { NGXLogger } from 'ngx-logger';
 import { GroupQueryService } from '../group-query.service';
@@ -21,7 +21,7 @@ import { GroupFormComponent } from '../group-form/group-form.component';
   templateUrl: './group-view.component.html',
   styleUrl: './group-view.component.scss'
 })
-export class GroupViewComponent {
+export class GroupViewComponent implements OnInit {
   eventBus = inject(EventBusService);
   logger = inject(NGXLogger);
   groupQueryService = inject(GroupQueryService);
@@ -59,6 +59,7 @@ export class GroupViewComponent {
 
   ngOnInit(): void {
     this.getItems();
+    this.changeTab(Tabs.LIST);
   }
 
   getItems() {
@@ -80,7 +81,7 @@ export class GroupViewComponent {
 
   // TABS
   tabs = [Tabs.LIST, Tabs.FORM];
-  activeTab = this.tabs[1];
+  activeTab = this.tabs[0];
   changeTab(tabName: string) {
     this.logger.debug(GroupViewComponent.name, "changeTab()");
     var tab: Tabs = Tabs[tabName as keyof typeof Tabs];

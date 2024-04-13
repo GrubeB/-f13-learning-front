@@ -62,6 +62,7 @@ export class TopicViewComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getTopics();
+    this.changeTab(Tabs.LIST);
   }
   getTopics() {
     this.logger.debug(TopicViewComponent.name, " getTopics()");

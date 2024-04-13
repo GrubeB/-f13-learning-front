@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../shared/service/event-bus.service';
 import { Comment } from '../comment.model';
@@ -9,6 +9,7 @@ import { CommentListComponent } from '../comment-list/comment-list.component';
 import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent, CreateCommentEvent, CreateCommentReplayEvent, DeleteCommentEvent, UpdateCommentEvent } from '../comment-module.event';
 import { first } from 'rxjs';
 import { SwitchButtonComponent } from '../../../shared/component/switch-button/switch-button.component';
+import { mergeDeep } from '../../../shared/utils/merge';
 @Component({
   selector: 'comment-section',
   standalone: true,
@@ -21,7 +22,7 @@ import { SwitchButtonComponent } from '../../../shared/component/switch-button/s
   templateUrl: './comment-section.component.html',
   styleUrl: './comment-section.component.scss'
 })
-export class CommentSectionComponent {
+export class CommentSectionComponent implements OnInit{
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
   @Input() modelId!: string;
@@ -55,27 +56,43 @@ export class CommentSectionComponent {
       this.changeTab(Tabs.LIST);
     });
   }
+  ngOnInit(): void {
+    this.contentHidden = this._config.contentHidden;
+  }
 
   emitCreateCommentEvent() {
     this.eventBus.emit(CreateCommentEvent.name, new CreateCommentEvent());
   }
-  
+
   // HIDDE CONTENT
-  contentHidden: boolean = false;
+  contentHidden!: boolean;
 
   // TABS
   tabs = [Tabs.LIST, Tabs.FORM];
   activeTab = this.tabs[0];
   changeTab(tabName: string) {
     this.logger.debug(CommentSectionComponent.name, "changeTab()");
-    var tab : Tabs = Tabs[tabName as keyof typeof Tabs];
+    var tab: Tabs = Tabs[tabName as keyof typeof Tabs];
     if (tab && this.tabs.includes(tab)) {
       let index = this.tabs.indexOf(tab);
       this.activeTab = this.tabs[index];
     }
   };
+
+  // CONFIG
+  @Input() set config(config: any) {
+    this._config = mergeDeep(this._config, config);
+  }
+  _config: Config = {
+    contentHidden: false,
+  }
 }
+
 enum Tabs {
   LIST = "LIST",
   FORM = "FORM",
+}
+
+class Config {
+  contentHidden!: boolean;
 }

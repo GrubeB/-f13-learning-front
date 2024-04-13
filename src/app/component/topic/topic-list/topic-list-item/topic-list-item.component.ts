@@ -16,6 +16,7 @@ import { DomainObjectType, Vote } from '../../../voting/vote.model';
 import { SimpleLikingComponent } from '../../../voting/simple-liking/simple-liking.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { first } from 'rxjs';
+import { mergeDeep } from '../../../../shared/utils/merge';
 
 @Component({
   selector: 'topic-list-item',
@@ -76,4 +77,25 @@ export class TopicListItemComponent implements OnInit {
     this.logger.debug(TopicListItemComponent.name, " removeLike()");
     this.votingService.deleteLikeAndDislike(id);
   }
+
+  // CONFIG
+  @Input() set config(config: any) {
+    this._config = mergeDeep(this._config, config);
+  }
+  _config: Config = {
+    contextMenu: {
+      enable: true,
+    },
+    modal: true,
+    voting: true,
+    open: true,
+  }
+}
+class Config {
+  contextMenu!: {
+    enable: boolean;
+  };
+  modal!:boolean;
+  voting!: boolean;
+  open!: boolean;
 }

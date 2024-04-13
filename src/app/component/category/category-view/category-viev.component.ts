@@ -61,6 +61,7 @@ export class CategoryVievComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
+    this.changeTab(Tabs.LIST);
   }
   getCategories() {
     this.logger.debug(CategoryVievComponent.name, " getCategories()");

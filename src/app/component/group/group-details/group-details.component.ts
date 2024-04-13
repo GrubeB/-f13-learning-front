@@ -8,18 +8,14 @@ import { Group } from '../group.model';
 import { first } from 'rxjs';
 import { CommentDisLikeRemvedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikeRemvedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../voting/voting-module.event';
 import { ReferenceCreatedEvent, ReferenceDeletedEvent, ReferenceUpdatedEvent } from '../../reference/reference-module.event';
-import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent, DeleteCommentEvent } from '../../comment/comment-module.event';
+import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent } from '../../comment/comment-module.event';
 import { CommonModule, DatePipe } from '@angular/common';
-import { ReferenceItemComponent } from '../../reference/reference-list/reference-item/reference-item.component';
-import { ReferenceFilterComponent } from '../../reference/reference-list/reference-filter/reference-filter.component';
-import { ReferenceFormComponent } from '../../reference/reference-form/reference-form.component';
-import { ReferenceListComponent } from '../../reference/reference-list/reference-list.component';
-import { CommentListComponent } from '../../comment/comment-list/comment-list.component';
-import { CommentFormComponent } from '../../comment/comment-form/comment-form.component';
 import { UserProfile2Component } from '../../user/user-profile-2/user-profile-2.component';
 import { CommentSectionComponent } from '../../comment/comment-section/comment-section.component';
 import { ReferenceSectionComponent } from '../../reference/reference-section/reference-section.component';
 import { GroupReferenceService } from '../../reference/group-reference.service';
+import { CategorySectionComponent } from '../../category/category-section/category-section.component';
+import { TopicSectionComponent } from '../../topic/topic-section/topic-section.component';
 
 @Component({
   selector: 'group-details',
@@ -30,6 +26,8 @@ import { GroupReferenceService } from '../../reference/group-reference.service';
     UserProfile2Component,
     CommentSectionComponent,
     ReferenceSectionComponent,
+    CategorySectionComponent,
+    TopicSectionComponent,
   ],
   templateUrl: './group-details.component.html',
   styleUrl: './group-details.component.scss'

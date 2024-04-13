@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../shared/service/event-bus.service';
 import { CreateReferenceCommand, Reference } from '../reference.model';
@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { ReferenceFormComponent } from '../reference-form/reference-form.component';
 import { ReferenceListComponent } from '../reference-list/reference-list.component';
 import { SwitchButtonComponent } from '../../../shared/component/switch-button/switch-button.component';
+import { mergeDeep } from '../../../shared/utils/merge';
 
 @Component({
   selector: 'reference-section',
@@ -22,7 +23,7 @@ import { SwitchButtonComponent } from '../../../shared/component/switch-button/s
   templateUrl: './reference-section.component.html',
   styleUrl: './reference-section.component.scss'
 })
-export class ReferenceSectionComponent {
+export class ReferenceSectionComponent implements OnInit{
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
   @Input() modelId!: string;
@@ -56,7 +57,9 @@ export class ReferenceSectionComponent {
       this.changeTab(Tabs.LIST);
     });
   }
-
+  ngOnInit(): void {
+    this.contentHidden = this._config.contentHidden;
+  }
   emitCreateReferenceEvent() {
     this.eventBus.emit(CreateReferenceEvent.name, new CreateReferenceEvent());
   }
@@ -75,8 +78,20 @@ export class ReferenceSectionComponent {
       this.activeTab = this.tabs[index];
     }
   };
+  // CONFIG
+  @Input() set config(config: any) {
+    this._config = mergeDeep(this._config, config);
+  }
+  _config: Config = {
+    contentHidden: false,
+  }
 }
+
 enum Tabs {
   LIST = "LIST",
   FORM = "FORM",
+}
+
+class Config {
+  contentHidden!: boolean;
 }

@@ -2,14 +2,13 @@
     <div id="header" class="p-3 ps-4 pe-4 ">
         <div class="d-flex flex-row justify-content-between">
             <div class="d-flex flex-row gap-1">
-                <h1 class="fw-bold">{{_config.label}}</h1>
-                
+                <h1 class="fw-bold">Topics</h1>
                 <switch-button [(value)]="contentHidden" />
             </div>
         </div>
     </div>
 
     <div [hidden]="contentHidden" class="mt-2">
-        <category-list [categories]="items" [config]="{items: { contextMenu: {enable: false}}}" />
+        <topic-list [topics]="items" [config]="{filter: false, items: { contextMenu: {enable: false}, modal: false}}" />
     </div>
 </div>
