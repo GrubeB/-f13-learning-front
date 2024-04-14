@@ -12,7 +12,7 @@ import { AuthenticationService } from '../../auth/authentication.service';
 export class GroupCommentService extends AbstractCommentService {
   http: HttpClient = inject(HttpClient);
 
-  resourceName: string = "groups";
+  resourceName: string = "comments";
   resourcePath: string = "/api/v1/groups/:groupId/" + this.resourceName;
   url: string = "http://localhost:9006" + this.resourcePath;
 

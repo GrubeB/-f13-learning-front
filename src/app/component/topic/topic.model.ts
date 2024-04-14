@@ -1,6 +1,6 @@
 import { Category } from "../category/category.model";
-import { CommentContainer } from "../comment/comment.model";
-import { Reference, ReferenceContainer } from "../reference/reference.model";
+import { Comment, CommentContainer } from "../comment/comment.model";
+import { Reference } from "../reference/reference.model";
 import { Voting } from "../voting/vote.model";
 
 export class Topic {
@@ -9,8 +9,8 @@ export class Topic {
     content?: string;
     status?: TopicStatus;
     categories?: Category[];
-    reference!: ReferenceContainer;
-    comment!: CommentContainer;
+    references!: Reference[];
+    comments!: Comment[];
     voting!: Voting;
 
     createdBy!: string;

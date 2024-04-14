@@ -10,7 +10,6 @@ import { CreateTopicEvent, DeleteTopicEvent, TopicCreatedEvent, TopicDeletedEven
 import { TopicQueryService } from '../topic-query.service';
 import { NGXLogger } from 'ngx-logger';
 import { TopicFormComponent } from '../topic-form/topic-form.component';
-import { Vote } from '../../voting/vote.model';
 
 
 @Component({
@@ -40,13 +39,13 @@ export class TopicViewComponent implements OnInit {
       TopicDeletedEvent.name
     ], (e: any) => {
       this.getTopics();
-      this.changeTab('list');
+      this.changeTab(Tabs.LIST);
     });
     this.eventBus.listen([
       UpdateTopicEvent.name,
       CreateTopicEvent.name
     ], (event: any) => {
-      this.changeTab('form');
+      this.changeTab(Tabs.FORM);
     });
     this.eventBus.listen(DeleteTopicEvent.name, (event: DeleteTopicEvent) => {
       this.topicService.delete(event.topicId).pipe(first()).subscribe({

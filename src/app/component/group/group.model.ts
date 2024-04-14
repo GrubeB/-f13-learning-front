@@ -1,6 +1,6 @@
 import { Category } from "../category/category.model";
-import { CommentContainer } from "../comment/comment.model";
-import { ReferenceContainer } from "../reference/reference.model";
+import { Comment, CommentContainer } from "../comment/comment.model";
+import { Reference, ReferenceContainer } from "../reference/reference.model";
 import { Topic } from "../topic/topic.model";
 import { Voting } from "../voting/vote.model";
 
@@ -10,11 +10,11 @@ export class Group {
     content! : string;
     status!: GroupStatus;
     categories!: Category[];
-    reference!: ReferenceContainer;
+    references!: Reference[];
     
     topics!: Topic[];
     groups!: Group[];
-    comment!: CommentContainer;
+    comments!: Comment[];
     voting!: Voting;
     
     createdBy!: string;
