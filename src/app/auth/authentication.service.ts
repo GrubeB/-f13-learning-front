@@ -44,10 +44,10 @@ export class AuthenticationService {
         );
     }
     login(email: string, password: string) {
-        this.logger.debug(AuthenticationService.name, " login()");
+        this.logger.info(AuthenticationService.name, " login()");
         return this.http.post<AuthResponse>(this.url + '/authenticate', { email, password })
             .pipe(map(response => {
-                this.logger.debug(AuthenticationService.name, " accessToken: ", response.accessToken);
+                this.logger.info(AuthenticationService.name, " accessToken: ", response.accessToken);
                 let decodedToken: any = jwtDecode<JwtPayload>(response.accessToken);
 
                 let context: AuthenticationContext = {
@@ -64,7 +64,7 @@ export class AuthenticationService {
                         accessToken: response.accessToken
                     }
                 };
-                this.logger.debug(AuthenticationService.name, " new authenticationContext ", context);
+                this.logger.info(AuthenticationService.name, " new authenticationContext ", context);
                 this._authenticationContext.next(context);
 
 
@@ -86,7 +86,7 @@ export class AuthenticationService {
                             },
                             userModel: data,
                         };
-                        this.logger.debug(AuthenticationService.name, " new authenticationContext ", context);
+                        this.logger.info(AuthenticationService.name, " new authenticationContext ", context);
                         this._authenticationContext.next(context);
                     }
                 });
@@ -94,6 +94,6 @@ export class AuthenticationService {
     }
 
     logout(): void {
-        this.logger.debug(AuthenticationService.name, " logout()");
+        this.logger.info(AuthenticationService.name, " logout()");
     }
 }

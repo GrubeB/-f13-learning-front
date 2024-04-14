@@ -9,6 +9,7 @@ import { first } from 'rxjs';
 import { CreateGroupEvent, DeleteGroupEvent, GroupCreatedEvent, GroupDeletedEvent, GroupUpdateddEvent, UpdateGroupEvent } from '../group-module.event';
 import { GroupListComponent } from '../group-list/group-list.component';
 import { GroupFormComponent } from '../group-form/group-form.component';
+import { GroupDetailsModalComponent } from '../group-details-modal/group-details-modal.component';
 
 @Component({
   selector: 'group-view',
@@ -17,6 +18,7 @@ import { GroupFormComponent } from '../group-form/group-form.component';
     CommonModule,
     GroupListComponent,
     GroupFormComponent,
+    GroupDetailsModalComponent,
   ],
   templateUrl: './group-view.component.html',
   styleUrl: './group-view.component.scss'

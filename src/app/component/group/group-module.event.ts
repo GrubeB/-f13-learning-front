@@ -1,3 +1,6 @@
+import { Filter } from "../../shared/filter/filter.model";
+import { Group } from "./group.model";
+
 // EVENTS
 export class GroupCreatedEvent {
     modelId!: string;
@@ -38,5 +41,13 @@ export class ShowGroupDetailsModalEvent {
     modelId!: string;
     constructor(modelId: string) {
         this.modelId = modelId;
+    }
+}
+export class HideGroupDetailsModalEvent {
+}
+export class GroupFilterChangedEvent {
+    filter!: Filter<Group>;
+    constructor(filter: Filter<Group>) {
+        this.filter = filter;
     }
 }

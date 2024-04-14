@@ -3,6 +3,7 @@ import { Group } from '../group.model';
 import { GroupListItemComponent } from './group-list-item/group-list-item.component';
 import { CommonModule } from '@angular/common';
 import { mergeDeep } from '../../../shared/utils/merge';
+import { GroupFilterComponent } from './group-filter/group-filter.component';
 
 @Component({
   selector: 'group-list',
@@ -10,6 +11,7 @@ import { mergeDeep } from '../../../shared/utils/merge';
   imports: [
     CommonModule,
     GroupListItemComponent,
+    GroupFilterComponent,
   ],
   templateUrl: './group-list.component.html',
   styleUrl: './group-list.component.scss'
