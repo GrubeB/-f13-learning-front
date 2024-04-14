@@ -16,6 +16,7 @@ import { ReferenceSectionComponent } from '../../reference/reference-section/ref
 import { GroupReferenceService } from '../../reference/group-reference.service';
 import { CategorySectionComponent } from '../../category/category-section/category-section.component';
 import { TopicSectionComponent } from '../../topic/topic-section/topic-section.component';
+import { GroupSectionComponent } from '../group-section/group-section.component';
 
 @Component({
   selector: 'group-details',
@@ -28,6 +29,7 @@ import { TopicSectionComponent } from '../../topic/topic-section/topic-section.c
     ReferenceSectionComponent,
     CategorySectionComponent,
     TopicSectionComponent,
+    GroupSectionComponent,
   ],
   templateUrl: './group-details.component.html',
   styleUrl: './group-details.component.scss'

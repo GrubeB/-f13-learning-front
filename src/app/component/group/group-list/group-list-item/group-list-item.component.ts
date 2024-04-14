@@ -12,6 +12,7 @@ import { SimpleLikingComponent } from '../../../voting/simple-liking/simple-liki
 import { GroupListItemContextMenuComponent } from './group-list-item-context-menu/group-list-item-context-menu.component';
 import { UserProfile2Component } from '../../../user/user-profile-2/user-profile-2.component';
 import { ShowGroupDetailsModalEvent } from '../../group-module.event';
+import { mergeDeep } from '../../../../shared/utils/merge';
 
 @Component({
   selector: 'group-list-item',
@@ -72,4 +73,25 @@ export class GroupListItemComponent implements OnInit {
     this.logger.debug(GroupListItemComponent.name, " removeLike()");
     this.votingService.deleteLikeAndDislike(id);
   }
+  
+  // CONFIG
+  @Input() set config(config: any) {
+    this._config = mergeDeep(this._config, config);
+  }
+  _config: Config = {
+    contextMenu: {
+      enable: true,
+    },
+    modal: true,
+    voting: true,
+    open: true,
+  }
+}
+class Config {
+  contextMenu!: {
+    enable: boolean;
+  };
+  modal!: boolean;
+  voting!: boolean;
+  open!: boolean;
 }

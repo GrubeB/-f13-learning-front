@@ -7,7 +7,7 @@ import { GroupService } from '../group.service';
 import { Group } from '../group.model';
 import { first } from 'rxjs';
 import { CreateGroupEvent, DeleteGroupEvent, GroupCreatedEvent, GroupDeletedEvent, GroupUpdateddEvent, UpdateGroupEvent } from '../group-module.event';
-import { GroupListComponent } from './group-list/group-list.component';
+import { GroupListComponent } from '../group-list/group-list.component';
 import { GroupFormComponent } from '../group-form/group-form.component';
 
 @Component({

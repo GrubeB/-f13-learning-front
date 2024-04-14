@@ -1,7 +1,7 @@
 <div class="m-2 p-2 border shadow-1">
     <div class="d-flex flex-row justify-content-between ">
         <user-profile-2 [userId]="group.createdBy" [date]="group.createdDate"/>
-        <button class="app-btn-icon-tertiary mt-0" (click)="toggleContextMenu()">
+        <button *ngIf="_config.contextMenu.enable" class="app-btn-icon-tertiary mt-0" (click)="toggleContextMenu()">
             <i class="bi bi-three-dots-vertical"></i>
             <group-list-item-context-menu [modelId]="group.id" [(visable)]="contextMenuVisable"/>
         </button>
@@ -18,11 +18,11 @@
     </div>
 
     <div class="card-footer d-flex flex-row justify-content-around pt-2">
-        <button class="app-btn-icon-tertiary" >
+        <button *ngIf="_config.modal" class="app-btn-icon-tertiary" >
             <i class="bi bi-arrows-angle-expand"></i>
         </button>
-        <simple-liking [vote]="vote" (like)="like(group.id)" (removeLike)="removeLike(group.id)" />
-        <button  class="app-btn-icon-tertiary" routerLink="/groups/{{group.id}}">
+        <simple-liking  *ngIf="_config.voting" [vote]="vote" (like)="like(group.id)" (removeLike)="removeLike(group.id)" />
+        <button *ngIf="_config.open" class="app-btn-icon-tertiary" routerLink="/groups/{{group.id}}">
             <i class="bi bi-box-arrow-up-right"></i>
         </button>
     </div>
