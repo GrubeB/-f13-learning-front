@@ -1,17 +1,17 @@
 <div 
     *ngIf="modalVisable && modalId" 
-    class="modal-background"
+    class="app-modal-background"
     (click)="$event.stopPropagation(); hideModal();"
 >
-    <div class="container-xl modal-container" (click)="$event.stopPropagation();">
-        <div class="modal-button-close">
+    <div class="app-modal-container" (click)="$event.stopPropagation();">
+        <div class="app-modal-buttons"></div>
+        <div class="app-modal" >
+            <topic-details [topicId]="modalId"/>
+        </div>
+        <div class="app-modal-buttons">
             <button (click)="hideModal()" class="app-btn-icon">
                 <i class="bi bi-x-lg"></i>
             </button>
-        </div>
-
-        <div class="modal-content">
-            <topic-details [topicId]="modalId"/>
         </div>
     </div>
 </div>
