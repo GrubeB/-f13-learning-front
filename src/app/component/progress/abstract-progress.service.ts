@@ -5,7 +5,7 @@ import { errorHandle } from '../../shared/service/service-support';
 import { Progress, ProgressType } from './progress.model';
 import { DomainObjectType } from '../voting/vote.model';
 import { EventBusService } from '../../shared/service/event-bus.service';
-import { ProgressSetedEvent } from './progress-module.event';
+import { ProgressSetEvent } from './progress-module.event';
 
 export abstract class AbstractProgressQueryService {
   abstract getAll(): Observable<Progress[]>;
@@ -42,7 +42,7 @@ export abstract class AbstractProgressService {
         }
         this.makeSetProgressRequest(domainObject, userId, type).pipe(first()).subscribe({
           next: res => {
-            this.eventBus().emit(ProgressSetedEvent.name, new ProgressSetedEvent(userId, type, domainObject, this.domainObjectType()));
+            this.eventBus().emit(ProgressSetEvent.name, new ProgressSetEvent(userId, type, domainObject, this.domainObjectType()));
           }
         });
       }

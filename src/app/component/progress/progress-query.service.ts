@@ -11,7 +11,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Progress, ProgressType } from './progress.model';
 import { DomainObjectType } from '../voting/vote.model';
 import { AbstractProgressQueryService } from './abstract-progress.service';
-import { ProgressSetedEvent } from './progress-module.event';
+import { ProgressSetEvent } from './progress-module.event';
 
 // TODO servis should make only one call when starting application,
 // and then should keep and update his state by yourself 
@@ -51,7 +51,7 @@ export class ProgressQueryService implements AbstractProgressQueryService {
   }
 
   constructor() {
-    this.eventBus.listen(ProgressSetedEvent.name, (event: ProgressSetedEvent) => {
+    this.eventBus.listen(ProgressSetEvent.name, (event: ProgressSetEvent) => {
       this.setProgress(this.currentUserId, event.progressType, event.domainObject, event.domainObjectType);
     });
 

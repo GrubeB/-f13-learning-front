@@ -2,7 +2,7 @@
     <div class="d-flex flex-column bg-gray-00 shadow-3 rounded-1 p-3">
         <div class="d-flex flex-row justify-content-between">
             <user-profile-2 [userId]="topic.createdBy" [date]="topic.createdDate"/>
-            <progress-setter [modelId]="topic.id" [progressService]="progressService"/>
+            <progress-setter [modelId]="topic.id" [progressService]="progressService" [domainObjectType]="'TOPIC'"/>
         </div>
 
         <div class="mt-3">

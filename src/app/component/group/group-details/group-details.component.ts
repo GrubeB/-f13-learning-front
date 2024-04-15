@@ -17,6 +17,8 @@ import { GroupReferenceService } from '../../reference/group-reference.service';
 import { CategorySectionComponent } from '../../category/category-section/category-section.component';
 import { TopicSectionComponent } from '../../topic/topic-section/topic-section.component';
 import { GroupSectionComponent } from '../group-section/group-section.component';
+import { ProgressSetComponent } from '../../progress/progress-setter/progress-setter.component';
+import { GroupProgressService } from '../../progress/group-progress.service';
 
 @Component({
   selector: 'group-details',
@@ -30,6 +32,7 @@ import { GroupSectionComponent } from '../group-section/group-section.component'
     CategorySectionComponent,
     TopicSectionComponent,
     GroupSectionComponent,
+    ProgressSetComponent,
   ],
   templateUrl: './group-details.component.html',
   styleUrl: './group-details.component.scss'
@@ -41,6 +44,7 @@ export class GroupDetailsComponent {
   queryService = inject(GroupQueryService);
   commentService = inject(GroupCommentService);
   referenceService = inject(GroupReferenceService);
+  progressService = inject(GroupProgressService);
 
   @Input() modelId!: string;
   model?: Group;

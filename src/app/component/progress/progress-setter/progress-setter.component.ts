@@ -20,7 +20,7 @@ import { AbstractProgressService } from '../abstract-progress.service';
   templateUrl: './progress-setter.component.html',
   styleUrl: './progress-setter.component.scss'
 })
-export class ProgressSetterComponent implements OnInit {
+export class ProgressSetComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
@@ -28,6 +28,10 @@ export class ProgressSetterComponent implements OnInit {
 
   @Input() modelId!: string;
   @Input() progressService!: AbstractProgressService;
+  _domainObjectType!: DomainObjectType;
+  @Input() set domainObjectType(string: string) {
+    this._domainObjectType = DomainObjectType[string as keyof typeof DomainObjectType];
+  }
   @Input() allowTypes: ProgressType[] = [
     ProgressType.IN_PROGRESS,
     ProgressType.DONE,
@@ -44,18 +48,18 @@ export class ProgressSetterComponent implements OnInit {
   }
 
   hideMenu() {
-    this.logger.debug(ProgressSetterComponent.name, " hideMenu()");
+    this.logger.debug(ProgressSetComponent.name, " hideMenu()");
     this.visable = false;
     this.visableChange.emit(this.visable);
   }
   showMenu() {
-    this.logger.debug(ProgressSetterComponent.name, " showMenu()");
+    this.logger.debug(ProgressSetComponent.name, " showMenu()");
     this.visable = true;
     this.visableChange.emit(this.visable);
   }
 
   setProgress(string: string) {
-    this.logger.debug(ProgressSetterComponent.name, " setProgress()");
+    this.logger.debug(ProgressSetComponent.name, " setProgress()");
     let type = ProgressType[string as keyof typeof ProgressType]
     if (type) {
       this.progressService.setProgress(this.modelId, type);
@@ -105,8 +109,8 @@ export class ProgressSetterComponent implements OnInit {
   // VOTING
   progress?: Progress;
   getProgress() {
-    this.logger.debug(ProgressSetterComponent.name, "getProgress()");
-    this.queryService.getByDomainObject(DomainObjectType.TOPIC, this.modelId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.logger.debug(ProgressSetComponent.name, "getProgress()");
+    this.queryService.getByDomainObject(this._domainObjectType, this.modelId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: data => {
         this.progress = data;
       },

@@ -6,15 +6,15 @@ import { AbstractProgressService } from './abstract-progress.service';
 import { DomainObjectType } from '../voting/vote.model';
 
 @Injectable()
-export class TopicProgressService extends AbstractProgressService {
+export class GroupProgressService extends AbstractProgressService {
   _http: HttpClient = inject(HttpClient);
   _authenticationService = inject(AuthenticationService);
   _eventBus = inject(EventBusService);
 
-  resourceName: string = "topics";
+  resourceName: string = "groups";
   resourcePath: string = "/api/v1/" + this.resourceName;
   _url: string = "http://localhost:9006" + this.resourcePath;
-  _domainObjectType: DomainObjectType = DomainObjectType.TOPIC;
+  _domainObjectType: DomainObjectType = DomainObjectType.GROUP;
 
   authenticationService(): AuthenticationService {
     return this._authenticationService;

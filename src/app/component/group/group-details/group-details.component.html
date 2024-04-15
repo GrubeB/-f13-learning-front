@@ -1,6 +1,11 @@
 <div *ngIf="model" class="container-xl d-flex flex-column ">
     <div class="d-flex flex-column bg-gray-00 shadow-3 rounded-1 p-3">
-        <user-profile-2 [userId]="model.createdBy" [date]="model.createdDate"/>
+
+
+        <div class="d-flex flex-row justify-content-between">
+            <user-profile-2 [userId]="model.createdBy" [date]="model.createdDate"/>
+            <progress-setter [modelId]="model.id" [progressService]="progressService"  [domainObjectType]="'GROUP'"/>
+        </div>
 
         <div class="mt-3">
             <h1>{{model.name}}</h1>

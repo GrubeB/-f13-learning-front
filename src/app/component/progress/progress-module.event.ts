@@ -1,7 +1,7 @@
 import { DomainObjectType } from "../voting/vote.model";
 import { ProgressType } from "./progress.model";
 
-export class ProgressSetedEvent {
+export class ProgressSetEvent {
     userId!: string;
     progressType!: ProgressType;
     domainObject!: string;

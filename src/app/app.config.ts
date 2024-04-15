@@ -29,6 +29,7 @@ import { GroupCommentService } from './component/comment/group-comment.service';
 import { GroupReferenceService } from './component/reference/group-reference.service';
 import { TopicProgressService } from './component/progress/topic-progress.service';
 import { ProgressQueryService } from './component/progress/progress-query.service';
+import { GroupProgressService } from './component/progress/group-progress.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -75,6 +76,7 @@ export const appConfig: ApplicationConfig = {
 
     { provide: TopicProgressService},
     { provide: ProgressQueryService},
+    { provide: GroupProgressService},
 
     
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
