@@ -1,0 +1,16 @@
+<button class="app-btn-icon-tertiary mt-0" (click)="showMenu()">
+    <i [ngClass] = "getColor()" class="bi bi-circle-fill"></i>
+    {{ getDisplayText() }}
+    <div [hidden]="!visable" [appOutsideClickActive]="visable" (appOutsideClick)="hideMenu()"
+        class="context-menu-container" (click)="$event.stopPropagation()">
+        <div class="context-menu">
+            <button 
+                *ngFor="let type of allowTypes"
+                (click)="setProgress(type)"
+            >
+                <i class="bi bi-circle-fill" [ngClass] = "getColor(type)" ></i>
+                <p>{{ getDisplayText(type) }}</p>
+            </button>
+        </div>
+    </div>
+</button>

@@ -31,7 +31,6 @@ export class TopicListItemContextMenuComponent {
     this.visableChange.emit(this.visable);
   }
   
-  
   emitDeleteEvent() {
     if (this.modelId) {
       this.logger.debug(TopicListItemContextMenuComponent.name, " emitDeleteEvent()");

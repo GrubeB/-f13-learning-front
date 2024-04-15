@@ -15,6 +15,8 @@ import { CommentSectionComponent } from '../../comment/comment-section/comment-s
 import { ReferenceSectionComponent } from '../../reference/reference-section/reference-section.component';
 import { TopicReferenceService } from '../../reference/topic-reference.service';
 import { CategorySectionComponent } from '../../category/category-section/category-section.component';
+import { ProgressSetterComponent } from '../../progress/progress-setter/progress-setter.component';
+import { TopicProgressService } from '../../progress/topic-progress.service';
 
 @Component({
   selector: 'topic-details',
@@ -26,6 +28,7 @@ import { CategorySectionComponent } from '../../category/category-section/catego
     CommentSectionComponent,
     ReferenceSectionComponent,
     CategorySectionComponent,
+    ProgressSetterComponent,
   ],
   templateUrl: './topic-details.component.html',
   styleUrl: './topic-details.component.scss'
@@ -37,6 +40,7 @@ export class TopicDetailsComponent implements OnInit {
   queryService = inject(TopicQueryService);
   commentService = inject(TopicCommentService);
   referenceService = inject(TopicReferenceService);
+  progressService = inject(TopicProgressService);
 
   @Input() topicId!: string;
   topic?: Topic;
