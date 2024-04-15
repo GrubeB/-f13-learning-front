@@ -26,7 +26,8 @@ export class TopicFilterComponent implements OnChanges, OnInit {
 
   filters: (() => Filter<Topic>)[] = [
     () => Filter.customOf((e) => true),
-    () => Filter.of('categories.id', Operator.IN, this.allVotes?.filter(v => v.type == VoteType.LIKE).map(v => v.domainObject)),
+    () => Filter.of('categories.id', Operator.IN, this.categoryVotes?.filter(v => v.type == VoteType.LIKE).map(v => v.domainObject)),
+    () => Filter.of('id', Operator.IN, this.topicVotes?.filter(v => v.type == VoteType.LIKE).map(v => v.domainObject)),
   ];
   sorters: (() => Sort<Topic>)[] = [
     () => Sort.customOf((e: Topic) => e.voting.likesNumber - e.voting.dislikesNumber, Direction.DESC),
@@ -35,7 +36,8 @@ export class TopicFilterComponent implements OnChanges, OnInit {
   activeFilter: Filter<Topic> = this.filters[0]();
   activeSorter: Sort<Topic> = this.sorters[0]();
 
-  allVotes?: Vote[];
+  categoryVotes?: Vote[];
+  topicVotes?: Vote[];
 
   ngOnInit(): void {
     this.getVotes();
@@ -68,7 +70,12 @@ export class TopicFilterComponent implements OnChanges, OnInit {
     this.logger.debug(TopicFilterComponent.name, "getVotes()");
     this.votingQueryService.getByDomainType(DomainObjectType.CATEGORY).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: data => {
-        this.allVotes = data;
+        this.categoryVotes = data;
+      },
+    });
+    this.votingQueryService.getByDomainType(DomainObjectType.TOPIC).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: data => {
+        this.topicVotes = data;
       },
     });
   }

@@ -129,7 +129,12 @@ export class Filter<T> {
     private getValueFromObject(obj: any, property: string): any[] {
         let properties: string[] = property.split('.');
         if (properties.length === 1) {
-            return this.getShallowValueFromObject(obj, property);
+            let prop = this.getShallowValueFromObject(obj, property);
+            if (Array.isArray(prop)) {
+                return prop;
+            } else {
+                return [prop];
+            }
         }
         let A1: any[] = [obj];
         let A2: any[] = [];
