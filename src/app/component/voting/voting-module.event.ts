@@ -1,186 +1,72 @@
-export class ReferenceLikedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class ReferenceLikeRemvedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class ReferenceDislikedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class ReferenceDisLikeRemvedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class ReferenceLikeDislikRemovedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-// COMMENTS
-export class CommentLikedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class CommentLikeRemvedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class CommentDislikedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class CommentDisLikeRemvedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class CommentLikeDislikRemovedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-// TOPIC
-export class TopicLikedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class TopicLikeRemvedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class TopicDislikedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class TopicDisLikeRemvedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class TopicLikeDislikRemovedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-// CATEGORY
-export class CategoryLikedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class CategoryLikeRemvedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class CategoryDislikedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class CategoryDisLikeRemvedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class CategoryLikeDislikRemovedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-// CATEGORY
-export class GroupLikedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class GroupLikeRemvedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class GroupDislikedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class GroupDisLikeRemvedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
-export class GroupLikeDislikRemovedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
-    }
-}
+import { DomainObjectType } from "./vote.model";
 
-// TOPIC
-export class PathLikedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
+export class LikedEvent {
+    userId!: string;
+    domainObject!: string;
+    domainObjectType!: DomainObjectType;
+    constructor(
+        userId: string,
+        domainObject: string,
+        domainObjectType: DomainObjectType,
+    ) {
+        this.userId = userId;
+        this.domainObject = domainObject;
+        this.domainObjectType = domainObjectType;
     }
 }
-export class PathLikeRemvedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
+export class LikeRemvedEvent {
+    userId!: string;
+    domainObject!: string;
+    domainObjectType!: DomainObjectType;
+    constructor(
+        userId: string,
+        domainObject: string,
+        domainObjectType: DomainObjectType,
+    ) {
+        this.userId = userId;
+        this.domainObject = domainObject;
+        this.domainObjectType = domainObjectType;
     }
 }
-export class PathDislikedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
+export class DislikedEvent {
+    userId!: string;
+    domainObject!: string;
+    domainObjectType!: DomainObjectType;
+    constructor(
+        userId: string,
+        domainObject: string,
+        domainObjectType: DomainObjectType,
+    ) {
+        this.userId = userId;
+        this.domainObject = domainObject;
+        this.domainObjectType = domainObjectType;
     }
 }
-export class PathDisLikeRemvedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
+export class DisLikeRemvedEvent {
+    userId!: string;
+    domainObject!: string;
+    domainObjectType!: DomainObjectType;
+    constructor(
+        userId: string,
+        domainObject: string,
+        domainObjectType: DomainObjectType,
+    ) {
+        this.userId = userId;
+        this.domainObject = domainObject;
+        this.domainObjectType = domainObjectType;
     }
 }
-export class PathLikeDislikRemovedEvent {
-    id!: string;
-    constructor(id: string) {
-        this.id = id;
+export class LikeDislikRemovedEvent {
+    userId!: string;
+    domainObject!: string;
+    domainObjectType!: DomainObjectType;
+    constructor(
+        userId: string,
+        domainObject: string,
+        domainObjectType: DomainObjectType,
+    ) {
+        this.userId = userId;
+        this.domainObject = domainObject;
+        this.domainObjectType = domainObjectType;
     }
 }

@@ -7,7 +7,6 @@ import { take } from 'rxjs';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../../../shared/service/event-bus.service';
 import { ReferenceItemContextMenuComponent } from './reference-item-context-menu/reference-item-context-menu.component';
-import { ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../../voting/voting-module.event';
 
 @Component({
   selector: 'reference-item',

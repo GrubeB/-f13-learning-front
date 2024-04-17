@@ -9,7 +9,6 @@ import { NGXLogger } from 'ngx-logger';
 import { ReferenceCreatedEvent, ReferenceUpdatedEvent, ReferenceDeletedEvent } from '../../reference/reference-module.event';
 import { TopicCommentService } from '../../comment/topic-comment.service';
 import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent } from '../../comment/comment-module.event';
-import { CommentDisLikeRemvedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikeRemvedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../voting/voting-module.event';
 import { UserProfile2Component } from '../../user/user-profile-2/user-profile-2.component';
 import { CommentSectionComponent } from '../../comment/comment-section/comment-section.component';
 import { ReferenceSectionComponent } from '../../reference/reference-section/reference-section.component';
@@ -17,6 +16,7 @@ import { TopicReferenceService } from '../../reference/topic-reference.service';
 import { CategorySectionComponent } from '../../category/category-section/category-section.component';
 import { ProgressSetComponent } from '../../progress/progress-setter/progress-setter.component';
 import { TopicProgressService } from '../../progress/topic-progress.service';
+import { DisLikeRemvedEvent, DislikedEvent, LikeDislikRemovedEvent, LikeRemvedEvent, LikedEvent } from '../../voting/voting-module.event';
 
 @Component({
   selector: 'topic-details',
@@ -47,9 +47,6 @@ export class TopicDetailsComponent implements OnInit {
 
   constructor() {
     this.eventBus.listen([
-      ReferenceLikedEvent.name,
-      ReferenceDislikedEvent.name,
-      ReferenceLikeDislikRemovedEvent.name,
       ReferenceCreatedEvent.name,
       ReferenceUpdatedEvent.name,
       ReferenceDeletedEvent.name,
@@ -58,11 +55,11 @@ export class TopicDetailsComponent implements OnInit {
       CommentUpdatedEvent.name,
       CommentDeletedEvent.name,
 
-      CommentLikedEvent.name,
-      CommentLikeRemvedEvent.name,
-      CommentDislikedEvent.name,
-      CommentDisLikeRemvedEvent.name,
-      CommentLikeDislikRemovedEvent.name,
+      LikedEvent.name,
+      LikeRemvedEvent.name,
+      DislikedEvent.name,
+      DisLikeRemvedEvent.name,
+      LikeDislikRemovedEvent.name,
     ], (event: any) => {
       this.getTopic(this.topicId);
     });

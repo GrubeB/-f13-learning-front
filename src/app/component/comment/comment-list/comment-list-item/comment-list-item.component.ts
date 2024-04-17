@@ -8,7 +8,6 @@ import { EventBusService } from '../../../../shared/service/event-bus.service';
 import { AuthenticationService } from '../../../../auth/authentication.service';
 import { ReferenceVotingService } from '../../../voting/reference-voting.service';
 import { CommentVotingService } from '../../../voting/comment-voting.service';
-import { CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikedEvent } from '../../../voting/voting-module.event';
 import { CommentListItemContextMenuComponent } from './comment-list-item-context-menu/comment-list-item-context-menu.component';
 import { UserProfile2Component } from '../../../user/user-profile-2/user-profile-2.component';
 

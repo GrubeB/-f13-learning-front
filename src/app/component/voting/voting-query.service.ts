@@ -9,8 +9,8 @@ import { DomainObjectType, Vote, VoteType } from './vote.model';
 import { AuthenticationService } from '../../auth/authentication.service';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../shared/service/event-bus.service';
-import { CategoryDisLikeRemvedEvent, CategoryDislikedEvent, CategoryLikeDislikRemovedEvent, CategoryLikeRemvedEvent, CategoryLikedEvent, CommentDisLikeRemvedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikeRemvedEvent, CommentLikedEvent, GroupDisLikeRemvedEvent, GroupDislikedEvent, GroupLikeDislikRemovedEvent, GroupLikeRemvedEvent, GroupLikedEvent, PathDisLikeRemvedEvent, PathDislikedEvent, PathLikeDislikRemovedEvent, PathLikeRemvedEvent, PathLikedEvent, ReferenceDisLikeRemvedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikeRemvedEvent, ReferenceLikedEvent, TopicDisLikeRemvedEvent, TopicDislikedEvent, TopicLikeDislikRemovedEvent, TopicLikeRemvedEvent, TopicLikedEvent } from './voting-module.event';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DisLikeRemvedEvent, DislikedEvent, LikeDislikRemovedEvent, LikeRemvedEvent, LikedEvent } from './voting-module.event';
 
 // TODO servis should make only one call when starting application,
 // and then should keep and update his state by yourself 
@@ -25,7 +25,6 @@ export class VotingQueryService implements AbstractVotingQueryService {
   resourcePath: string = "/api/v1/" + this.resourceName;
   url: string = "http://localhost:9006" + this.resourcePath;
 
-  private currentUserId!: string;
   public cache$ = new ReplaySubject<Vote[]>(1);
 
   private addVote(userId: string, type: VoteType, domainObject: string, domainObjectType: DomainObjectType) {
@@ -62,84 +61,52 @@ export class VotingQueryService implements AbstractVotingQueryService {
   }
 
   constructor() {
-    this.eventBus.listen(ReferenceLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.REFERENCE); });
-    this.eventBus.listen(ReferenceLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.REFERENCE); });
-    this.eventBus.listen(ReferenceDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.REFERENCE); });
-    this.eventBus.listen(ReferenceDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.REFERENCE); });
-    this.eventBus.listen(ReferenceLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.REFERENCE); });
+    this.eventBus.listen(LikedEvent.name, (event: LikedEvent) => { this.addVote(event.userId, VoteType.LIKE, event.domainObject, event.domainObjectType); });
+    this.eventBus.listen(LikeRemvedEvent.name, (event: LikeRemvedEvent) => { this.removeVote(event.userId, event.domainObject, event.domainObjectType); });
+    this.eventBus.listen(DislikedEvent.name, (event: DislikedEvent) => { this.addVote(event.userId, VoteType.DISLIKE, event.domainObject, event.domainObjectType); });
+    this.eventBus.listen(DisLikeRemvedEvent.name, (event: DisLikeRemvedEvent) => { this.removeVote(event.userId, event.domainObject, event.domainObjectType); });
+    this.eventBus.listen(LikeDislikRemovedEvent.name, (event: LikeDislikRemovedEvent) => { this.removeVote(event.userId, event.domainObject, event.domainObjectType); });
 
-    this.eventBus.listen(CommentLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.COMMENT); });
-    this.eventBus.listen(CommentLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.COMMENT); });
-    this.eventBus.listen(CommentDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.COMMENT); });
-    this.eventBus.listen(CommentDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.COMMENT); });
-    this.eventBus.listen(CommentLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.COMMENT); });
-
-    this.eventBus.listen(TopicLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.TOPIC); });
-    this.eventBus.listen(TopicLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.TOPIC); });
-    this.eventBus.listen(TopicDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.TOPIC); });
-    this.eventBus.listen(TopicDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.TOPIC); });
-    this.eventBus.listen(TopicLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.TOPIC); });
-
-    this.eventBus.listen(CategoryLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.CATEGORY); });
-    this.eventBus.listen(CategoryLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.CATEGORY); });
-    this.eventBus.listen(CategoryDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.CATEGORY); });
-    this.eventBus.listen(CategoryDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.CATEGORY); });
-    this.eventBus.listen(CategoryLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.CATEGORY); });
-
-    this.eventBus.listen(GroupLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.GROUP); });
-    this.eventBus.listen(GroupLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.GROUP); });
-    this.eventBus.listen(GroupDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.GROUP); });
-    this.eventBus.listen(GroupDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.GROUP); });
-    this.eventBus.listen(GroupLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.GROUP); });
-
-    this.eventBus.listen(PathLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.PATH); });
-    this.eventBus.listen(PathLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.PATH); });
-    this.eventBus.listen(PathDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.PATH); });
-    this.eventBus.listen(PathDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.PATH); });
-    this.eventBus.listen(PathLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.PATH); });
-    
     this.authenticationService.userId$().pipe(takeUntilDestroyed()).subscribe({
       next: data => {
         if (data != null) {
-          this.currentUserId = data;
-          this.refreshData().pipe(first()).subscribe({
+          this.refreshData(data).pipe(first()).subscribe({
             next: data => {
               this.cache$.next(data.content);
             }
           });
         } else {
-          this.currentUserId = "";
           this.cache$.next([]);
         }
       }
     });
   }
 
-  private refreshData(): Observable<Page<Vote[]>> {
+  private refreshData(userId: string): Observable<Page<Vote[]>> {
     this.logger.info(VotingQueryService.name, "refreshData()");
-    if (this.currentUserId == null) {
+    if (userId == null) {
       return throwError(() => Error('userId jest null'));
     }
     return this.http.request<Page<Vote[]>>("GET",
       this.url,
       {
-        params: new HttpParams().set('query', '"' + 'userId=' + this.currentUserId + '"')
+        params: new HttpParams().set('query', '"' + 'userId=' + userId + '"')
       }
     ).pipe(retry(1), catchError(errorHandle));
   }
 
-  getAllByUser(): Observable<Vote[]> {
+  getAll(): Observable<Vote[]> {
     return this.cache$;
   }
-  getByDomainType(domainObjectType: DomainObjectType): Observable<Vote[]> {
+  getAllByDomainType(domainObjectType: DomainObjectType): Observable<Vote[]> {
     this.logger.info(VotingQueryService.name, " getByDomainType()");
-    return this.getAllByUser().pipe(
+    return this.getAll().pipe(
       map(arr => arr.filter(e => e.domainObjectType.toString() == DomainObjectType[domainObjectType])),
     );
   }
-  get(domainObjectType: DomainObjectType, domainObjectId: string): Observable<Vote | undefined> {
+  getByDomainObject(domainObjectType: DomainObjectType, domainObjectId: string): Observable<Vote | undefined> {
     this.logger.info(VotingQueryService.name, " get()");
-    return this.getAllByUser().pipe(
+    return this.getAll().pipe(
       mergeMap(array => array),
       filter(element => element.domainObjectType.toString() == DomainObjectType[domainObjectType]),
       filter(element => element.domainObject === domainObjectId),

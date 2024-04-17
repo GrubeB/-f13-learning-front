@@ -66,7 +66,7 @@ export class GroupFilterComponent implements OnChanges, OnInit {
   // VOTING
   getVotes() {
     this.logger.debug(GroupFilterComponent.name, "getVotes()");
-    this.votingQueryService.getByDomainType(DomainObjectType.CATEGORY).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.votingQueryService.getAllByDomainType(DomainObjectType.CATEGORY).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: data => {
         this.allVotes = data;
       },

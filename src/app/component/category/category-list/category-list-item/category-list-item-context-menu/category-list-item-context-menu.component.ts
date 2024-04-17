@@ -5,7 +5,6 @@ import { RouterLink } from '@angular/router';
 import { OutsideClickDirective } from '../../../../../shared/directive/outside-click.directive';
 import { EventBusService } from '../../../../../shared/service/event-bus.service';
 import { DeleteCategoryEvent, UpdateCategoryEvent } from '../../../category-module.event';
-import { CategoryLikeRemvedEvent, CategoryLikedEvent } from '../../../../voting/voting-module.event';
 
 @Component({
   selector: 'category-list-item-context-menu',
@@ -43,22 +42,6 @@ export class CategoryListItemContextMenuComponent {
     if (this.modelId) {
       this.logger.debug(CategoryListItemContextMenuComponent.name, " emitEditCategoryEvent()");
       this.eventBus.emit(UpdateCategoryEvent.name, new UpdateCategoryEvent(this.modelId));
-      this.hideMenu();
-    }
-  }
-
-  emitCategoryLikedEvent() {
-    if (this.modelId) {
-      this.logger.debug(CategoryListItemContextMenuComponent.name, " emitCategoryLikedEvent()");
-      this.eventBus.emit(CategoryLikedEvent.name, new CategoryLikedEvent(this.modelId));
-      this.hideMenu();
-    }
-  }
-  
-  emitCategoryLikeRemvedEvent() {
-    if (this.modelId) {
-      this.logger.debug(CategoryListItemContextMenuComponent.name, " emitCategoryLikeRemvedEvent()");
-      this.eventBus.emit(CategoryLikeRemvedEvent.name, new CategoryLikeRemvedEvent(this.modelId));
       this.hideMenu();
     }
   }

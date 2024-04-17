@@ -9,7 +9,6 @@ import { CategoryVotingService } from '../../../voting/category-voting.service';
 import { DomainObjectType, Vote } from '../../../voting/vote.model';
 import { VotingQueryService } from '../../../voting/voting-query.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CategoryLikeRemvedEvent, CategoryLikedEvent } from '../../../voting/voting-module.event';
 import { first } from 'rxjs';
 import { mergeDeep } from '../../../../shared/utils/merge';
 import { SimpleLikingComponent } from '../../../voting/simple-likeing/simple-likeing.component';

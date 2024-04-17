@@ -34,7 +34,7 @@ export class SimpleLikingComponent implements OnInit {
   
   getVote() {
     this.logger.debug(SimpleLikingComponent.name, " getVote()");
-    this.votingQueryService.get(this._domainObjectType, this.modelId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.votingQueryService.getByDomainObject(this._domainObjectType, this.modelId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: vote => {
         this.vote = vote;
       },
@@ -47,6 +47,6 @@ export class SimpleLikingComponent implements OnInit {
   }
   removeLike() {
     this.logger.debug(SimpleLikingComponent.name, " removeLike()");
-    this.votingService.deleteLikeAndDislike(this.modelId)
+    this.votingService.removeLike(this.modelId)
   }
 }

@@ -6,7 +6,6 @@ import { NGXLogger } from 'ngx-logger';
 import { GroupCommentService } from '../../comment/group-comment.service';
 import { Group } from '../group.model';
 import { first } from 'rxjs';
-import { CommentDisLikeRemvedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikeRemvedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../voting/voting-module.event';
 import { ReferenceCreatedEvent, ReferenceDeletedEvent, ReferenceUpdatedEvent } from '../../reference/reference-module.event';
 import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent } from '../../comment/comment-module.event';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -19,6 +18,7 @@ import { TopicSectionComponent } from '../../topic/topic-section/topic-section.c
 import { GroupSectionComponent } from '../group-section/group-section.component';
 import { ProgressSetComponent } from '../../progress/progress-setter/progress-setter.component';
 import { GroupProgressService } from '../../progress/group-progress.service';
+import { DisLikeRemvedEvent, DislikedEvent, LikeDislikRemovedEvent, LikeRemvedEvent, LikedEvent } from '../../voting/voting-module.event';
 
 @Component({
   selector: 'group-details',
@@ -51,9 +51,6 @@ export class GroupDetailsComponent {
 
   constructor() {
     this.eventBus.listen([
-      ReferenceLikedEvent.name,
-      ReferenceDislikedEvent.name,
-      ReferenceLikeDislikRemovedEvent.name,
       ReferenceCreatedEvent.name,
       ReferenceUpdatedEvent.name,
       ReferenceDeletedEvent.name,
@@ -62,11 +59,11 @@ export class GroupDetailsComponent {
       CommentUpdatedEvent.name,
       CommentDeletedEvent.name,
 
-      CommentLikedEvent.name,
-      CommentLikeRemvedEvent.name,
-      CommentDislikedEvent.name,
-      CommentDisLikeRemvedEvent.name,
-      CommentLikeDislikRemovedEvent.name,
+      LikedEvent.name,
+      LikeRemvedEvent.name,
+      DislikedEvent.name,
+      DisLikeRemvedEvent.name,
+      LikeDislikRemovedEvent.name,
     ], (event: any) => {
       this.getModel(this.modelId);
     });

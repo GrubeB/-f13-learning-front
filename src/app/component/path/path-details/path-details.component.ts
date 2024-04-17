@@ -3,8 +3,6 @@ import { EventBusService } from '../../../shared/service/event-bus.service';
 import { NGXLogger } from 'ngx-logger';
 import { GroupCommentService } from '../../comment/group-comment.service';
 import { first } from 'rxjs';
-import { CommentDisLikeRemvedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikeRemvedEvent, CommentLikedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikedEvent } from '../../voting/voting-module.event';
-import { ReferenceCreatedEvent, ReferenceDeletedEvent, ReferenceUpdatedEvent } from '../../reference/reference-module.event';
 import { CommentCreatedEvent, CommentDeletedEvent, CommentUpdatedEvent } from '../../comment/comment-module.event';
 import { CommonModule, DatePipe } from '@angular/common';
 import { UserProfile2Component } from '../../user/user-profile-2/user-profile-2.component';
@@ -23,6 +21,7 @@ import { PathCommentService } from '../../comment/path-comment.service';
 import { PathProgressService } from '../../progress/path-progress.service';
 import { Path } from '../path.model';
 import { PathItemsSectionComponent } from '../path-items-section/path-items-section.component';
+import { DisLikeRemvedEvent, DislikedEvent, LikeDislikRemovedEvent, LikeRemvedEvent, LikedEvent } from '../../voting/voting-module.event';
 
 @Component({
   selector: 'path-details',
@@ -56,11 +55,11 @@ export class PathDetailsComponent {
       CommentUpdatedEvent.name,
       CommentDeletedEvent.name,
 
-      CommentLikedEvent.name,
-      CommentLikeRemvedEvent.name,
-      CommentDislikedEvent.name,
-      CommentDisLikeRemvedEvent.name,
-      CommentLikeDislikRemovedEvent.name,
+      LikedEvent.name,
+      LikeRemvedEvent.name,
+      DislikedEvent.name,
+      DisLikeRemvedEvent.name,
+      LikeDislikRemovedEvent.name,
     ], (event: any) => {
       this.getModel(this.modelId);
     });

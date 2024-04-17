@@ -3,7 +3,7 @@
         <button class="app-btn-icon-tertiary" (click)="votingService.createLike(reference.id)">
             <i class="bi bi-chevron-double-up"></i>
         </button>
-        <button class="app-btn-icon-tertiary" (click)="votingService.deleteLikeAndDislike(reference.id)">
+        <button class="app-btn-icon-tertiary" (click)="votingService.removeLikeAndDislike(reference.id)">
             {{ reference.voting.likesNumber - reference.voting.dislikesNumber }}
         </button>
         <button class="app-btn-icon-tertiary" (click)="votingService.createDislike(reference.id)">

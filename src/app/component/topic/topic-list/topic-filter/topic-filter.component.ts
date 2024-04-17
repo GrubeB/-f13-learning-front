@@ -68,12 +68,12 @@ export class TopicFilterComponent implements OnChanges, OnInit {
   // VOTING
   getVotes() {
     this.logger.debug(TopicFilterComponent.name, "getVotes()");
-    this.votingQueryService.getByDomainType(DomainObjectType.CATEGORY).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.votingQueryService.getAllByDomainType(DomainObjectType.CATEGORY).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: data => {
         this.categoryVotes = data;
       },
     });
-    this.votingQueryService.getByDomainType(DomainObjectType.TOPIC).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.votingQueryService.getAllByDomainType(DomainObjectType.TOPIC).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: data => {
         this.topicVotes = data;
       },

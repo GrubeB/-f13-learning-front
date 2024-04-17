@@ -10,7 +10,6 @@ import { UserProfileComponent } from '../../../user/user-profile/user-profile.co
 import { UserProfile2Component } from '../../../user/user-profile-2/user-profile-2.component';
 import { TopicVotingService } from '../../../voting/topic-voting.service';
 import { AuthenticationService } from '../../../../auth/authentication.service';
-import { TopicLikeRemvedEvent, TopicLikedEvent } from '../../../voting/voting-module.event';
 import { VotingQueryService } from '../../../voting/voting-query.service';
 import { DomainObjectType, Vote } from '../../../voting/vote.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
