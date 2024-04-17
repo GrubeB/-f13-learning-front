@@ -11,8 +11,8 @@ export class Path {
     status!: PathStatus;
 
     categories!: Category[];
-    topics!: PathItemTopic[];
-    groups!: PathItemGroup[];
+    topics!: PathItem[];
+    groups!: PathItem[];
 
     comments!: Comment[];
     voting!: Voting;
@@ -22,22 +22,22 @@ export class Path {
     lastModifiedBy!: string;
     lastModifiedDate!: Date;
 }
-export class PathItemTopic {
+export class PathItem {
     id!: string;
     number!: number;
     type!: ItemType;
     entityType!: ItemEntityType;
     entityId!: string;
-    topic!: Topic;
+    entity!: any;
 }
-export class PathItemGroup {
-    id!: string;
-    number!: number;
-    type!: ItemType;
-    entityType!: ItemEntityType;
-    entityId!: string;
-    group!: Group;
-}
+// export class PathItemGroup {
+//     id!: string;
+//     number!: number;
+//     type!: ItemType;
+//     entityType!: ItemEntityType;
+//     entityId!: string;
+//     group!: Group;
+// }
 export enum PathStatus {
     UNVERIFIED = "UNVERIFIED",
     VERIFIED = "VERIFIED",

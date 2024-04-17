@@ -1,0 +1,67 @@
+<div class="d-flex flex-row">
+    <div class="col d-flex flex-column" >
+        <div *ngFor="let item of getItems()">
+
+            <div *ngIf="item.entityType == 'TOPIC'" class="m-2 p-2 border shadow-1" >
+                <div class="d-flex flex-row justify-content-between ">
+                    <user-profile-2 [userId]="item.entity.createdBy" [date]="item.entity.createdDate"/>
+                    <progress-setter [modelId]="item.entityId" [progressService]="topicProgressService" [domainObjectType]="'TOPIC'"/>
+                </div>
+                <div class="pt-2">
+                    <h2 class="card-title">{{item.entity.name}}</h2>
+                    <p>{{item.entity.content}}</p>
+                </div>
+                <div 
+                    *ngIf="item.entity.categories && item.entity.categories.length > 0"
+                    class="d-flex flex-row flex-wrap justify-content-start"
+                >
+                    <button *ngFor="let category of item.entity.categories" class="btn-category">{{category.name}}</button>
+                </div>
+            
+                <div class="card-footer d-flex flex-row justify-content-around pt-2">
+                    <button class="app-btn-icon-tertiary" (click)="openTopicDetailsModal(item.entity.id)">
+                        <i class="bi bi-arrows-angle-expand"></i>
+                    </button>
+                    <button class="app-btn-icon-tertiary" routerLink="/topics/{{item.entity.id}}">
+                        <i class="bi bi-box-arrow-up-right"></i>
+                    </button>
+                    <div></div>
+                </div>
+            </div>
+
+            <div *ngIf="item.entityType == 'GROUP'" class="m-2 p-2 border shadow-1" >
+                <div class="d-flex flex-row justify-content-between ">
+                    <user-profile-2 [userId]="item.entity.createdBy" [date]="item.entity.createdDate"/>
+                    <progress-setter [modelId]="item.entityId" [progressService]="groupProgressService" [domainObjectType]="'GROUP'"/>
+                </div>
+                <div class="pt-2">
+                    <h2 class="card-title">{{item.entity.name}}</h2>
+                    <p>{{item.entity.content}}</p>
+                </div>
+                <div 
+                    *ngIf="item.entity.categories && item.entity.categories.length > 0"
+                    class="d-flex flex-row flex-wrap justify-content-start"
+                >
+                    <button *ngFor="let category of item.entity.categories" class="btn-category">{{category.name}}</button>
+                </div>
+            
+                <div class="card-footer d-flex flex-row justify-content-around pt-2">
+                    <button class="app-btn-icon-tertiary" (click)="openGroupDetailsModal(item.entity.id)">
+                        <i class="bi bi-arrows-angle-expand"></i>
+                    </button>
+                    <button class="app-btn-icon-tertiary" routerLink="/groups/{{item.entity.id}}">
+                        <i class="bi bi-box-arrow-up-right"></i>
+                    </button>
+                    <button class="app-btn-icon-tertiary">
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col d-flex flex-column" >
+
+    </div>
+</div>
+<topic-details-modal />
+<group-details-modal />

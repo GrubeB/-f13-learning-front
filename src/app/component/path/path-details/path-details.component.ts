@@ -22,6 +22,7 @@ import { PathQueryService } from '../path-query.service';
 import { PathCommentService } from '../../comment/path-comment.service';
 import { PathProgressService } from '../../progress/path-progress.service';
 import { Path } from '../path.model';
+import { PathItemsSectionComponent } from '../path-items-section/path-items-section.component';
 
 @Component({
   selector: 'path-details',
@@ -33,6 +34,7 @@ import { Path } from '../path.model';
     CommentSectionComponent,
     CategorySectionComponent,
     ProgressSetComponent,
+    PathItemsSectionComponent,
   ],
   templateUrl: './path-details.component.html',
   styleUrl: './path-details.component.scss'
