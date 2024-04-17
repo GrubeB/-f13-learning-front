@@ -1,0 +1,17 @@
+<div 
+    *ngIf="modalVisable && modalId" 
+    class="app-modal-background"
+    (click)="$event.stopPropagation(); hideModal();"
+>
+    <div class="app-modal-container" (click)="$event.stopPropagation();">
+        <div class="app-modal-buttons"></div>
+        <div class="app-modal" >
+            <path-details [modelId]="modalId"/>
+        </div>
+        <div class="app-modal-buttons">
+            <button (click)="hideModal()" class="app-btn-icon">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+    </div>
+</div>

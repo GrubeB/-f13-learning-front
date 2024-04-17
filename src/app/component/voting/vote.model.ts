@@ -19,4 +19,5 @@ export enum DomainObjectType {
     CATEGORY = "CATEGORY",
     COMMENT = "COMMENT",
     GROUP = "GROUP",
+    PATH = "PATH",
 }

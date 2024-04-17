@@ -30,10 +30,15 @@ import { GroupReferenceService } from './component/reference/group-reference.ser
 import { TopicProgressService } from './component/progress/topic-progress.service';
 import { ProgressQueryService } from './component/progress/progress-query.service';
 import { GroupProgressService } from './component/progress/group-progress.service';
+import { PathCommentService } from './component/comment/path-comment.service';
+import { PathQueryService } from './component/path/path-query.service';
+import { PathService } from './component/path/path.service';
+import { PathVotingService } from './component/voting/path-voting.service';
+import { PathProgressService } from './component/progress/path-progress.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes, withComponentInputBinding(),withRouterConfig({onSameUrlNavigation: 'reload'})),
+    provideRouter(routes, withComponentInputBinding(), withRouterConfig({ onSameUrlNavigation: 'reload' })),
     importProvidersFrom(HttpClientModule),
 
     importProvidersFrom(LoggerModule.forRoot({
@@ -43,42 +48,52 @@ export const appConfig: ApplicationConfig = {
     })),
 
     { provide: AuthenticationService },
-
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: LocalStorageService },
-    { provide: EventBusService},
+    { provide: EventBusService },
+    { provide: UserQueryService },
 
+    // CATEGORY
     { provide: CategoryService },
     { provide: CategoryQueryService },
 
-    { provide: TopicService},
-    { provide: TopicQueryService},
+    // TOPIC
+    { provide: TopicService },
+    { provide: TopicQueryService },
 
-    { provide: ReferenceQueryService},
-    { provide: TopicReferenceService},
-    { provide: GroupReferenceService},
-    
-    { provide: CommentQueryService},
-    { provide: TopicCommentService},
-    { provide: GroupCommentService},
+    // GROUP
+    { provide: GroupQueryService },
+    { provide: GroupService },
 
-    { provide: GroupQueryService},
-    { provide: GroupService},
+    // PATH
+    { provide: PathQueryService },
+    { provide: PathService },
 
-    
-    { provide: ReferenceVotingService},
-    { provide: CommentVotingService},
-    { provide: TopicVotingService},
-    { provide: CategoryVotingService},
-    { provide: GroupVotingService},
-    { provide: VotingQueryService},
-    
-    { provide: UserQueryService},
+    // REFERENCE
+    { provide: ReferenceQueryService },
+    { provide: TopicReferenceService },
+    { provide: GroupReferenceService },
 
-    { provide: TopicProgressService},
-    { provide: ProgressQueryService},
-    { provide: GroupProgressService},
+    // COMMENT
+    { provide: CommentQueryService },
+    { provide: TopicCommentService },
+    { provide: GroupCommentService },
+    { provide: PathCommentService },
 
-    
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    // VOTING
+    { provide: VotingQueryService },
+    { provide: ReferenceVotingService },
+    { provide: CommentVotingService },
+    { provide: TopicVotingService },
+    { provide: CategoryVotingService },
+    { provide: GroupVotingService },
+    { provide: PathVotingService },
+
+    // PROGRESS
+    { provide: ProgressQueryService },
+    { provide: TopicProgressService },
+    { provide: GroupProgressService },
+    { provide: PathProgressService },
+
   ]
 };

@@ -7,6 +7,8 @@ import { TopicViewComponent } from './component/topic/topic-view/topic-view.comp
 import { TopicDetailsViewComponent } from './component/topic/topic-details-view/topic-details-view.component';
 import { GroupViewComponent } from './component/group/group-view/group-view.component';
 import { GroupDetailsViewComponent } from './component/group/group-details-view/group-details-view.component';
+import { PathViewComponent } from './component/path/path-view/path-view.component';
+import { PathDetailsViewComponent } from './component/path/path-details-view/path-details-view.component';
 
 export const routes: Routes = [
     { path: '',   redirectTo: '/home', pathMatch: 'full' }, // redirect to `home`
@@ -17,5 +19,7 @@ export const routes: Routes = [
     { path: 'topics/:id', component: TopicDetailsViewComponent },
     { path: 'groups', component: GroupViewComponent },
     { path: 'groups/:id', component: GroupDetailsViewComponent },
+    { path: 'paths', component: PathViewComponent },
+    { path: 'paths/:id', component: PathDetailsViewComponent },
     { path: '**', component: PageNotFoundComponent }, // Wildcard route for a 404 page
 ];

@@ -9,7 +9,7 @@ import { DomainObjectType, Vote, VoteType } from './vote.model';
 import { AuthenticationService } from '../../auth/authentication.service';
 import { NGXLogger } from 'ngx-logger';
 import { EventBusService } from '../../shared/service/event-bus.service';
-import { CategoryDisLikeRemvedEvent, CategoryDislikedEvent, CategoryLikeDislikRemovedEvent, CategoryLikeRemvedEvent, CategoryLikedEvent, CommentDisLikeRemvedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikeRemvedEvent, CommentLikedEvent, GroupDisLikeRemvedEvent, GroupDislikedEvent, GroupLikeDislikRemovedEvent, GroupLikeRemvedEvent, GroupLikedEvent, ReferenceDisLikeRemvedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikeRemvedEvent, ReferenceLikedEvent, TopicDisLikeRemvedEvent, TopicDislikedEvent, TopicLikeDislikRemovedEvent, TopicLikeRemvedEvent, TopicLikedEvent } from './voting-module.event';
+import { CategoryDisLikeRemvedEvent, CategoryDislikedEvent, CategoryLikeDislikRemovedEvent, CategoryLikeRemvedEvent, CategoryLikedEvent, CommentDisLikeRemvedEvent, CommentDislikedEvent, CommentLikeDislikRemovedEvent, CommentLikeRemvedEvent, CommentLikedEvent, GroupDisLikeRemvedEvent, GroupDislikedEvent, GroupLikeDislikRemovedEvent, GroupLikeRemvedEvent, GroupLikedEvent, PathDisLikeRemvedEvent, PathDislikedEvent, PathLikeDislikRemovedEvent, PathLikeRemvedEvent, PathLikedEvent, ReferenceDisLikeRemvedEvent, ReferenceDislikedEvent, ReferenceLikeDislikRemovedEvent, ReferenceLikeRemvedEvent, ReferenceLikedEvent, TopicDisLikeRemvedEvent, TopicDislikedEvent, TopicLikeDislikRemovedEvent, TopicLikeRemvedEvent, TopicLikedEvent } from './voting-module.event';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 // TODO servis should make only one call when starting application,
@@ -91,6 +91,12 @@ export class VotingQueryService implements AbstractVotingQueryService {
     this.eventBus.listen(GroupDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.GROUP); });
     this.eventBus.listen(GroupDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.GROUP); });
     this.eventBus.listen(GroupLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.GROUP); });
+
+    this.eventBus.listen(PathLikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.LIKE, e.id, DomainObjectType.PATH); });
+    this.eventBus.listen(PathLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.PATH); });
+    this.eventBus.listen(PathDislikedEvent.name, (e) => { this.addVote(this.currentUserId, VoteType.DISLIKE, e.id, DomainObjectType.PATH); });
+    this.eventBus.listen(PathDisLikeRemvedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.PATH); });
+    this.eventBus.listen(PathLikeDislikRemovedEvent.name, (e) => { this.removeVote(this.currentUserId, e.id, DomainObjectType.PATH); });
     
     this.authenticationService.userId$().pipe(takeUntilDestroyed()).subscribe({
       next: data => {

@@ -1,0 +1,11 @@
+<div class="view-container container-xl">
+    <div class="view-button-back">
+        <button class="app-btn-icon" (click)="goBack()">
+            <i class="bi bi-arrow-bar-left"></i>
+        </button>
+    </div>
+    
+    <div *ngIf="modelId" class="view-content">
+        <path-details [modelId]="modelId" />
+    </div>
+</div>

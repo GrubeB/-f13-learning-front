@@ -152,3 +152,35 @@ export class GroupLikeDislikRemovedEvent {
         this.id = id;
     }
 }
+
+// TOPIC
+export class PathLikedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class PathLikeRemvedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class PathDislikedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class PathDisLikeRemvedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+export class PathLikeDislikRemovedEvent {
+    id!: string;
+    constructor(id: string) {
+        this.id = id;
+    }
+}
