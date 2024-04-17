@@ -1,0 +1,52 @@
+@import 'styles';
+
+.tiered-select-container{
+    color: black;
+    .tiered-select-selected-item {
+        background-color: white;
+        border: none;
+        border-radius: .375em;
+        min-height: 2.2em;
+        padding: .25em;
+        display: flex;
+        flex-direction: row;
+        align-content:flex-start;
+        flex-wrap: wrap;
+        gap: .5em;
+        overflow: hidden;
+        margin-bottom: .25em;
+    }
+    .tiered-select-menu-container {
+        width: 100%;
+        max-height: 0px;
+        .tiered-select-group-path {
+            z-index: 10;
+            position: relative;
+            background-color: white;
+            border: none;
+            border-radius: .375em;
+            max-height: 10em;
+            overflow: auto;
+            padding-top: .5em;
+            border-radius: 5px;
+            scrollbar-width: none;
+        }
+        .tiered-select-menu {
+            z-index: 10;
+            position: relative;
+            background-color: white;
+            border: none;
+            border-radius: .375em;
+            max-height: 10em;
+            overflow: auto;
+            padding-top: .5em;
+            border-radius: 5px;
+            scrollbar-width: none;
+            .tiered-select-menu-item{
+                padding-left: 1em;
+                border-radius: 3px;
+                height: 2.2em;
+            }
+        }
+    }
+}

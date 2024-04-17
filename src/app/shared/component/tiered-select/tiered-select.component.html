@@ -1,0 +1,36 @@
+<div class="tiered-select-container">
+    <div class="tiered-select-selected-item" (click)="openMenu()">
+        <div *ngIf="selectedItem && selectedItemGroup" class="d-flex flex-row">
+            <div *ngFor="let selectedGroup of getSelectedGroupsForGroup(selectedItemGroup) | slice:1 " class="app-btn-tertiary"
+                (click)="selectGroup(selectedGroup.groupId)">
+                {{selectedGroup.groupLabel}}<span>></span>
+            </div>
+            <div>
+                {{selectedItemGroup.itemPropertyLabel ? selectedItem[selectedItemGroup.itemPropertyLabel] : selectedItem}}
+            </div>
+        </div>
+    </div>
+    <div [hidden]="!menuVisable" [appOutsideClickActive]="menuVisable" (appOutsideClick)="hideMenu()"
+        class="tiered-select-menu-container">
+        <div class="tiered-select-group-path">
+            <button class="app-btn-tertiary" (click)="selectGroup()">
+                <i class="bi bi-house-door-fill"></i>
+            </button>
+            <button *ngFor="let selectedGroup of selectedGroups | slice:1 " class="app-btn-tertiary"
+                (click)="selectGroup(selectedGroup.groupId)">
+                {{selectedGroup.groupLabel}}
+                <i class="bi bi-caret-right-fill"></i>
+            </button>
+        </div>
+        <div class="tiered-select-menu">
+            <div *ngFor="let group of getGroupsToDisplay()" class="tiered-select-menu-item"
+                (click)="selectGroup(group.groupId)">
+                {{group.groupLabel }}
+            </div>
+            <div *ngFor="let item of getItemsToDisplay()" class="tiered-select-menu-item"
+                (click)="setSelectedItem(item)">
+                {{activeGroup.itemPropertyLabel ? item[activeGroup.itemPropertyLabel] : item}}
+            </div>
+        </div>
+    </div>
+</div>
