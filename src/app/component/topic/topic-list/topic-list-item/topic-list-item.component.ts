@@ -13,10 +13,10 @@ import { AuthenticationService } from '../../../../auth/authentication.service';
 import { TopicLikeRemvedEvent, TopicLikedEvent } from '../../../voting/voting-module.event';
 import { VotingQueryService } from '../../../voting/voting-query.service';
 import { DomainObjectType, Vote } from '../../../voting/vote.model';
-import { SimpleLikingComponent } from '../../../voting/simple-liking/simple-liking.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { first } from 'rxjs';
 import { mergeDeep } from '../../../../shared/utils/merge';
+import { SimpleLikingComponent } from '../../../voting/simple-likeing/simple-likeing.component';
 
 @Component({
   selector: 'topic-list-item',
@@ -27,12 +27,12 @@ import { mergeDeep } from '../../../../shared/utils/merge';
     DatePipe,
     TopicListItemContextMenuComponent,
     UserProfile2Component,
-    SimpleLikingComponent
+    SimpleLikingComponent,
   ],
   templateUrl: './topic-list-item.component.html',
   styleUrl: './topic-list-item.component.scss'
 })
-export class TopicListItemComponent implements OnInit {
+export class TopicListItemComponent {
   destroyRef = inject(DestroyRef);
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
@@ -40,11 +40,6 @@ export class TopicListItemComponent implements OnInit {
   votingQueryService = inject(VotingQueryService);
 
   @Input() topic!: Topic;
-  vote?: Vote;
-
-  ngOnInit(): void {
-    this.getVote();
-  }
 
   // MODAL 
   openTopicDetailsModal(topicId: string) {
@@ -57,25 +52,6 @@ export class TopicListItemComponent implements OnInit {
   toggleContextMenu() {
     this.logger.debug(TopicListItemComponent.name, " toggleContextMenu()");
     this.contextMenuVisable = !this.contextMenuVisable;
-  }
-
-  // VOTING
-  getVote() {
-    this.logger.debug(TopicListItemComponent.name, " getVote()");
-    this.votingQueryService.get(DomainObjectType.TOPIC, this.topic.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: vote => {
-        this.vote = vote;
-      },
-    });
-  }
-
-  like(id: string) {
-    this.logger.debug(TopicListItemComponent.name, " like()");
-    this.votingService.createLike(id)
-  }
-  removeLike(id: string) {
-    this.logger.debug(TopicListItemComponent.name, " removeLike()");
-    this.votingService.deleteLikeAndDislike(id);
   }
 
   // CONFIG

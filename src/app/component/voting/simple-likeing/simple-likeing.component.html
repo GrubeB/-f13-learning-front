@@ -1,12 +1,12 @@
 <button 
     *ngIf="vote === null || vote?.type?.toString() !== 'LIKE'" 
-    class="app-btn-icon-tertiary" (click)="like.emit()"
+    class="app-btn-icon-tertiary" (click)="like()"
 >
     <i class="bi bi-star"></i>
 </button>
 <button 
     *ngIf="vote !== null && vote?.type?.toString() === 'LIKE'" 
-    class="app-btn-icon-tertiary" (click)="removeLike.emit()"
+    class="app-btn-icon-tertiary" (click)="removeLike()"
 >
     <i class="bi bi-star-fill"></i>
 </button>

@@ -11,8 +11,8 @@ import { VotingQueryService } from '../../../voting/voting-query.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CategoryLikeRemvedEvent, CategoryLikedEvent } from '../../../voting/voting-module.event';
 import { first } from 'rxjs';
-import { SimpleLikingComponent } from '../../../voting/simple-liking/simple-liking.component';
 import { mergeDeep } from '../../../../shared/utils/merge';
+import { SimpleLikingComponent } from '../../../voting/simple-likeing/simple-likeing.component';
 
 @Component({
   selector: 'category-list-item',
@@ -27,7 +27,7 @@ import { mergeDeep } from '../../../../shared/utils/merge';
   templateUrl: './category-list-item.component.html',
   styleUrl: './category-list-item.component.scss'
 })
-export class CategoriesListItemComponent implements OnInit {
+export class CategoriesListItemComponent {
   private destroyRef = inject(DestroyRef);
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
@@ -35,11 +35,6 @@ export class CategoriesListItemComponent implements OnInit {
   votingQueryService = inject(VotingQueryService);
 
   @Input() category!: Category;
-  vote?: Vote;
-
-  ngOnInit(): void {
-    this.getVote();
-  }
 
   // CONTEXT MENU
   contextMenuVisable: boolean = false;
@@ -48,15 +43,6 @@ export class CategoriesListItemComponent implements OnInit {
     this.contextMenuVisable = !this.contextMenuVisable;
   }
 
-  // VOTING
-  getVote() {
-    this.logger.debug(CategoriesListItemComponent.name, " getVote()");
-    this.votingQueryService.get(DomainObjectType.CATEGORY, this.category.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: vote => {
-        this.vote = vote;
-      },
-    });
-  }
 
   // CONFIG
   @Input() set config(config: any) {

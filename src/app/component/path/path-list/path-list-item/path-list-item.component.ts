@@ -6,13 +6,13 @@ import { EventBusService } from '../../../../shared/service/event-bus.service';
 import { VotingQueryService } from '../../../voting/voting-query.service';
 import { DomainObjectType, Vote } from '../../../voting/vote.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { SimpleLikingComponent } from '../../../voting/simple-liking/simple-liking.component';
 import { UserProfile2Component } from '../../../user/user-profile-2/user-profile-2.component';
 import { mergeDeep } from '../../../../shared/utils/merge';
 import { PathListItemContextMenuComponent } from './path-list-item-context-menu/path-list-item-context-menu.component';
 import { Path } from '../../path.model';
 import { ShowPathDetailsModalEvent } from '../../path-module.event';
 import { PathVotingService } from '../../../voting/path-voting.service';
+import { SimpleLikingComponent } from '../../../voting/simple-likeing/simple-likeing.component';
 
 
 @Component({
@@ -37,11 +37,6 @@ export class PathListItemComponent {
   votingQueryService = inject(VotingQueryService);
 
   @Input() item!: Path;
-  vote?: Vote;
-
-  ngOnInit(): void {
-    this.getVote();
-  }
 
   // MODAL 
   openDetailsModal(modelId: string) {
@@ -56,25 +51,6 @@ export class PathListItemComponent {
     this.contextMenuVisable = !this.contextMenuVisable;
   }
 
-  // VOTING
-  getVote() {
-    this.logger.debug(PathListItemComponent.name, " getVote()");
-    this.votingQueryService.get(DomainObjectType.PATH, this.item.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: vote => {
-        this.vote = vote;
-      },
-    });
-  }
-
-  like(id: string) {
-    this.logger.debug(PathListItemComponent.name, " like()");
-    this.votingService.createLike(id)
-  }
-  removeLike(id: string) {
-    this.logger.debug(PathListItemComponent.name, " removeLike()");
-    this.votingService.deleteLikeAndDislike(id);
-  }
-  
   // CONFIG
   @Input() set config(config: any) {
     this._config = mergeDeep(this._config, config);

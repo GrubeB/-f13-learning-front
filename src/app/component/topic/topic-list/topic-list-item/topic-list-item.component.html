@@ -21,7 +21,7 @@
         <button  *ngIf="_config.modal" class="app-btn-icon-tertiary" (click)="openTopicDetailsModal(topic.id)">
             <i class="bi bi-arrows-angle-expand"></i>
         </button>
-        <simple-liking *ngIf="_config.voting" [vote]="vote" (like)="like(topic.id)" (removeLike)="removeLike(topic.id)" />
+        <simple-likeing *ngIf="_config.voting" [votingService]="votingService" [modelId]="topic.id" [domainObjectType]="'TOPIC'"/>
         <button   *ngIf="_config.open" class="app-btn-icon-tertiary" routerLink="/topics/{{topic.id}}">
             <i class="bi bi-box-arrow-up-right"></i>
         </button>

@@ -8,11 +8,11 @@ import { Group } from '../../group.model';
 import { DomainObjectType, Vote } from '../../../voting/vote.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GroupVotingService } from '../../../voting/group-voting.service';
-import { SimpleLikingComponent } from '../../../voting/simple-liking/simple-liking.component';
 import { GroupListItemContextMenuComponent } from './group-list-item-context-menu/group-list-item-context-menu.component';
 import { UserProfile2Component } from '../../../user/user-profile-2/user-profile-2.component';
 import { ShowGroupDetailsModalEvent } from '../../group-module.event';
 import { mergeDeep } from '../../../../shared/utils/merge';
+import { SimpleLikingComponent } from '../../../voting/simple-likeing/simple-likeing.component';
 
 @Component({
   selector: 'group-list-item',
@@ -28,7 +28,7 @@ import { mergeDeep } from '../../../../shared/utils/merge';
   templateUrl: './group-list-item.component.html',
   styleUrl: './group-list-item.component.scss'
 })
-export class GroupListItemComponent implements OnInit {
+export class GroupListItemComponent {
   destroyRef = inject(DestroyRef);
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
@@ -36,11 +36,6 @@ export class GroupListItemComponent implements OnInit {
   votingQueryService = inject(VotingQueryService);
 
   @Input() group!: Group;
-  vote?: Vote;
-
-  ngOnInit(): void {
-    this.getVote();
-  }
 
   // MODAL 
   openDetailsModal(modelId: string) {
@@ -55,25 +50,6 @@ export class GroupListItemComponent implements OnInit {
     this.contextMenuVisable = !this.contextMenuVisable;
   }
 
-  // VOTING
-  getVote() {
-    this.logger.debug(GroupListItemComponent.name, " getVote()");
-    this.votingQueryService.get(DomainObjectType.GROUP, this.group.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: vote => {
-        this.vote = vote;
-      },
-    });
-  }
-
-  like(id: string) {
-    this.logger.debug(GroupListItemComponent.name, " like()");
-    this.votingService.createLike(id)
-  }
-  removeLike(id: string) {
-    this.logger.debug(GroupListItemComponent.name, " removeLike()");
-    this.votingService.deleteLikeAndDislike(id);
-  }
-  
   // CONFIG
   @Input() set config(config: any) {
     this._config = mergeDeep(this._config, config);
