@@ -5,10 +5,10 @@ import { Voting } from "../voting/vote.model";
 
 export class Topic {
     id!: string;
-    name?: string;
+    name!: string;
     content?: string;
-    status?: TopicStatus;
-    categories?: Category[];
+    status!: TopicStatus;
+    categories!: Category[];
     references!: Reference[];
     comments!: Comment[];
     voting!: Voting;
