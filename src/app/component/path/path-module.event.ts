@@ -1,4 +1,5 @@
 import { Filter } from "../../shared/filter/filter.model";
+import { Group } from "../group/group.model";
 import { Path } from "./path.model";
 
 // EVENTS
@@ -51,5 +52,12 @@ export class PathFilterChangedEvent {
     filter!: Filter<Path>;
     constructor(filter: Filter<Path>) {
         this.filter = filter;
+    }
+}
+
+export class PathTwoColumnDisplayGroupSelectedEvent {
+    groupId!: string;
+    constructor(groupId: string) {
+        this.groupId = groupId;
     }
 }

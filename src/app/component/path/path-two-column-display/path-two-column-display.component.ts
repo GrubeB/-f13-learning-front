@@ -14,6 +14,11 @@ import { GroupDetailsModalComponent } from '../../group/group-details-modal/grou
 import { TopicProgressService } from '../../progress/topic-progress.service';
 import { GroupProgressService } from '../../progress/group-progress.service';
 import { ProgressSetComponent } from '../../progress/progress-setter/progress-setter.component';
+import { Group } from '../../group/group.model';
+import { PathTwoColumnDisplayGroupComponent } from './path-two-column-display-group/path-two-column-display-group.component';
+import { PathTwoColumnDisplayGroupSelectedEvent } from '../path-module.event';
+import { GroupQueryService } from '../../group/group-query.service';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'path-two-column-display',
@@ -22,36 +27,60 @@ import { ProgressSetComponent } from '../../progress/progress-setter/progress-se
     CommonModule,
     TopicListItemComponent,
     PathTwoColumnDisplayTopicComponent,
+    PathTwoColumnDisplayGroupComponent,
     UserProfile2Component,
     RouterLink,
     TopicDetailsModalComponent,
     GroupDetailsModalComponent,
-    ProgressSetComponent,
   ],
   templateUrl: './path-two-column-display.component.html',
   styleUrl: './path-two-column-display.component.scss'
 })
-export class PathTwoColumnDisplayComponent implements OnInit {
+export class PathTwoColumnDisplayComponent {
   logger = inject(NGXLogger);
   eventBus = inject(EventBusService);
-  
-  topicProgressService = inject(TopicProgressService);
-  groupProgressService = inject(GroupProgressService);
-  
+  groupQueryService = inject(GroupQueryService)
+
   @Input() model!: Path;
 
-  ngOnInit(): void {
+  constructor() {
+    this.eventBus.listen(PathTwoColumnDisplayGroupSelectedEvent.name, (event: PathTwoColumnDisplayGroupSelectedEvent) => {
+      this.selectGroup(event.groupId);
+    });
+
   }
+
+  // GROUP
+  selectedGroupId?: string;
+  selectedGroup?: Group;
+  selectedGroupIdList: string[] = [];
+  selectGroup(groupId: string) {
+    if (this.selectedGroupId === groupId) {
+      return
+    }
+    if (this.selectedGroupIdList.includes(groupId)) {
+      this.selectedGroupIdList.splice(this.selectedGroupIdList.indexOf(groupId));
+    }
+    this.selectedGroupIdList.push(groupId);
+    this.selectedGroupId = groupId;
+    this.groupQueryService.get(this.selectedGroupId).pipe(first()).subscribe({
+      next: data => {
+        this.selectedGroup = data;
+      }
+    });
+  }
+  goBack() {
+    const selected = this.selectedGroupIdList.pop();
+    const prev = this.selectedGroupIdList[this.selectedGroupIdList.length - 1];
+    if (prev) {
+      this.selectGroup(prev);
+    }
+  }
+  getRootGroups(): Group[] {
+    return this.model.groups.map(pathItem => pathItem.entity as Group);
+  }
+  // ITEMS
   getItems(): any[] {
-    return [...this.model.topics, ...this.model.groups];
-  }
-  // MODAL 
-  openTopicDetailsModal(topicId: string) {
-    this.logger.debug(PathTwoColumnDisplayComponent.name, " openTopicDetailsModal()");
-    this.eventBus.emit(ShowTopicDetailsModalEvent.name, new ShowTopicDetailsModalEvent(topicId));
-  }
-  openGroupDetailsModal(topicId: string) {
-    this.logger.debug(PathTwoColumnDisplayComponent.name, " openGroupDetailsModal()");
-    this.eventBus.emit(ShowGroupDetailsModalEvent.name, new ShowGroupDetailsModalEvent(topicId));
+    return [...this.model.topics, ...this.model.groups].sort((i1, i2) => i1.number - i2.number);
   }
 }

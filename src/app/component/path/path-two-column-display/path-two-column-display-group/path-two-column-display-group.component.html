@@ -1,0 +1,28 @@
+<div *ngIf="group"class="m-2 p-2 border shadow-1 bg-secondary-20" >
+    <div class="d-flex flex-row justify-content-between ">
+        <user-profile-2 [userId]="group.createdBy" [date]="group.createdDate"/>
+        <progress-setter [modelId]="group.id" [progressService]="groupProgressService" [domainObjectType]="'GROUP'"/>
+    </div>
+    <div class="pt-2">
+        <h2 class="card-title"><span *ngIf="pathItem">{{pathItem.number}} - </span>{{group.name}}</h2>
+        <p>{{group.content}}</p>
+    </div>
+    <div 
+        *ngIf="group.categories && group.categories.length > 0"
+        class="d-flex flex-row flex-wrap justify-content-start"
+    >
+        <button *ngFor="let category of group.categories" class="btn-category">{{category.name}}</button>
+    </div>
+
+    <div class="card-footer d-flex flex-row justify-content-around pt-2">
+        <button class="app-btn-icon-tertiary" (click)="openGroupDetailsModal(group.id)">
+            <i class="bi bi-arrows-angle-expand"></i>
+        </button>
+        <button class="app-btn-icon-tertiary" routerLink="/groups/{{group.id}}">
+            <i class="bi bi-box-arrow-up-right"></i>
+        </button>
+        <button class="app-btn-icon-tertiary" (click)="selectGroup()">
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+</div>

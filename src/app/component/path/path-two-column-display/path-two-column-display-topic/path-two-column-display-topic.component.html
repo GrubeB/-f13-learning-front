@@ -1,1 +1,26 @@
-<p>path-two-column-display-topic works!</p>
+<div class="m-2 p-2 border shadow-1" >
+    <div class="d-flex flex-row justify-content-between ">
+        <user-profile-2 [userId]="topic.createdBy" [date]="topic.createdDate"/>
+        <progress-setter [modelId]="topic.id" [progressService]="topicProgressService" [domainObjectType]="'TOPIC'"/>
+    </div>
+    <div class="pt-2">
+        <h2 class="card-title"><span *ngIf="pathItem">{{pathItem.number}} - </span>{{topic.name}}</h2>
+        <p>{{topic.content}}</p>
+    </div>
+    <div 
+        *ngIf="topic.categories && topic.categories.length > 0"
+        class="d-flex flex-row flex-wrap justify-content-start"
+    >
+        <button *ngFor="let category of topic.categories" class="btn-category">{{category.name}}</button>
+    </div>
+
+    <div class="card-footer d-flex flex-row justify-content-around pt-2">
+        <button class="app-btn-icon-tertiary" (click)="openTopicDetailsModal(topic.id)">
+            <i class="bi bi-arrows-angle-expand"></i>
+        </button>
+        <button class="app-btn-icon-tertiary" routerLink="/topics/{{topic.id}}">
+            <i class="bi bi-box-arrow-up-right"></i>
+        </button>
+        <div style="width: 40px;"></div>
+    </div>
+</div>

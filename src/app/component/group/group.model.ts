@@ -1,6 +1,6 @@
 import { Category } from "../category/category.model";
-import { Comment, CommentContainer } from "../comment/comment.model";
-import { Reference, ReferenceContainer } from "../reference/reference.model";
+import { Comment } from "../comment/comment.model";
+import { Reference } from "../reference/reference.model";
 import { Topic } from "../topic/topic.model";
 import { Voting } from "../voting/vote.model";
 

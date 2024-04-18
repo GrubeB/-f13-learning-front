@@ -11,15 +11,38 @@
     background-color: $secondary-dark;
     color: $secondary-dark-text;
 }
-.bg-gray-00 {
-    background-color: $gray-00;
-}
-.bg-gray-10 {
-    background-color: $gray-10;
-}
-.bg-gray-20 {
-    background-color: $gray-20;
-}
+.bg-gray-00 { background-color: $white }
+.bg-gray-10 { background-color: $gray-10 }
+.bg-gray-20 { background-color: $gray-20 }
+.bg-gray-30 { background-color: $gray-30 }
+.bg-gray-40 { background-color: $gray-40 }
+.bg-gray-50 { background-color: $gray-50 }
+.bg-gray-60 { background-color: $gray-60 }
+.bg-gray-70 { background-color: $gray-70 }
+.bg-gray-80 { background-color: $gray-80 }
+.bg-gray-90 { background-color: $gray-90 }
+
+.bg-primary-00 { background-color: $white }
+.bg-primary-10 { background-color: $primary-10 }
+.bg-primary-20 { background-color: $primary-20 }
+.bg-primary-30 { background-color: $primary-30 }
+.bg-primary-40 { background-color: $primary-40 }
+.bg-primary-50 { background-color: $primary-50 }
+.bg-primary-60 { background-color: $primary-60 }
+.bg-primary-70 { background-color: $primary-70 }
+.bg-primary-80 { background-color: $primary-80 }
+.bg-primary-90 { background-color: $primary-90 }
+
+.bg-secondary-00 { background-color: $white }
+.bg-secondary-10 { background-color: $secondary-10 }
+.bg-secondary-20 { background-color: $secondary-20 }
+.bg-secondary-30 { background-color: $secondary-30 }
+.bg-secondary-40 { background-color: $secondary-40 }
+.bg-secondary-50 { background-color: $secondary-50 }
+.bg-secondary-60 { background-color: $secondary-60 }
+.bg-secondary-70 { background-color: $secondary-70 }
+.bg-secondary-80 { background-color: $secondary-80 }
+.bg-secondary-90 { background-color: $secondary-90 }
 
 // TEXT COLOR
 .text-blue-00 { color: $white }
