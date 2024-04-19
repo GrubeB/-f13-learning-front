@@ -7,7 +7,7 @@ import { Voting } from "../voting/vote.model";
 export class Path {
     id!: string;
     name!: string;
-    content?: string;
+    content!: string;
     status!: PathStatus;
 
     categories!: Category[];
@@ -30,14 +30,6 @@ export class PathItem {
     entityId!: string;
     entity!: any;
 }
-// export class PathItemGroup {
-//     id!: string;
-//     number!: number;
-//     type!: ItemType;
-//     entityType!: ItemEntityType;
-//     entityId!: string;
-//     group!: Group;
-// }
 export enum PathStatus {
     UNVERIFIED = "UNVERIFIED",
     VERIFIED = "VERIFIED",
@@ -47,8 +39,8 @@ export enum ItemType {
     MANDATORY = "MANDATORY",
 }
 export enum ItemEntityType {
-    OPTIONAL = "TOPIC",
-    MANDATORY = "GROUP",
+    TOPIC = "TOPIC",
+    GROUP = "GROUP",
 }
 
 export class CreatePathCommand {
@@ -60,9 +52,10 @@ export class CreatePathCommand {
 export class CreatePathItemCommand {
     number!: number;
     type!: ItemType;
-    itemEntityType!: ItemEntityType;
+    entityType!: ItemEntityType;
     entityId!: string;
 }
+
 export class UpdatePathCommand {
     pathId!: string;
     name!: string;
@@ -74,6 +67,6 @@ export class UpdatePathItemCommand {
     itemId!: string;
     number!: number;
     type!: ItemType;
-    itemEntityType!: ItemEntityType;
+    entityType!: ItemEntityType;
     entityId!: string;
 }

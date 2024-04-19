@@ -9,6 +9,7 @@ import { Path } from '../path.model';
 import { CreatePathEvent, DeletePathEvent, PathCreatedEvent, PathDeletedEvent, PathUpdateddEvent, UpdatePathEvent } from '../path-module.event';
 import { PathListComponent } from '../path-list/path-list.component';
 import { PathDetailsModalComponent } from '../path-details-modal/path-details-modal.component';
+import { PathFormComponent } from '../path-form/path-form.component';
 
 @Component({
   selector: 'path-view',
@@ -17,6 +18,7 @@ import { PathDetailsModalComponent } from '../path-details-modal/path-details-mo
     CommonModule,
     PathListComponent,
     PathDetailsModalComponent,
+    PathFormComponent,
   ],
   templateUrl: './path-view.component.html',
   styleUrl: './path-view.component.scss'

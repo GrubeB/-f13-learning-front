@@ -1,0 +1,76 @@
+<div class="d-flex flex-column bg-secondary-light p-3 mb-3 rounded">
+    <div>
+        <h1>Add path</h1>
+    </div>
+    <form [formGroup]="formGroup" class="container-xl">
+        <div class="d-flex flex-column">
+            <div *ngIf="message">
+                <small class="text-danger">{{message}}</small>
+            </div>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input id="name" class="form-control" type="text" formControlName="name">
+                <div
+                    *ngIf="formGroup.get('name')?.invalid && (formGroup.get('name')?.dirty || formGroup.get('name')?.touched)">
+                    <small class="text-danger" *ngIf="formGroup.get('name')?.hasError('required')">This field is
+                        requied.</small>
+                </div>
+
+            </div>
+
+
+            <div class="mb-3 d-flex flex-column">
+                <label for="items">Itmes</label>
+                <div formArrayName="items" *ngFor="let item of formGroup.controls.items.controls; let i=index">
+                    <div class="d-flex flex-row gap-2 align-items-center">
+                        <label for="item-{{ i }}">{{i+1}}:</label>
+                        <app-tiered-select class="col pt-1" [formControlName]="i" [config]="{
+                        group: {
+                          groups: [
+                            {
+                              groupId:'Topic',
+                              groupLabel: 'Topics',
+                              itmes: this.allTopics,
+                              itemPropertyLabel: 'name',
+                            },{
+                              groupId:'Group',
+                              groupLabel: 'Groups',
+                              itmes: this.allGroups,
+                              itemPropertyLabel: 'name',
+                            }
+                          ]
+                        }
+                      }" />
+                        <div>
+                            <button class="app-btn-icon" (click)="removeItemControl(i)"> <i class="bi bi-dash-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row justify-content-end">
+                    <button class="app-btn-icon" (click)="addItemControl()"><i class="bi bi-plus-lg"></i></button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="content" class="form-label">Description</label>
+                <textarea id="content" class="form-control" rows="3" formControlName="content"></textarea>
+                <div
+                    *ngIf="formGroup.get('content')?.invalid && (formGroup.get('content')?.dirty || formGroup.get('content')?.touched)">
+                    <small class="text-danger" *ngIf="formGroup.get('content')?.hasError('required')">This field is
+                        requied.</small>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="categories">Selec categories</label>
+                <app-multi-select [options]="allCategories" [optionLabel]="'name'" formControlName="categories" />
+            </div>
+
+            <div class="d-flex flex-row justify-content-end">
+                <button type="submit" class="app-btn" [disabled]="formGroup.invalid" (click)="submit()">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

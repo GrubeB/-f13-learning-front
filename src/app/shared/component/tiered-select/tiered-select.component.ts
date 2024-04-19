@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, forwardRef, inject } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, forwardRef, inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OutsideClickDirective } from '../../directive/outside-click.directive';
 import { NGXLogger } from 'ngx-logger';
@@ -30,11 +30,19 @@ export class TieredSelectComponent implements ControlValueAccessor, OnInit {
   selectedItemGroup: any;
 
   isDisabled: boolean = false;
-  onChange: any = () => {};
-  onTouch: any = () => {};
+  onChange: any = () => { };
+  onTouch: any = () => { };
+
+  ngOnInit(): void {
+    this.baseInit();
+  }
 
   writeValue(obj: any): void {
-    this.selectedItem = obj
+    if (obj instanceof TieredSelectValue) {
+      this.selectedItemGroup = this.findGroupById(obj.groupId); 
+      this.selectedItem = obj.item;
+      return;
+    }
   }
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -46,10 +54,6 @@ export class TieredSelectComponent implements ControlValueAccessor, OnInit {
     this.isDisabled = isDisabled;
   }
 
-  ngOnInit(): void {
-    this.baseInit();
-  }
-
   baseInit() {
     this.selectedGroups = [this._config.group];
     this.activeGroup = this._config.group;
@@ -57,8 +61,11 @@ export class TieredSelectComponent implements ControlValueAccessor, OnInit {
 
   // ITEM
   setSelectedItem(item: any) {
+    this.logger.debug(TieredSelectComponent.name, " setSelectedItem()");
     this.selectedItem = item;
     this.selectedItemGroup = this.activeGroup;
+    this.onChange(new TieredSelectValue(this.selectedItemGroup.groupId, this.selectedItem));
+    this.hideMenu();
   }
   getItemsToDisplay(): any[] {
     if (this.activeGroup) {
@@ -148,40 +155,37 @@ export class TieredSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   // CONFIG
-  @Input() set config(config: any) {
-    // set gropId for all groups
-    this._config = mergeDeep(this._config, config);
+  @Input() set config(c: any) {
+    this.logger.debug(TieredSelectComponent.name, "set config", c);
+    this._config = mergeDeep(this._config, c);
+    this.setIdToGroups(this._config.group);
+  }
+  private setIdToGroups(group: Group) {
+    if (group) {
+      if (!group.groupId) {
+        group.groupId = uuid();
+      }
+      if (group.groups) {
+        for (let index = 0; index < group.groups?.length; index++) {
+          this.setIdToGroups(group.groups[index]);
+        }
+      }
+    }
   }
   _config: Config = {
-    group: {
-      groupId: uuid(),
-      groupLabel: 'G0',
-      groups: [
-        {
-          groupId: uuid(),
-          groupLabel: 'G1',
-          groups: [
-            {
-              groupId: uuid(),
-              groupLabel: 'G11',
-              itmes: [{ id: '123', name: 'i1' }],
-              itemPropertyLabel: 'name',
-            },
-          ]
-        },
-        {
-          groupId: uuid(),
-          groupLabel: 'G2',
-          itmes: [{ id: '1232', name: 'i2' }],
-          itemPropertyLabel: 'name',
-        }
-      ],
-    }
+    group: new Group()
   }
 
 }
-
-class Config {
+export class TieredSelectValue {
+  groupId!: string;
+  item!: any;
+  constructor(groupId: string, item: any) {
+    this.groupId = groupId;
+    this.item = item;
+  }
+}
+export class Config {
   group!: Group;
 }
 class Group {
