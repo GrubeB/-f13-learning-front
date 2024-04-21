@@ -1,4 +1,4 @@
-<div class="m-2 p-2 border shadow-1 d-flex flex-column" style="height: 95%;">
+<div *ngIf="group" class="m-2 p-2 border shadow-1 d-flex flex-column" style="height: 95%;">
     <div class="d-flex flex-row justify-content-between ">
         <user-profile-2 [userId]="group.createdBy" [date]="group.createdDate"/>
         <button *ngIf="_config.contextMenu.enable" class="app-btn-icon-tertiary mt-0" (click)="toggleContextMenu()">

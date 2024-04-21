@@ -26,6 +26,7 @@ export class GroupListComponent {
   }
   _config: Config = {
     filter: true,
+    loadById: false,
     items: {
       contextMenu: {
         enable: true,
@@ -39,6 +40,7 @@ export class GroupListComponent {
 
 class Config {
   filter!: boolean;
+  loadById!: boolean;
   items!: {
     contextMenu: {
       enable: boolean;

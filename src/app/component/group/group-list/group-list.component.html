@@ -2,7 +2,10 @@
     <div class="d-flex flex-row justify-content-end">
         <group-filter [hidden]="!_config.filter" [items]="groups" (outputItmes)="filtredGroups = $event"/>
     </div>
-    <div class="container-list"> 
+    <div *ngIf="!_config.loadById" class="container-list"> 
         <group-list-item *ngFor="let group of filtredGroups" [group]="group" [config]="_config.items"/>
+    </div>
+    <div *ngIf="_config.loadById" class="container-list"> 
+        <group-list-item *ngFor="let group of filtredGroups" [groupId]="group.id" [config]="_config.items"/>
     </div>
 </div>

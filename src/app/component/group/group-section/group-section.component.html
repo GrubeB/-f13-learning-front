@@ -7,8 +7,7 @@
             </div>
         </div>
     </div>
-
     <div [hidden]="contentHidden" class="mt-2">
-        <group-list [groups]="items" [config]="{filter: false, items: { contextMenu: {enable: false}, modal: false}}" />
+        <group-list [groups]="items" [config]="{filter: false, loadById: true, items: { contextMenu: {enable: false}, modal: false}}" />
     </div>
 </div>

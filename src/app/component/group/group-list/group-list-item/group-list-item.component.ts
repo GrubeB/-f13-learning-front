@@ -13,6 +13,8 @@ import { UserProfile2Component } from '../../../user/user-profile-2/user-profile
 import { ShowGroupDetailsModalEvent } from '../../group-module.event';
 import { mergeDeep } from '../../../../shared/utils/merge';
 import { SimpleLikingComponent } from '../../../voting/simple-likeing/simple-likeing.component';
+import { GroupQueryService } from '../../group-query.service';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'group-list-item',
@@ -34,8 +36,16 @@ export class GroupListItemComponent {
   eventBus = inject(EventBusService);
   votingService = inject(GroupVotingService);
   votingQueryService = inject(VotingQueryService);
+  groupQueryService = inject(GroupQueryService);
 
-  @Input() group!: Group;
+  @Input() group?: Group;
+  @Input() set groupId(id: string) {
+    this.groupQueryService.get(id).pipe(first()).subscribe({
+      next: data => {
+        this.group = data;
+      }
+    });
+  }
 
   // MODAL 
   openDetailsModal(modelId: string) {

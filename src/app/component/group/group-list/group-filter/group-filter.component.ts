@@ -29,7 +29,7 @@ export class GroupFilterComponent implements OnChanges, OnInit {
     () => Filter.of('categories.id', Operator.IN, this.allVotes?.filter(v => v.type == VoteType.LIKE).map(v => v.domainObject)),
   ];
   sorters: (() => Sort<Group>)[] = [
-    () => Sort.customOf((e: Group) => e.voting.likesNumber - e.voting.dislikesNumber, Direction.DESC),
+    () => Sort.customOf((e: Group) => (e.voting?.likesNumber ?? 0) - (e.voting?.dislikesNumber ?? 0), Direction.DESC),
     () => Sort.of('createdDate', Direction.DESC),
   ];
   activeFilter: Filter<Group> = this.filters[0]();

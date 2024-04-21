@@ -43,7 +43,7 @@ export class PathTwoColumnDisplayGroupComponent {
   }
 
   selectGroup() {
-    this.logger.debug(PathTwoColumnDisplayGroupComponent.name, " selectGroup()", this.group?.id, "--- ");
+    this.logger.debug(PathTwoColumnDisplayGroupComponent.name, " selectGroup()", this.group?.id);
     if (this.group) {
       this.eventBus.emit(PathTwoColumnDisplayGroupSelectedEvent.name, new PathTwoColumnDisplayGroupSelectedEvent(this.group.id));
     }
