@@ -1,5 +1,5 @@
 
-// MODAL
+$modal-buttons-width: 40px;
 .app-modal-background {
     position: fixed;
     top: 0;
@@ -30,7 +30,6 @@
         overflow: auto;
         scrollbar-width: none;
         .app-modal {
-            min-width: 960px;
             height: fit-content;
             margin: 64px auto;
 
@@ -38,6 +37,21 @@
             background-color: $secondary;
             border-radius: 4px;
             box-shadow: 16px 16px 32px -8px rgba(0, 0, 0, 0.8);
+
+            width: 1248px;
+            max-width: 1248px;
+            @media screen and (max-width:  $layout-breakpoint-xx-large) {
+                width: 1068px;
+                max-width: 1068px;
+            }
+            @media screen and (max-width:  $layout-breakpoint-x-large) {
+                width: 888px;
+                max-width: 888px;
+            }
+            @media screen and (max-width: $layout-breakpoint-large) {
+                width: 672px;
+                max-width: 672px;
+            }
         }
         
         .app-modal-buttons {
@@ -46,7 +60,7 @@
             top:0;
             margin: 64px 5px;
             height: fit-content;
-            width: 40px;
+            width: $modal-buttons-width;
 
             display: flex;
             flex-direction: column;
