@@ -3,6 +3,7 @@ import { Path } from '../path.model';
 import { mergeDeep } from '../../../shared/utils/merge';
 import { CommonModule } from '@angular/common';
 import { PathListItemComponent } from './path-list-item/path-list-item.component';
+import { PathFilterComponent } from './path-filter/path-filter.component';
 
 @Component({
   selector: 'path-list',
@@ -10,6 +11,7 @@ import { PathListItemComponent } from './path-list-item/path-list-item.component
   imports: [
     CommonModule,
     PathListItemComponent,
+    PathFilterComponent,
   ],
   templateUrl: './path-list.component.html',
   styleUrl: './path-list.component.scss'

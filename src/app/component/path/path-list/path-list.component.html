@@ -1,8 +1,8 @@
 <div class="d-flex flex-column">
     <div class="d-flex flex-row justify-content-end">
-        <!-- <group-filter [hidden]="!_config.filter" [items]="groups" (outputItmes)="filtredGroups = $event"/> -->
+        <path-filter [hidden]="!_config.filter" [items]="items" (outputItmes)="filtredItems = $event"/>
     </div>
     <div class="container-list"> 
-        <path-list-item *ngFor="let item of items" [item]="item" [config]="_config.items"/>
+        <path-list-item *ngFor="let item of filtredItems" [item]="item" [config]="_config.items"/>
     </div>
 </div>
