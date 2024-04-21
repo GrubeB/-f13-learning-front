@@ -92,6 +92,7 @@ export class PathFormComponent {
   fillForm(path?: Path) {
     this.logger.debug(PathFormComponent.name, " fillForm()", path)
     this.formGroup.reset();
+    this.message = '';
     this.formGroup.controls.items.clear();
     if (!path) {
       this.isEditForm = false;

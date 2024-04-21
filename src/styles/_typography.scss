@@ -53,3 +53,28 @@ a{
     font-size: 12px;
     font-weight: 400;
 }
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+}
+.truncate-overflow-1 {
+    display: -webkit-box; 
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 1; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+.truncate-overflow-2 {
+    display: -webkit-box; 
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 2; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+.truncate-overflow-3 {
+    display: -webkit-box; 
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 3; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
