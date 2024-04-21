@@ -50,25 +50,13 @@ export class TopicFormComponent implements OnInit {
 
   constructor() {
     this.eventBus.listen(CreateTopicEvent.name, (event: CreateTopicEvent) => {
-      this.isEditForm = false;
-      this.formGroup.setValue({
-        name: "",
-        content: "",
-        categories: []
-      });
+      this.fillForm();
     });
 
     this.eventBus.listen(UpdateTopicEvent.name, (event: UpdateTopicEvent) => {
       this.isEditForm = true;
       this.topicQueryService.get(event.topicId).pipe(take(1)).subscribe({
-        next: data => {
-          this.editModel = data;
-          this.formGroup.setValue({
-            name: this.editModel?.name ?? "",
-            content: this.editModel?.content ?? "",
-            categories: this.editModel?.categories ?? []
-          });
-        }
+        next: data => this.fillForm(data)
       })
     });
   }
@@ -79,6 +67,29 @@ export class TopicFormComponent implements OnInit {
         this.allCategories = data.content;
       }
     })
+  }
+
+  fillForm(model?: Topic) {
+    this.logger.debug(TopicFormComponent.name, " fillForm()", model)
+    this.formGroup.reset();
+    this.message = '';
+    if (!model) {
+      this.isEditForm = false;
+      this.editModel = undefined;
+      this.formGroup.setValue({
+        name: "",
+        content: "",
+        categories: []
+      });
+    } else {
+      this.isEditForm = true;
+      this.editModel = model;
+      this.formGroup.setValue({
+        name: this.editModel.name,
+        content: this.editModel.content,
+        categories: this.editModel.categories,
+      });
+    }
   }
 
   submit() {
@@ -99,16 +110,17 @@ export class TopicFormComponent implements OnInit {
         next: response => {
           this.logger.debug(TopicFormComponent.name, " topic created ", response.id);
           this.eventBus.emit(TopicCreatedEvent.name, new TopicCreatedEvent(response.id));
+          this.fillForm();
         },
         error: e => {
           this.logger.debug(TopicFormComponent.name, " error occurred while creating topic ", e);
           this.message = e.message;
         }
-      })
+      });
   }
   updateCategory() {
     let command = new UpdateTopicCommand();
-    command.id = this.editModel?.id ?? '';
+    command.id = this.editModel?.id ?? (() => { throw new Error("Edit model ID is null or undefined."); })();
     command.name = this.formGroup.value.name ? this.formGroup.value.name as string : '';
     command.content = this.formGroup.value.content ? this.formGroup.value.content as string : '';
     command.categoryIds = this.formGroup.value.categories?.map(cat => cat['id']) as string[] ?? [];
@@ -119,11 +131,12 @@ export class TopicFormComponent implements OnInit {
         next: response => {
           this.logger.debug(TopicFormComponent.name, " topic updated ", command.id);
           this.eventBus.emit(TopicUpdateddEvent.name, new TopicUpdateddEvent(command.id));
+          this.fillForm();
         },
         error: e => {
           this.logger.debug(TopicFormComponent.name, " error occurred while updateing topic ", e);
           this.message = e.message;
         }
-      })
+      });
   }
 }

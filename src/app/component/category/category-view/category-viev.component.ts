@@ -75,9 +75,9 @@ export class CategoryVievComponent implements OnInit {
     });
   }
 
-  showCategoryForm() {
+  showForm() {
     this.logger.debug(CategoryVievComponent.name, "showCategoryForm()");
-    this.eventBus.emit(CreateCategoryCommand.name, new CreateCategoryCommand());
+    this.eventBus.emit(CreateCategoryEvent.name, new CreateCategoryEvent());
   }
 
   // TABS

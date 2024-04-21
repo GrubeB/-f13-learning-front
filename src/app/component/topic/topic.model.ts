@@ -6,7 +6,7 @@ import { Voting } from "../voting/vote.model";
 export class Topic {
     id!: string;
     name!: string;
-    content?: string;
+    content!: string;
     status!: TopicStatus;
     categories!: Category[];
     references!: Reference[];

@@ -55,29 +55,12 @@ export class GroupFormComponent implements OnInit {
 
   constructor() {
     this.eventBus.listen(CreateGroupEvent.name, (event: CreateGroupEvent) => {
-      this.isEditForm = false;
-      this.formGroup.setValue({
-        name: "",
-        content: "",
-        categories: [],
-        topics: [],
-        groups: [],
-      });
+      this.fillForm();
     });
 
     this.eventBus.listen(UpdateGroupEvent.name, (event: UpdateGroupEvent) => {
-      this.isEditForm = true;
       this.groupQueryService.get(event.modelId).pipe(take(1)).subscribe({
-        next: data => {
-          this.editModel = data;
-          this.formGroup.setValue({
-            name: this.editModel?.name ?? "",
-            content: this.editModel?.content ?? "",
-            categories: this.editModel?.categories ?? [],
-            topics: this.editModel?.topics ?? [],
-            groups: this.editModel?.groups ?? [],
-          });
-        }
+        next: data => this.fillForm(data)
       });
     });
   }
@@ -98,6 +81,32 @@ export class GroupFormComponent implements OnInit {
         this.allTopics = data.content;
       }
     });
+  }
+  fillForm(model?: Group) {
+    this.logger.debug(GroupFormComponent.name, " fillForm()", model)
+    this.formGroup.reset();
+    this.message = '';
+    if (!model) {
+      this.isEditForm = false;
+      this.editModel = undefined;
+      this.formGroup.setValue({
+        name: "",
+        content: "",
+        categories: [],
+        topics: [],
+        groups: [],
+      });
+    } else {
+      this.isEditForm = true;
+      this.editModel = model;
+      this.formGroup.setValue({
+        name: this.editModel.name,
+        content: this.editModel.content,
+        categories: this.editModel.categories,
+        topics: this.editModel.topics,
+        groups: this.editModel.groups,
+      });
+    }
   }
 
   submit() {
@@ -120,6 +129,7 @@ export class GroupFormComponent implements OnInit {
         next: response => {
           this.logger.debug(GroupFormComponent.name, " group created ", response.id);
           this.eventBus.emit(GroupCreatedEvent.name, new GroupCreatedEvent(response.id));
+          this.fillForm();
         },
         error: e => {
           this.logger.debug(GroupFormComponent.name, " error occurred while creating group ", e);
@@ -129,7 +139,7 @@ export class GroupFormComponent implements OnInit {
   }
   update() {
     let command = new UpdateGroupCommand();
-    command.id = this.editModel?.id ?? '';
+    command.id = this.editModel?.id ??  (() => { throw new Error("Edit model ID is null or undefined."); })();
     command.name = this.formGroup.value.name ? this.formGroup.value.name as string : '';
     command.content = this.formGroup.value.content ? this.formGroup.value.content as string : '';
     command.categoryIds = this.formGroup.value.categories?.map(cat => cat['id']) as string[] ?? [];
@@ -142,6 +152,7 @@ export class GroupFormComponent implements OnInit {
         next: response => {
           this.logger.debug(GroupFormComponent.name, " group updated ", command.id);
           this.eventBus.emit(GroupUpdateddEvent.name, new GroupUpdateddEvent(command.id));
+          this.fillForm();
         },
         error: e => {
           this.logger.debug(GroupFormComponent.name, " error occurred while updateing group ", e);
