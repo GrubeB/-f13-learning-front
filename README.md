@@ -22,8 +22,6 @@ The goal of the project was to write frontent application to this [backend-appli
         ng serve
 
 ## Preview
-Home
-![view](./.readme/home.png)
 Categories view
 ![view](./.readme/categories.png)
 Topic view
